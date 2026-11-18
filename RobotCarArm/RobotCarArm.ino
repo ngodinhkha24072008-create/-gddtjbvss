@@ -35,6 +35,17 @@
 //  The physical buttons on D12 / D13 still work as before.
 // ---------------------------------------------------------------------
 //
+// ---------- "Arduino Bluetooth Control" app (broxcode) SETUP ----------
+//  Connect to the HC-05 in the app, open the gamepad / arrow-keys screen,
+//  and in its settings set each control to send:
+//    Up = F   Down = B   Left = L   Right = R   (diagonals, if offered: G I H J)
+//    Triangle = W   Circle = U   Cross = u   Square = X   Start or Select = D
+//  Buttons & Slider screen: set the slider range to 0 - 10
+//    (0 = hand closed, 10 = hand fully open). Multi-digit numbers are fine.
+//  The app keeps sending while you hold a direction. When you let go and it
+//  stops sending, the car stops by itself after DRIVE_TIMEOUT_MS.
+// ---------------------------------------------------------------------
+//
 // ------------- Rover Arm Gamepad (controller/index.html) -------------
 //  Joystick     -> F B L R G I H J, release = S
 //  Triangle     -> W  (save position)      Circle -> U (play)
@@ -64,12 +75,16 @@ const int BUTTON_PLAY   = 13;   // was button2
 // ---------- Timing ----------
 const unsigned long DEBOUNCE_MS = 50;
 const unsigned long PLAYBACK_STEP_MS = 1050;  // time spent at each saved position
+const unsigned long DRIVE_TIMEOUT_MS = 400;   // stop the car if no drive command arrives for this long
+const unsigned long NUMBER_IDLE_MS   = 30;    // a slider number is complete after this much quiet
 
 // ---------- Hand / gripper (app lever) ----------
 const int GRIPPER = 2;                 // which servo is the hand: 0 = servo1, 1 = servo2, 2 = servo3
 const int GRIPPER_CLOSED_ANGLE = 10;   // lever all the way left  (adjust for your gripper)
 const int GRIPPER_OPEN_ANGLE   = 170;  // lever all the way right (adjust for your gripper)
 const int KNOB_TAKEOVER_DEG    = 6;    // turn the knob this far to take the hand back from the app
+const int LEVER_MIN = 0;               // slider value for "fully closed" (set the app slider to match)
+const int LEVER_MAX = 10;              // slider value for "fully open"   ('q' also means fully open)
 
 bool appHasGripper = false;            // true while the app lever is controlling the hand
 int appGripperAngle = 90;
@@ -111,11 +126,32 @@ bool wasPressed(Button &b) {
 }
 
 // ---------- Car ----------
+bool driving = false;
+unsigned long lastDriveCommand = 0;
+
 void setMotors(int p1, int p2, int p3, int p4) {
   digitalWrite(MOTOR_PIN_1, p1);
   digitalWrite(MOTOR_PIN_2, p2);
   digitalWrite(MOTOR_PIN_3, p3);
   digitalWrite(MOTOR_PIN_4, p4);
+}
+
+void drive(int p1, int p2, int p3, int p4) {
+  setMotors(p1, p2, p3, p4);
+  driving = true;
+  lastDriveCommand = millis();
+}
+
+void stopCar() {
+  setMotors(LOW, LOW, LOW, LOW);
+  driving = false;
+}
+
+// Safety stop: the phone app repeats drive commands while a direction is held
+void checkDriveTimeout() {
+  if (driving && millis() - lastDriveCommand > DRIVE_TIMEOUT_MS) {
+    stopCar();
+  }
 }
 
 // ---------- Arm ----------
@@ -132,9 +168,10 @@ int liveAngle(int i) {
   return potAngles[i];
 }
 
-// level: 0 = lever all the way left (closed) ... 10 = all the way right (open)
+// level: LEVER_MIN = lever all the way left (closed) ... LEVER_MAX = all the way right (open)
 void setGripperFromApp(int level) {
-  appGripperAngle = map(level, 0, 10, GRIPPER_CLOSED_ANGLE, GRIPPER_OPEN_ANGLE);
+  level = constrain(level, LEVER_MIN, LEVER_MAX);
+  appGripperAngle = map(level, LEVER_MIN, LEVER_MAX, GRIPPER_CLOSED_ANGLE, GRIPPER_OPEN_ANGLE);
   appHasGripper = true;
   knobAngleAtLever = potAngles[GRIPPER];
 }
@@ -185,21 +222,41 @@ void clearPositions() {
 }
 
 // ---------- Bluetooth app commands ----------
+// Slider values can be several digits ("10", "7\n"), so digits are collected
+// into one number and used once a non-digit arrives or the line goes quiet.
+int sliderNumber = -1;               // -1 = no number in progress
+unsigned long lastDigitTime = 0;
+
+void finishSliderNumber() {
+  if (sliderNumber >= 0) {
+    setGripperFromApp(sliderNumber);
+    sliderNumber = -1;
+  }
+}
+
 void handleAppCommands() {
   while (Serial.available() > 0) {
     char data = Serial.read();
 
+    if (data >= '0' && data <= '9') {
+      if (sliderNumber < 0) sliderNumber = 0;
+      if (sliderNumber < 1000) sliderNumber = sliderNumber * 10 + (data - '0');
+      lastDigitTime = millis();
+      continue;
+    }
+    finishSliderNumber();             // any other character ends the number
+
     switch (data) {
       // --- Driving ---
-      case 'F': setMotors(HIGH, LOW, HIGH, LOW); break; // Forward
-      case 'B': setMotors(LOW, HIGH, LOW, HIGH); break; // Backward
-      case 'L': setMotors(HIGH, LOW, LOW, HIGH); break; // Turn left
-      case 'R': setMotors(LOW, HIGH, HIGH, LOW); break; // Turn right
-      case 'G': setMotors(HIGH, LOW, LOW, LOW);  break; // Forward-left
-      case 'I': setMotors(LOW, LOW, HIGH, LOW);  break; // Forward-right
-      case 'H': setMotors(LOW, HIGH, LOW, LOW);  break; // Back-left
-      case 'J': setMotors(LOW, LOW, LOW, HIGH);  break; // Back-right
-      case 'S': setMotors(LOW, LOW, LOW, LOW);   break; // Stop
+      case 'F': drive(HIGH, LOW, HIGH, LOW); break; // Forward
+      case 'B': drive(LOW, HIGH, LOW, HIGH); break; // Backward
+      case 'L': drive(HIGH, LOW, LOW, HIGH); break; // Turn left
+      case 'R': drive(LOW, HIGH, HIGH, LOW); break; // Turn right
+      case 'G': drive(HIGH, LOW, LOW, LOW);  break; // Forward-left
+      case 'I': drive(LOW, LOW, HIGH, LOW);  break; // Forward-right
+      case 'H': drive(LOW, HIGH, LOW, LOW);  break; // Back-left
+      case 'J': drive(LOW, LOW, LOW, HIGH);  break; // Back-right
+      case 'S': stopCar();                   break; // Stop
 
       // --- Robot arm ---
       case 'W':                       // Front lights on  -> save position
@@ -215,21 +272,22 @@ void handleAppCommands() {
 
       // --- Stop everything ---
       case 'D':
-        setMotors(LOW, LOW, LOW, LOW);
+        stopCar();
         stopPlayback();
         break;
 
-      // --- Hand lever (app speed slider) ---
-      case '0': case '1': case '2': case '3': case '4':
-      case '5': case '6': case '7': case '8': case '9':
-        setGripperFromApp(data - '0');
-        break;
+      // --- Hand lever: numbers are handled above; 'q' = fully open ---
       case 'q':
-        setGripperFromApp(10);
+        setGripperFromApp(LEVER_MAX);
         break;
 
-      // Horn (V/v) and anything else are ignored
+      // Horn (V/v), newlines and anything else are ignored
     }
+  }
+
+  // A number with nothing after it (e.g. "7" then silence) is complete once the line goes quiet
+  if (sliderNumber >= 0 && millis() - lastDigitTime > NUMBER_IDLE_MS) {
+    finishSliderNumber();
   }
 }
 
@@ -266,7 +324,7 @@ void setup() {
   pinMode(MOTOR_PIN_2, OUTPUT);
   pinMode(MOTOR_PIN_3, OUTPUT);
   pinMode(MOTOR_PIN_4, OUTPUT);
-  setMotors(LOW, LOW, LOW, LOW);  // start stopped
+  stopCar();  // start stopped
 
   for (int i = 0; i < 3; i++) {
     servos[i].attach(SERVO_PINS[i]);
@@ -282,5 +340,6 @@ void setup() {
 
 void loop() {
   handleAppCommands();
+  checkDriveTimeout();
   handleArm();
 }

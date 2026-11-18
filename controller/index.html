@@ -319,6 +319,10 @@ ol b { color: var(--fg); font-weight: 600; }
     nowName.textContent = (NAMES[c] || "") + (link ? "" : " (not sent)");
     const chip = document.createElement("i"); chip.textContent = c;
     trail.prepend(chip); while (trail.children.length > 10) trail.lastChild.remove();
+    transmit(c);
+  }
+
+  function transmit(c) {
     if (!link) return;
     if (pending > 8) return;            // don't let a slow link build a backlog
     pending++;
@@ -436,6 +440,8 @@ ol b { color: var(--fg); font-weight: 600; }
     setStickDir(dirFrom(dx / max, -dy / max));
   }
   function release() { activeId = null; stick.classList.remove("live"); placeKnob(0, 0); setStickDir("S"); }
+  // The robot stops by itself if drive commands stop arriving, so repeat the held direction
+  setInterval(() => { if (dir !== "S") transmit(dir); }, 150);
   stick.addEventListener("pointerdown", e => {
     if (activeId !== null) return;
     activeId = e.pointerId; stick.setPointerCapture(e.pointerId); stick.classList.add("live"); moveTo(e);
