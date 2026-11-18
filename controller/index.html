@@ -103,7 +103,7 @@ body {
 .stick.live .knob { border-color: var(--accent); }
 
 /* Right side: face buttons + lever */
-.right { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; }
+.right { display: flex; flex-direction: column; align-items: center; gap: 30px; }
 .faces {
   --b: min(68px, 17vw);
   display: grid; grid-template-columns: repeat(3, var(--b)); grid-template-rows: repeat(3, var(--b));
@@ -123,15 +123,16 @@ body {
 .f-cross { grid-area: 3 / 2; --c: var(--cross); }
 
 .lever-box { display: grid; justify-items: center; gap: 8px; }
-.lever-track { height: min(220px, 52vw); display: grid; place-items: center; padding: 10px 6px; background: var(--well); border: 1px solid var(--line); border-radius: 20px; }
+.lever-row { display: flex; align-items: center; gap: 10px; }
+.lever-track { width: min(240px, 52vw); display: grid; place-items: center; padding: 6px 12px; background: var(--well); border: 1px solid var(--line); border-radius: 20px; }
 .lever {
-  writing-mode: vertical-lr; direction: rtl; appearance: none; -webkit-appearance: none;
-  width: 34px; height: 100%; background: transparent; cursor: ns-resize; margin: 0;
+  appearance: none; -webkit-appearance: none;
+  width: 100%; height: 34px; background: transparent; cursor: ew-resize; margin: 0;
 }
-.lever::-webkit-slider-runnable-track { width: 6px; border-radius: 3px; background: linear-gradient(0deg, #2a3348, var(--accent)); }
-.lever::-moz-range-track { width: 6px; border-radius: 3px; background: linear-gradient(0deg, #2a3348, var(--accent)); }
-.lever::-webkit-slider-thumb { -webkit-appearance: none; width: 34px; height: 22px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; margin-left: -14px; }
-.lever::-moz-range-thumb { width: 30px; height: 18px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; }
+.lever::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #2a3348, var(--accent)); }
+.lever::-moz-range-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #2a3348, var(--accent)); }
+.lever::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 34px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; margin-top: -14px; }
+.lever::-moz-range-thumb { width: 18px; height: 30px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; }
 .lever-val { font: 700 .95rem var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; }
 .lever-end { font: 700 .68rem var(--mono); letter-spacing: .14em; color: var(--muted); }
 
@@ -202,9 +203,11 @@ ol b { color: var(--fg); font-weight: 600; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><span class="code">u</span></button>
         </div>
         <div class="lever-box">
-          <span class="lever-end">OPEN</span>
-          <div class="lever-track"><input class="lever" id="lever" type="range" min="0" max="10" step="1" value="5" aria-label="Hand lever: push forward to open, pull back to close"></div>
-          <span class="lever-end">CLOSE</span>
+          <div class="lever-row">
+            <span class="lever-end">CLOSE</span>
+            <div class="lever-track"><input class="lever" id="lever" type="range" min="0" max="10" step="1" value="5" aria-label="Hand lever: slide right to open, left to close"></div>
+            <span class="lever-end">OPEN</span>
+          </div>
           <div class="lever-val" id="leverVal">5 · 50% open</div>
         </div>
       </div>
@@ -232,8 +235,8 @@ ol b { color: var(--fg); font-weight: 600; }
             <tr><td>Circle</td><td><code>U</code></td><td>Play saved positions</td></tr>
             <tr><td>Cross</td><td><code>u</code></td><td>Stop playback, knobs control the arm</td></tr>
             <tr><td>Square</td><td><code>X</code></td><td>Clear saved positions</td></tr>
-            <tr><td>Hand lever forward</td><td>up to <code>q</code></td><td>Open the hand (<code>q</code> = fully open)</td></tr>
-            <tr><td>Hand lever back</td><td>down to <code>0</code></td><td>Close the hand (<code>0</code> = fully closed)</td></tr>
+            <tr><td>Hand lever right</td><td>up to <code>q</code></td><td>Open the hand (<code>q</code> = fully open)</td></tr>
+            <tr><td>Hand lever left</td><td>down to <code>0</code></td><td>Close the hand (<code>0</code> = fully closed)</td></tr>
             <tr><td>Stop all</td><td><code>D</code></td><td>Stop driving and playback</td></tr>
           </tbody>
         </table>
@@ -409,7 +412,7 @@ ol b { color: var(--fg); font-weight: 600; }
     b.addEventListener("contextmenu", e => e.preventDefault());
   });
 
-  // ---- Hand lever: forward (up) = open, back (down) = close ----
+  // ---- Hand lever: right = open, left = close ----
   const lever = $("lever"), leverVal = $("leverVal");
   let lastHand = "5";
   lever.addEventListener("input", () => {

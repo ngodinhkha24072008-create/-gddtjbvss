@@ -39,7 +39,7 @@
 //  Joystick     -> F B L R G I H J, release = S
 //  Triangle     -> W  (save position)      Circle -> U (play)
 //  Square       -> X  (clear positions)    Cross  -> u (stop playback)
-//  Hand lever   -> 0-9, q  (forward = open, back = close)   Stop all -> D
+//  Hand lever   -> 0-9, q  (slide right = open, left = close)   Stop all -> D
 //
 //  The hand lever moves the gripper servo (servo3 on D9, knob A2 by default).
 //  The last control you touch wins: move the lever and the hand follows the
@@ -67,8 +67,8 @@ const unsigned long PLAYBACK_STEP_MS = 1050;  // time spent at each saved positi
 
 // ---------- Hand / gripper (app lever) ----------
 const int GRIPPER = 2;                 // which servo is the hand: 0 = servo1, 1 = servo2, 2 = servo3
-const int GRIPPER_CLOSED_ANGLE = 10;   // lever all the way back  (adjust for your gripper)
-const int GRIPPER_OPEN_ANGLE   = 170;  // lever all the way forward (adjust for your gripper)
+const int GRIPPER_CLOSED_ANGLE = 10;   // lever all the way left  (adjust for your gripper)
+const int GRIPPER_OPEN_ANGLE   = 170;  // lever all the way right (adjust for your gripper)
 const int KNOB_TAKEOVER_DEG    = 6;    // turn the knob this far to take the hand back from the app
 
 bool appHasGripper = false;            // true while the app lever is controlling the hand
@@ -132,7 +132,7 @@ int liveAngle(int i) {
   return potAngles[i];
 }
 
-// level: 0 = lever all the way back (closed) ... 10 = all the way forward (open)
+// level: 0 = lever all the way left (closed) ... 10 = all the way right (open)
 void setGripperFromApp(int level) {
   appGripperAngle = map(level, 0, 10, GRIPPER_CLOSED_ANGLE, GRIPPER_OPEN_ANGLE);
   appHasGripper = true;
