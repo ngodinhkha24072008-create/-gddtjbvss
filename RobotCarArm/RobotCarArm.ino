@@ -30,7 +30,7 @@
 //  Back lights toggle    U / u     ARM: U = start playback, u = stop playback
 //  Extra toggle          X / x     ARM: clear all saved positions (LEDs off)
 //  Horn                  V / v     (not used)
-//  Speed slider          0-9, q    (ignored - motor pins have no speed control)
+//  Speed slider          0-9, q    ARM: hand/gripper (0 = closed ... q = fully open)
 //  Stop-all / disconnect D         Stop driving AND stop arm playback
 //  The physical buttons on D12 / D13 still work as before.
 // ---------------------------------------------------------------------
@@ -39,7 +39,11 @@
 //  Joystick     -> F B L R G I H J, release = S
 //  Triangle     -> W  (save position)      Circle -> U (play)
 //  Square       -> X  (clear positions)    Cross  -> u (stop playback)
-//  Speed lever  -> 0-9, q                  Stop all -> D
+//  Hand lever   -> 0-9, q  (forward = open, back = close)   Stop all -> D
+//
+//  The hand lever moves the gripper servo (servo3 on D9, knob A2 by default).
+//  The last control you touch wins: move the lever and the hand follows the
+//  lever; turn the A2 knob and the hand follows the knob again.
 // ---------------------------------------------------------------------
 
 #include <Servo.h>
@@ -60,6 +64,16 @@ const int BUTTON_PLAY   = 13;   // was button2
 // ---------- Timing ----------
 const unsigned long DEBOUNCE_MS = 50;
 const unsigned long PLAYBACK_STEP_MS = 1050;  // time spent at each saved position
+
+// ---------- Hand / gripper (app lever) ----------
+const int GRIPPER = 2;                 // which servo is the hand: 0 = servo1, 1 = servo2, 2 = servo3
+const int GRIPPER_CLOSED_ANGLE = 10;   // lever all the way back  (adjust for your gripper)
+const int GRIPPER_OPEN_ANGLE   = 170;  // lever all the way forward (adjust for your gripper)
+const int KNOB_TAKEOVER_DEG    = 6;    // turn the knob this far to take the hand back from the app
+
+bool appHasGripper = false;            // true while the app lever is controlling the hand
+int appGripperAngle = 90;
+int knobAngleAtLever = 0;              // knob position when the lever last moved
 
 // ---------- Arm state ----------
 Servo servos[3];
@@ -111,11 +125,25 @@ void readPots() {
   }
 }
 
+// The angle a servo should be at when it isn't playing back:
+// the knob, or for the hand, the app lever if that was used last.
+int liveAngle(int i) {
+  if (i == GRIPPER && appHasGripper) return appGripperAngle;
+  return potAngles[i];
+}
+
+// level: 0 = lever all the way back (closed) ... 10 = all the way forward (open)
+void setGripperFromApp(int level) {
+  appGripperAngle = map(level, 0, 10, GRIPPER_CLOSED_ANGLE, GRIPPER_OPEN_ANGLE);
+  appHasGripper = true;
+  knobAngleAtLever = potAngles[GRIPPER];
+}
+
 void savePosition() {
   if (savedCount >= 5) return;  // all 5 slots used, same as the original
 
   for (int i = 0; i < 3; i++) {
-    posSaves[savedCount][i] = potAngles[i];
+    posSaves[savedCount][i] = liveAngle(i);
   }
   digitalWrite(LED_PINS[savedCount], HIGH);
   Serial.print("Pos ");
@@ -191,7 +219,16 @@ void handleAppCommands() {
         stopPlayback();
         break;
 
-      // Speed (0-9, q), horn (V/v) and anything else are ignored
+      // --- Hand lever (app speed slider) ---
+      case '0': case '1': case '2': case '3': case '4':
+      case '5': case '6': case '7': case '8': case '9':
+        setGripperFromApp(data - '0');
+        break;
+      case 'q':
+        setGripperFromApp(10);
+        break;
+
+      // Horn (V/v) and anything else are ignored
     }
   }
 }
@@ -211,8 +248,12 @@ void handleArm() {
   if (playing) {
     playbackStep();
   } else {
+    // Turning the hand knob takes the hand back from the app lever
+    if (appHasGripper && abs(potAngles[GRIPPER] - knobAngleAtLever) > KNOB_TAKEOVER_DEG) {
+      appHasGripper = false;
+    }
     for (int i = 0; i < 3; i++) {
-      servos[i].write(potAngles[i]);  // follow the potentiometers
+      servos[i].write(liveAngle(i));  // follow the knobs (and the hand lever)
     }
   }
 }
@@ -235,6 +276,8 @@ void setup() {
   }
   pinMode(BUTTON_SAVE, INPUT);
   pinMode(BUTTON_PLAY, INPUT);
+
+  readPots();  // so the first lever command has a real knob position to compare with
 }
 
 void loop() {

@@ -133,6 +133,7 @@ body {
 .lever::-webkit-slider-thumb { -webkit-appearance: none; width: 34px; height: 22px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; margin-left: -14px; }
 .lever::-moz-range-thumb { width: 30px; height: 18px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; }
 .lever-val { font: 700 .95rem var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; }
+.lever-end { font: 700 .68rem var(--mono); letter-spacing: .14em; color: var(--muted); }
 
 /* Readout */
 .readout { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; background: var(--well); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; }
@@ -201,11 +202,13 @@ ol b { color: var(--fg); font-weight: 600; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><span class="code">u</span></button>
         </div>
         <div class="lever-box">
-          <div class="lever-track"><input class="lever" id="lever" type="range" min="0" max="10" step="1" value="10" aria-label="Speed lever"></div>
-          <div class="lever-val" id="leverVal">q · 100%</div>
+          <span class="lever-end">OPEN</span>
+          <div class="lever-track"><input class="lever" id="lever" type="range" min="0" max="10" step="1" value="5" aria-label="Hand lever: push forward to open, pull back to close"></div>
+          <span class="lever-end">CLOSE</span>
+          <div class="lever-val" id="leverVal">5 · 50% open</div>
         </div>
       </div>
-      <div class="zone-label">Arm buttons · speed lever</div>
+      <div class="zone-label">Arm buttons · hand lever</div>
     </div>
 
     <div class="readout">
@@ -229,7 +232,8 @@ ol b { color: var(--fg); font-weight: 600; }
             <tr><td>Circle</td><td><code>U</code></td><td>Play saved positions</td></tr>
             <tr><td>Cross</td><td><code>u</code></td><td>Stop playback, knobs control the arm</td></tr>
             <tr><td>Square</td><td><code>X</code></td><td>Clear saved positions</td></tr>
-            <tr><td>Speed lever</td><td><code>0</code>–<code>9</code> <code>q</code></td><td>Speed (needs motor enable pins wired)</td></tr>
+            <tr><td>Hand lever forward</td><td>up to <code>q</code></td><td>Open the hand (<code>q</code> = fully open)</td></tr>
+            <tr><td>Hand lever back</td><td>down to <code>0</code></td><td>Close the hand (<code>0</code> = fully closed)</td></tr>
             <tr><td>Stop all</td><td><code>D</code></td><td>Stop driving and playback</td></tr>
           </tbody>
         </table>
@@ -251,8 +255,8 @@ ol b { color: var(--fg); font-weight: 600; }
 (() => {
   const NAMES = { F: "Forward", B: "Backward", L: "Turn left", R: "Turn right", G: "Forward-left", I: "Forward-right",
     H: "Back-left", J: "Back-right", S: "Stopped", W: "Save arm position", U: "Play saved positions",
-    u: "Stop playback", X: "Clear saved positions", D: "Stop all", q: "Speed 100%" };
-  for (let i = 0; i <= 9; i++) NAMES[String(i)] = "Speed " + (i * 10) + "%";
+    u: "Stop playback", X: "Clear saved positions", D: "Stop all", q: "Hand fully open" };
+  for (let i = 0; i <= 9; i++) NAMES[String(i)] = i === 0 ? "Hand closed" : "Hand " + (i * 10) + "% open";
 
   const enc = new TextEncoder();
   const $ = id => document.getElementById(id);
@@ -405,13 +409,13 @@ ol b { color: var(--fg); font-weight: 600; }
     b.addEventListener("contextmenu", e => e.preventDefault());
   });
 
-  // ---- Speed lever ----
+  // ---- Hand lever: forward (up) = open, back (down) = close ----
   const lever = $("lever"), leverVal = $("leverVal");
-  let lastSpeed = "q";
+  let lastHand = "5";
   lever.addEventListener("input", () => {
     const v = Number(lever.value), c = v === 10 ? "q" : String(v);
-    leverVal.textContent = c + " · " + (v * 10) + "%";
-    if (c !== lastSpeed) { lastSpeed = c; send(c); }
+    leverVal.textContent = v === 0 ? "0 · closed" : c + " · " + (v * 10) + "% open";
+    if (c !== lastHand) { lastHand = c; send(c); }
   });
 
   ticks.S = null;
