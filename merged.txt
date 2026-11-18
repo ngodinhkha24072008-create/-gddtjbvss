@@ -1,0 +1,168 @@
+===== FILE 1: Code.ino =====
+
+char data; // Variable to store received data
+
+void setup() {
+  Serial.begin(9600); // Start serial communication at 9600 baud rate
+
+  // Set motor control pins as output
+  pinMode(7, OUTPUT); 
+  pinMode(6, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(4, OUTPUT);
+
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    data = Serial.read(); // Read received data
+
+    // Control motor movement based on received data
+    switch (data) {
+      case 'F': // Move Forward
+        digitalWrite(7, HIGH);
+        digitalWrite(6, LOW);
+        digitalWrite(5, HIGH);
+        digitalWrite(4, LOW);
+        break;
+      case 'B': // Move Backward
+        digitalWrite(7, LOW);
+        digitalWrite(6, HIGH);
+        digitalWrite(5, LOW);
+        digitalWrite(4, HIGH);
+        break;
+      case 'R': // Turn Left
+        digitalWrite(7, LOW);
+        digitalWrite(6, HIGH);
+        digitalWrite(5, HIGH);
+        digitalWrite(4, LOW);
+        break;
+      case 'L': // Turn Right
+        digitalWrite(7, HIGH);
+        digitalWrite(6, LOW);
+        digitalWrite(5, LOW);
+        digitalWrite(4, HIGH);
+        break;
+      case 'S': // Stop
+        digitalWrite(7, LOW);
+        digitalWrite(6, LOW);
+        digitalWrite(5, LOW);
+        digitalWrite(4, LOW);
+        break;
+    }
+  }
+}
+
+
+===== FILE 2: latestlog.txt =====
+
+--------- Starting game with Launcher Debug!
+Info: Launcher version: justicia-20260910-[7e5e21b]-v3_openjdk
+Info: Build type: gplay
+Info: Architecture: arm64
+Info: Device model: Xiaomi 23127PN0CG
+Info: API version: 36
+Info: Selected game version: neoforge-21.1.1
+Info: Custom Java arguments: ""
+Info: Total RAM on device: 11168 Mb
+Info: RAM allocated: 2048 Mb
+Info: Graphics device: Qualcomm Adreno (TM) 750 (OpenGL ES 3)
+Info: Selected renderer: opengles2
+Added custom env: FORCE_VSYNC=true
+Added custom env: LIBGL_MIPMAP=3
+Added custom env: allow_higher_compat_version=true
+Added custom env: MESA_GLSL_CACHE_DIR=/data/user/0/git.artdeell.mjlaunch/cache
+Added custom env: LIBGL_NOINTOVLHACK=1
+Added custom env: MOD_ANDROID_RUNTIME=/data/user/0/git.artdeell.mjlaunch/cache/app_runtime_mod
+Added custom env: force_glsl_extensions_warn=true
+Added custom env: LIBGL_NORMALIZE=1
+Added custom env: POJAV_VSYNC_IN_ZINK=1
+Added custom env: LIBGL_NOERROR=1
+Added custom env: LIBGL_ES=2
+Added custom env: allow_glsl_extension_directive_midshader=true
+Initialising gl4es
+v1.1.5 built on Jun  7 2026 11:29:56
+Using GLES 2.0 backend
+loaded: libGLESv2.so
+loaded: libEGL.so
+Using GLES 2.0 backend
+Hardware Full NPOT detected and used
+FBO are in core, and so used
+PointSprite are in core, and so used
+CubeMap are in core, and so used
+BlendColor is in core, and so used
+Blend Subtract is in core, and so used
+Blend Function and Equation Separation is in core, and so used
+Texture Mirrored Repeat is in core, and so used
+Extension GL_OES_element_index_uint  detected and used
+Extension GL_OES_packed_depth_stencil  detected and used
+Extension GL_OES_depth24  detected and used
+Extension GL_OES_rgb8_rgba8  detected and used
+Extension GL_EXT_texture_format_BGRA8888  detected and used
+Extension GL_OES_depth_texture  detected and used
+Extension GL_OES_texture_stencil8  detected and used
+Extension GL_OES_texture_float  detected and used
+Extension GL_OES_texture_half_float  detected and used
+Extension GL_EXT_color_buffer_float  detected and used
+Extension GL_EXT_color_buffer_half_float  detected and used
+high precision float in fragment shader available and used
+Max vertex attrib: 32
+Extension GL_OES_standard_derivatives  detected and used
+Extension GL_ARM_shader_framebuffer_fetch detected and used
+Extension GL_OES_get_program_binary  detected and used
+Number of supported Program Binary Format: 1
+Max texture size: 16384
+Max Varying Vector: 31
+Texture Units: 16/16 (hardware: 16), Max lights: 8, Max planes: 6
+Extension GL_EXT_texture_filter_anisotropic  detected and used
+Max Anisotropic filtering: 16
+Hardware vendor is Qualcomm
+GLSL 300 es supported
+GLSL 310 es supported and used
+GLSL 320 es supported
+Max Color Attachments: 8 / Draw buffers: 8
+sRGB surface supported
+EGLImage to Texture2D supported
+EGLImage to RenderBuffer supported
+ignore MipMap
+glGetError() always return GL_NOERROR
+Targeting OpenGL 2.1
+No hack in shader converter to define overloaded function with int
+Not trying to batch small subsequent glDrawXXXX
+try to use VBO
+Force texture for Attachment color0 on FBO
+Hack to trigger a SwapBuffers when a Full Framebuffer Blit on default FBO is done
+Force normals to be normalized on FPE shaders
+glX Will try to recycle EGL Surface
+Current folder is:/storage/emulated/0/Android/data/git.artdeell.mjlaunch/files/instances/21.1.1-06b0dee8-263a-41fa-a04a-30f9eb817767
+MojoExec: Loaded EGL libgl4es_114.so (in namespace: 0)
+--------- beginning of main
+I/jrelog  (11567): updateLdLibPath: 0x7e88a4812c
+
+[0.509s][warning][jni,resolve] Re-registering of platform native method: jdk.internal.loader.NativeLibraries.load(Ljdk/internal/loader/NativeLibraries$NativeLibraryImpl;Ljava/lang/String;ZZ)Z from code in a different classloader
+[0.509s][warning][jni,resolve] Re-registering of platform native method: java.lang.ProcessImpl.forkAndExec(I[B[B[BI[BI[B[IZ)I from code in a different classloader
+Registered forkAndExec
+ERROR StatusConsoleListener appender Console has no parameter that matches element Policies
+[09:20:34] [main/INFO]: ModLauncher running: args [--username, eeee, --version, 1.21.1, --gameDir, /storage/emulated/0/Android/data/git.artdeell.mjlaunch/files/instances/21.1.1-06b0dee8-263a-41fa-a04a-30f9eb817767, --assetsDir, /storage/emulated/0/Android/data/git.artdeell.mjlaunch/files/.minecraft/assets, --assetIndex, 17, --uuid, 00000000000000000000000000000000, --accessToken, ❄❄❄❄❄❄❄❄, --clientId, ${clientid}, --xuid, , --userType, msa, --versionType, release, --fml.neoForgeVersion, 21.1.1, --fml.fmlVersion, 4.0.24, --fml.mcVersion, 1.21.1, --fml.neoFormVersion, 20240808.144430, --launchTarget, forgeclient]
+[09:20:34] [main/INFO]: JVM identified as Oracle Corporation OpenJDK 64-Bit Server VM 21.0.13.0.2-internal-adhoc.runner.openjdk-21
+[09:20:34] [main/INFO]: ModLauncher 11.0.4+main.d2e20e43 starting: java version 21.0.13.0.2-internal by N/A; OS Linux arch aarch64 version Android-16
+[09:20:35] [main/INFO]: Loading ImmediateWindowProvider fmlearlywindow
+[09:20:35] [main/INFO]: Trying GL version 4.6
+[09:20:35] [main/INFO]: Requested GL version 4.6 got version 2.1
+LWJGL linkerhook: replacing OpenGL with renderspec driver
+[09:20:35] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.6 Source=union:/storage/emulated/0/Android/data/git.artdeell.mjlaunch/files/.minecraft/libraries/net/fabricmc/sponge-mixin/0.14.0+mixin.0.8.6/sponge-mixin-0.14.0+mixin.0.8.6.jar%23106!/ Service=ModLauncher Env=CLIENT
+[09:20:35] [pool-2-thread-1/INFO]: GL info: Adreno (TM) 750 GL version 2.1 gl4es wrapper 1.1.5, PojavLauncherTeam & ptitSeb
+FATAL ERROR in native method: Thread[#41,pool-2-thread-1,5,main]: No context is current or a function that is not available in the current context was called. The JVM will abort execution.
+	at org.lwjgl.opengl.GL30C.nglTexParameterIiv(org.lwjgl.opengl@3.3.3-snapshot/Native Method)
+	at org.lwjgl.opengl.GL30C.glTexParameterIi(org.lwjgl.opengl@3.3.3-snapshot/GL30C.java:1901)
+	at net.neoforged.fml.earlydisplay.EarlyFramebuffer.<init>(fml_earlydisplay@4.0.24/EarlyFramebuffer.java:26)
+	at net.neoforged.fml.earlydisplay.DisplayWindow.initRender(fml_earlydisplay@4.0.24/DisplayWindow.java:223)
+	at net.neoforged.fml.earlydisplay.DisplayWindow.lambda$start$9(fml_earlydisplay@4.0.24/DisplayWindow.java:290)
+	at net.neoforged.fml.earlydisplay.DisplayWindow$$Lambda/0x000000080031e230.run(fml_earlydisplay@4.0.24/Unknown Source)
+	at java.util.concurrent.Executors$RunnableAdapter.call(java.base@21.0.13.0.2-internal/Executors.java:572)
+	at java.util.concurrent.FutureTask.run(java.base@21.0.13.0.2-internal/FutureTask.java:317)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(java.base@21.0.13.0.2-internal/ScheduledThreadPoolExecutor.java:304)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13.0.2-internal/ThreadPoolExecutor.java:1144)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13.0.2-internal/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13.0.2-internal/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13.0.2-internal/Thread.java:1583)
