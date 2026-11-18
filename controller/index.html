@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: one handheld "shell" — joystick on the left, symbol buttons + speed lever on the right; command map below. Single committed dark console look. */
+/* Layout: a landscape handheld that fills one screen. Left grip = joystick, centre = readout + stop, right grip = symbol buttons over the hand lever. Single committed dark console look. */
 :root {
   --bg: #0d1220;
   --shell: #161d2e;
@@ -29,68 +29,70 @@
   --display: "Chakra Petch", "Arial Narrow", system-ui, sans-serif;
   --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* control sizes follow the screen height so the pad always fits one landscape screen */
+  --stick: clamp(150px, min(34vw, calc(100dvh - 120px)), 320px);
+  --b: clamp(44px, min(8vw, calc((100dvh - 200px) / 3.4)), 78px);
   color-scheme: dark;
 }
-html, body { min-height: 100%; }
+html, body { height: 100%; margin: 0; }
+[hidden] { display: none !important; }
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--body);
-  font-size: 15px;
-  line-height: 1.5;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 16px 40px;
+  font-size: 14px;
+  line-height: 1.45;
+  padding-left: max(12px, env(safe-area-inset-left, 0px));
+  padding-right: max(12px, env(safe-area-inset-right, 0px));
+  padding-block: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
   -webkit-tap-highlight-color: transparent;
+  user-select: none; -webkit-user-select: none;
 }
-.wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 20px; }
+.app { height: 100%; display: grid; grid-template-rows: auto 1fr; gap: 8px; max-width: 1200px; margin: 0 auto; }
 
-/* Top bar */
-.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between; }
-.brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; min-width: 0; }
-.brand h1 { font-family: var(--display); font-size: 1.5rem; letter-spacing: .02em; margin: 0; text-wrap: balance; }
-.brand span { color: var(--muted); font-size: .85rem; }
-.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Top strip */
+.bar { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; min-width: 0; }
+.bar h1 { font-family: var(--display); font-size: 1.1rem; letter-spacing: .03em; margin: 0; white-space: nowrap; }
+.status { display: flex; align-items: center; gap: 7px; font-size: .8rem; color: var(--muted); white-space: nowrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); box-shadow: 0 0 0 3px rgba(255,95,87,.15); }
+.status.on .dot { background: var(--ok); box-shadow: 0 0 0 3px rgba(70,211,154,.18); }
+.status.on { color: var(--fg); }
+.actions { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
 .btn {
-  font: 600 .85rem var(--body); color: var(--fg); background: var(--shell);
-  border: 1px solid var(--line); border-radius: 8px; padding: 9px 14px; cursor: pointer;
+  font: 600 .78rem var(--body); color: var(--fg); background: var(--shell);
+  border: 1px solid var(--line); border-radius: 8px; padding: 7px 11px; cursor: pointer; white-space: nowrap;
 }
 .btn:hover { border-color: var(--muted); }
 .btn.primary { background: var(--accent); color: #1b1305; border-color: var(--accent); }
-.btn.stop { background: transparent; color: var(--danger); border-color: var(--danger); }
-.btn:focus-visible, .face:focus-visible, .lever:focus-visible, .stick:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.btn:focus-visible, .face:focus-visible, .lever:focus-visible, .stick:focus-visible, .stopall:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-.status { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--muted); }
-.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--danger); box-shadow: 0 0 0 3px rgba(255,95,87,.15); }
-.status.on .dot { background: var(--ok); box-shadow: 0 0 0 3px rgba(70,211,154,.18); }
-.status.on { color: var(--fg); }
-.notice { font-size: .85rem; color: var(--accent); min-height: 1.3em; margin: -8px 0 0; }
-
-/* Shell */
+/* The handheld */
 .shell {
+  min-height: 0;
   background: linear-gradient(180deg, #1a2236, var(--shell));
-  border: 1px solid var(--line); border-radius: 36px;
-  padding: 24px; display: grid; gap: 24px;
-  grid-template-columns: 1fr 1fr; align-items: center;
+  border: 1px solid var(--line); border-radius: 48px;
   box-shadow: 0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+  padding: 14px clamp(16px, 3vw, 40px);
+  display: grid; grid-template-columns: 1fr minmax(150px, .8fr) 1fr; align-items: center; gap: 12px;
 }
-.zone { display: grid; justify-items: center; gap: 12px; min-width: 0; }
-.zone-label { font: 500 .72rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.grip { display: grid; justify-items: center; align-content: center; gap: 10px; min-width: 0; }
+.zone-label { font: 500 .66rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-align: center; }
 
 /* Joystick */
 .stick {
-  --size: min(240px, 62vw);
-  width: var(--size); height: var(--size); border-radius: 50%; position: relative;
+  width: var(--stick); height: var(--stick); border-radius: 50%; position: relative;
   background: radial-gradient(circle at 50% 50%, #121a2b 0 55%, var(--well) 56% 100%);
   border: 1px solid var(--line); touch-action: none; cursor: grab;
   box-shadow: inset 0 6px 18px rgba(0,0,0,.6);
 }
-.stick .tick { position: absolute; font: 700 .8rem var(--mono); color: var(--muted); transition: color .1s; }
+.stick .tick { position: absolute; font: 700 .75rem var(--mono); color: var(--muted); transition: color .1s; }
 .stick .tick.hot { color: var(--accent); }
-.t-F { top: 8px; left: 50%; transform: translateX(-50%); }
-.t-B { bottom: 8px; left: 50%; transform: translateX(-50%); }
-.t-L { left: 10px; top: 50%; transform: translateY(-50%); }
-.t-R { right: 10px; top: 50%; transform: translateY(-50%); }
+.t-F { top: 6%; left: 50%; transform: translateX(-50%); }
+.t-B { bottom: 6%; left: 50%; transform: translateX(-50%); }
+.t-L { left: 6%; top: 50%; transform: translateY(-50%); }
+.t-R { right: 6%; top: 50%; transform: translateY(-50%); }
 .t-G { top: 17%; left: 17%; } .t-I { top: 17%; right: 17%; }
 .t-H { bottom: 17%; left: 17%; } .t-J { bottom: 17%; right: 17%; }
 .knob {
@@ -102,84 +104,103 @@ body {
 }
 .stick.live .knob { border-color: var(--accent); }
 
-/* Right side: face buttons + lever */
-.right { display: flex; flex-direction: column; align-items: center; gap: 30px; }
-.faces {
-  --b: min(68px, 17vw);
-  display: grid; grid-template-columns: repeat(3, var(--b)); grid-template-rows: repeat(3, var(--b));
+/* Centre */
+.centre { display: grid; justify-items: center; align-content: center; gap: 12px; min-width: 0; text-align: center; }
+.now b { display: block; font: 700 2.4rem/1 var(--mono); color: var(--accent); }
+.now span { display: block; color: var(--muted); font-size: .82rem; margin-top: 4px; }
+.trail { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; max-width: 220px; min-height: 22px; }
+.trail i { font: 500 .72rem var(--mono); font-style: normal; padding: 1px 6px; border-radius: 5px; background: var(--well); color: var(--muted); border: 1px solid var(--line); }
+.trail i:first-child { color: var(--fg); border-color: var(--muted); }
+.stopall {
+  font: 700 .8rem var(--display); letter-spacing: .12em; color: var(--danger); background: var(--well);
+  border: 1px solid var(--danger); border-radius: 999px; padding: 8px 18px; cursor: pointer;
 }
+.notice { font-size: .76rem; color: var(--accent); max-width: 240px; margin: 0; min-height: 2.6em; }
+
+/* Right grip */
+.faces { display: grid; grid-template-columns: repeat(3, var(--b)); grid-template-rows: repeat(3, var(--b)); }
 .face {
   width: var(--b); height: var(--b); border-radius: 50%; border: 1px solid var(--line);
   background: radial-gradient(circle at 40% 30%, #26304a, #151c2c 75%);
   box-shadow: 0 6px 14px rgba(0,0,0,.5); cursor: pointer; display: grid; place-items: center;
-  color: var(--c); position: relative; touch-action: manipulation; transition: transform .06s;
+  color: var(--c); position: relative; touch-action: manipulation; transition: transform .06s; padding: 0;
 }
 .face svg { width: 46%; height: 46%; }
-.face .code { position: absolute; bottom: -18px; font: 700 .7rem var(--mono); color: var(--muted); }
+.face .code { position: absolute; right: -2px; bottom: -2px; font: 700 .62rem var(--mono); color: var(--muted); background: var(--shell); border: 1px solid var(--line); border-radius: 4px; padding: 0 3px; }
 .face.pressed { transform: scale(.92); background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--c) 30%, #151c2c), #151c2c 80%); border-color: var(--c); }
 .f-tri { grid-area: 1 / 2; --c: var(--tri); }
 .f-sq { grid-area: 2 / 1; --c: var(--sq); }
 .f-circ { grid-area: 2 / 3; --c: var(--circ); }
 .f-cross { grid-area: 3 / 2; --c: var(--cross); }
 
-.lever-box { display: grid; justify-items: center; gap: 8px; }
-.lever-row { display: flex; align-items: center; gap: 10px; }
-.lever-track { width: min(240px, 52vw); display: grid; place-items: center; padding: 6px 12px; background: var(--well); border: 1px solid var(--line); border-radius: 20px; }
-.lever {
-  appearance: none; -webkit-appearance: none;
-  width: 100%; height: 34px; background: transparent; cursor: ew-resize; margin: 0;
-}
+.lever-row { display: flex; align-items: center; gap: 8px; }
+.lever-end { font: 700 .62rem var(--mono); letter-spacing: .12em; color: var(--muted); }
+.lever-track { width: calc(var(--b) * 3); display: grid; place-items: center; padding: 4px 12px; background: var(--well); border: 1px solid var(--line); border-radius: 20px; }
+.lever { appearance: none; -webkit-appearance: none; width: 100%; height: 32px; background: transparent; cursor: ew-resize; margin: 0; touch-action: none; }
 .lever::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #2a3348, var(--accent)); }
 .lever::-moz-range-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #2a3348, var(--accent)); }
-.lever::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 34px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; margin-top: -14px; }
-.lever::-moz-range-thumb { width: 18px; height: 30px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; }
-.lever-val { font: 700 .95rem var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; }
-.lever-end { font: 700 .68rem var(--mono); letter-spacing: .14em; color: var(--muted); }
+.lever::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 32px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; margin-top: -13px; }
+.lever::-moz-range-thumb { width: 18px; height: 28px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; }
+.lever-val { font: 700 .8rem var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; }
 
-/* Readout */
-.readout { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; background: var(--well); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; }
-.now { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
-.now b { font: 700 1.6rem var(--mono); color: var(--accent); min-width: 1.2ch; }
-.now span { color: var(--muted); font-size: .9rem; }
-.trail { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; min-width: 0; }
-.trail i { font: 500 .78rem var(--mono); font-style: normal; padding: 2px 7px; border-radius: 5px; background: var(--shell); color: var(--muted); border: 1px solid var(--line); }
-.trail i:first-child { color: var(--fg); border-color: var(--muted); }
-
-/* Map + setup */
+/* Command map sheet */
+.sheet { position: fixed; inset: 0; z-index: 20; background: rgba(5,8,15,.72); display: grid; place-items: center;
+  padding: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); }
+.sheet-panel { background: var(--shell); border: 1px solid var(--line); border-radius: 16px; width: min(920px, 100%); max-height: 100%; overflow: auto; padding: 16px 20px; display: grid; gap: 14px; user-select: text; -webkit-user-select: text; }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sheet-head h2 { font-family: var(--display); font-size: 1.1rem; margin: 0; }
 .info { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
-.panel { min-width: 0; }
-.panel h2 { font-family: var(--display); font-size: 1.05rem; letter-spacing: .03em; margin: 0 0 8px; }
+.info > div { min-width: 0; }
+.info h3 { font-family: var(--display); font-size: .95rem; margin: 0 0 6px; letter-spacing: .03em; }
 .tbl-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
-th, td { text-align: left; padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { font: 500 .7rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-td code { font: 700 .85rem var(--mono); color: var(--accent); }
-ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; color: var(--muted); font-size: .9rem; max-width: 60ch; }
+table { width: 100%; border-collapse: collapse; font-size: .84rem; }
+th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 .66rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+td code { font: 700 .82rem var(--mono); color: var(--accent); }
+ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; color: var(--muted); font-size: .86rem; max-width: 60ch; }
 ol b { color: var(--fg); font-weight: 600; }
 
-@media (max-width: 720px) {
-  .shell { grid-template-columns: 1fr; border-radius: 28px; padding: 22px 16px; }
+/* Portrait phones: ask to turn sideways */
+.rotate { display: none; }
+@media (orientation: portrait) and (max-width: 760px) {
+  body:not(.allow-portrait) .app { display: none; }
+  body:not(.allow-portrait) .rotate {
+    display: grid; position: fixed; inset: 0; z-index: 15; place-items: center; text-align: center;
+    background: var(--bg); padding: 24px;
+  }
+  .rotate-inner { display: grid; gap: 14px; justify-items: center; max-width: 300px; }
+  .rotate-inner h2 { font-family: var(--display); margin: 0; font-size: 1.3rem; }
+  .rotate-inner p { margin: 0; color: var(--muted); }
+  .phone-icon { width: 64px; height: 104px; border: 3px solid var(--accent); border-radius: 12px; animation: turn 2.4s ease-in-out infinite; }
+  @keyframes turn { 0%, 30% { transform: rotate(0); } 60%, 100% { transform: rotate(-90deg); } }
+  .linkish { background: none; border: 0; color: var(--muted); text-decoration: underline; font: inherit; cursor: pointer; }
+  /* fallback stacked layout if they choose to stay upright */
+  body.allow-portrait { overflow: auto; height: auto; }
+  body.allow-portrait .app { height: auto; }
+  body.allow-portrait .shell { grid-template-columns: 1fr; border-radius: 28px; padding: 20px 14px; gap: 22px; }
+  body.allow-portrait { --stick: min(240px, 62vw); --b: min(64px, 16vw); }
   .info { grid-template-columns: 1fr; }
-  .trail { margin-left: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .face, .stick .tick { transition: none; } }
+@media (max-width: 760px) { .info { grid-template-columns: 1fr; } }
+@media (max-height: 420px) { .bar h1 { font-size: .95rem; } .btn { padding: 5px 9px; } .now b { font-size: 1.9rem; } .notice { display: none; } }
+@media (prefers-reduced-motion: reduce) { .face, .stick .tick { transition: none; } .phone-icon { animation: none; transform: rotate(-90deg); } }
 </style>
 
-<div class="wrap">
+<div class="app">
   <header class="bar">
-    <div class="brand"><h1>Rover Arm Gamepad</h1><span>for RobotCarArm.ino</span></div>
+    <h1>Rover Arm Gamepad</h1>
     <div class="status" id="status" role="status"><span class="dot"></span><span id="statusText">Not connected</span></div>
     <div class="actions">
-      <button class="btn primary" id="connBle" type="button">Connect BLE (HM-10)</button>
+      <button class="btn primary" id="connBle" type="button">Connect BLE</button>
       <button class="btn" id="connSer" type="button">Connect HC-05</button>
       <button class="btn" id="disc" type="button" hidden>Disconnect</button>
-      <button class="btn stop" id="stopAll" type="button">Stop all · D</button>
+      <button class="btn" id="full" type="button" hidden>Full screen</button>
+      <button class="btn" id="mapBtn" type="button">Command map</button>
     </div>
   </header>
-  <p class="notice" id="notice">Not connected yet. The controls still work and show what they would send.</p>
 
-  <section class="shell" aria-label="Gamepad">
-    <div class="zone">
+  <main class="shell" aria-label="Gamepad">
+    <section class="grip">
       <div class="stick" id="stick" tabindex="0" aria-label="Drive joystick. Arrow keys also steer.">
         <span class="tick t-F" data-d="F">F</span><span class="tick t-B" data-d="B">B</span>
         <span class="tick t-L" data-d="L">L</span><span class="tick t-R" data-d="R">R</span>
@@ -187,71 +208,83 @@ ol b { color: var(--fg); font-weight: 600; }
         <span class="tick t-H" data-d="H">H</span><span class="tick t-J" data-d="J">J</span>
         <div class="knob" id="knob"></div>
       </div>
-      <div class="zone-label">Drive · release = S</div>
-    </div>
+      <div class="zone-label">Drive · let go = S</div>
+    </section>
 
-    <div class="zone">
-      <div class="right">
-        <div class="faces">
-          <button class="face f-tri" type="button" data-send="W" data-name="Save arm position" aria-label="Triangle: save arm position">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3.5 21 19.5H3z"/></svg><span class="code">W</span></button>
-          <button class="face f-sq" type="button" data-send="X" data-name="Clear saved positions" aria-label="Square: clear saved positions">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="4" width="16" height="16" rx="1.5"/></svg><span class="code">X</span></button>
-          <button class="face f-circ" type="button" data-send="U" data-name="Play saved positions" aria-label="Circle: play saved positions">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="12" cy="12" r="8.5"/></svg><span class="code">U</span></button>
-          <button class="face f-cross" type="button" data-send="u" data-name="Stop playback" aria-label="Cross: stop playback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><span class="code">u</span></button>
-        </div>
-        <div class="lever-box">
-          <div class="lever-row">
-            <span class="lever-end">CLOSE</span>
-            <div class="lever-track"><input class="lever" id="lever" type="range" min="0" max="10" step="1" value="5" aria-label="Hand lever: slide right to open, left to close"></div>
-            <span class="lever-end">OPEN</span>
-          </div>
-          <div class="lever-val" id="leverVal">5 · 50% open</div>
-        </div>
-      </div>
-      <div class="zone-label">Arm buttons · hand lever</div>
-    </div>
-
-    <div class="readout">
+    <section class="centre">
       <div class="now"><b id="nowCode">S</b><span id="nowName">Stopped</span></div>
       <div class="trail" id="trail" aria-label="Last commands sent"></div>
-    </div>
-  </section>
+      <button class="stopall" id="stopAll" type="button">STOP ALL · D</button>
+      <p class="notice" id="notice">Not connected. Controls show what they would send.</p>
+    </section>
 
-  <section class="info">
-    <div class="panel">
-      <h2>Command map</h2>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>Control</th><th>Sends</th><th>On the robot</th></tr></thead>
-          <tbody>
-            <tr><td>Joystick up / down</td><td><code>F</code> <code>B</code></td><td>Drive forward / backward</td></tr>
-            <tr><td>Joystick left / right</td><td><code>L</code> <code>R</code></td><td>Turn left / right</td></tr>
-            <tr><td>Joystick diagonals</td><td><code>G</code> <code>I</code> <code>H</code> <code>J</code></td><td>Forward-left, forward-right, back-left, back-right</td></tr>
-            <tr><td>Let go of joystick</td><td><code>S</code></td><td>Stop driving</td></tr>
-            <tr><td>Triangle</td><td><code>W</code></td><td>Save arm position (next of 5 slots)</td></tr>
-            <tr><td>Circle</td><td><code>U</code></td><td>Play saved positions</td></tr>
-            <tr><td>Cross</td><td><code>u</code></td><td>Stop playback, knobs control the arm</td></tr>
-            <tr><td>Square</td><td><code>X</code></td><td>Clear saved positions</td></tr>
-            <tr><td>Hand lever right</td><td>up to <code>q</code></td><td>Open the hand (<code>q</code> = fully open)</td></tr>
-            <tr><td>Hand lever left</td><td>down to <code>0</code></td><td>Close the hand (<code>0</code> = fully closed)</td></tr>
-            <tr><td>Stop all</td><td><code>D</code></td><td>Stop driving and playback</td></tr>
-          </tbody>
-        </table>
+    <section class="grip">
+      <div class="faces">
+        <button class="face f-tri" type="button" data-send="W" aria-label="Triangle: save arm position">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3.5 21 19.5H3z"/></svg><span class="code">W</span></button>
+        <button class="face f-sq" type="button" data-send="X" aria-label="Square: clear saved positions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="4" width="16" height="16" rx="1.5"/></svg><span class="code">X</span></button>
+        <button class="face f-circ" type="button" data-send="U" aria-label="Circle: play saved positions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="12" cy="12" r="8.5"/></svg><span class="code">U</span></button>
+        <button class="face f-cross" type="button" data-send="u" aria-label="Cross: stop playback">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><span class="code">u</span></button>
+      </div>
+      <div class="lever-row">
+        <span class="lever-end">CLOSE</span>
+        <div class="lever-track"><input class="lever" id="lever" type="range" min="0" max="10" step="1" value="5" aria-label="Hand lever: slide right to open, left to close"></div>
+        <span class="lever-end">OPEN</span>
+      </div>
+      <div class="lever-val" id="leverVal">Hand 5 · 50% open</div>
+    </section>
+  </main>
+</div>
+
+<div class="rotate" id="rotate">
+  <div class="rotate-inner">
+    <div class="phone-icon" aria-hidden="true"></div>
+    <h2>Turn your phone sideways</h2>
+    <p>The gamepad is laid out for landscape: joystick under your left thumb, buttons and hand lever under your right.</p>
+    <button class="btn primary" id="rotFull" type="button">Full screen landscape</button>
+    <button class="linkish" id="rotStay" type="button">Use it upright instead</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-head"><h2 id="sheetTitle">Command map</h2><button class="btn" id="sheetClose" type="button">Close</button></div>
+    <div class="info">
+      <div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Control</th><th>Sends</th><th>On the robot</th></tr></thead>
+            <tbody>
+              <tr><td>Joystick up / down</td><td><code>F</code> <code>B</code></td><td>Drive forward / backward</td></tr>
+              <tr><td>Joystick left / right</td><td><code>L</code> <code>R</code></td><td>Turn left / right</td></tr>
+              <tr><td>Joystick diagonals</td><td><code>G</code> <code>I</code> <code>H</code> <code>J</code></td><td>Forward-left, forward-right, back-left, back-right</td></tr>
+              <tr><td>Let go of joystick</td><td><code>S</code></td><td>Stop driving</td></tr>
+              <tr><td>Triangle</td><td><code>W</code></td><td>Save arm position (next of 5 slots)</td></tr>
+              <tr><td>Circle</td><td><code>U</code></td><td>Play saved positions</td></tr>
+              <tr><td>Cross</td><td><code>u</code></td><td>Stop playback, knobs control the arm</td></tr>
+              <tr><td>Square</td><td><code>X</code></td><td>Clear saved positions</td></tr>
+              <tr><td>Hand lever right</td><td>up to <code>q</code></td><td>Open the hand (<code>q</code> = fully open)</td></tr>
+              <tr><td>Hand lever left</td><td>down to <code>0</code></td><td>Close the hand (<code>0</code> = fully closed)</td></tr>
+              <tr><td>Stop all</td><td><code>D</code></td><td>Stop driving and playback</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3>Using it on your phone</h3>
+        <ol>
+          <li>Open this controller in <b>Chrome on Android</b> from its web address (it needs https). Bluetooth can't be used inside the claude.ai preview.</li>
+          <li>Turn the phone sideways and tap <b>Full screen</b> to hide the browser bars.</li>
+          <li><b>HM-10 / BLE module:</b> tap Connect BLE and pick the module.</li>
+          <li><b>HC-05 / HC-06:</b> pair it in Android Bluetooth settings first (PIN is usually 1234), then tap Connect HC-05. Needs a recent Chrome.</li>
+          <li>The Arduino side is <b>RobotCarArm.ino</b> at 9600 baud.</li>
+        </ol>
       </div>
     </div>
-    <div class="panel">
-      <h2>Using it on your phone</h2>
-      <ol>
-        <li>Open this controller in <b>Chrome on Android</b> from its web address (it needs https). Bluetooth can't be used inside the claude.ai preview.</li>
-        <li><b>HM-10 / BLE module:</b> tap Connect BLE and pick the module.</li>
-        <li><b>HC-05 / HC-06:</b> pair it in Android Bluetooth settings first (PIN is usually 1234), then tap Connect HC-05. Needs a recent Chrome.</li>
-        <li>The Arduino side is <b>RobotCarArm.ino</b> at 9600 baud. No code changes are needed.</li>
-      </ol>
-    </div>
-  </section>
+  </div>
 </div>
 
 <script>
@@ -276,7 +309,7 @@ ol b { color: var(--fg); font-weight: 600; }
     $("disc").hidden = !l;
     $("connBle").hidden = !!l;
     $("connSer").hidden = !!l;
-    say(l ? "Ready. Drive with the joystick." : "Not connected. The controls still show what they would send.");
+    say(l ? "Ready. Drive with the joystick." : "Not connected. Controls show what they would send.");
     if (l && navigator.wakeLock) navigator.wakeLock.request("screen").then(w => wakeLock = w).catch(() => {});
     if (!l && wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
   }
@@ -285,7 +318,7 @@ ol b { color: var(--fg); font-weight: 600; }
     nowCode.textContent = c;
     nowName.textContent = (NAMES[c] || "") + (link ? "" : " (not sent)");
     const chip = document.createElement("i"); chip.textContent = c;
-    trail.prepend(chip); while (trail.children.length > 14) trail.lastChild.remove();
+    trail.prepend(chip); while (trail.children.length > 10) trail.lastChild.remove();
     if (!link) return;
     if (pending > 8) return;            // don't let a slow link build a backlog
     pending++;
@@ -351,6 +384,30 @@ ol b { color: var(--fg); font-weight: 600; }
   });
   $("stopAll").addEventListener("click", () => { send("D"); setStickDir("S", true); });
 
+  // ---- Full screen + landscape ----
+  const canFull = !!document.documentElement.requestFullscreen;
+  $("full").hidden = !canFull;
+  async function goLandscape() {
+    try {
+      if (!document.fullscreenElement) await document.documentElement.requestFullscreen({ navigationUI: "hide" });
+      if (screen.orientation && screen.orientation.lock) await screen.orientation.lock("landscape");
+    } catch (_) {
+      say("Full screen isn't available here. Turn the phone sideways instead.");
+    }
+  }
+  $("full").addEventListener("click", () => { if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); else goLandscape(); });
+  $("rotFull").addEventListener("click", goLandscape);
+  $("rotFull").hidden = !canFull;
+  $("rotStay").addEventListener("click", () => document.body.classList.add("allow-portrait"));
+  document.addEventListener("fullscreenchange", () => { $("full").textContent = document.fullscreenElement ? "Exit full screen" : "Full screen"; });
+
+  // ---- Command map sheet ----
+  const sheet = $("sheet");
+  $("mapBtn").addEventListener("click", () => { sheet.hidden = false; $("sheetClose").focus(); });
+  $("sheetClose").addEventListener("click", () => { sheet.hidden = true; $("mapBtn").focus(); });
+  sheet.addEventListener("click", e => { if (e.target === sheet) sheet.hidden = true; });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") sheet.hidden = true; });
+
   // ---- Joystick ----
   const stick = $("stick"), knob = $("knob");
   const ticks = {}; stick.querySelectorAll(".tick").forEach(t => ticks[t.dataset.d] = t);
@@ -398,10 +455,10 @@ ol b { color: var(--fg); font-weight: 600; }
     setStickDir(dirFrom(x, y));
   }
   document.addEventListener("keydown", e => {
-    const k = KEYMAP[e.key]; if (!k || e.target.tagName === "INPUT") return;
+    const k = KEYMAP[e.key]; if (!k || e.target.tagName === "INPUT" || !sheet.hidden) return;
     e.preventDefault(); if (!held.has(k)) { held.add(k); keyDir(); }
   });
-  document.addEventListener("keyup", e => { const k = KEYMAP[e.key]; if (k) { held.delete(k); keyDir(); } });
+  document.addEventListener("keyup", e => { const k = KEYMAP[e.key]; if (k && held.has(k)) { held.delete(k); keyDir(); } });
   window.addEventListener("blur", () => { held.clear(); if (activeId === null) { placeKnob(0, 0); setStickDir("S"); } });
 
   // ---- Symbol buttons ----
@@ -417,11 +474,9 @@ ol b { color: var(--fg); font-weight: 600; }
   let lastHand = "5";
   lever.addEventListener("input", () => {
     const v = Number(lever.value), c = v === 10 ? "q" : String(v);
-    leverVal.textContent = v === 0 ? "0 · closed" : c + " · " + (v * 10) + "% open";
+    leverVal.textContent = v === 0 ? "Hand 0 · closed" : "Hand " + c + " · " + (v * 10) + "% open";
     if (c !== lastHand) { lastHand = c; send(c); }
   });
-
-  ticks.S = null;
 })();
 </script>
 
