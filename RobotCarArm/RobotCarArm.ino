@@ -34,6 +34,13 @@
 //  Stop-all / disconnect D         Stop driving AND stop arm playback
 //  The physical buttons on D12 / D13 still work as before.
 // ---------------------------------------------------------------------
+//
+// ------------- Rover Arm Gamepad (controller/index.html) -------------
+//  Joystick     -> F B L R G I H J, release = S
+//  Triangle     -> W  (save position)      Circle -> U (play)
+//  Square       -> X  (clear positions)    Cross  -> u (stop playback)
+//  Speed lever  -> 0-9, q                  Stop all -> D
+// ---------------------------------------------------------------------
 
 #include <Servo.h>
 

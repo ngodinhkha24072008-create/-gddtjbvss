@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>Rover Arm Gamepad</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one handheld "shell" — joystick on the left, symbol buttons + speed lever on the right; command map below. Single committed dark console look. */
+:root {
+  --bg: #0d1220;
+  --shell: #161d2e;
+  --well: #0a0e19;
+  --line: #29344b;
+  --fg: #e6ebf5;
+  --muted: #8a96ae;
+  --accent: #ffb547;
+  --ok: #46d39a;
+  --danger: #ff5f57;
+  --tri: #43d6b5;
+  --circ: #ff7a6b;
+  --cross: #7ea6ff;
+  --sq: #e08cff;
+  --display: "Chakra Petch", "Arial Narrow", system-ui, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+html, body { min-height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 16px 40px;
+  -webkit-tap-highlight-color: transparent;
+}
+.wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 20px; }
+
+/* Top bar */
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between; }
+.brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; min-width: 0; }
+.brand h1 { font-family: var(--display); font-size: 1.5rem; letter-spacing: .02em; margin: 0; text-wrap: balance; }
+.brand span { color: var(--muted); font-size: .85rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn {
+  font: 600 .85rem var(--body); color: var(--fg); background: var(--shell);
+  border: 1px solid var(--line); border-radius: 8px; padding: 9px 14px; cursor: pointer;
+}
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); color: #1b1305; border-color: var(--accent); }
+.btn.stop { background: transparent; color: var(--danger); border-color: var(--danger); }
+.btn:focus-visible, .face:focus-visible, .lever:focus-visible, .stick:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.status { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--muted); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--danger); box-shadow: 0 0 0 3px rgba(255,95,87,.15); }
+.status.on .dot { background: var(--ok); box-shadow: 0 0 0 3px rgba(70,211,154,.18); }
+.status.on { color: var(--fg); }
+.notice { font-size: .85rem; color: var(--accent); min-height: 1.3em; margin: -8px 0 0; }
+
+/* Shell */
+.shell {
+  background: linear-gradient(180deg, #1a2236, var(--shell));
+  border: 1px solid var(--line); border-radius: 36px;
+  padding: 24px; display: grid; gap: 24px;
+  grid-template-columns: 1fr 1fr; align-items: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.zone { display: grid; justify-items: center; gap: 12px; min-width: 0; }
+.zone-label { font: 500 .72rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+/* Joystick */
+.stick {
+  --size: min(240px, 62vw);
+  width: var(--size); height: var(--size); border-radius: 50%; position: relative;
+  background: radial-gradient(circle at 50% 50%, #121a2b 0 55%, var(--well) 56% 100%);
+  border: 1px solid var(--line); touch-action: none; cursor: grab;
+  box-shadow: inset 0 6px 18px rgba(0,0,0,.6);
+}
+.stick .tick { position: absolute; font: 700 .8rem var(--mono); color: var(--muted); transition: color .1s; }
+.stick .tick.hot { color: var(--accent); }
+.t-F { top: 8px; left: 50%; transform: translateX(-50%); }
+.t-B { bottom: 8px; left: 50%; transform: translateX(-50%); }
+.t-L { left: 10px; top: 50%; transform: translateY(-50%); }
+.t-R { right: 10px; top: 50%; transform: translateY(-50%); }
+.t-G { top: 17%; left: 17%; } .t-I { top: 17%; right: 17%; }
+.t-H { bottom: 17%; left: 17%; } .t-J { bottom: 17%; right: 17%; }
+.knob {
+  position: absolute; left: 50%; top: 50%; width: 40%; height: 40%; margin: -20% 0 0 -20%;
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 38% 32%, #3a4660, #222b40 70%);
+  border: 1px solid #45526d; box-shadow: 0 8px 18px rgba(0,0,0,.55);
+  will-change: transform;
+}
+.stick.live .knob { border-color: var(--accent); }
+
+/* Right side: face buttons + lever */
+.right { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; }
+.faces {
+  --b: min(68px, 17vw);
+  display: grid; grid-template-columns: repeat(3, var(--b)); grid-template-rows: repeat(3, var(--b));
+}
+.face {
+  width: var(--b); height: var(--b); border-radius: 50%; border: 1px solid var(--line);
+  background: radial-gradient(circle at 40% 30%, #26304a, #151c2c 75%);
+  box-shadow: 0 6px 14px rgba(0,0,0,.5); cursor: pointer; display: grid; place-items: center;
+  color: var(--c); position: relative; touch-action: manipulation; transition: transform .06s;
+}
+.face svg { width: 46%; height: 46%; }
+.face .code { position: absolute; bottom: -18px; font: 700 .7rem var(--mono); color: var(--muted); }
+.face.pressed { transform: scale(.92); background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--c) 30%, #151c2c), #151c2c 80%); border-color: var(--c); }
+.f-tri { grid-area: 1 / 2; --c: var(--tri); }
+.f-sq { grid-area: 2 / 1; --c: var(--sq); }
+.f-circ { grid-area: 2 / 3; --c: var(--circ); }
+.f-cross { grid-area: 3 / 2; --c: var(--cross); }
+
+.lever-box { display: grid; justify-items: center; gap: 8px; }
+.lever-track { height: min(220px, 52vw); display: grid; place-items: center; padding: 10px 6px; background: var(--well); border: 1px solid var(--line); border-radius: 20px; }
+.lever {
+  writing-mode: vertical-lr; direction: rtl; appearance: none; -webkit-appearance: none;
+  width: 34px; height: 100%; background: transparent; cursor: ns-resize; margin: 0;
+}
+.lever::-webkit-slider-runnable-track { width: 6px; border-radius: 3px; background: linear-gradient(0deg, #2a3348, var(--accent)); }
+.lever::-moz-range-track { width: 6px; border-radius: 3px; background: linear-gradient(0deg, #2a3348, var(--accent)); }
+.lever::-webkit-slider-thumb { -webkit-appearance: none; width: 34px; height: 22px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; margin-left: -14px; }
+.lever::-moz-range-thumb { width: 30px; height: 18px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; }
+.lever-val { font: 700 .95rem var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; }
+
+/* Readout */
+.readout { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; background: var(--well); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; }
+.now { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.now b { font: 700 1.6rem var(--mono); color: var(--accent); min-width: 1.2ch; }
+.now span { color: var(--muted); font-size: .9rem; }
+.trail { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; min-width: 0; }
+.trail i { font: 500 .78rem var(--mono); font-style: normal; padding: 2px 7px; border-radius: 5px; background: var(--shell); color: var(--muted); border: 1px solid var(--line); }
+.trail i:first-child { color: var(--fg); border-color: var(--muted); }
+
+/* Map + setup */
+.info { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+.panel { min-width: 0; }
+.panel h2 { font-family: var(--display); font-size: 1.05rem; letter-spacing: .03em; margin: 0 0 8px; }
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+th, td { text-align: left; padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 .7rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+td code { font: 700 .85rem var(--mono); color: var(--accent); }
+ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; color: var(--muted); font-size: .9rem; max-width: 60ch; }
+ol b { color: var(--fg); font-weight: 600; }
+
+@media (max-width: 720px) {
+  .shell { grid-template-columns: 1fr; border-radius: 28px; padding: 22px 16px; }
+  .info { grid-template-columns: 1fr; }
+  .trail { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .face, .stick .tick { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <div class="brand"><h1>Rover Arm Gamepad</h1><span>for RobotCarArm.ino</span></div>
+    <div class="status" id="status" role="status"><span class="dot"></span><span id="statusText">Not connected</span></div>
+    <div class="actions">
+      <button class="btn primary" id="connBle" type="button">Connect BLE (HM-10)</button>
+      <button class="btn" id="connSer" type="button">Connect HC-05</button>
+      <button class="btn" id="disc" type="button" hidden>Disconnect</button>
+      <button class="btn stop" id="stopAll" type="button">Stop all · D</button>
+    </div>
+  </header>
+  <p class="notice" id="notice">Not connected yet. The controls still work and show what they would send.</p>
+
+  <section class="shell" aria-label="Gamepad">
+    <div class="zone">
+      <div class="stick" id="stick" tabindex="0" aria-label="Drive joystick. Arrow keys also steer.">
+        <span class="tick t-F" data-d="F">F</span><span class="tick t-B" data-d="B">B</span>
+        <span class="tick t-L" data-d="L">L</span><span class="tick t-R" data-d="R">R</span>
+        <span class="tick t-G" data-d="G">G</span><span class="tick t-I" data-d="I">I</span>
+        <span class="tick t-H" data-d="H">H</span><span class="tick t-J" data-d="J">J</span>
+        <div class="knob" id="knob"></div>
+      </div>
+      <div class="zone-label">Drive · release = S</div>
+    </div>
+
+    <div class="zone">
+      <div class="right">
+        <div class="faces">
+          <button class="face f-tri" type="button" data-send="W" data-name="Save arm position" aria-label="Triangle: save arm position">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3.5 21 19.5H3z"/></svg><span class="code">W</span></button>
+          <button class="face f-sq" type="button" data-send="X" data-name="Clear saved positions" aria-label="Square: clear saved positions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="4" width="16" height="16" rx="1.5"/></svg><span class="code">X</span></button>
+          <button class="face f-circ" type="button" data-send="U" data-name="Play saved positions" aria-label="Circle: play saved positions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="12" cy="12" r="8.5"/></svg><span class="code">U</span></button>
+          <button class="face f-cross" type="button" data-send="u" data-name="Stop playback" aria-label="Cross: stop playback">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><span class="code">u</span></button>
+        </div>
+        <div class="lever-box">
+          <div class="lever-track"><input class="lever" id="lever" type="range" min="0" max="10" step="1" value="10" aria-label="Speed lever"></div>
+          <div class="lever-val" id="leverVal">q · 100%</div>
+        </div>
+      </div>
+      <div class="zone-label">Arm buttons · speed lever</div>
+    </div>
+
+    <div class="readout">
+      <div class="now"><b id="nowCode">S</b><span id="nowName">Stopped</span></div>
+      <div class="trail" id="trail" aria-label="Last commands sent"></div>
+    </div>
+  </section>
+
+  <section class="info">
+    <div class="panel">
+      <h2>Command map</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Control</th><th>Sends</th><th>On the robot</th></tr></thead>
+          <tbody>
+            <tr><td>Joystick up / down</td><td><code>F</code> <code>B</code></td><td>Drive forward / backward</td></tr>
+            <tr><td>Joystick left / right</td><td><code>L</code> <code>R</code></td><td>Turn left / right</td></tr>
+            <tr><td>Joystick diagonals</td><td><code>G</code> <code>I</code> <code>H</code> <code>J</code></td><td>Forward-left, forward-right, back-left, back-right</td></tr>
+            <tr><td>Let go of joystick</td><td><code>S</code></td><td>Stop driving</td></tr>
+            <tr><td>Triangle</td><td><code>W</code></td><td>Save arm position (next of 5 slots)</td></tr>
+            <tr><td>Circle</td><td><code>U</code></td><td>Play saved positions</td></tr>
+            <tr><td>Cross</td><td><code>u</code></td><td>Stop playback, knobs control the arm</td></tr>
+            <tr><td>Square</td><td><code>X</code></td><td>Clear saved positions</td></tr>
+            <tr><td>Speed lever</td><td><code>0</code>–<code>9</code> <code>q</code></td><td>Speed (needs motor enable pins wired)</td></tr>
+            <tr><td>Stop all</td><td><code>D</code></td><td>Stop driving and playback</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Using it on your phone</h2>
+      <ol>
+        <li>Open this controller in <b>Chrome on Android</b> from its web address (it needs https). Bluetooth can't be used inside the claude.ai preview.</li>
+        <li><b>HM-10 / BLE module:</b> tap Connect BLE and pick the module.</li>
+        <li><b>HC-05 / HC-06:</b> pair it in Android Bluetooth settings first (PIN is usually 1234), then tap Connect HC-05. Needs a recent Chrome.</li>
+        <li>The Arduino side is <b>RobotCarArm.ino</b> at 9600 baud. No code changes are needed.</li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const NAMES = { F: "Forward", B: "Backward", L: "Turn left", R: "Turn right", G: "Forward-left", I: "Forward-right",
+    H: "Back-left", J: "Back-right", S: "Stopped", W: "Save arm position", U: "Play saved positions",
+    u: "Stop playback", X: "Clear saved positions", D: "Stop all", q: "Speed 100%" };
+  for (let i = 0; i <= 9; i++) NAMES[String(i)] = "Speed " + (i * 10) + "%";
+
+  const enc = new TextEncoder();
+  const $ = id => document.getElementById(id);
+  const statusEl = $("status"), statusText = $("statusText"), notice = $("notice");
+  const nowCode = $("nowCode"), nowName = $("nowName"), trail = $("trail");
+  let link = null, chain = Promise.resolve(), pending = 0, wakeLock = null;
+
+  function say(msg) { notice.textContent = msg; }
+
+  function setLink(l) {
+    link = l;
+    statusEl.classList.toggle("on", !!l);
+    statusText.textContent = l ? "Connected: " + l.name : "Not connected";
+    $("disc").hidden = !l;
+    $("connBle").hidden = !!l;
+    $("connSer").hidden = !!l;
+    say(l ? "Ready. Drive with the joystick." : "Not connected. The controls still show what they would send.");
+    if (l && navigator.wakeLock) navigator.wakeLock.request("screen").then(w => wakeLock = w).catch(() => {});
+    if (!l && wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
+  }
+
+  function send(c) {
+    nowCode.textContent = c;
+    nowName.textContent = (NAMES[c] || "") + (link ? "" : " (not sent)");
+    const chip = document.createElement("i"); chip.textContent = c;
+    trail.prepend(chip); while (trail.children.length > 14) trail.lastChild.remove();
+    if (!link) return;
+    if (pending > 8) return;            // don't let a slow link build a backlog
+    pending++;
+    const l = link;
+    chain = chain.then(() => l.send(c)).catch(err => {
+      say("Couldn't send '" + c + "': " + (err && err.message ? err.message : err));
+    }).finally(() => { pending--; });
+  }
+
+  function describe(err) {
+    if (!err) return "Unknown error.";
+    if (err.name === "NotFoundError") return "No device chosen.";
+    if (err.name === "SecurityError" || err.name === "NotAllowedError")
+      return "Bluetooth is blocked on this page. Open the controller directly in Chrome on Android (https address).";
+    return err.message || String(err);
+  }
+
+  // ---- BLE: HM-10 / HM-19 / AT-09 (FFE0/FFE1) and Nordic UART (ESP32 etc.) ----
+  const NUS = "6e400001-b5a3-f393-e0a9-e50e24dcca9e", NUS_RX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+  $("connBle").addEventListener("click", async () => {
+    if (!navigator.bluetooth) { say("This browser has no Web Bluetooth. Use Chrome on Android, opened from the controller's https address."); return; }
+    try {
+      say("Choose your Bluetooth module…");
+      const dev = await navigator.bluetooth.requestDevice({ acceptAllDevices: true, optionalServices: [0xFFE0, NUS] });
+      const server = await dev.gatt.connect();
+      let ch;
+      try { ch = await (await server.getPrimaryService(0xFFE0)).getCharacteristic(0xFFE1); }
+      catch (_) { ch = await (await server.getPrimaryService(NUS)).getCharacteristic(NUS_RX); }
+      dev.addEventListener("gattserverdisconnected", () => { setLink(null); say("Bluetooth module disconnected."); });
+      setLink({
+        name: dev.name || "BLE module",
+        send: s => ch.properties.writeWithoutResponse ? ch.writeValueWithoutResponse(enc.encode(s)) : ch.writeValue(enc.encode(s)),
+        close: () => dev.gatt.disconnect()
+      });
+    } catch (err) { say(describe(err)); }
+  });
+
+  // ---- Classic Bluetooth serial (HC-05 / HC-06) or USB, via Web Serial ----
+  const SPP = "00001101-0000-1000-8000-00805f9b34fb";
+  $("connSer").addEventListener("click", async () => {
+    if (!navigator.serial) { say("This browser can't open Bluetooth serial ports. Use a recent Chrome on Android, or a BLE module."); return; }
+    try {
+      say("Choose your paired HC-05…");
+      const port = await navigator.serial.requestPort({ allowedBluetoothServiceClassIds: [SPP] });
+      await port.open({ baudRate: 9600 });
+      const writer = port.writable.getWriter();
+      navigator.serial.addEventListener("disconnect", e => { if (e.target === port) { setLink(null); say("HC-05 disconnected."); } });
+      setLink({
+        name: "HC-05",
+        send: s => writer.write(enc.encode(s)),
+        close: async () => { try { writer.releaseLock(); await port.close(); } catch (_) {} }
+      });
+    } catch (err) { say(describe(err)); }
+  });
+
+  $("disc").addEventListener("click", async () => {
+    if (!link) return;
+    send("D");
+    const l = link;
+    await chain;
+    try { await l.close(); } catch (_) {}
+    setLink(null);
+  });
+  $("stopAll").addEventListener("click", () => { send("D"); setStickDir("S", true); });
+
+  // ---- Joystick ----
+  const stick = $("stick"), knob = $("knob");
+  const ticks = {}; stick.querySelectorAll(".tick").forEach(t => ticks[t.dataset.d] = t);
+  const ORDER = ["R", "I", "F", "G", "L", "H", "B", "J"];   // 0°, 45°, 90° ... counter-clockwise
+  let dir = "S", activeId = null;
+
+  function dirFrom(x, y) {
+    if (Math.hypot(x, y) < 0.35) return "S";
+    const a = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+    return ORDER[Math.round(a / 45) % 8];
+  }
+  function setStickDir(d, quiet) {
+    if (d === dir) return;
+    if (ticks[dir]) ticks[dir].classList.remove("hot");
+    dir = d;
+    if (ticks[d]) ticks[d].classList.add("hot");
+    if (!quiet) send(d);
+  }
+  function placeKnob(dx, dy) { knob.style.transform = "translate(" + dx + "px," + dy + "px)"; }
+  function moveTo(e) {
+    const r = stick.getBoundingClientRect();
+    let dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    const max = r.width * 0.3, m = Math.hypot(dx, dy);
+    if (m > max) { dx = dx / m * max; dy = dy / m * max; }
+    placeKnob(dx, dy);
+    setStickDir(dirFrom(dx / max, -dy / max));
+  }
+  function release() { activeId = null; stick.classList.remove("live"); placeKnob(0, 0); setStickDir("S"); }
+  stick.addEventListener("pointerdown", e => {
+    if (activeId !== null) return;
+    activeId = e.pointerId; stick.setPointerCapture(e.pointerId); stick.classList.add("live"); moveTo(e);
+  });
+  stick.addEventListener("pointermove", e => { if (e.pointerId === activeId) moveTo(e); });
+  stick.addEventListener("pointerup", e => { if (e.pointerId === activeId) release(); });
+  stick.addEventListener("pointercancel", e => { if (e.pointerId === activeId) release(); });
+  stick.addEventListener("lostpointercapture", e => { if (e.pointerId === activeId) release(); });
+
+  // Arrow keys / WASD for testing on a computer
+  const held = new Set();
+  const KEYMAP = { ArrowUp: "u", ArrowDown: "d", ArrowLeft: "l", ArrowRight: "r", w: "u", s: "d", a: "l", d: "r" };
+  function keyDir() {
+    const x = (held.has("r") ? 1 : 0) - (held.has("l") ? 1 : 0), y = (held.has("u") ? 1 : 0) - (held.has("d") ? 1 : 0);
+    const max = stick.getBoundingClientRect().width * 0.3;
+    placeKnob(x * max * (y ? .7 : 1), -y * max * (x ? .7 : 1));
+    setStickDir(dirFrom(x, y));
+  }
+  document.addEventListener("keydown", e => {
+    const k = KEYMAP[e.key]; if (!k || e.target.tagName === "INPUT") return;
+    e.preventDefault(); if (!held.has(k)) { held.add(k); keyDir(); }
+  });
+  document.addEventListener("keyup", e => { const k = KEYMAP[e.key]; if (k) { held.delete(k); keyDir(); } });
+  window.addEventListener("blur", () => { held.clear(); if (activeId === null) { placeKnob(0, 0); setStickDir("S"); } });
+
+  // ---- Symbol buttons ----
+  document.querySelectorAll(".face").forEach(b => {
+    const press = () => { b.classList.add("pressed"); send(b.dataset.send); setTimeout(() => b.classList.remove("pressed"), 140); };
+    b.addEventListener("pointerdown", e => { e.preventDefault(); press(); });
+    b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); press(); } });
+    b.addEventListener("contextmenu", e => e.preventDefault());
+  });
+
+  // ---- Speed lever ----
+  const lever = $("lever"), leverVal = $("leverVal");
+  let lastSpeed = "q";
+  lever.addEventListener("input", () => {
+    const v = Number(lever.value), c = v === 10 ? "q" : String(v);
+    leverVal.textContent = c + " · " + (v * 10) + "%";
+    if (c !== lastSpeed) { lastSpeed = c; send(c); }
+  });
+
+  ticks.S = null;
+})();
+</script>
+
+</body>
+</html>
