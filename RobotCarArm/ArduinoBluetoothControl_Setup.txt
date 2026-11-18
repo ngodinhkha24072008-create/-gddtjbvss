@@ -1,0 +1,77 @@
+ROBOT CAR + ARM : CONTROL SCHEME FOR "ARDUINO BLUETOOTH CONTROL" (broxcode)
+==========================================================================
+
+The phone app does not run code. It only sends the characters you give each
+control. The program that runs on the robot is RobotCarArm.ino. Upload that to
+the Arduino first, then type the values below into the app's settings.
+
+Bluetooth module : HC-05 / HC-06 on D0 (RX) and D1 (TX), 9600 baud
+Pair it in Android Bluetooth settings first (PIN 1234 or 0000).
+
+
+1) GAMEPAD / ARROW KEYS SCREEN  (drive the car + arm buttons)
+-------------------------------------------------------------
+Open the screen, tap the settings (gear) icon and set each control to send:
+
+  Control              Send    What the robot does
+  -------------------  ------  ------------------------------------------
+  Up                   F       Drive forward
+  Down                 B       Drive backward
+  Left                 L       Turn left
+  Right                R       Turn right
+  Up + Left            G       Forward-left   (only if the app offers diagonals)
+  Up + Right           I       Forward-right  (only if the app offers diagonals)
+  Down + Left          H       Back-left      (only if the app offers diagonals)
+  Down + Right         J       Back-right     (only if the app offers diagonals)
+  On release (if any)  S       Stop driving   (optional, the car also stops by
+                                               itself 0.4 s after you let go)
+
+  Triangle  (△)        W       Save arm position (each tap fills the next of
+                               5 slots, LED 1-5 lights up)
+  Circle    (○)        U       Play the saved positions on a loop
+  Cross     (✕)        u       Stop playback (lower-case u)
+  Square    (□)        X       Clear all saved positions (LEDs turn off)
+  Start or Select      D       STOP EVERYTHING (car + arm playback)
+
+  Leave "continuous sending while held" ON for the direction buttons.
+  Letters are case-sensitive: U and u do different things.
+
+
+2) BUTTONS & SLIDER SCREEN  (hand open / close lever)
+-----------------------------------------------------
+Turn the phone sideways to show the slider, open its settings and set:
+
+  Slider minimum       0       Hand fully CLOSED  (slider all the way left)
+  Slider maximum       10      Hand fully OPEN    (slider all the way right)
+
+  The six buttons on this screen can repeat the arm controls if you like:
+  Button 1 = W (save)   Button 2 = U (play)   Button 3 = u (stop playback)
+  Button 4 = X (clear)  Button 5 = D (stop all)  Button 6 = S (stop car)
+
+  Using a different slider range (for example 0-100)? Change LEVER_MIN and
+  LEVER_MAX near the top of RobotCarArm.ino to the same numbers.
+
+
+3) QUICK TEST WITH THE TERMINAL SCREEN
+--------------------------------------
+Type these one at a time and press send. Wheels off the ground for the first ones.
+
+  F        wheels turn forward for about 0.4 s, then stop (auto-stop works)
+  S        nothing moving
+  W        "Pos 1 Saved" comes back, LED 1 lights
+  0        hand closes
+  10       hand opens fully
+  U        arm moves through saved positions
+  u        arm goes back to following the knobs
+  D        everything stops
+
+
+4) THINGS TO ADJUST IN RobotCarArm.ino IF NEEDED
+------------------------------------------------
+  GRIPPER               which servo is the hand (0, 1 or 2; default 2 = D9)
+  GRIPPER_CLOSED_ANGLE  servo angle when closed (default 10)
+  GRIPPER_OPEN_ANGLE    servo angle when open   (default 170)
+                        swap these two if the slider works backwards
+  DRIVE_TIMEOUT_MS      how long the car keeps going after the last command
+                        (default 400 ms)
+  Turns the wrong way?  swap the L/R letters in the app settings.
