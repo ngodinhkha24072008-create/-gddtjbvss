@@ -162,6 +162,17 @@ ol b { color: var(--fg); font-weight: 600; }
 
 /* Portrait phones: ask to turn sideways */
 .rotate { display: none; }
+/* Inside the Android app (window.Robot exists): hide browser-only controls */
+body.in-app .web-only, body.in-app .rotate { display: none !important; }
+body:not(.in-app) .app-only { display: none !important; }
+.devices { display: grid; gap: 8px; }
+.device { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; text-align: left;
+  font: 600 .9rem var(--body); color: var(--fg); background: var(--well); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; cursor: pointer; }
+.device:hover, .device:focus-visible { border-color: var(--accent); outline: none; }
+.device small { font: 500 .72rem var(--mono); color: var(--muted); }
+.device.likely { border-color: var(--accent); }
+.picker-note { color: var(--muted); font-size: .86rem; margin: 0; }
+.picker-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 @media (orientation: portrait) and (max-width: 760px) {
   body:not(.allow-portrait) .app { display: none; }
   body:not(.allow-portrait) .rotate {
@@ -191,10 +202,11 @@ ol b { color: var(--fg); font-weight: 600; }
     <h1>Rover Arm Gamepad</h1>
     <div class="status" id="status" role="status"><span class="dot"></span><span id="statusText">Not connected</span></div>
     <div class="actions">
-      <button class="btn primary" id="connBle" type="button">Connect BLE</button>
-      <button class="btn" id="connSer" type="button">Connect HC-05</button>
+      <button class="btn primary app-only" id="connApp" type="button">Connect robot</button>
+      <button class="btn primary web-only" id="connBle" type="button">Connect BLE</button>
+      <button class="btn web-only" id="connSer" type="button">Connect HC-05</button>
       <button class="btn" id="disc" type="button" hidden>Disconnect</button>
-      <button class="btn" id="full" type="button" hidden>Full screen</button>
+      <button class="btn web-only" id="full" type="button" hidden>Full screen</button>
       <button class="btn" id="mapBtn" type="button">Command map</button>
     </div>
   </header>
@@ -249,6 +261,19 @@ ol b { color: var(--fg); font-weight: 600; }
   </div>
 </div>
 
+<div class="sheet" id="picker" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="pickerTitle" style="width: min(520px, 100%)">
+    <div class="sheet-head"><h2 id="pickerTitle">Connect to the robot</h2><button class="btn" id="pickerClose" type="button">Close</button></div>
+    <p class="picker-note" id="pickerNote">Paired Bluetooth devices. Pick your HC-05 or HC-06.</p>
+    <div class="devices" id="devices"></div>
+    <div class="picker-actions">
+      <button class="btn primary" id="btOn" type="button" hidden>Turn on Bluetooth</button>
+      <button class="btn" id="pickerRefresh" type="button">Refresh list</button>
+      <button class="btn" id="btSettings" type="button">Pair a new device</button>
+    </div>
+  </div>
+</div>
+
 <div class="sheet" id="sheet" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <div class="sheet-head"><h2 id="sheetTitle">Command map</h2><button class="btn" id="sheetClose" type="button">Close</button></div>
@@ -276,10 +301,12 @@ ol b { color: var(--fg); font-weight: 600; }
       <div>
         <h3>Using it on your phone</h3>
         <ol>
-          <li>Open this controller in <b>Chrome on Android</b> from its web address (it needs https). Bluetooth can't be used inside the claude.ai preview.</li>
-          <li>Turn the phone sideways and tap <b>Full screen</b> to hide the browser bars.</li>
-          <li><b>HM-10 / BLE module:</b> tap Connect BLE and pick the module.</li>
-          <li><b>HC-05 / HC-06:</b> pair it in Android Bluetooth settings first (PIN is usually 1234), then tap Connect HC-05. Needs a recent Chrome.</li>
+          <li class="app-only">Pair the <b>HC-05 / HC-06</b> in Android Bluetooth settings first (PIN is usually 1234).</li>
+          <li class="app-only">Tap <b>Connect robot</b>, allow <b>Nearby devices</b> the first time, and pick the module.</li>
+          <li class="web-only">Open this controller in <b>Chrome on Android</b> from its web address (it needs https). Bluetooth can't be used inside the claude.ai preview.</li>
+          <li class="web-only">Turn the phone sideways and tap <b>Full screen</b> to hide the browser bars.</li>
+          <li class="web-only"><b>HM-10 / BLE module:</b> tap Connect BLE and pick the module.</li>
+          <li class="web-only"><b>HC-05 / HC-06:</b> pair it in Android Bluetooth settings first (PIN is usually 1234), then tap Connect HC-05. Needs a recent Chrome.</li>
           <li>The Arduino side is <b>RobotCarArm.ino</b> at 9600 baud.</li>
         </ol>
       </div>
@@ -309,6 +336,7 @@ ol b { color: var(--fg); font-weight: 600; }
     $("disc").hidden = !l;
     $("connBle").hidden = !!l;
     $("connSer").hidden = !!l;
+    $("connApp").hidden = !!l;
     say(l ? "Ready. Drive with the joystick." : "Not connected. Controls show what they would send.");
     if (l && navigator.wakeLock) navigator.wakeLock.request("screen").then(w => wakeLock = w).catch(() => {});
     if (!l && wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
@@ -387,6 +415,67 @@ ol b { color: var(--fg); font-weight: 600; }
     setLink(null);
   });
   $("stopAll").addEventListener("click", () => { send("D"); setStickDir("S", true); });
+
+  // ---- Android app: native Bluetooth bridge (window.Robot) ----
+  const native = window.Robot;
+  if (native) {
+    document.body.classList.add("in-app");
+    const picker = $("picker"), devices = $("devices"), pickerNote = $("pickerNote");
+
+    function openPicker() {
+      devices.textContent = "";
+      const on = native.bluetoothOn();
+      $("btOn").hidden = on;
+      if (!on) { pickerNote.textContent = "Bluetooth is off. Turn it on, then refresh the list."; picker.hidden = false; return; }
+      let list = [];
+      try { list = JSON.parse(native.pairedDevices()); } catch (_) {}
+      pickerNote.textContent = list.length
+        ? "Paired Bluetooth devices. Pick your HC-05 or HC-06."
+        : "No paired devices. Tap Pair a new device, pair the HC-05 (PIN 1234), then come back and refresh.";
+      list.forEach(d => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "device" + (/HC-?0[56]|BT|robot/i.test(d.name) ? " likely" : "");
+        const n = document.createElement("span"); n.textContent = d.name || "Unnamed device";
+        const a = document.createElement("small"); a.textContent = d.address;
+        b.append(n, a);
+        b.addEventListener("click", () => {
+          picker.hidden = true;
+          statusText.textContent = "Connecting…";
+          say("Connecting to " + (d.name || d.address) + "…");
+          native.connect(d.address, d.name || d.address);
+        });
+        devices.append(b);
+      });
+      picker.hidden = false;
+    }
+
+    $("connApp").addEventListener("click", () => {
+      if (native.hasPermission()) openPicker();
+      else native.requestPermission();
+    });
+    window.onRobotPermission = granted => {
+      if (granted) openPicker();
+      else say("Allow the Nearby devices permission so the app can reach the HC-05.");
+    };
+    $("pickerClose").addEventListener("click", () => { picker.hidden = true; });
+    $("pickerRefresh").addEventListener("click", openPicker);
+    $("btSettings").addEventListener("click", () => native.openBluetoothSettings());
+    $("btOn").addEventListener("click", () => native.enableBluetooth());
+    picker.addEventListener("click", e => { if (e.target === picker) picker.hidden = true; });
+
+    window.onRobotStatus = (state, msg) => {
+      if (state === "connected") {
+        setLink({ name: msg, send: s => { native.send(s); return Promise.resolve(); }, close: () => native.disconnect() });
+      } else if (state === "connecting") {
+        statusText.textContent = "Connecting…";
+      } else {
+        if (link) setLink(null);
+        if (msg) say(msg);
+      }
+    };
+    window.onRobotMessage = line => { if (line) say("Robot: " + line); };
+  }
 
   // ---- Full screen + landscape ----
   const canFull = !!document.documentElement.requestFullscreen;
