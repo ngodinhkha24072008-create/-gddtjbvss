@@ -14,6 +14,26 @@
 //  Potentiometers   : A0, A1, A2
 //  Serial / Bluetooth module : D0 (RX), D1 (TX)
 // ---------------------------------------------------------------
+//
+// ------------- "Arduino Bluetooth RC Car" APP BUTTON MAP -------------
+//  App button            Sends     Does
+//  Up arrow              F         Drive forward
+//  Down arrow            B         Drive backward
+//  Left arrow            L         Turn left
+//  Right arrow           R         Turn right
+//  Up + Left             G         Forward-left  (right motor only)
+//  Up + Right            I         Forward-right (left motor only)
+//  Down + Left           H         Back-left
+//  Down + Right          J         Back-right
+//  (release arrows)      S         Stop driving
+//  Front lights toggle   W / w     ARM: save current position (each tap = next slot)
+//  Back lights toggle    U / u     ARM: U = start playback, u = stop playback
+//  Extra toggle          X / x     ARM: clear all saved positions (LEDs off)
+//  Horn                  V / v     (not used)
+//  Speed slider          0-9, q    (ignored - motor pins have no speed control)
+//  Stop-all / disconnect D         Stop driving AND stop arm playback
+//  The physical buttons on D12 / D13 still work as before.
+// ---------------------------------------------------------------------
 
 #include <Servo.h>
 
@@ -77,30 +97,6 @@ void setMotors(int p1, int p2, int p3, int p4) {
   digitalWrite(MOTOR_PIN_4, p4);
 }
 
-void handleCarCommands() {
-  while (Serial.available() > 0) {
-    char data = Serial.read();
-
-    switch (data) {
-      case 'F': // Move Forward
-        setMotors(HIGH, LOW, HIGH, LOW);
-        break;
-      case 'B': // Move Backward
-        setMotors(LOW, HIGH, LOW, HIGH);
-        break;
-      case 'R': // Turn (labelled "Turn Left" in the original code)
-        setMotors(LOW, HIGH, HIGH, LOW);
-        break;
-      case 'L': // Turn (labelled "Turn Right" in the original code)
-        setMotors(HIGH, LOW, LOW, HIGH);
-        break;
-      case 'S': // Stop
-        setMotors(LOW, LOW, LOW, LOW);
-        break;
-    }
-  }
-}
-
 // ---------- Arm ----------
 void readPots() {
   for (int i = 0; i < 3; i++) {
@@ -133,6 +129,66 @@ void playbackStep() {
   playIndex = (playIndex + 1) % savedCount;  // loop through saved positions
 }
 
+void startPlayback() {
+  if (savedCount == 0) return;     // nothing saved yet
+  playing = true;
+  playIndex = 0;
+  lastStepTime = millis() - PLAYBACK_STEP_MS;  // move to the first position now
+}
+
+void stopPlayback() {
+  playing = false;                 // servos follow the potentiometers again
+}
+
+void clearPositions() {
+  stopPlayback();
+  savedCount = 0;
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(LED_PINS[i], LOW);
+  }
+  Serial.println("Positions cleared");
+}
+
+// ---------- Bluetooth app commands ----------
+void handleAppCommands() {
+  while (Serial.available() > 0) {
+    char data = Serial.read();
+
+    switch (data) {
+      // --- Driving ---
+      case 'F': setMotors(HIGH, LOW, HIGH, LOW); break; // Forward
+      case 'B': setMotors(LOW, HIGH, LOW, HIGH); break; // Backward
+      case 'L': setMotors(HIGH, LOW, LOW, HIGH); break; // Turn left
+      case 'R': setMotors(LOW, HIGH, HIGH, LOW); break; // Turn right
+      case 'G': setMotors(HIGH, LOW, LOW, LOW);  break; // Forward-left
+      case 'I': setMotors(LOW, LOW, HIGH, LOW);  break; // Forward-right
+      case 'H': setMotors(LOW, HIGH, LOW, LOW);  break; // Back-left
+      case 'J': setMotors(LOW, LOW, LOW, HIGH);  break; // Back-right
+      case 'S': setMotors(LOW, LOW, LOW, LOW);   break; // Stop
+
+      // --- Robot arm ---
+      case 'W':                       // Front lights on  -> save position
+      case 'w':                       // Front lights off -> save position
+        savePosition();
+        break;
+      case 'U': startPlayback(); break; // Back lights on  -> play
+      case 'u': stopPlayback();  break; // Back lights off -> stop
+      case 'X':                         // Extra on/off    -> clear saves
+      case 'x':
+        clearPositions();
+        break;
+
+      // --- Stop everything ---
+      case 'D':
+        setMotors(LOW, LOW, LOW, LOW);
+        stopPlayback();
+        break;
+
+      // Speed (0-9, q), horn (V/v) and anything else are ignored
+    }
+  }
+}
+
 void handleArm() {
   readPots();
 
@@ -140,10 +196,9 @@ void handleArm() {
     savePosition();
   }
 
-  if (wasPressed(playButton) && savedCount > 0) {
-    playing = !playing;            // press once to start playback, again to stop
-    playIndex = 0;
-    lastStepTime = millis() - PLAYBACK_STEP_MS;  // move to the first position now
+  if (wasPressed(playButton)) {
+    if (playing) stopPlayback();   // press once to start playback, again to stop
+    else startPlayback();
   }
 
   if (playing) {
@@ -176,6 +231,6 @@ void setup() {
 }
 
 void loop() {
-  handleCarCommands();
+  handleAppCommands();
   handleArm();
 }
