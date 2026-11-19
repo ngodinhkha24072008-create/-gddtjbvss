@@ -58,7 +58,7 @@ Type these one at a time and press send. Wheels off the ground for the first one
 
   F        wheels turn forward for about 0.4 s, then stop (auto-stop works)
   S        nothing moving
-  W        "Saved 1" comes back, LED 1 lights
+  W        "Pos 1 Saved" comes back, LED 1 lights
   0        hand closes
   10       hand opens fully
   U        arm moves through saved positions
