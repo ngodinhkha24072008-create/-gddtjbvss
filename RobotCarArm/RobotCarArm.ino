@@ -76,6 +76,7 @@ const int BUTTON_PLAY   = 13;   // was button2
 const unsigned long DEBOUNCE_MS = 50;
 const unsigned long PLAYBACK_STEP_MS = 1050;  // time spent at each saved position
 const unsigned long DRIVE_TIMEOUT_MS = 400;   // stop the car if no drive command arrives for this long
+                                              // (set to 60000 to keep driving until S, for testing)
 const unsigned long NUMBER_IDLE_MS   = 30;    // a slider number is complete after this much quiet
 
 // ---------- Hand / gripper (app lever) ----------
@@ -234,6 +235,8 @@ void finishSliderNumber() {
   }
 }
 
+char lastReported = 0;
+
 void handleAppCommands() {
   while (Serial.available() > 0) {
     char data = Serial.read();
@@ -245,6 +248,13 @@ void handleAppCommands() {
       continue;
     }
     finishSliderNumber();             // any other character ends the number
+
+    // Report each new command so you can see in the app what the robot received
+    if (data != '\r' && data != '\n' && data != lastReported) {
+      lastReported = data;
+      Serial.print(F("Got "));
+      Serial.println(data);
+    }
 
     switch (data) {
       // --- Driving ---
