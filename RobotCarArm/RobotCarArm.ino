@@ -147,6 +147,13 @@ void setup() {
   pinMode(SAVE_BTN, INPUT);
   pinMode(PLAY_BTN, INPUT);
   stopCar();
+
+  // Wiring check: LEDs 1-5 flash once each, in order, at power-on
+  for (byte i = 0; i < 5; i++) {
+    digitalWrite(ledPin[i], HIGH);
+    delay(150);
+    digitalWrite(ledPin[i], LOW);
+  }
 }
 
 void loop() {
