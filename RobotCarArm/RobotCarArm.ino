@@ -10,7 +10,7 @@
 //   F B L R = forward, back, left, right    G I H J = diagonals    S = stop
 //   W = save arm position   U = play   u = stop playback   X = clear   D = stop all
 //   0 ... 10 (or q) = hand lever: 0 closed, 10 open
-//   The car stops by itself 0.4 s after the last drive command.
+//   The car stops by itself AUTO_STOP_MS after the last drive command (set 0 to turn off).
 
 #include <Servo.h>
 
@@ -19,6 +19,7 @@
 #define HAND_CLOSED 10    // hand angle at lever 0
 #define HAND_OPEN   170   // hand angle at lever 10
 #define LEVER_MAX   10    // highest number the app slider sends
+#define AUTO_STOP_MS 400   // stop the car this long after the last drive command (0 = off: drive until S)
 
 // ----- Pins -----
 const byte motorPin[4] = {7, 6, 5, 4};
@@ -162,7 +163,7 @@ void loop() {
   readBluetooth();
   readButtons();
 
-  if (driving && millis() - lastDrive > 400) stopCar();     // auto-stop
+  if (AUTO_STOP_MS > 0 && driving && millis() - lastDrive > AUTO_STOP_MS) stopCar();  // auto-stop
 
   // Turning the hand knob takes the hand back from the app lever
   if (handAngle >= 0 && abs(knob[HAND] - knobAtLever) > 6) handAngle = -1;
