@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: a landscape handheld that fills one screen. Left grip = joystick, centre = readout + stop, right grip = symbol buttons over the hand lever. Single committed dark console look. */
+/* Layout: a landscape handheld that fills one screen. Left grip = drive stick, centre = readout + stop/home, right grip = arm bumpers over symbol buttons. Single committed dark console look. */
 :root {
   --bg: #0d1220;
   --shell: #161d2e;
@@ -66,7 +66,7 @@ body {
 }
 .btn:hover { border-color: var(--muted); }
 .btn.primary { background: var(--accent); color: #1b1305; border-color: var(--accent); }
-.btn:focus-visible, .face:focus-visible, .lever:focus-visible, .stick:focus-visible, .stopall:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.btn:focus-visible, .face:focus-visible, .bump:focus-visible, .homebtn:focus-visible, .stick:focus-visible, .stopall:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* The handheld */
 .shell {
@@ -133,15 +133,19 @@ body {
 .f-circ { grid-area: 2 / 3; --c: var(--circ); }
 .f-cross { grid-area: 3 / 2; --c: var(--cross); }
 
-.lever-row { display: flex; align-items: center; gap: 8px; }
-.lever-end { font: 700 .62rem var(--mono); letter-spacing: .12em; color: var(--muted); }
-.lever-track { width: calc(var(--b) * 3); display: grid; place-items: center; padding: 4px 12px; background: var(--well); border: 1px solid var(--line); border-radius: 20px; }
-.lever { appearance: none; -webkit-appearance: none; width: 100%; height: 32px; background: transparent; cursor: ew-resize; margin: 0; touch-action: none; }
-.lever::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #2a3348, var(--accent)); }
-.lever::-moz-range-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #2a3348, var(--accent)); }
-.lever::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 32px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; margin-top: -13px; }
-.lever::-moz-range-thumb { width: 18px; height: 28px; border-radius: 6px; background: #d9dfeb; border: 2px solid #8a96ae; }
-.lever-val { font: 700 .8rem var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; }
+.bumpers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 8px; width: calc(var(--b) * 3 + 24px); }
+.bump {
+  font: 700 .72rem var(--mono); letter-spacing: .04em; color: var(--fg); cursor: pointer; touch-action: none;
+  background: linear-gradient(180deg, #26304a, #151c2c); border: 1px solid var(--line); border-radius: 10px 10px 6px 6px;
+  padding: 7px 6px; display: flex; justify-content: space-between; align-items: center; gap: 6px;
+}
+.bump b { color: var(--muted); font-weight: 700; }
+.bump.grip-c, .bump.grip-o { --c: var(--accent); }
+.bump.elb { --c: var(--cross); }
+.bump.pressed { border-color: var(--c); color: var(--c); }
+.face .tag { position: absolute; top: calc(100% + 1px); left: 50%; transform: translateX(-50%); white-space: nowrap; font: 600 .55rem var(--mono); color: var(--muted); letter-spacing: .04em; }
+.homebtn { font: 700 .78rem var(--display); letter-spacing: .12em; color: var(--tri); background: var(--well); border: 1px solid var(--tri); border-radius: 999px; padding: 7px 16px; cursor: pointer; }
+.centre-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 
 /* Command map sheet */
 .sheet { position: fixed; inset: 0; z-index: 20; background: rgba(5,8,15,.72); display: grid; place-items: center;
@@ -221,7 +225,6 @@ body:not(.in-app) .app-only { display: none !important; }
       <button class="btn" id="disc" type="button" hidden>Disconnect</button>
       <button class="btn web-only" id="full" type="button" hidden>Full screen</button>
       <button class="btn toggle" id="modeBtn" type="button" aria-pressed="false">Use arrows</button>
-      <button class="btn toggle" id="diagBtn" type="button" aria-pressed="false">Diagonals: off</button>
       <button class="btn" id="mapBtn" type="button">Command map</button>
     </div>
   </header>
@@ -231,8 +234,6 @@ body:not(.in-app) .app-only { display: none !important; }
       <div class="stick" id="stick" tabindex="0" aria-label="Drive joystick. Arrow keys also steer.">
         <span class="tick t-F" data-d="F">F</span><span class="tick t-B" data-d="B">B</span>
         <span class="tick t-L" data-d="L">L</span><span class="tick t-R" data-d="R">R</span>
-        <span class="tick t-G" data-d="G">G</span><span class="tick t-I" data-d="I">I</span>
-        <span class="tick t-H" data-d="H">H</span><span class="tick t-J" data-d="J">J</span>
         <div class="knob" id="knob"></div>
       </div>
       <div class="dpad" id="dpad" hidden>
@@ -248,28 +249,32 @@ body:not(.in-app) .app-only { display: none !important; }
     <section class="centre">
       <div class="now"><b id="nowCode">S</b><span id="nowName">Stopped</span></div>
       <div class="trail" id="trail" aria-label="Last commands sent"></div>
-      <button class="stopall" id="stopAll" type="button">STOP ALL · D</button>
+      <div class="centre-btns">
+        <button class="stopall" id="stopAll" type="button">STOP · S</button>
+        <button class="homebtn" id="homeBtn" type="button">ARM HOME · H</button>
+      </div>
       <p class="reply" id="reply" aria-live="polite"></p>
       <p class="notice" id="notice">Not connected. Controls show what they would send.</p>
     </section>
 
     <section class="grip">
+      <div class="bumpers" aria-label="Gripper and elbow">
+        <button class="bump grip-c" type="button" data-send="C" aria-label="Gripper close">✊ CLOSE <b>C</b></button>
+        <button class="bump grip-o" type="button" data-send="O" aria-label="Gripper open">✋ OPEN <b>O</b></button>
+        <button class="bump elb" type="button" data-send="K" aria-label="Elbow down">ELBOW ▼ <b>K</b></button>
+        <button class="bump elb" type="button" data-send="I" aria-label="Elbow up">ELBOW ▲ <b>I</b></button>
+      </div>
       <div class="faces">
-        <button class="face f-tri" type="button" data-send="W" aria-label="Triangle: save arm position">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3.5 21 19.5H3z"/></svg><span class="code">W</span></button>
-        <button class="face f-sq" type="button" data-send="X" aria-label="Square: clear saved positions">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="4" width="16" height="16" rx="1.5"/></svg><span class="code">X</span></button>
-        <button class="face f-circ" type="button" data-send="U" aria-label="Circle: play saved positions">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="12" cy="12" r="8.5"/></svg><span class="code">U</span></button>
-        <button class="face f-cross" type="button" data-send="u" aria-label="Cross: stop playback">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><span class="code">u</span></button>
+        <button class="face f-tri" type="button" data-send="U" aria-label="Triangle: shoulder up">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3.5 21 19.5H3z"/></svg><span class="code">U</span></button>
+        <button class="face f-sq" type="button" data-send="A" aria-label="Square: base left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="4" width="16" height="16" rx="1.5"/></svg><span class="code">A</span></button>
+        <button class="face f-circ" type="button" data-send="Z" aria-label="Circle: base right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="12" cy="12" r="8.5"/></svg><span class="code">Z</span></button>
+        <button class="face f-cross" type="button" data-send="J" aria-label="Cross: shoulder down">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><span class="code">J</span></button>
       </div>
-      <div class="lever-row">
-        <span class="lever-end">CLOSE</span>
-        <div class="lever-track"><input class="lever" id="lever" type="range" min="0" max="10" step="1" value="5" aria-label="Hand lever: slide right to open, left to close"></div>
-        <span class="lever-end">OPEN</span>
-      </div>
-      <div class="lever-val" id="leverVal">Hand 5 · 50% open</div>
+      <div class="zone-label">△ ✕ shoulder · □ ○ base · hold to repeat</div>
     </section>
   </main>
 </div>
@@ -278,7 +283,7 @@ body:not(.in-app) .app-only { display: none !important; }
   <div class="rotate-inner">
     <div class="phone-icon" aria-hidden="true"></div>
     <h2>Turn your phone sideways</h2>
-    <p>The gamepad is laid out for landscape: joystick under your left thumb, buttons and hand lever under your right.</p>
+    <p>The gamepad is laid out for landscape: driving under your left thumb, the robot arm under your right.</p>
     <button class="btn primary" id="rotFull" type="button">Full screen landscape</button>
     <button class="linkish" id="rotStay" type="button">Use it upright instead</button>
   </div>
@@ -306,17 +311,15 @@ body:not(.in-app) .app-only { display: none !important; }
           <table>
             <thead><tr><th>Control</th><th>Sends</th><th>On the robot</th></tr></thead>
             <tbody>
-              <tr><td>Joystick up / down</td><td><code>F</code> <code>B</code></td><td>Drive forward / backward</td></tr>
-              <tr><td>Joystick left / right</td><td><code>L</code> <code>R</code></td><td>Turn left / right</td></tr>
-              <tr><td>Joystick diagonals</td><td><code>G</code> <code>I</code> <code>H</code> <code>J</code></td><td>Forward-left, forward-right, back-left, back-right</td></tr>
-              <tr><td>Let go of joystick</td><td><code>S</code></td><td>Stop driving</td></tr>
-              <tr><td>Triangle</td><td><code>W</code></td><td>Save arm position (next of 5 slots)</td></tr>
-              <tr><td>Circle</td><td><code>U</code></td><td>Play saved positions</td></tr>
-              <tr><td>Cross</td><td><code>u</code></td><td>Stop playback, knobs control the arm</td></tr>
-              <tr><td>Square</td><td><code>X</code></td><td>Clear saved positions</td></tr>
-              <tr><td>Hand lever right</td><td>up to <code>q</code></td><td>Open the hand (<code>q</code> = fully open)</td></tr>
-              <tr><td>Hand lever left</td><td>down to <code>0</code></td><td>Close the hand (<code>0</code> = fully closed)</td></tr>
-              <tr><td>Stop all</td><td><code>D</code></td><td>Stop driving and playback</td></tr>
+              <tr><td>Stick or arrows up / down</td><td><code>F</code> <code>B</code></td><td>Drive forward / backward</td></tr>
+              <tr><td>Stick or arrows left / right</td><td><code>L</code> <code>R</code></td><td>Turn left / right</td></tr>
+              <tr><td>Let go</td><td><code>S</code></td><td>Stop driving</td></tr>
+              <tr><td>Square / Circle</td><td><code>A</code> <code>Z</code></td><td>Base left / right</td></tr>
+              <tr><td>Triangle / Cross</td><td><code>U</code> <code>J</code></td><td>Shoulder up / down</td></tr>
+              <tr><td>Elbow ▲ / ▼</td><td><code>I</code> <code>K</code></td><td>Elbow up / down</td></tr>
+              <tr><td>Grip open / close</td><td><code>O</code> <code>C</code></td><td>Gripper open / close</td></tr>
+              <tr><td>Arm home</td><td><code>H</code></td><td>All arm joints to 90°</td></tr>
+              <tr><td>Stop</td><td><code>S</code></td><td>Stop the car</td></tr>
             </tbody>
           </table>
         </div>
@@ -330,7 +333,7 @@ body:not(.in-app) .app-only { display: none !important; }
           <li class="web-only">Turn the phone sideways and tap <b>Full screen</b> to hide the browser bars.</li>
           <li class="web-only"><b>HM-10 / BLE module:</b> tap Connect BLE and pick the module.</li>
           <li class="web-only"><b>HC-05 / HC-06:</b> pair it in Android Bluetooth settings first (PIN is usually 1234), then tap Connect HC-05. Needs a recent Chrome.</li>
-          <li>The Arduino side is <b>RobotCarArm.ino</b> at 9600 baud.</li>
+          <li>The Arduino side is <b>CarArm4DOF.ino</b> at 9600 baud. Arm buttons move a joint 5° per step and repeat while held.</li>
         </ol>
       </div>
     </div>
@@ -339,10 +342,9 @@ body:not(.in-app) .app-only { display: none !important; }
 
 <script>
 (() => {
-  const NAMES = { F: "Forward", B: "Backward", L: "Turn left", R: "Turn right", G: "Forward-left", I: "Forward-right",
-    H: "Back-left", J: "Back-right", S: "Stopped", W: "Save arm position", U: "Play saved positions",
-    u: "Stop playback", X: "Clear saved positions", D: "Stop all", q: "Hand fully open" };
-  for (let i = 0; i <= 9; i++) NAMES[String(i)] = i === 0 ? "Hand closed" : "Hand " + (i * 10) + "% open";
+  const NAMES = { F: "Forward", B: "Backward", L: "Turn left", R: "Turn right", S: "Stopped",
+    A: "Base left", Z: "Base right", U: "Shoulder up", J: "Shoulder down",
+    I: "Elbow up", K: "Elbow down", O: "Gripper open", C: "Gripper close", H: "Arm home" };
 
   const enc = new TextEncoder();
   const $ = id => document.getElementById(id);
@@ -431,13 +433,14 @@ body:not(.in-app) .app-only { display: none !important; }
 
   $("disc").addEventListener("click", async () => {
     if (!link) return;
-    send("D");
+    send("S");
     const l = link;
     await chain;
     try { await l.close(); } catch (_) {}
     setLink(null);
   });
-  $("stopAll").addEventListener("click", () => { send("D"); setStickDir("S", true); });
+  $("stopAll").addEventListener("click", () => { send("S"); setStickDir("S", true); });
+  $("homeBtn").addEventListener("click", () => send("H"));
 
   // ---- Android app: native Bluetooth bridge (window.Robot) ----
   const native = window.Robot;
@@ -527,20 +530,17 @@ body:not(.in-app) .app-only { display: none !important; }
   // ---- Joystick ----
   const stick = $("stick"), knob = $("knob"), dpad = $("dpad");
   const ticks = {}; stick.querySelectorAll(".tick").forEach(t => ticks[t.dataset.d] = t);
-  const ORDER = ["R", "I", "F", "G", "L", "H", "B", "J"];   // 0°, 45°, 90° ... counter-clockwise
   let dir = "S", activeId = null;
 
   // Settings (remembered on this phone)
   function load(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v === "1"; } catch (_) { return d; } }
   function store(k, v) { try { localStorage.setItem(k, v ? "1" : "0"); } catch (_) {} }
-  let diagonals = load("rover.diag", false);
   let arrows = load("rover.arrows", false);
 
   function dirFrom(x, y) {
     if (Math.hypot(x, y) < 0.4) return "S";                       // bigger dead zone
     const a = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
-    if (!diagonals) return ["R", "F", "L", "B"][Math.round(a / 90) % 4];   // 4 directions only
-    return ORDER[Math.round(a / 45) % 8];
+    return ["R", "F", "L", "B"][Math.round(a / 90) % 4];          // 4 directions only
   }
   function setStickDir(d, quiet) {
     if (d === dir) return;
@@ -596,14 +596,9 @@ body:not(.in-app) .app-only { display: none !important; }
     dpad.hidden = !arrows;
     $("modeBtn").textContent = arrows ? "Use joystick" : "Use arrows";
     $("modeBtn").setAttribute("aria-pressed", String(arrows));
-    $("diagBtn").textContent = "Diagonals: " + (diagonals ? "on" : "off");
-    $("diagBtn").setAttribute("aria-pressed", String(diagonals));
-    $("diagBtn").hidden = arrows;
     $("driveLabel").textContent = arrows ? "Hold an arrow · let go = S" : "Drive · let go = S";
-    ["G", "I", "H", "J"].forEach(k => { if (ticks[k]) ticks[k].style.visibility = diagonals ? "visible" : "hidden"; });
   }
   $("modeBtn").addEventListener("click", () => { arrows = !arrows; store("rover.arrows", arrows); setStickDir("S"); applySettings(); });
-  $("diagBtn").addEventListener("click", () => { diagonals = !diagonals; store("rover.diag", diagonals); applySettings(); });
   applySettings();
 
   // Arrow keys / WASD for testing on a computer
@@ -622,21 +617,26 @@ body:not(.in-app) .app-only { display: none !important; }
   document.addEventListener("keyup", e => { const k = KEYMAP[e.key]; if (k && held.has(k)) { held.delete(k); keyDir(); } });
   window.addEventListener("blur", () => { held.clear(); if (activeId === null) { placeKnob(0, 0); setStickDir("S"); } });
 
-  // ---- Symbol buttons ----
-  document.querySelectorAll(".face").forEach(b => {
-    const press = () => { b.classList.add("pressed"); send(b.dataset.send); setTimeout(() => b.classList.remove("pressed"), 140); };
-    b.addEventListener("pointerdown", e => { e.preventDefault(); press(); });
-    b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); press(); } });
+  // ---- Arm buttons: send once on press, repeat while held ----
+  const ARM_REPEAT_MS = 150;
+  document.querySelectorAll(".face, .bump").forEach(b => {
+    let timer = null, pid = null;
+    const stop = () => { clearInterval(timer); timer = null; pid = null; b.classList.remove("pressed"); };
+    b.addEventListener("pointerdown", e => {
+      e.preventDefault();
+      if (pid !== null) return;
+      pid = e.pointerId;
+      try { b.setPointerCapture(e.pointerId); } catch (_) {}
+      b.classList.add("pressed");
+      send(b.dataset.send);
+      timer = setInterval(() => transmit(b.dataset.send), ARM_REPEAT_MS);
+    });
+    const up = e => { if (e.pointerId === pid) stop(); };
+    b.addEventListener("pointerup", up);
+    b.addEventListener("pointercancel", up);
+    b.addEventListener("lostpointercapture", up);
+    b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); send(b.dataset.send); } });
     b.addEventListener("contextmenu", e => e.preventDefault());
-  });
-
-  // ---- Hand lever: right = open, left = close ----
-  const lever = $("lever"), leverVal = $("leverVal");
-  let lastHand = "5";
-  lever.addEventListener("input", () => {
-    const v = Number(lever.value), c = v === 10 ? "q" : String(v);
-    leverVal.textContent = v === 0 ? "Hand 0 · closed" : "Hand " + c + " · " + (v * 10) + "% open";
-    if (c !== lastHand) { lastHand = c; send(c); }
   });
 })();
 </script>

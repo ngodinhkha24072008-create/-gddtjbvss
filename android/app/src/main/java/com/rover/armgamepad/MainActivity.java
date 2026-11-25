@@ -82,8 +82,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        // Safety: stop the car and arm playback when the app goes to the background
-        write("D");
+        // Safety: stop the car when the app goes to the background
+        write("S");
     }
 
     @Override
