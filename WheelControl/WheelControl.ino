@@ -31,6 +31,10 @@ const bool SWAP_SIDES = false;  // true if L turns the car right (sides swapped)
 // Auto-stop: 0 = keep driving until S (like the original code).
 // Set e.g. 400 if your app repeats the command while a button is held.
 const unsigned long AUTO_STOP_MS = 0;
+
+// Side test at power-on: left side alone, then right side alone, then both.
+// Set to false once both sides work.
+const bool SIDE_TEST = true;
 // ============================================
 
 unsigned long lastCommand = 0;
@@ -55,13 +59,35 @@ void drive(int left, int right) {
   lastCommand = millis();
 }
 
+// Runs one side (or both) for 1.5 s and says which outputs should be turning
+void testStep(int left, int right, const __FlashStringHelper *what) {
+  Serial.println(what);
+  digitalWrite(LED_BUILTIN, HIGH);
+  drive(left, right);
+  delay(1500);
+  drive(0, 0);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(700);
+}
+
 void setup() {
   Serial.begin(9600);
   pinMode(LEFT_A, OUTPUT);
   pinMode(LEFT_B, OUTPUT);
   pinMode(RIGHT_A, OUTPUT);
   pinMode(RIGHT_B, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
   drive(0, 0);
+
+  if (SIDE_TEST) {
+    Serial.println(F("Side test - wheels off the ground!"));
+    delay(2000);
+    testStep(1, 0, F("LEFT side forward  (D7/D6 -> IN1/IN2 -> OUT1/OUT2)"));
+    testStep(0, 1, F("RIGHT side forward (D5/D4 -> IN3/IN4 -> OUT3/OUT4)"));
+    testStep(-1, 0, F("LEFT side backward"));
+    testStep(0, -1, F("RIGHT side backward"));
+    testStep(1, 1, F("BOTH sides forward"));
+  }
   Serial.println(F("Wheel control ready"));
 }
 
