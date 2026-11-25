@@ -28,6 +28,13 @@
 // ---------- Bluetooth ----------
 SoftwareSerial btSerial(2, 3); // RX, TX
 
+// Holds a command that is still arriving (defined up here so the Arduino IDE's
+// automatic function declarations can see it)
+struct LineReader {
+  char buf[16];
+  byte len;
+};
+
 // ---------- Car (L298N) ----------
 const int IN1 = 7;
 const int IN2 = 6;
@@ -186,10 +193,6 @@ bool letterCommand(char c) {
 // A capital command letter at the start of a line acts straight away.
 // Anything else (lowercase text) is collected until Enter and sent to the arm.
 // =====================================================================
-struct LineReader {
-  char buf[16];
-  byte len;
-};
 LineReader usbLine = {{0}, 0};
 LineReader btLine = {{0}, 0};
 
