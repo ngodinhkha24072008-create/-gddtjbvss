@@ -16,6 +16,7 @@
  *   HC-06 TXD -> D2, RXD -> D3        (SoftwareSerial, D0/D1 stay free for uploading)
  *   Servos: base D9, shoulder D10, elbow D11, gripper D8   (gripper moved from D6)
  *   Buttons: base A0, shoulder A1, elbow A2, gripper A3    (moved from D2-D5)
+ *            gamepad style: each button from its pin to GND, no resistors needed
  *   Power the servos from a separate 5-6 V supply, GND shared with the Arduino.
  */
 
@@ -56,6 +57,7 @@ const int STEP = 10;
 const int MIN_ANGLE = 0;
 const int MAX_ANGLE = 180;
 const unsigned long BUTTON_REPEAT_MS = 200;
+const int BUTTON_PRESSED = LOW;   // gamepad-style: pressed button connects the pin to GND
 unsigned long lastButton[4] = {0, 0, 0, 0};
 
 // ---------- Text going to both the Serial Monitor and the phone ----------
@@ -163,7 +165,7 @@ void armCommand(char *cmd) {
 void checkButtons() {
   const int pins[4] = {BASE_BUTTON, SHOULDER_BUTTON, ELBOW_BUTTON, GRIPPER_BUTTON};
   for (int i = 0; i < 4; i++) {
-    if (digitalRead(pins[i]) != HIGH) continue;
+    if (digitalRead(pins[i]) != BUTTON_PRESSED) continue;
     if (millis() - lastButton[i] < BUTTON_REPEAT_MS) continue;  // held: repeat every 200 ms
     lastButton[i] = millis();
 
@@ -219,10 +221,12 @@ void setup() {
   elbowServo.attach(ELBOW_PIN);
   gripperServo.attach(GRIPPER_PIN);
 
-  pinMode(BASE_BUTTON, INPUT);
-  pinMode(SHOULDER_BUTTON, INPUT);
-  pinMode(ELBOW_BUTTON, INPUT);
-  pinMode(GRIPPER_BUTTON, INPUT);
+  // Gamepad-style buttons: each button between its pin and GND, no resistors.
+  // The Arduino's built-in pull-up keeps the pin HIGH; pressing pulls it LOW.
+  pinMode(BASE_BUTTON, INPUT_PULLUP);
+  pinMode(SHOULDER_BUTTON, INPUT_PULLUP);
+  pinMode(ELBOW_BUTTON, INPUT_PULLUP);
+  pinMode(GRIPPER_BUTTON, INPUT_PULLUP);
 
   sayLine(F("Car + 4-DOF Arm - Initialized"));
   moveToHome();
