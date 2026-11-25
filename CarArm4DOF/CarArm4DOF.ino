@@ -3,20 +3,22 @@
  *   Car part:  your original Code.ino (F / B / L / R / S)
  *   Arm part:  4-DOF Robotic Arm Control by Aryan Panwar (2024)
  *
- * COMMANDS - from the phone (HC-06) or typed in the Serial Monitor (9600)
- *   CAR (capital letters, act instantly):
- *     F = forward   B = backward   L = turn   R = turn   S = stop
- *   ARM (lowercase, end with Enter / newline):
- *     b<angle>  base       e.g. b90        s<angle>  shoulder   e.g. s45
- *     e<angle>  elbow      e.g. e120       g<angle>  gripper    e.g. g30
- *     home  open  close  status  help
+ * COMMANDS - one capital letter each, like the wheel drive.
+ * Send them from the gamepad app (HC-06) or type them in the Serial Monitor (9600).
+ *   CAR:   F = forward   B = backward   L = turn   R = turn   S = stop
+ *   ARM:   A / Z = base left / right          U / J = shoulder up / down
+ *          I / K = elbow up / down            O / C = gripper open / close
+ *          H = arm home (all joints to 90)
+ *   Each arm letter moves that joint STEP degrees. Hold the app button
+ *   (with "send continuously" on) and the joint keeps moving.
+ *
+ *   Exact angles still work as lowercase text + Enter:
+ *     b90  s45  e120  g30  home  open  close  status  help
  *
  * PINS (Arduino Uno)
  *   L298N IN1..IN4 -> D7 D6 D5 D4     (same as the original car code)
  *   HC-06 TXD -> D2, RXD -> D3        (SoftwareSerial, D0/D1 stay free for uploading)
  *   Servos: base D9, shoulder D10, elbow D11, gripper D8   (gripper moved from D6)
- *   Buttons: base A0, shoulder A1, elbow A2, gripper A3    (moved from D2-D5)
- *            gamepad style: each button from its pin to GND, no resistors needed
  *   Power the servos from a separate 5-6 V supply, GND shared with the Arduino.
  */
 
@@ -43,22 +45,14 @@ const int SHOULDER_PIN = 10;
 const int ELBOW_PIN = 11;
 const int GRIPPER_PIN = 8;
 
-const int BASE_BUTTON = A0;
-const int SHOULDER_BUTTON = A1;
-const int ELBOW_BUTTON = A2;
-const int GRIPPER_BUTTON = A3;
-
 int basePos = 90;
 int shoulderPos = 90;
 int elbowPos = 90;
 int gripperPos = 90;
 
-const int STEP = 10;
+const int STEP = 5;            // degrees per arm command (smaller = smoother)
 const int MIN_ANGLE = 0;
 const int MAX_ANGLE = 180;
-const unsigned long BUTTON_REPEAT_MS = 200;
-const int BUTTON_PRESSED = LOW;   // gamepad-style: pressed button connects the pin to GND
-unsigned long lastButton[4] = {0, 0, 0, 0};
 
 // ---------- Text going to both the Serial Monitor and the phone ----------
 void say(const __FlashStringHelper *text) { Serial.print(text); btSerial.print(text); }
@@ -128,8 +122,8 @@ void printStatus() {
 void printInstructions() {
   sayLine(F("=== Commands ==="));
   sayLine(F("CAR: F forward, B backward, L / R turn, S stop"));
-  sayLine(F("ARM: b<angle> base, s<angle> shoulder, e<angle> elbow, g<angle> gripper"));
-  sayLine(F("     home, open, close, status, help   (lowercase, then Enter)"));
+  sayLine(F("ARM: A/Z base, U/J shoulder, I/K elbow, O/C gripper, H home"));
+  sayLine(F("     or b90 s45 e120 g30 home open close status help + Enter"));
   sayLine(F("Angle range: 0-180 degrees"));
 }
 
@@ -162,24 +156,35 @@ void armCommand(char *cmd) {
   else sayLine(F("Unknown command. Type 'help' for instructions."));
 }
 
-void checkButtons() {
-  const int pins[4] = {BASE_BUTTON, SHOULDER_BUTTON, ELBOW_BUTTON, GRIPPER_BUTTON};
-  for (int i = 0; i < 4; i++) {
-    if (digitalRead(pins[i]) != BUTTON_PRESSED) continue;
-    if (millis() - lastButton[i] < BUTTON_REPEAT_MS) continue;  // held: repeat every 200 ms
-    lastButton[i] = millis();
+// One-letter arm commands (like the wheel letters)
+void nudge(void (*move)(int), int pos, int delta) {
+  move(constrain(pos + delta, MIN_ANGLE, MAX_ANGLE));
+}
 
-    if (i == 0) moveBase(constrain(basePos + STEP, MIN_ANGLE, MAX_ANGLE));
-    if (i == 1) moveShoulder(constrain(shoulderPos + STEP, MIN_ANGLE, MAX_ANGLE));
-    if (i == 2) moveElbow(constrain(elbowPos + STEP, MIN_ANGLE, MAX_ANGLE));
-    if (i == 3) moveGripper(gripperPos > 100 ? 30 : 180);       // toggle open / close
+// Returns true if the letter was a car or arm command
+bool letterCommand(char c) {
+  switch (c) {
+    // --- car ---
+    case 'F': case 'B': case 'L': case 'R': case 'S':
+      carCommand(c); return true;
+    // --- arm ---
+    case 'A': nudge(moveBase, basePos, +STEP);          return true;  // base left
+    case 'Z': nudge(moveBase, basePos, -STEP);          return true;  // base right
+    case 'U': nudge(moveShoulder, shoulderPos, +STEP);  return true;  // shoulder up
+    case 'J': nudge(moveShoulder, shoulderPos, -STEP);  return true;  // shoulder down
+    case 'I': nudge(moveElbow, elbowPos, +STEP);        return true;  // elbow up
+    case 'K': nudge(moveElbow, elbowPos, -STEP);        return true;  // elbow down
+    case 'O': nudge(moveGripper, gripperPos, +STEP);    return true;  // gripper open
+    case 'C': nudge(moveGripper, gripperPos, -STEP);    return true;  // gripper close
+    case 'H': moveToHome();                             return true;  // arm home
   }
+  return false;
 }
 
 // =====================================================================
 // COMMAND READING (non-blocking, for both Serial Monitor and Bluetooth)
-// Capital F/B/L/R/S at the start of a line drive the car straight away.
-// Anything else is collected until Enter and then sent to the arm.
+// A capital command letter at the start of a line acts straight away.
+// Anything else (lowercase text) is collected until Enter and sent to the arm.
 // =====================================================================
 struct LineReader {
   char buf[16];
@@ -189,8 +194,8 @@ LineReader usbLine = {{0}, 0};
 LineReader btLine = {{0}, 0};
 
 void feed(LineReader &r, char c) {
-  if (r.len == 0 && (c == 'F' || c == 'B' || c == 'L' || c == 'R' || c == 'S')) {
-    carCommand(c);
+  if (r.len == 0 && c >= 'A' && c <= 'Z') {
+    letterCommand(c);          // unknown capitals are ignored
     return;
   }
   if (c == '\n' || c == '\r') {
@@ -221,13 +226,6 @@ void setup() {
   elbowServo.attach(ELBOW_PIN);
   gripperServo.attach(GRIPPER_PIN);
 
-  // Gamepad-style buttons: each button between its pin and GND, no resistors.
-  // The Arduino's built-in pull-up keeps the pin HIGH; pressing pulls it LOW.
-  pinMode(BASE_BUTTON, INPUT_PULLUP);
-  pinMode(SHOULDER_BUTTON, INPUT_PULLUP);
-  pinMode(ELBOW_BUTTON, INPUT_PULLUP);
-  pinMode(GRIPPER_BUTTON, INPUT_PULLUP);
-
   sayLine(F("Car + 4-DOF Arm - Initialized"));
   moveToHome();
   printInstructions();
@@ -236,5 +234,4 @@ void setup() {
 void loop() {
   while (btSerial.available() > 0) feed(btLine, btSerial.read());
   while (Serial.available() > 0)   feed(usbLine, Serial.read());
-  checkButtons();
 }
