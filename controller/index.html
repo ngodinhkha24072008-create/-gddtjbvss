@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: a landscape handheld that fills one screen. Left grip = drive stick, centre = readout + stop/home, right grip = arm bumpers over symbol buttons. Single committed dark console look. */
+/* Layout: a landscape handheld that fills one screen. Left grip = drive stick (or arrows), centre = readout + stop/home, right grip = arm bumpers over an arm arrow pad. Single committed dark console look. */
 :root {
   --bg: #0d1220;
   --shell: #161d2e;
@@ -144,6 +144,17 @@ body {
 .bump.elb { --c: var(--cross); }
 .bump.pressed { border-color: var(--c); color: var(--c); }
 .face .tag { position: absolute; top: calc(100% + 1px); left: 50%; transform: translateX(-50%); white-space: nowrap; font: 600 .55rem var(--mono); color: var(--muted); letter-spacing: .04em; }
+.armpad { --a: calc(var(--b) * 1.05); width: calc(var(--a) * 3 + 12px); height: calc(var(--a) * 3 + 12px); display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr); gap: 6px; touch-action: none; }
+.armpad .arm {
+  border: 1px solid var(--line); border-radius: 14px; background: radial-gradient(circle at 40% 30%, #26304a, #151c2c 75%);
+  color: var(--c, var(--fg)); font: 700 1.3rem var(--mono); cursor: pointer; touch-action: none; display: grid; place-items: center; align-content: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,.45); padding: 0; line-height: 1.1;
+}
+.armpad .arm small { display: block; font-size: .5rem; letter-spacing: .06em; color: var(--muted); }
+.armpad .arm.pressed { border-color: var(--c, var(--accent)); background: radial-gradient(circle at 50% 50%, #2a3350, #151c2c 80%); }
+.armpad .up { grid-area: 1 / 2; --c: var(--tri); } .armpad .down { grid-area: 3 / 2; --c: var(--tri); }
+.armpad .left { grid-area: 2 / 1; --c: var(--sq); } .armpad .right { grid-area: 2 / 3; --c: var(--sq); }
+.armpad .mid { grid-area: 2 / 2; border-radius: 50%; background: var(--well); font: 700 .62rem var(--display); letter-spacing: .1em; --c: var(--ok); }
 .homebtn { font: 700 .78rem var(--display); letter-spacing: .12em; color: var(--tri); background: var(--well); border: 1px solid var(--tri); border-radius: 999px; padding: 7px 16px; cursor: pointer; }
 .centre-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 
@@ -259,22 +270,19 @@ body:not(.in-app) .app-only { display: none !important; }
 
     <section class="grip">
       <div class="bumpers" aria-label="Gripper and elbow">
-        <button class="bump grip-c" type="button" data-send="C" aria-label="Gripper close">✊ CLOSE <b>C</b></button>
-        <button class="bump grip-o" type="button" data-send="O" aria-label="Gripper open">✋ OPEN <b>O</b></button>
+        <button class="bump grip-c" type="button" data-send="C" aria-label="Gripper close">▶◀ GRIP <b>C</b></button>
+        <button class="bump grip-o" type="button" data-send="O" aria-label="Gripper open">◀▶ GRIP <b>O</b></button>
         <button class="bump elb" type="button" data-send="K" aria-label="Elbow down">ELBOW ▼ <b>K</b></button>
         <button class="bump elb" type="button" data-send="I" aria-label="Elbow up">ELBOW ▲ <b>I</b></button>
       </div>
-      <div class="faces">
-        <button class="face f-tri" type="button" data-send="U" aria-label="Triangle: shoulder up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3.5 21 19.5H3z"/></svg><span class="code">U</span></button>
-        <button class="face f-sq" type="button" data-send="A" aria-label="Square: base left">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="4" width="16" height="16" rx="1.5"/></svg><span class="code">A</span></button>
-        <button class="face f-circ" type="button" data-send="Z" aria-label="Circle: base right">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="12" cy="12" r="8.5"/></svg><span class="code">Z</span></button>
-        <button class="face f-cross" type="button" data-send="J" aria-label="Cross: shoulder down">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><span class="code">J</span></button>
+      <div class="armpad" aria-label="Arm shoulder and base">
+        <button class="arm up" type="button" data-send="U" aria-label="Shoulder up">▲<small>SHOULDER U</small></button>
+        <button class="arm left" type="button" data-send="A" aria-label="Base left">◀<small>BASE A</small></button>
+        <button class="arm mid" type="button" data-send="H" aria-label="Arm home">HOME<small>H</small></button>
+        <button class="arm right" type="button" data-send="Z" aria-label="Base right">▶<small>BASE Z</small></button>
+        <button class="arm down" type="button" data-send="J" aria-label="Shoulder down">▼<small>SHOULDER J</small></button>
       </div>
-      <div class="zone-label">△ ✕ shoulder · □ ○ base · hold to repeat</div>
+      <div class="zone-label">Arm · hold an arrow to keep moving</div>
     </section>
   </main>
 </div>
@@ -314,11 +322,11 @@ body:not(.in-app) .app-only { display: none !important; }
               <tr><td>Stick or arrows up / down</td><td><code>F</code> <code>B</code></td><td>Drive forward / backward</td></tr>
               <tr><td>Stick or arrows left / right</td><td><code>L</code> <code>R</code></td><td>Turn left / right</td></tr>
               <tr><td>Let go</td><td><code>S</code></td><td>Stop driving</td></tr>
-              <tr><td>Square / Circle</td><td><code>A</code> <code>Z</code></td><td>Base left / right</td></tr>
-              <tr><td>Triangle / Cross</td><td><code>U</code> <code>J</code></td><td>Shoulder up / down</td></tr>
+              <tr><td>Arm arrows ◀ / ▶</td><td><code>A</code> <code>Z</code></td><td>Base left / right</td></tr>
+              <tr><td>Arm arrows ▲ / ▼</td><td><code>U</code> <code>J</code></td><td>Shoulder up / down</td></tr>
               <tr><td>Elbow ▲ / ▼</td><td><code>I</code> <code>K</code></td><td>Elbow up / down</td></tr>
-              <tr><td>Grip open / close</td><td><code>O</code> <code>C</code></td><td>Gripper open / close</td></tr>
-              <tr><td>Arm home</td><td><code>H</code></td><td>All arm joints to 90°</td></tr>
+              <tr><td>◀▶ GRIP / ▶◀ GRIP</td><td><code>O</code> <code>C</code></td><td>Gripper open / close</td></tr>
+              <tr><td>HOME (middle of arm arrows)</td><td><code>H</code></td><td>All arm joints to 90°</td></tr>
               <tr><td>Stop</td><td><code>S</code></td><td>Stop the car</td></tr>
             </tbody>
           </table>
@@ -535,7 +543,7 @@ body:not(.in-app) .app-only { display: none !important; }
   // Settings (remembered on this phone)
   function load(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v === "1"; } catch (_) { return d; } }
   function store(k, v) { try { localStorage.setItem(k, v ? "1" : "0"); } catch (_) {} }
-  let arrows = load("rover.arrows", false);
+  let arrows = load("rover.arrows2", false);          // joystick by default
 
   function dirFrom(x, y) {
     if (Math.hypot(x, y) < 0.4) return "S";                       // bigger dead zone
@@ -598,7 +606,7 @@ body:not(.in-app) .app-only { display: none !important; }
     $("modeBtn").setAttribute("aria-pressed", String(arrows));
     $("driveLabel").textContent = arrows ? "Hold an arrow · let go = S" : "Drive · let go = S";
   }
-  $("modeBtn").addEventListener("click", () => { arrows = !arrows; store("rover.arrows", arrows); setStickDir("S"); applySettings(); });
+  $("modeBtn").addEventListener("click", () => { arrows = !arrows; store("rover.arrows2", arrows); setStickDir("S"); applySettings(); });
   applySettings();
 
   // Arrow keys / WASD for testing on a computer
@@ -619,7 +627,7 @@ body:not(.in-app) .app-only { display: none !important; }
 
   // ---- Arm buttons: send once on press, repeat while held ----
   const ARM_REPEAT_MS = 150;
-  document.querySelectorAll(".face, .bump").forEach(b => {
+  document.querySelectorAll(".arm, .bump").forEach(b => {
     let timer = null, pid = null;
     const stop = () => { clearInterval(timer); timer = null; pid = null; b.classList.remove("pressed"); };
     b.addEventListener("pointerdown", e => {
