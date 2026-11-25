@@ -84,6 +84,10 @@ void carCommand(char c) {
     case 'L': setMotors(HIGH, LOW, LOW, HIGH); break; // Turn (original 'L')
     case 'S': setMotors(LOW, LOW, LOW, LOW);   break; // Stop
   }
+  // Confirm the command arrived (shows in the Serial Monitor and the phone app)
+  say(F("Got "));
+  Serial.println(c);
+  btSerial.println(c);
 }
 
 // =====================================================================
