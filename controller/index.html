@@ -193,7 +193,20 @@ body:not(.in-app) .app-only { display: none !important; }
   .info { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) { .info { grid-template-columns: 1fr; } }
-@media (max-height: 420px) { .bar h1 { font-size: .95rem; } .btn { padding: 5px 9px; } .now b { font-size: 1.9rem; } .notice { display: none; } }
+/* Arrow pad (alternative to the joystick) */
+.dpad { width: var(--stick); height: var(--stick); display: grid; grid-template: repeat(3, 1fr) / repeat(3, 1fr); gap: 6px; touch-action: none; }
+.dpad button {
+  border: 1px solid var(--line); border-radius: 14px; background: radial-gradient(circle at 40% 30%, #26304a, #151c2c 75%);
+  color: var(--fg); font: 700 1.5rem var(--mono); cursor: pointer; touch-action: none; display: grid; place-items: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,.45);
+}
+.dpad button small { display: block; font-size: .62rem; color: var(--muted); }
+.dpad button.on { border-color: var(--accent); color: var(--accent); background: radial-gradient(circle at 50% 50%, #3a3220, #151c2c 80%); }
+.dpad .up { grid-area: 1 / 2; } .dpad .left { grid-area: 2 / 1; } .dpad .right { grid-area: 2 / 3; } .dpad .down { grid-area: 3 / 2; }
+.dpad .mid { grid-area: 2 / 2; border-radius: 50%; background: var(--well); color: var(--danger); font-size: .8rem; }
+.btn.toggle[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.reply { font: 500 .74rem var(--mono); color: var(--ok); max-width: 240px; min-height: 1.2em; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-height: 420px) { .bar h1 { font-size: .95rem; } .btn { padding: 5px 9px; } .now b { font-size: 1.9rem; } .notice { font-size: .68rem; min-height: 0; max-height: 2.6em; overflow: hidden; } .trail { display: none; } }
 @media (prefers-reduced-motion: reduce) { .face, .stick .tick { transition: none; } .phone-icon { animation: none; transform: rotate(-90deg); } }
 </style>
 
@@ -207,6 +220,8 @@ body:not(.in-app) .app-only { display: none !important; }
       <button class="btn web-only" id="connSer" type="button">Connect HC-05</button>
       <button class="btn" id="disc" type="button" hidden>Disconnect</button>
       <button class="btn web-only" id="full" type="button" hidden>Full screen</button>
+      <button class="btn toggle" id="modeBtn" type="button" aria-pressed="false">Use arrows</button>
+      <button class="btn toggle" id="diagBtn" type="button" aria-pressed="false">Diagonals: off</button>
       <button class="btn" id="mapBtn" type="button">Command map</button>
     </div>
   </header>
@@ -220,13 +235,21 @@ body:not(.in-app) .app-only { display: none !important; }
         <span class="tick t-H" data-d="H">H</span><span class="tick t-J" data-d="J">J</span>
         <div class="knob" id="knob"></div>
       </div>
-      <div class="zone-label">Drive · let go = S</div>
+      <div class="dpad" id="dpad" hidden>
+        <button class="up" type="button" data-d="F" aria-label="Forward">▲<small>F</small></button>
+        <button class="left" type="button" data-d="L" aria-label="Left">◀<small>L</small></button>
+        <button class="mid" type="button" data-d="S" aria-label="Stop">STOP</button>
+        <button class="right" type="button" data-d="R" aria-label="Right">▶<small>R</small></button>
+        <button class="down" type="button" data-d="B" aria-label="Backward">▼<small>B</small></button>
+      </div>
+      <div class="zone-label" id="driveLabel">Drive · let go = S</div>
     </section>
 
     <section class="centre">
       <div class="now"><b id="nowCode">S</b><span id="nowName">Stopped</span></div>
       <div class="trail" id="trail" aria-label="Last commands sent"></div>
       <button class="stopall" id="stopAll" type="button">STOP ALL · D</button>
+      <p class="reply" id="reply" aria-live="polite"></p>
       <p class="notice" id="notice">Not connected. Controls show what they would send.</p>
     </section>
 
@@ -474,7 +497,7 @@ body:not(.in-app) .app-only { display: none !important; }
         if (msg) say(msg);
       }
     };
-    window.onRobotMessage = line => { if (line) say("Robot: " + line); };
+    window.onRobotMessage = line => { if (line) $("reply").textContent = "Robot: " + line; };
   }
 
   // ---- Full screen + landscape ----
@@ -502,14 +525,21 @@ body:not(.in-app) .app-only { display: none !important; }
   document.addEventListener("keydown", e => { if (e.key === "Escape") sheet.hidden = true; });
 
   // ---- Joystick ----
-  const stick = $("stick"), knob = $("knob");
+  const stick = $("stick"), knob = $("knob"), dpad = $("dpad");
   const ticks = {}; stick.querySelectorAll(".tick").forEach(t => ticks[t.dataset.d] = t);
   const ORDER = ["R", "I", "F", "G", "L", "H", "B", "J"];   // 0°, 45°, 90° ... counter-clockwise
   let dir = "S", activeId = null;
 
+  // Settings (remembered on this phone)
+  function load(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v === "1"; } catch (_) { return d; } }
+  function store(k, v) { try { localStorage.setItem(k, v ? "1" : "0"); } catch (_) {} }
+  let diagonals = load("rover.diag", false);
+  let arrows = load("rover.arrows", false);
+
   function dirFrom(x, y) {
-    if (Math.hypot(x, y) < 0.35) return "S";
+    if (Math.hypot(x, y) < 0.4) return "S";                       // bigger dead zone
     const a = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+    if (!diagonals) return ["R", "F", "L", "B"][Math.round(a / 90) % 4];   // 4 directions only
     return ORDER[Math.round(a / 45) % 8];
   }
   function setStickDir(d, quiet) {
@@ -517,7 +547,12 @@ body:not(.in-app) .app-only { display: none !important; }
     if (ticks[dir]) ticks[dir].classList.remove("hot");
     dir = d;
     if (ticks[d]) ticks[d].classList.add("hot");
+    dpad.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.d === d && d !== "S"));
     if (!quiet) send(d);
+    if (d === "S") {                                              // repeat the stop so a lost byte can't leave the car driving
+      setTimeout(() => { if (dir === "S") transmit("S"); }, 120);
+      setTimeout(() => { if (dir === "S") transmit("S"); }, 300);
+    }
   }
   function placeKnob(dx, dy) { knob.style.transform = "translate(" + dx + "px," + dy + "px)"; }
   function moveTo(e) {
@@ -539,6 +574,37 @@ body:not(.in-app) .app-only { display: none !important; }
   stick.addEventListener("pointerup", e => { if (e.pointerId === activeId) release(); });
   stick.addEventListener("pointercancel", e => { if (e.pointerId === activeId) release(); });
   stick.addEventListener("lostpointercapture", e => { if (e.pointerId === activeId) release(); });
+
+  // ---- Arrow pad: hold a button to drive, let go to stop ----
+  let padId = null;
+  dpad.querySelectorAll("button").forEach(b => {
+    b.addEventListener("pointerdown", e => {
+      e.preventDefault();
+      padId = e.pointerId;
+      try { b.setPointerCapture(e.pointerId); } catch (_) {}
+      setStickDir(b.dataset.d);
+    });
+    const up = e => { if (e.pointerId === padId) { padId = null; setStickDir("S"); } };
+    b.addEventListener("pointerup", up);
+    b.addEventListener("pointercancel", up);
+    b.addEventListener("lostpointercapture", up);
+    b.addEventListener("contextmenu", e => e.preventDefault());
+  });
+
+  function applySettings() {
+    stick.hidden = arrows;
+    dpad.hidden = !arrows;
+    $("modeBtn").textContent = arrows ? "Use joystick" : "Use arrows";
+    $("modeBtn").setAttribute("aria-pressed", String(arrows));
+    $("diagBtn").textContent = "Diagonals: " + (diagonals ? "on" : "off");
+    $("diagBtn").setAttribute("aria-pressed", String(diagonals));
+    $("diagBtn").hidden = arrows;
+    $("driveLabel").textContent = arrows ? "Hold an arrow · let go = S" : "Drive · let go = S";
+    ["G", "I", "H", "J"].forEach(k => { if (ticks[k]) ticks[k].style.visibility = diagonals ? "visible" : "hidden"; });
+  }
+  $("modeBtn").addEventListener("click", () => { arrows = !arrows; store("rover.arrows", arrows); setStickDir("S"); applySettings(); });
+  $("diagBtn").addEventListener("click", () => { diagonals = !diagonals; store("rover.diag", diagonals); applySettings(); });
+  applySettings();
 
   // Arrow keys / WASD for testing on a computer
   const held = new Set();
