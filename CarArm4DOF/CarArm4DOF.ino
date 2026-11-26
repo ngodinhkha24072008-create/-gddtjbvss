@@ -68,8 +68,12 @@ const int STEP = 5;            // degrees per arm command (smaller = smoother)
 // about 100 mA and stays on. Set KEEPALIVE_ENABLED to false if you don't use it.
 const bool KEEPALIVE_ENABLED = true;
 const int KEEPALIVE_PIN = A4;
-const unsigned long KEEPALIVE_EVERY_MS = 5000;   // try 3000 if your power bank still turns off
-const unsigned long KEEPALIVE_PULSE_MS = 150;
+const unsigned long KEEPALIVE_EVERY_MS = 3000;   // start a pulse this often
+const unsigned long KEEPALIVE_PULSE_MS = 500;    // each pulse lasts this long
+// Set to true to keep the load on all the time (about 100 mA extra). Works with
+// any power bank, and is the easiest way to check the circuit: the 47 ohm
+// resistor should get warm within a minute. Use a 1 W resistor for this mode.
+const bool KEEPALIVE_ALWAYS_ON = false;
 unsigned long keepAliveStart = 0;
 bool keepAliveOn = false;
 const int MIN_ANGLE = 0;
@@ -249,6 +253,10 @@ void feed(LineReader &r, char c) {
 // Power bank keep-alive pulse (non-blocking, so commands are never delayed)
 void keepAlive() {
   if (!KEEPALIVE_ENABLED) return;
+  if (KEEPALIVE_ALWAYS_ON) {
+    digitalWrite(KEEPALIVE_PIN, HIGH);
+    return;
+  }
   unsigned long now = millis();
   if (!keepAliveOn && now - keepAliveStart >= KEEPALIVE_EVERY_MS) {
     digitalWrite(KEEPALIVE_PIN, HIGH);
