@@ -33,6 +33,7 @@ SoftwareSerial btSerial(2, 3); // RX, TX
 struct LineReader {
   char buf[16];
   byte len;
+  unsigned long last;   // when the last character of an unfinished text command arrived
 };
 
 // ---------- Car (L298N) ----------
@@ -62,9 +63,15 @@ const int MIN_ANGLE = 0;
 const int MAX_ANGLE = 180;
 
 // ---------- Text going to both the Serial Monitor and the phone ----------
+// Only used for rare messages (help, status, home). Sending over SoftwareSerial
+// blocks receiving, so frequent replies would garble incoming commands.
 void say(const __FlashStringHelper *text) { Serial.print(text); btSerial.print(text); }
 void sayLine(const __FlashStringHelper *text) { Serial.println(text); btSerial.println(text); }
 void sayNumber(int n) { Serial.println(n); btSerial.println(n); }
+
+// ---------- Text going to the Serial Monitor only (frequent messages) ----------
+void note(const __FlashStringHelper *text) { Serial.print(text); }
+void noteLine(int n) { Serial.println(n); }
 
 // =====================================================================
 // CAR
@@ -84,10 +91,14 @@ void carCommand(char c) {
     case 'L': setMotors(HIGH, LOW, LOW, HIGH); break; // Turn (original 'L')
     case 'S': setMotors(LOW, LOW, LOW, LOW);   break; // Stop
   }
-  // Confirm the command arrived (shows in the Serial Monitor and the phone app)
-  say(F("Got "));
-  Serial.println(c);
-  btSerial.println(c);
+  // Confirm the command in the Serial Monitor, only when it changes
+  // (the app repeats a held command many times a second)
+  static char lastCar = 0;
+  if (c != lastCar) {
+    lastCar = c;
+    Serial.print(F("Got "));
+    Serial.println(c);
+  }
 }
 
 // =====================================================================
@@ -100,9 +111,9 @@ bool moveServo(Servo &servo, int &pos, int angle, const __FlashStringHelper *nam
   }
   pos = angle;
   servo.write(pos);
-  say(name);
-  say(F(" moved to: "));
-  sayNumber(pos);
+  note(name);                 // Serial Monitor only, so Bluetooth stays free for commands
+  note(F(" moved to: "));
+  noteLine(pos);
   return true;
 }
 
@@ -194,14 +205,17 @@ bool letterCommand(char c) {
 
 // =====================================================================
 // COMMAND READING (non-blocking, for both Serial Monitor and Bluetooth)
-// A capital command letter at the start of a line acts straight away.
-// Anything else (lowercase text) is collected until Enter and sent to the arm.
+// A capital command letter ALWAYS acts straight away (and throws away any
+// half-finished text, e.g. a garbled byte), so the controls can never get stuck.
+// Lowercase text is collected until Enter and sent to the arm.
 // =====================================================================
-LineReader usbLine = {{0}, 0};
-LineReader btLine = {{0}, 0};
+LineReader usbLine = {{0}, 0, 0};
+LineReader btLine = {{0}, 0, 0};
+const unsigned long TEXT_TIMEOUT_MS = 2000;   // unfinished text is dropped after 2 s
 
 void feed(LineReader &r, char c) {
-  if (r.len == 0 && c >= 'A' && c <= 'Z') {
+  if (c >= 'A' && c <= 'Z') {
+    r.len = 0;                 // drop any unfinished text or junk
     letterCommand(c);          // unknown capitals are ignored
     return;
   }
@@ -213,8 +227,15 @@ void feed(LineReader &r, char c) {
     }
     return;
   }
-  if (c == ' ') return;
-  if (r.len < sizeof(r.buf) - 1) r.buf[r.len++] = c;
+  if (c <= ' ' || c > '~') return;            // ignore spaces and garbled bytes
+  if (r.len >= sizeof(r.buf) - 1) r.len = 0;  // too long: must be junk, start again
+  r.buf[r.len++] = c;
+  r.last = millis();
+}
+
+// Throw away text that never got its Enter
+void expire(LineReader &r) {
+  if (r.len > 0 && millis() - r.last > TEXT_TIMEOUT_MS) r.len = 0;
 }
 
 // =====================================================================
@@ -241,4 +262,6 @@ void setup() {
 void loop() {
   while (btSerial.available() > 0) feed(btLine, btSerial.read());
   while (Serial.available() > 0)   feed(usbLine, Serial.read());
+  expire(btLine);
+  expire(usbLine);
 }
