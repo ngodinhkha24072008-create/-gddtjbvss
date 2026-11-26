@@ -47,7 +47,7 @@ struct LineReader {
 //           original turn patterns stop all motors, so L/R use other patterns.
 // If F and B work but L and R don't move at all, set this to true.
 // If you rewire the motors the normal way, set it back to false.
-const bool MOTORS_CROSS_WIRED = true;
+const bool MOTORS_CROSS_WIRED = false;
 
 const int IN1 = 7;
 const int IN2 = 6;
