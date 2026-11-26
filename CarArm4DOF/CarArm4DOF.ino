@@ -47,6 +47,13 @@ struct LineReader {
 // Both turn the car in the same direction as the original L and R.
 const bool GENTLE_TURNS = true;
 
+// Car driving upside down (chassis flipped over): every motor direction is
+// reversed so F still drives forward and turns still move the car forward.
+const bool UPSIDE_DOWN = true;
+
+// If the L button turns the car right (and R turns it left), set this to true.
+const bool SWAP_TURNS = false;
+
 const int IN1 = 7;
 const int IN2 = 6;
 const int IN3 = 5;
@@ -102,6 +109,10 @@ void noteLine(int n) { Serial.println(n); }
 // CAR
 // =====================================================================
 void setMotors(int a, int b, int c, int d) {
+  if (UPSIDE_DOWN) {             // reverse both sides: swap each pair's two inputs
+    int t = a; a = b; b = t;
+    t = c; c = d; d = t;
+  }
   digitalWrite(IN1, a);
   digitalWrite(IN2, b);
   digitalWrite(IN3, c);
@@ -109,6 +120,11 @@ void setMotors(int a, int b, int c, int d) {
 }
 
 void carCommand(char c) {
+  char received = c;             // the letter as sent, for the Serial Monitor
+  if (SWAP_TURNS) {
+    if (c == 'L') c = 'R';
+    else if (c == 'R') c = 'L';
+  }
   switch (c) {
     case 'F': setMotors(HIGH, LOW, HIGH, LOW); break; // Move Forward
     case 'B': setMotors(LOW, HIGH, LOW, HIGH); break; // Move Backward
@@ -125,10 +141,10 @@ void carCommand(char c) {
   // Confirm the command in the Serial Monitor, only when it changes
   // (the app repeats a held command many times a second)
   static char lastCar = 0;
-  if (c != lastCar) {
-    lastCar = c;
+  if (received != lastCar) {
+    lastCar = received;
     Serial.print(F("Got "));
-    Serial.println(c);
+    Serial.println(received);
   }
 }
 
