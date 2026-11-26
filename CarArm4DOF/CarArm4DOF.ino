@@ -20,6 +20,8 @@
  *   HC-06 TXD -> D2, RXD -> D3        (SoftwareSerial, D0/D1 stay free for uploading)
  *   Servos: base D9, shoulder D10, elbow D11, gripper D8   (gripper moved from D6)
  *   Power the servos from a separate 5-6 V supply, GND shared with the Arduino.
+ *   Power bank keep-alive: A4 -> 1k -> NPN base; NPN collector -> 47 ohm (1/2 W) -> 5V;
+ *                          NPN emitter -> GND   (see KEEPALIVE settings below)
  */
 
 #include <Servo.h>
@@ -59,6 +61,17 @@ int elbowPos = 90;
 int gripperPos = 90;
 
 const int STEP = 5;            // degrees per arm command (smaller = smoother)
+
+// ---------- Power bank keep-alive ----------
+// Many power banks switch off when the load is small. Every few seconds the
+// Arduino switches on a 47 ohm resistor for a moment so the power bank sees
+// about 100 mA and stays on. Set KEEPALIVE_ENABLED to false if you don't use it.
+const bool KEEPALIVE_ENABLED = true;
+const int KEEPALIVE_PIN = A4;
+const unsigned long KEEPALIVE_EVERY_MS = 5000;   // try 3000 if your power bank still turns off
+const unsigned long KEEPALIVE_PULSE_MS = 150;
+unsigned long keepAliveStart = 0;
+bool keepAliveOn = false;
 const int MIN_ANGLE = 0;
 const int MAX_ANGLE = 180;
 
@@ -233,6 +246,20 @@ void feed(LineReader &r, char c) {
   r.last = millis();
 }
 
+// Power bank keep-alive pulse (non-blocking, so commands are never delayed)
+void keepAlive() {
+  if (!KEEPALIVE_ENABLED) return;
+  unsigned long now = millis();
+  if (!keepAliveOn && now - keepAliveStart >= KEEPALIVE_EVERY_MS) {
+    digitalWrite(KEEPALIVE_PIN, HIGH);
+    keepAliveOn = true;
+    keepAliveStart = now;
+  } else if (keepAliveOn && now - keepAliveStart >= KEEPALIVE_PULSE_MS) {
+    digitalWrite(KEEPALIVE_PIN, LOW);
+    keepAliveOn = false;
+  }
+}
+
 // Throw away text that never got its Enter
 void expire(LineReader &r) {
   if (r.len > 0 && millis() - r.last > TEXT_TIMEOUT_MS) r.len = 0;
@@ -254,6 +281,9 @@ void setup() {
   elbowServo.attach(ELBOW_PIN);
   gripperServo.attach(GRIPPER_PIN);
 
+  pinMode(KEEPALIVE_PIN, OUTPUT);
+  digitalWrite(KEEPALIVE_PIN, LOW);
+
   sayLine(F("Car + 4-DOF Arm - Initialized"));
   moveToHome();
   printInstructions();
@@ -264,4 +294,5 @@ void loop() {
   while (Serial.available() > 0)   feed(usbLine, Serial.read());
   expire(btLine);
   expire(usbLine);
+  keepAlive();
 }
