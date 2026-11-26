@@ -1,0 +1,36 @@
+# ===== Gradle =====
+.gradle/
+build/
+app/build/
+
+# ===== Local configuration =====
+local.properties
+
+# ===== Logs =====
+*.log
+
+# ===== Android Studio / IntelliJ =====
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ===== Build outputs =====
+*.apk
+*.aab
+output-metadata.json
+
+# ===== Keystore (never commit) =====
+*.jks
+*.keystore
+
+# ===== Google services (API keys) =====
+google-services.json
+
+# ===== Android profiling =====
+*.hprof
+
+# ===== OS =====
+.DS_Store
+Thumbs.db

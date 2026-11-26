@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.CubeSolver" parent="android:Theme.Material.NoActionBar">
+        <!-- Console navy so there is no white flash before Compose draws -->
+        <item name="android:windowBackground">@color/console_bg</item>
+    </style>
+</resources>
