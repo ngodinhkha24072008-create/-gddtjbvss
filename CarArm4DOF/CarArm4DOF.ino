@@ -39,6 +39,16 @@ struct LineReader {
 };
 
 // ---------- Car (L298N) ----------
+// How the wheel motors are connected to the L298N outputs:
+//   false = normal: left motors on OUT1/OUT2, right motors on OUT3/OUT4
+//           (turning is exactly the same as the original Code.ino)
+//   true  = cross-wired: motors between OUT1/OUT4 and OUT2/OUT3.
+//           Forward/backward work either way, but with this wiring the
+//           original turn patterns stop all motors, so L/R use other patterns.
+// If F and B work but L and R don't move at all, set this to true.
+// If you rewire the motors the normal way, set it back to false.
+const bool MOTORS_CROSS_WIRED = true;
+
 const int IN1 = 7;
 const int IN2 = 6;
 const int IN3 = 5;
@@ -104,8 +114,14 @@ void carCommand(char c) {
   switch (c) {
     case 'F': setMotors(HIGH, LOW, HIGH, LOW); break; // Move Forward
     case 'B': setMotors(LOW, HIGH, LOW, HIGH); break; // Move Backward
-    case 'R': setMotors(LOW, HIGH, HIGH, LOW); break; // Turn (original 'R')
-    case 'L': setMotors(HIGH, LOW, LOW, HIGH); break; // Turn (original 'L')
+    case 'R':                                         // Turn (original 'R')
+      if (MOTORS_CROSS_WIRED) setMotors(LOW, LOW, HIGH, HIGH);
+      else                    setMotors(LOW, HIGH, HIGH, LOW);
+      break;
+    case 'L':                                         // Turn (original 'L')
+      if (MOTORS_CROSS_WIRED) setMotors(HIGH, HIGH, LOW, LOW);
+      else                    setMotors(HIGH, LOW, LOW, HIGH);
+      break;
     case 'S': setMotors(LOW, LOW, LOW, LOW);   break; // Stop
   }
   // Confirm the command in the Serial Monitor, only when it changes
