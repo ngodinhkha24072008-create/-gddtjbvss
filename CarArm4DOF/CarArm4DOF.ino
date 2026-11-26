@@ -39,15 +39,13 @@ struct LineReader {
 };
 
 // ---------- Car (L298N) ----------
-// How the wheel motors are connected to the L298N outputs:
-//   false = normal: left motors on OUT1/OUT2, right motors on OUT3/OUT4
-//           (turning is exactly the same as the original Code.ino)
-//   true  = cross-wired: motors between OUT1/OUT4 and OUT2/OUT3.
-//           Forward/backward work either way, but with this wiring the
-//           original turn patterns stop all motors, so L/R use other patterns.
-// If F and B work but L and R don't move at all, set this to true.
-// If you rewire the motors the normal way, set it back to false.
-const bool MOTORS_CROSS_WIRED = false;
+// Turning style
+//   true  = gentle: one side drives forward, the other side stops. Needs much
+//           less power, so the car can turn on the ground with small motors.
+//   false = spin on the spot like the original Code.ino: one side forward,
+//           the other side backward (needs a lot of power on the ground).
+// Both turn the car in the same direction as the original L and R.
+const bool GENTLE_TURNS = true;
 
 const int IN1 = 7;
 const int IN2 = 6;
@@ -115,12 +113,12 @@ void carCommand(char c) {
     case 'F': setMotors(HIGH, LOW, HIGH, LOW); break; // Move Forward
     case 'B': setMotors(LOW, HIGH, LOW, HIGH); break; // Move Backward
     case 'R':                                         // Turn (original 'R')
-      if (MOTORS_CROSS_WIRED) setMotors(LOW, LOW, HIGH, HIGH);
-      else                    setMotors(LOW, HIGH, HIGH, LOW);
+      if (GENTLE_TURNS) setMotors(LOW, LOW, HIGH, LOW);   // side B forward, side A stopped
+      else              setMotors(LOW, HIGH, HIGH, LOW);  // original: A backward, B forward
       break;
     case 'L':                                         // Turn (original 'L')
-      if (MOTORS_CROSS_WIRED) setMotors(HIGH, HIGH, LOW, LOW);
-      else                    setMotors(HIGH, LOW, LOW, HIGH);
+      if (GENTLE_TURNS) setMotors(HIGH, LOW, LOW, LOW);   // side A forward, side B stopped
+      else              setMotors(HIGH, LOW, LOW, HIGH);  // original: A forward, B backward
       break;
     case 'S': setMotors(LOW, LOW, LOW, LOW);   break; // Stop
   }
