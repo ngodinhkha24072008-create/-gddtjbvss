@@ -2,7 +2,14 @@ package com.example.cubesolver.tabs
 
 import android.R
 import com.example.cubesolver.ui.theme.Console
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
+import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -78,6 +85,35 @@ fun ScanTab(
             .build()
     }
 
+    // Camera permission: the manifest lists it, but Android also has to ask the user
+    var hasCamera by remember {
+        mutableStateOf(
+            ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_GRANTED
+        )
+    }
+    var cameraDenied by remember { mutableStateOf(false) }
+    val cameraPermissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        hasCamera = granted
+        cameraDenied = !granted
+    }
+    LaunchedEffect(Unit) {
+        if (!hasCamera) cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+    }
+    // Re-check when coming back from the app's settings page
+    DisposableEffect(lifecycleOwner) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME) {
+                hasCamera = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) ==
+                    PackageManager.PERMISSION_GRANTED
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
     // Graying out UI and enabling/disabling based on Bluetooth
     val alpha = if (btHelper.isConnected) 1f else 0.4f
     val enabled = btHelper.isConnected
@@ -107,7 +143,36 @@ fun ScanTab(
                         .border(2.dp, Console.Line, RoundedCornerShape(8.dp))
                         .clip(RoundedCornerShape(8.dp))
                 ) {
-                    AndroidView(factory = { ctx ->
+                    if (!hasCamera) {
+                        // Shown in the camera box until the user allows the camera
+                        Column(
+                            modifier = Modifier.fillMaxSize().padding(24.dp),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                if (cameraDenied) "Camera access was denied. The app needs the camera to read the cube's colours."
+                                else "The app needs the camera to read the cube's colours.",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = Console.Fg,
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                            )
+                            Spacer(Modifier.height(12.dp))
+                            Button(onClick = {
+                                if (cameraDenied) {
+                                    // Android stops showing the prompt after repeated denials, so open the app's settings
+                                    context.startActivity(
+                                        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", context.packageName, null))
+                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    )
+                                } else {
+                                    cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+                                }
+                            }) {
+                                Text(if (cameraDenied) "Open settings" else "Allow camera")
+                            }
+                        }
+                    } else AndroidView(factory = { ctx ->
                         val previewView = PreviewView(ctx)
                         val providerFuture = ProcessCameraProvider.getInstance(ctx)
                         providerFuture.addListener({
@@ -123,7 +188,7 @@ fun ScanTab(
                         }, ContextCompat.getMainExecutor(ctx))
                         previewView
                     })
-                    CubeGridOverlay()
+                    if (hasCamera) CubeGridOverlay()
                 }
             }
 
@@ -157,7 +222,8 @@ fun ScanTab(
             Spacer(Modifier.height(16.dp))
 
             /* ---------- BUTTON ---------- */
-            val scanButtonEnabled = robotState == "IDLE" && !isProcessing && !scanCompleted && enabled && !scanButtonPressed
+            val scanButtonEnabled = robotState == "IDLE" && !isProcessing && !scanCompleted && enabled && !scanButtonPressed &&
+                (scanPhase == ScanPhase.REVIEWING || hasCamera) // can't scan without the camera
 
             Button(
                 enabled = scanButtonEnabled,
