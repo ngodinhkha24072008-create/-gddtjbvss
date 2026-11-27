@@ -22,6 +22,13 @@ const unsigned long DRIVE_MS = 2000;   // how long each drive step lasts
 const unsigned long TURN_MS = 1500;    // how long each turn lasts
 const unsigned long PAUSE_MS = 1000;   // stop between steps
 
+// Base servo type (same as CarArm4DOF.ino). A continuous (360) base is turned
+// for a calculated time instead of being sent to an angle.
+const bool BASE_IS_CONTINUOUS = true;
+const int BASE_SPIN_SPEED = 15;
+const float BASE_DEG_PER_SEC = 120.0;
+const bool BASE_REVERSE = false;
+
 // All arm angles used below stay inside CarArm4DOF.ino's safe limits:
 // shoulder/elbow 45-135, gripper 40 (closed) - 130 (open).
 
@@ -100,6 +107,16 @@ void armStep(Servo &s, int &pos, int a, int b, const __FlashStringHelper *what) 
   delay(PAUSE_MS);
 }
 
+// Continuous base: turn by 'degrees' (+ = left, - = right) and stop
+void baseTurn(int degrees) {
+  int dir = (degrees > 0) ? 1 : -1;
+  if (BASE_REVERSE) dir = -dir;
+  baseServo.write(90 + dir * BASE_SPIN_SPEED);
+  delay((unsigned long)(abs(degrees) / BASE_DEG_PER_SEC * 1000.0));
+  baseServo.write(90);                    // stop
+  delay(500);
+}
+
 // ================= RUN =================
 void setup() {
   Serial.begin(9600);
@@ -130,7 +147,15 @@ void setup() {
   driveStep('R', TURN_MS, F("turn right"));
 
   Serial.println(F("2) ARM"));
-  armStep(baseServo, basePos, 45, 135, F("base: left, right, centre"));
+  if (BASE_IS_CONTINUOUS) {
+    Serial.println(F("  ARM  base: left 45, right 90, back to centre"));
+    baseTurn(45);
+    baseTurn(-90);
+    baseTurn(45);
+    delay(PAUSE_MS);
+  } else {
+    armStep(baseServo, basePos, 45, 135, F("base: left, right, centre"));
+  }
   armStep(shoulderServo, shoulderPos, 60, 120, F("shoulder: down, up, centre"));
   armStep(elbowServo, elbowPos, 60, 120, F("elbow: down, up, centre"));
   armStep(gripperServo, gripperPos, 130, 40, F("gripper: open, close, centre"));

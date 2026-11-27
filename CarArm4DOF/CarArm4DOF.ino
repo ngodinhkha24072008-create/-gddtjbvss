@@ -93,6 +93,19 @@ const int ELBOW_MIN = 45,     ELBOW_MAX = 135;
 const int GRIP_CLOSED = 40;   // gripper fully closed
 const int GRIP_OPEN = 130;    // gripper fully open
 
+// ---------- Base servo type ----------
+// true  = the base is a 360-degree CONTINUOUS servo (it keeps spinning instead of
+//         stopping at an angle). The code then keeps track of the base angle
+//         itself from how long it has turned, stops after each 45-degree step and
+//         never lets it go below BASE_MIN or above BASE_MAX (0-180 = half a turn).
+// false = a normal 180-degree servo that moves to an angle and holds it.
+const bool BASE_IS_CONTINUOUS = true;
+const int BASE_SPIN_SPEED = 15;        // turning speed: 90 +/- this (smaller = slower, 5-40)
+const float BASE_DEG_PER_SEC = 120.0;  // how fast it turns at that speed - measure with "spin"
+const bool BASE_REVERSE = false;       // true if the base turns the wrong way
+// IMPORTANT for the continuous base: point the arm straight ahead (the middle)
+// before switching on. That position counts as 90 degrees.
+
 // ---------- Smooth movement ----------
 // Every SWEEP_MS each servo moves SWEEP_DEG closer to its target, so a 45 degree
 // move takes about a third of a second instead of a sudden jump.
@@ -200,10 +213,55 @@ int *targets[4] = {&basePos, &shoulderPos, &elbowPos, &gripperPos};
 int current[4] = {90, 90, 90, 90};
 unsigned long lastSweep = 0;
 
+// ---------- Continuous base: turn for a calculated time, then stop ----------
+float baseEstimate = 90;          // where the code thinks the base is (degrees)
+bool baseSpinning = false;
+unsigned long baseSpinStart = 0, baseSpinMs = 0;
+int baseSpinTarget = 90;
+
+void baseStop() { baseServo.write(90); }   // 90 = stop for a continuous servo
+
+void updateBase() {
+  if (!BASE_IS_CONTINUOUS) return;
+  unsigned long now = millis();
+  if (baseSpinning) {
+    if (now - baseSpinStart < baseSpinMs) return;       // still turning
+    baseStop();
+    baseSpinning = false;
+    baseEstimate = baseSpinTarget;                       // arrived
+    note(F("Base at about "));
+    noteLine(baseSpinTarget);
+  }
+  int diff = basePos - (int)(baseEstimate + 0.5);
+  if (diff > -2 && diff < 2) return;                     // already there
+  int dir = (diff > 0) ? 1 : -1;
+  if (BASE_REVERSE) dir = -dir;
+  baseSpinTarget = basePos;
+  baseSpinMs = (unsigned long)(abs(diff) / BASE_DEG_PER_SEC * 1000.0);
+  baseSpinStart = now;
+  baseSpinning = true;
+  baseServo.write(90 + dir * BASE_SPIN_SPEED);
+}
+
+// "spin" command: turns the base for exactly 2 seconds and back, so you can
+// measure the speed. BASE_DEG_PER_SEC = degrees it turned / 2.
+void baseCalibrate() {
+  if (!BASE_IS_CONTINUOUS) { sayLine(F("spin is only for a continuous base")); return; }
+  sayLine(F("Base turns for 2 s - measure the angle, then it comes back"));
+  baseServo.write(90 + (BASE_REVERSE ? -1 : 1) * BASE_SPIN_SPEED);
+  delay(2000);
+  baseStop();
+  delay(2000);
+  baseServo.write(90 - (BASE_REVERSE ? -1 : 1) * BASE_SPIN_SPEED);
+  delay(2000);
+  baseStop();
+  sayLine(F("Set BASE_DEG_PER_SEC = (degrees turned) / 2, upload again"));
+}
+
 void updateServos() {
   if (millis() - lastSweep < SWEEP_MS) return;
   lastSweep = millis();
-  for (int i = 0; i < 4; i++) {
+  for (int i = (BASE_IS_CONTINUOUS ? 1 : 0); i < 4; i++) {   // continuous base is handled by updateBase()
     int diff = *targets[i] - current[i];
     if (diff == 0) continue;
     if (diff > SWEEP_DEG) diff = SWEEP_DEG;
@@ -229,6 +287,7 @@ void printInstructions() {
   sayLine(F("     O gripper fully open, C fully closed, H home"));
   sayLine(F("     or b90 s45 e120 g60 home open close status help + Enter"));
   sayLine(F("Safe limits are set at the top of the code."));
+  if (BASE_IS_CONTINUOUS) sayLine(F("Continuous base: type spin + Enter to measure its speed"));
 }
 
 bool isNumber(const char *s) {
@@ -245,6 +304,7 @@ void armCommand(char *cmd) {
   else if (strcmp(cmd, "open") == 0)   moveGripper(GRIP_OPEN);
   else if (strcmp(cmd, "close") == 0)  moveGripper(GRIP_CLOSED);
   else if (strcmp(cmd, "status") == 0) printStatus();
+  else if (strcmp(cmd, "spin") == 0)   baseCalibrate();
   else if (strcmp(cmd, "help") == 0)   printInstructions();
   // Then letter + angle
   else if (isNumber(cmd + 1)) {
@@ -359,7 +419,7 @@ void setup() {
   shoulderServo.attach(SHOULDER_PIN);
   elbowServo.attach(ELBOW_PIN);
   gripperServo.attach(GRIPPER_PIN);
-  for (int i = 0; i < 4; i++) servos[i]->write(current[i]);   // start at 90
+  for (int i = 0; i < 4; i++) servos[i]->write(current[i]);   // start at 90 (= stop for a continuous base)
 
   pinMode(KEEPALIVE_PIN, OUTPUT);
   digitalWrite(KEEPALIVE_PIN, LOW);
@@ -376,4 +436,5 @@ void loop() {
   expire(usbLine);
   keepAlive();
   updateServos();
+  updateBase();
 }
