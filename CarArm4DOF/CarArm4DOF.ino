@@ -50,6 +50,10 @@ const bool GENTLE_TURNS = true;
 // If the L button turns the car right (and R turns it left), set this to true.
 const bool SWAP_TURNS = false;
 
+// Swap forward and backward: the joystick's up (F) drives the way B used to,
+// and down (B) drives the way F used to. Set to false to undo.
+const bool SWAP_FORWARD_BACK = true;
+
 const int IN1 = 7;
 const int IN2 = 6;
 const int IN3 = 5;
@@ -153,6 +157,10 @@ void carCommand(char c) {
   if (SWAP_TURNS) {
     if (c == 'L') c = 'R';
     else if (c == 'R') c = 'L';
+  }
+  if (SWAP_FORWARD_BACK) {
+    if (c == 'F') c = 'B';
+    else if (c == 'B') c = 'F';
   }
   switch (c) {
     case 'F': setMotors(HIGH, LOW, HIGH, LOW); break; // Move Forward
