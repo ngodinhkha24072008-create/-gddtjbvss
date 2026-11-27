@@ -47,10 +47,6 @@ struct LineReader {
 // Both turn the car in the same direction as the original L and R.
 const bool GENTLE_TURNS = true;
 
-// Car driving upside down (chassis flipped over): every motor direction is
-// reversed so F still drives forward and turns still move the car forward.
-const bool UPSIDE_DOWN = true;
-
 // If the L button turns the car right (and R turns it left), set this to true.
 const bool SWAP_TURNS = false;
 
@@ -146,10 +142,6 @@ void noteLine(int n) { Serial.println(n); }
 // CAR
 // =====================================================================
 void setMotors(int a, int b, int c, int d) {
-  if (UPSIDE_DOWN) {             // reverse both sides: swap each pair's two inputs
-    int t = a; a = b; b = t;
-    t = c; c = d; d = t;
-  }
   digitalWrite(IN1, a);
   digitalWrite(IN2, b);
   digitalWrite(IN3, c);

@@ -14,7 +14,6 @@
 #include <Servo.h>
 
 // ---------- Settings (same as CarArm4DOF.ino) ----------
-const bool UPSIDE_DOWN = true;    // car runs upside down
 const bool GENTLE_TURNS = true;   // turn with one side, the other side stopped
 const bool SWAP_TURNS = false;    // true if L turns the car right
 
@@ -42,10 +41,6 @@ int basePos = 90, shoulderPos = 90, elbowPos = 90, gripperPos = 90;
 
 // ================= CAR =================
 void setMotors(int a, int b, int c, int d) {
-  if (UPSIDE_DOWN) {
-    int t = a; a = b; b = t;
-    t = c; c = d; d = t;
-  }
   digitalWrite(IN1, a);
   digitalWrite(IN2, b);
   digitalWrite(IN3, c);
