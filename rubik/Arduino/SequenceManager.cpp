@@ -1,4 +1,5 @@
 #include "SequenceManager.h"
+#include "BtLink.h"
 #include "MyServo.h"
 #include <ctype.h> 
 #include <stdlib.h>
@@ -91,9 +92,9 @@ int SequenceManager::tick()
 void SequenceManager::notifyState()
 {
     if (isBusy())
-        Serial.println("BUSY");
+        Link.println("BUSY");
     else
-        Serial.println("IDLE");
+        Link.println("IDLE");
 }
 
 int SequenceManager::executeUntilDelay()

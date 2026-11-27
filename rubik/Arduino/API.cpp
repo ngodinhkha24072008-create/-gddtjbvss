@@ -4,6 +4,7 @@
 #include "SequenceManager.h"
 #include "Config.h"
 #include "API.h"
+#include "BtLink.h"
 #include "Types.h"
 
 #define MAX_TOKENS  5
@@ -13,8 +14,9 @@ static char* tokens[MAX_TOKENS];
 
 void APISetup()
 {
-    Serial.println("Listening for API commands, type 'HELP' for list of commands.");
+    linkBegin();             // HC-06 on D11/D12
     Serial.setTimeout(2000); // safer for long lines
+    Link.println("Listening for API commands, type 'HELP' for list of commands.");
 }
 
 static int tokenize(char* line, char** tokens, int maxTokens)
@@ -49,10 +51,12 @@ static int tokenize(char* line, char** tokens, int maxTokens)
 
 void APILoop()
 {
-    if (!Serial.available())
+    // Commands can come from the phone (HC-06) or the USB Serial Monitor
+    Stream* in = linkAvailable();
+    if (!in)
         return;
 
-    int len = Serial.readBytesUntil('\n', rxBuf, SEQUENCE_BUFFER_SIZE - 1);
+    int len = in->readBytesUntil('\n', rxBuf, SEQUENCE_BUFFER_SIZE - 1);
     rxBuf[len] = '\0';
 
     // Trim trailing CR (Windows serial)
@@ -71,12 +75,12 @@ void APILoop()
     // --- HELP ---
     if (strcmp(cmd, "HELP") == 0)
     {
-        Serial.println("Commands:");
-        Serial.println("HELP");
-        Serial.println("PING");
-        Serial.println("STATUS [servo]");
-        Serial.println("SEQ <string>|C");
-        Serial.println("MOVE <delay_ms> <orientation> <moves>");
+        Link.println("Commands:");
+        Link.println("HELP");
+        Link.println("PING");
+        Link.println("STATUS [servo]");
+        Link.println("SEQ <string>|C");
+        Link.println("MOVE <delay_ms> <orientation> <moves>");
         return;
     }
 
@@ -85,15 +89,15 @@ void APILoop()
     {
         if (tokenCount != 2)
         {
-            Serial.println("ERR args");
+            Link.println("ERR args");
             return;
         }
 
         int res = seqManager.startSequence(tokens[1]);
-        if (res == 0) Serial.println("OK");
-        else if (res == -1) Serial.println("ERR busy");
-        else if (res == -2) Serial.println("ERR format");
-        else Serial.println("ERR");
+        if (res == 0) Link.println("OK");
+        else if (res == -1) Link.println("ERR busy");
+        else if (res == -2) Link.println("ERR format");
+        else Link.println("ERR");
 
         return;
     }
@@ -103,14 +107,14 @@ void APILoop()
     {
         if (tokenCount != 4)
         {
-            Serial.println("ERR args");
+            Link.println("ERR args");
             return;
         }
 
         int delay = atoi(tokens[1]);
         if (delay < 0)
         {
-            Serial.println("ERR delay");
+            Link.println("ERR delay");
             return;
         }
 
@@ -121,15 +125,15 @@ void APILoop()
             seqManager.orientation = ORIENT_INVERT;
         else
         {
-            Serial.println("ERR orientation");
+            Link.println("ERR orientation");
             return;
         }
 
         int res = seqManager.startMoves(tokens[3], delay);
-        if (res == 0) Serial.println("OK");
-        else if (res == -1) Serial.println("ERR busy");
-        else if (res == -2) Serial.println("ERR format");
-        else Serial.println("ERR");
+        if (res == 0) Link.println("OK");
+        else if (res == -1) Link.println("ERR busy");
+        else if (res == -2) Link.println("ERR format");
+        else Link.println("ERR");
 
         return;
     }
@@ -139,31 +143,31 @@ void APILoop()
     {
         if (tokenCount == 1)
         {
-            Serial.println(seqManager.isBusy() ? "BUSY" : "IDLE");
+            Link.println(seqManager.isBusy() ? "BUSY" : "IDLE");
             return;
         }
 
         if (tokenCount != 2)
         {
-            Serial.println("ERR args");
+            Link.println("ERR args");
             return;
         }
 
         ServoType servo;
         if (!parseServoType(tokens[1][0], servo))
         {
-            Serial.println("ERR servo_type");
+            Link.println("ERR servo_type");
             return;
         }
 
         switch (servos[servo].getState())
         {
-            case STATE_R: Serial.println('R'); break;
-            case STATE_L: Serial.println('L'); break;
-            case STATE_C: Serial.println('C'); break;
-            case STATE_r: Serial.println('r'); break;
-            case STATE_l: Serial.println('l'); break;
-            default: Serial.println("ERR state"); break;
+            case STATE_R: Link.println('R'); break;
+            case STATE_L: Link.println('L'); break;
+            case STATE_C: Link.println('C'); break;
+            case STATE_r: Link.println('r'); break;
+            case STATE_l: Link.println('l'); break;
+            default: Link.println("ERR state"); break;
         }
         return;
     }
@@ -171,11 +175,11 @@ void APILoop()
     // --- PING ---
     if (strcmp(cmd, "PING") == 0)
     {
-        Serial.println("PONG");
+        Link.println("PONG");
         return;
     }
 
     // --- UNKNOWN ---
-    Serial.print("ERR cmd: ");
-    Serial.println(cmd);
+    Link.print("ERR cmd: ");
+    Link.println(cmd);
 }

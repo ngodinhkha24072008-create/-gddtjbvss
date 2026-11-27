@@ -2,6 +2,7 @@
 #include "MyServo.h"
 #include "SequenceManager.h"
 #include "API.h"
+#include "BtLink.h"
 
 void setup() {
     Serial.begin(9600);
@@ -26,8 +27,8 @@ void loop() {
     int res = seqManager.tick();    // If ongoing sequence, keep going
     if (res < 0)
     {
-        Serial.print("SEQ ERR ");
-        Serial.println(res);
+        Link.print("SEQ ERR ");
+        Link.println(res);
     }
 #endif
 }

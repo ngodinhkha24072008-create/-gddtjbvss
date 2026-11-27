@@ -18,17 +18,23 @@ Each power rail goes straight from the adapter to each part.
 | **+5 V** (red) | Nano **5V** pin (not VIN), HC-06 **VCC**, red wire of every servo |
 | **GND** (black) | Nano **GND**, HC-06 **GND**, brown wire of every servo |
 
-### Bluetooth (HC-06)
+### Bluetooth (HC-06): on D11 / D12
+
+The HC-06 now uses SoftwareSerial on **D11 / D12**, like the car projects, so **D0/D1 stay
+free for USB**. The original project used D0/D1, and the diagram above still shows that.
 
 | HC-06 pin | Connection |
 |---|---|
 | VCC | +5 V from the adapter |
 | GND | Common ground |
-| **TXD** | Nano **RX0 (D0)**, direct wire |
-| **RXD** | Middle of a voltage divider: Nano **TX1 (D1)** → **1 kΩ** → **HC-06 RXD** → **2 kΩ** → GND. That gives 5 × 2/3 ≈ 3.3 V, which is correct. |
+| **TXD** | Nano **D11** (Arduino RX), direct wire |
+| **RXD** | Middle of a voltage divider: Nano **D12** (Arduino TX) → **1 kΩ** → **HC-06 RXD** → **2 kΩ** → GND (≈3.3 V) |
 | KEY, STATE | Not connected |
 
-The link runs at **9600 baud**, set by `Serial.begin(9600)`, which is the HC-06's factory default.
+- **Settings:** the pins and the baud rate (**9600**) are in `Arduino/Config.h` (`BT_RX_PIN`, `BT_TX_PIN`, `BT_BAUD`).
+- **Commands:** the robot accepts commands from the phone **and** from the USB Serial Monitor.
+- **Replies:** every reply goes to both.
+- **Uploading:** you can upload with the HC-06 still plugged in.
 
 ### Servos (signal wires, from `Config.h`)
 
@@ -71,15 +77,16 @@ This is the most likely cause.
   - Better still, give the servos their own supply. Keep the grounds connected, and run
     the Nano and HC-06 from a separate clean 5 V, or from USB.
 
-### 2. The HC-06 is on D0/D1, which the USB port also uses
+### 2. SoftwareSerial and the servos share the CPU
 
-- **Uploading:** uploads fail while the HC-06 is plugged in. Unplug it to flash.
-- **USB plugged in:** the Nano's USB chip is wired to RX0 through a 1 kΩ resistor.
-  Anything coming from the Serial Monitor collides with the HC-06's data.
-- **USB unplugged:** the unpowered USB chip can still drag the RX0 line down a little.
-- **Fix:** for Bluetooth, run with USB unplugged.
-- Don't move the HC-06 to SoftwareSerial instead. The Servo library's interrupts would
-  corrupt incoming bytes.
+- **Why:** while the Arduino sends a reply over SoftwareSerial, interrupts are paused for
+  about 1 ms per character at 9600 baud. That can stretch one servo pulse, so a servo may
+  twitch slightly when the robot answers (`OK`, `BUSY`, `IDLE`).
+- **Why it's acceptable:** the replies are a few characters long, so this is usually
+  invisible.
+- **If you see twitches:** don't send long commands like `HELP` while the robot is moving.
+- (The old D0/D1 wiring shared the USB chip instead, which caused upload failures and
+  garbled data whenever USB was plugged in.)
 
 ### 3. The HC-06's TX signal only just counts as "high" to the Nano
 
@@ -89,7 +96,7 @@ This is the most likely cause.
 - That margin is tiny. With servo noise on the same ground it can flip bits, which shows
   up as `ERR cmd` or garbage commands.
 - **Fix:** a proper logic-level shifter, or a transistor/diode level-up circuit, on the
-  HC-06 TX → D0 line.
+  HC-06 TX → D11 line.
 
 ### 4. The baud rate may not match
 

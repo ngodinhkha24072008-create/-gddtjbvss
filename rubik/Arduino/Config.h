@@ -26,3 +26,12 @@
 // (Realistically, we will almost never find a perfect 20-move solution, unless its an easy scramble)
 // But, based on real testing, 32 moves were exceeded, so make it larger.
 #define MOVE_BUFFER_SIZE 64
+
+// Bluetooth (HC-05 / HC-06) on SoftwareSerial, like the car projects.
+// D0/D1 stay free for USB, so you can upload and use the Serial Monitor
+// without unplugging the module.
+//   HC-06 TXD -> D11 (Arduino RX)
+//   HC-06 RXD <- voltage divider <- D12 (Arduino TX)
+#define BT_RX_PIN 11
+#define BT_TX_PIN 12
+#define BT_BAUD 9600
