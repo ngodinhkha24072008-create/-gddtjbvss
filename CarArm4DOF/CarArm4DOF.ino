@@ -77,6 +77,16 @@ int gripperPos = 90;
 
 const int STEP = 5;            // degrees per arm command (smaller = smoother)
 
+// ---------- Gripper ----------
+// The gripper moves GRIP_STEP degrees per button PRESS. Holding the button
+// counts as one press (the app repeats the letter while held), so each tap
+// of OPEN / CLOSE moves exactly one step.
+const int GRIP_STEP = 45;
+const int GRIP_MIN = 0;        // most closed angle allowed  (raise if the claw jams when closing)
+const int GRIP_MAX = 180;      // most open angle allowed    (lower if the claw jams when opening)
+const unsigned long GRIP_PRESS_GAP_MS = 300;  // letters closer together than this = same press
+unsigned long lastGripLetter = 0;
+
 // ---------- Power bank keep-alive ----------
 // Many power banks switch off when the load is small. Every few seconds the
 // Arduino switches on a 47 ohm resistor for a moment so the power bank sees
@@ -230,6 +240,16 @@ void nudge(void (*move)(int), int pos, int delta) {
   move(constrain(pos + delta, MIN_ANGLE, MAX_ANGLE));
 }
 
+// One gripper step per button press (repeats while held are ignored)
+void gripStep(int delta) {
+  unsigned long now = millis();
+  bool newPress = (now - lastGripLetter > GRIP_PRESS_GAP_MS);
+  lastGripLetter = now;
+  if (!newPress) return;
+  int target = constrain(gripperPos + delta, GRIP_MIN, GRIP_MAX);
+  if (target != gripperPos) moveGripper(target);
+}
+
 // Returns true if the letter was a car or arm command
 bool letterCommand(char c) {
   switch (c) {
@@ -243,8 +263,8 @@ bool letterCommand(char c) {
     case 'J': nudge(moveShoulder, shoulderPos, -STEP);  return true;  // shoulder down
     case 'I': nudge(moveElbow, elbowPos, +STEP);        return true;  // elbow up
     case 'K': nudge(moveElbow, elbowPos, -STEP);        return true;  // elbow down
-    case 'O': nudge(moveGripper, gripperPos, +STEP);    return true;  // gripper open
-    case 'C': nudge(moveGripper, gripperPos, -STEP);    return true;  // gripper close
+    case 'O': gripStep(+GRIP_STEP);                     return true;  // gripper open 45
+    case 'C': gripStep(-GRIP_STEP);                     return true;  // gripper close 45
     case 'H': moveToHome();                             return true;  // arm home
   }
   return false;
