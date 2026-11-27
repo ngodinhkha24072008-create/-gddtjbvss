@@ -25,8 +25,9 @@ const unsigned long PAUSE_MS = 1000;   // stop between steps
 // Base servo type (same as CarArm4DOF.ino). A continuous (360) base is turned
 // for a calculated time instead of being sent to an angle.
 const bool BASE_IS_CONTINUOUS = true;
-const int BASE_SPIN_SPEED = 15;
-const float BASE_DEG_PER_SEC = 120.0;
+const int BASE_SPIN_SPEED = 8;
+const float BASE_DEG_PER_SEC_LEFT = 120.0;    // copy both speeds from CarArm4DOF.ino
+const float BASE_DEG_PER_SEC_RIGHT = 120.0;
 const bool BASE_REVERSE = false;
 
 // All arm angles used below stay inside CarArm4DOF.ino's safe limits:
@@ -110,10 +111,13 @@ void armStep(Servo &s, int &pos, int a, int b, const __FlashStringHelper *what) 
 // Continuous base: turn by 'degrees' (+ = left, - = right) and stop
 void baseTurn(int degrees) {
   int dir = (degrees > 0) ? 1 : -1;
+  float speed = (degrees > 0) ? BASE_DEG_PER_SEC_LEFT : BASE_DEG_PER_SEC_RIGHT;
   if (BASE_REVERSE) dir = -dir;
+  if (!baseServo.attached()) baseServo.attach(BASE_PIN);
   baseServo.write(90 + dir * BASE_SPIN_SPEED);
-  delay((unsigned long)(abs(degrees) / BASE_DEG_PER_SEC * 1000.0));
-  baseServo.write(90);                    // stop
+  delay((unsigned long)(abs(degrees) / speed * 1000.0));
+  baseServo.write(90);
+  baseServo.detach();                     // signal off = a continuous servo always stops
   delay(500);
 }
 
@@ -132,6 +136,7 @@ void setup() {
   elbowServo.attach(ELBOW_PIN);
   gripperServo.attach(GRIPPER_PIN);
   baseServo.write(basePos);
+  if (BASE_IS_CONTINUOUS) baseServo.detach();   // continuous base: stopped until it turns
   shoulderServo.write(shoulderPos);
   elbowServo.write(elbowPos);
   gripperServo.write(gripperPos);

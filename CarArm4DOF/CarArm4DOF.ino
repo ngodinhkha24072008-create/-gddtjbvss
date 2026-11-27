@@ -100,9 +100,13 @@ const int GRIP_OPEN = 130;    // gripper fully open
 //         never lets it go below BASE_MIN or above BASE_MAX (0-180 = half a turn).
 // false = a normal 180-degree servo that moves to an angle and holds it.
 const bool BASE_IS_CONTINUOUS = true;
-const int BASE_SPIN_SPEED = 15;        // turning speed: 90 +/- this (smaller = slower, 5-40)
-const float BASE_DEG_PER_SEC = 120.0;  // how fast it turns at that speed - measure with "spin"
+const int BASE_SPIN_SPEED = 8;         // turning speed: 90 +/- this (smaller = slower, 5-40)
+// How fast the base turns in each direction (degrees per second). Cheap 360
+// servos are often faster one way than the other, so measure both with "spin".
+const float BASE_DEG_PER_SEC_LEFT = 120.0;    // speed when turning left  (A / arrow left)
+const float BASE_DEG_PER_SEC_RIGHT = 120.0;   // speed when turning right (Z / arrow right)
 const bool BASE_REVERSE = false;       // true if the base turns the wrong way
+const unsigned long BASE_MAX_SPIN_MS = 1000;   // safety: one move never turns longer than this
 // IMPORTANT for the continuous base: point the arm straight ahead (the middle)
 // before switching on. That position counts as 90 degrees.
 
@@ -219,7 +223,17 @@ bool baseSpinning = false;
 unsigned long baseSpinStart = 0, baseSpinMs = 0;
 int baseSpinTarget = 90;
 
-void baseStop() { baseServo.write(90); }   // 90 = stop for a continuous servo
+// Stopping: a continuous servo's "stop" value is often not exactly 90, so it
+// would keep creeping. Switching its signal off (detach) always stops it.
+void baseStop() {
+  baseServo.write(90);
+  baseServo.detach();
+}
+
+void baseRun(int dir) {
+  if (!baseServo.attached()) baseServo.attach(BASE_PIN);
+  baseServo.write(90 + dir * BASE_SPIN_SPEED);
+}
 
 void updateBase() {
   if (!BASE_IS_CONTINUOUS) return;
@@ -236,26 +250,36 @@ void updateBase() {
   if (diff > -2 && diff < 2) return;                     // already there
   int dir = (diff > 0) ? 1 : -1;
   if (BASE_REVERSE) dir = -dir;
-  baseSpinTarget = basePos;
-  baseSpinMs = (unsigned long)(abs(diff) / BASE_DEG_PER_SEC * 1000.0);
+  float speed = (diff > 0) ? BASE_DEG_PER_SEC_LEFT : BASE_DEG_PER_SEC_RIGHT;
+  baseSpinMs = (unsigned long)(abs(diff) / speed * 1000.0);
+  if (baseSpinMs > BASE_MAX_SPIN_MS) {                   // safety cap: move only part of the way
+    baseSpinMs = BASE_MAX_SPIN_MS;
+    baseSpinTarget = (int)(baseEstimate + (diff > 0 ? 1 : -1) * speed * BASE_MAX_SPIN_MS / 1000.0 + 0.5);
+  } else {
+    baseSpinTarget = basePos;
+  }
   baseSpinStart = now;
   baseSpinning = true;
-  baseServo.write(90 + dir * BASE_SPIN_SPEED);
+  baseRun(dir);
 }
 
-// "spin" command: turns the base for exactly 2 seconds and back, so you can
-// measure the speed. BASE_DEG_PER_SEC = degrees it turned / 2.
+// "spin" command: turns the base LEFT for exactly 2 seconds, pauses, then
+// RIGHT for exactly 2 seconds, so you can measure both speeds:
+//   BASE_DEG_PER_SEC_LEFT  = degrees it turned left  / 2
+//   BASE_DEG_PER_SEC_RIGHT = degrees it turned right / 2
 void baseCalibrate() {
   if (!BASE_IS_CONTINUOUS) { sayLine(F("spin is only for a continuous base")); return; }
-  sayLine(F("Base turns for 2 s - measure the angle, then it comes back"));
-  baseServo.write(90 + (BASE_REVERSE ? -1 : 1) * BASE_SPIN_SPEED);
+  sayLine(F("1) LEFT for 2 s - note how many degrees"));
+  baseRun(BASE_REVERSE ? -1 : 1);
   delay(2000);
   baseStop();
-  delay(2000);
-  baseServo.write(90 - (BASE_REVERSE ? -1 : 1) * BASE_SPIN_SPEED);
+  delay(3000);
+  sayLine(F("2) RIGHT for 2 s - note how many degrees"));
+  baseRun(BASE_REVERSE ? 1 : -1);
   delay(2000);
   baseStop();
-  sayLine(F("Set BASE_DEG_PER_SEC = (degrees turned) / 2, upload again"));
+  sayLine(F("Set BASE_DEG_PER_SEC_LEFT / _RIGHT = degrees / 2, upload again"));
+  sayLine(F("Then point the arm straight ahead and press reset"));
 }
 
 void updateServos() {
@@ -419,7 +443,8 @@ void setup() {
   shoulderServo.attach(SHOULDER_PIN);
   elbowServo.attach(ELBOW_PIN);
   gripperServo.attach(GRIPPER_PIN);
-  for (int i = 0; i < 4; i++) servos[i]->write(current[i]);   // start at 90 (= stop for a continuous base)
+  for (int i = 0; i < 4; i++) servos[i]->write(current[i]);   // start at 90
+  if (BASE_IS_CONTINUOUS) baseStop();                          // continuous base: signal off = stopped
 
   pinMode(KEEPALIVE_PIN, OUTPUT);
   digitalWrite(KEEPALIVE_PIN, LOW);
