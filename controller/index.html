@@ -270,8 +270,8 @@ body:not(.in-app) .app-only { display: none !important; }
 
     <section class="grip">
       <div class="bumpers" aria-label="Gripper and elbow">
-        <button class="bump grip-c" type="button" data-send="C" aria-label="Gripper close">▶◀ GRIP <b>C</b></button>
-        <button class="bump grip-o" type="button" data-send="O" aria-label="Gripper open">◀▶ GRIP <b>O</b></button>
+        <button class="bump grip-c" type="button" data-send="C" aria-label="Gripper fully closed">▶◀ CLOSE <b>C</b></button>
+        <button class="bump grip-o" type="button" data-send="O" aria-label="Gripper fully open">◀▶ OPEN <b>O</b></button>
         <button class="bump elb" type="button" data-send="K" aria-label="Elbow down">ELBOW ▼ <b>K</b></button>
         <button class="bump elb" type="button" data-send="I" aria-label="Elbow up">ELBOW ▲ <b>I</b></button>
       </div>
@@ -282,7 +282,7 @@ body:not(.in-app) .app-only { display: none !important; }
         <button class="arm right" type="button" data-send="Z" aria-label="Base right">▶<small>BASE Z</small></button>
         <button class="arm down" type="button" data-send="J" aria-label="Shoulder down">▼<small>SHOULDER J</small></button>
       </div>
-      <div class="zone-label">Arm · hold an arrow to keep moving</div>
+      <div class="zone-label">Arm · 45° per tap · gripper opens / closes fully</div>
     </section>
   </main>
 </div>
@@ -322,10 +322,10 @@ body:not(.in-app) .app-only { display: none !important; }
               <tr><td>Stick or arrows up / down</td><td><code>F</code> <code>B</code></td><td>Drive forward / backward</td></tr>
               <tr><td>Stick or arrows left / right</td><td><code>L</code> <code>R</code></td><td>Turn left / right</td></tr>
               <tr><td>Let go</td><td><code>S</code></td><td>Stop driving</td></tr>
-              <tr><td>Arm arrows ◀ / ▶</td><td><code>A</code> <code>Z</code></td><td>Base left / right</td></tr>
-              <tr><td>Arm arrows ▲ / ▼</td><td><code>U</code> <code>J</code></td><td>Shoulder up / down</td></tr>
-              <tr><td>Elbow ▲ / ▼</td><td><code>I</code> <code>K</code></td><td>Elbow up / down</td></tr>
-              <tr><td>◀▶ GRIP / ▶◀ GRIP</td><td><code>O</code> <code>C</code></td><td>Gripper open / close</td></tr>
+              <tr><td>Arm arrows ◀ / ▶</td><td><code>A</code> <code>Z</code></td><td>Base left / right, 45° per tap</td></tr>
+              <tr><td>Arm arrows ▲ / ▼</td><td><code>U</code> <code>J</code></td><td>Shoulder up / down, 45° per tap</td></tr>
+              <tr><td>Elbow ▲ / ▼</td><td><code>I</code> <code>K</code></td><td>Elbow up / down, 45° per tap</td></tr>
+              <tr><td>◀▶ OPEN / ▶◀ CLOSE</td><td><code>O</code> <code>C</code></td><td>Gripper fully open / fully closed</td></tr>
               <tr><td>HOME (middle of arm arrows)</td><td><code>H</code></td><td>All arm joints to 90°</td></tr>
               <tr><td>Stop</td><td><code>S</code></td><td>Stop the car</td></tr>
             </tbody>
@@ -341,7 +341,7 @@ body:not(.in-app) .app-only { display: none !important; }
           <li class="web-only">Turn the phone sideways and tap <b>Full screen</b> to hide the browser bars.</li>
           <li class="web-only"><b>HM-10 / BLE module:</b> tap Connect BLE and pick the module.</li>
           <li class="web-only"><b>HC-05 / HC-06:</b> pair it in Android Bluetooth settings first (PIN is usually 1234), then tap Connect HC-05. Needs a recent Chrome.</li>
-          <li>The Arduino side is <b>CarArm4DOF.ino</b> at 9600 baud. Arm buttons move a joint 5° per step and repeat while held.</li>
+          <li>The Arduino side is <b>CarArm4DOF.ino</b> at 9600 baud. Arm arrows move a joint 45° per tap (holding counts as one tap); the gripper opens or closes fully. Every joint stays inside its safe limits.</li>
         </ol>
       </div>
     </div>
@@ -352,7 +352,7 @@ body:not(.in-app) .app-only { display: none !important; }
 (() => {
   const NAMES = { F: "Forward", B: "Backward", L: "Turn left", R: "Turn right", S: "Stopped",
     A: "Base left", Z: "Base right", U: "Shoulder up", J: "Shoulder down",
-    I: "Elbow up", K: "Elbow down", O: "Gripper open", C: "Gripper close", H: "Arm home" };
+    I: "Elbow up", K: "Elbow down", O: "Gripper fully open", C: "Gripper fully closed", H: "Arm home" };
 
   const enc = new TextEncoder();
   const $ = id => document.getElementById(id);
