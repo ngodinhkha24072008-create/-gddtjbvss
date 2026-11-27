@@ -70,22 +70,34 @@ const int SHOULDER_PIN = 10;
 const int ELBOW_PIN = 11;
 const int GRIPPER_PIN = 8;
 
+// Target angle of each joint (where it is going). The servos glide there.
 int basePos = 90;
 int shoulderPos = 90;
 int elbowPos = 90;
 int gripperPos = 90;
 
-const int STEP = 5;            // degrees per arm command (smaller = smoother)
+// ---------- Arm moves ----------
+// Base, shoulder and elbow move ARM_STEP degrees per button PRESS.
+// The gripper goes fully open (O) or fully closed (C) in one press.
+// Holding a button counts as one press (the app repeats the letter while held).
+const int ARM_STEP = 45;
+const unsigned long PRESS_GAP_MS = 300;   // letters closer together than this = same press
 
-// ---------- Gripper ----------
-// The gripper moves GRIP_STEP degrees per button PRESS. Holding the button
-// counts as one press (the app repeats the letter while held), so each tap
-// of OPEN / CLOSE moves exactly one step.
-const int GRIP_STEP = 45;
-const int GRIP_MIN = 0;        // most closed angle allowed  (raise if the claw jams when closing)
-const int GRIP_MAX = 180;      // most open angle allowed    (lower if the claw jams when opening)
-const unsigned long GRIP_PRESS_GAP_MS = 300;  // letters closer together than this = same press
-unsigned long lastGripLetter = 0;
+// ---------- SAFE LIMITS (protect the wooden arm) ----------
+// No button or typed command can move a joint outside these angles.
+// If a joint still buzzes or hits something at a limit, move that limit
+// 10-15 degrees closer to 90. Home (90) must stay inside every range.
+const int BASE_MIN = 0,       BASE_MAX = 180;
+const int SHOULDER_MIN = 45,  SHOULDER_MAX = 135;
+const int ELBOW_MIN = 45,     ELBOW_MAX = 135;
+const int GRIP_CLOSED = 40;   // gripper fully closed
+const int GRIP_OPEN = 130;    // gripper fully open
+
+// ---------- Smooth movement ----------
+// Every SWEEP_MS each servo moves SWEEP_DEG closer to its target, so a 45 degree
+// move takes about a third of a second instead of a sudden jump.
+const int SWEEP_DEG = 2;
+const unsigned long SWEEP_MS = 15;
 
 // ---------- Power bank keep-alive ----------
 // Many power banks switch off when the load is small. Every few seconds the
@@ -101,8 +113,6 @@ const unsigned long KEEPALIVE_PULSE_MS = 500;    // each pulse lasts this long
 const bool KEEPALIVE_ALWAYS_ON = false;
 unsigned long keepAliveStart = 0;
 bool keepAliveOn = false;
-const int MIN_ANGLE = 0;
-const int MAX_ANGLE = 180;
 
 // ---------- Text going to both the Serial Monitor and the phone ----------
 // Only used for rare messages (help, status, home). Sending over SoftwareSerial
@@ -161,32 +171,46 @@ void carCommand(char c) {
 // =====================================================================
 // ARM
 // =====================================================================
-bool moveServo(Servo &servo, int &pos, int angle, const __FlashStringHelper *name) {
-  if (angle < MIN_ANGLE || angle > MAX_ANGLE) {
-    sayLine(F("Error: Angle out of range (0-180)"));
-    return false;
-  }
-  pos = angle;
-  servo.write(pos);
+// Sets a joint's target, always kept inside that joint's safe limits
+void moveServo(int &pos, int angle, int minA, int maxA, const __FlashStringHelper *name) {
+  int safe = constrain(angle, minA, maxA);
+  pos = safe;
   note(name);                 // Serial Monitor only, so Bluetooth stays free for commands
-  note(F(" moved to: "));
-  noteLine(pos);
-  return true;
+  note(F(" -> "));
+  noteLine(safe);
+  if (safe != angle) {
+    note(F("  (limited to the safe range)"));
+    noteLine(safe);
+  }
 }
 
-void moveBase(int a)     { moveServo(baseServo, basePos, a, F("Base")); }
-void moveShoulder(int a) { moveServo(shoulderServo, shoulderPos, a, F("Shoulder")); }
-void moveElbow(int a)    { moveServo(elbowServo, elbowPos, a, F("Elbow")); }
-void moveGripper(int a)  { moveServo(gripperServo, gripperPos, a, F("Gripper")); }
+void moveBase(int a)     { moveServo(basePos, a, BASE_MIN, BASE_MAX, F("Base")); }
+void moveShoulder(int a) { moveServo(shoulderPos, a, SHOULDER_MIN, SHOULDER_MAX, F("Shoulder")); }
+void moveElbow(int a)    { moveServo(elbowPos, a, ELBOW_MIN, ELBOW_MAX, F("Elbow")); }
+void moveGripper(int a)  { moveServo(gripperPos, a, GRIP_CLOSED, GRIP_OPEN, F("Gripper")); }
 
 void moveToHome() {
-  sayLine(F("Moving to home position..."));
-  basePos = shoulderPos = elbowPos = gripperPos = 90;
-  baseServo.write(basePos);         delay(300);
-  shoulderServo.write(shoulderPos); delay(300);
-  elbowServo.write(elbowPos);       delay(300);
-  gripperServo.write(gripperPos);   delay(300);
-  sayLine(F("Home position reached (all at 90)"));
+  sayLine(F("Moving to home position (all 90)"));
+  basePos = shoulderPos = elbowPos = gripperPos = 90;   // servos glide there
+}
+
+// Glides every servo toward its target (called all the time from loop)
+Servo *servos[4] = {&baseServo, &shoulderServo, &elbowServo, &gripperServo};
+int *targets[4] = {&basePos, &shoulderPos, &elbowPos, &gripperPos};
+int current[4] = {90, 90, 90, 90};
+unsigned long lastSweep = 0;
+
+void updateServos() {
+  if (millis() - lastSweep < SWEEP_MS) return;
+  lastSweep = millis();
+  for (int i = 0; i < 4; i++) {
+    int diff = *targets[i] - current[i];
+    if (diff == 0) continue;
+    if (diff > SWEEP_DEG) diff = SWEEP_DEG;
+    if (diff < -SWEEP_DEG) diff = -SWEEP_DEG;
+    current[i] += diff;
+    servos[i]->write(current[i]);
+  }
 }
 
 void printStatus() {
@@ -201,9 +225,10 @@ void printStatus() {
 void printInstructions() {
   sayLine(F("=== Commands ==="));
   sayLine(F("CAR: F forward, B backward, L / R turn, S stop"));
-  sayLine(F("ARM: A/Z base, U/J shoulder, I/K elbow, O/C gripper, H home"));
-  sayLine(F("     or b90 s45 e120 g30 home open close status help + Enter"));
-  sayLine(F("Angle range: 0-180 degrees"));
+  sayLine(F("ARM: A/Z base, U/J shoulder, I/K elbow (45 per press)"));
+  sayLine(F("     O gripper fully open, C fully closed, H home"));
+  sayLine(F("     or b90 s45 e120 g60 home open close status help + Enter"));
+  sayLine(F("Safe limits are set at the top of the code."));
 }
 
 bool isNumber(const char *s) {
@@ -217,8 +242,8 @@ void armCommand(char *cmd) {
 
   // Whole words first (so "status" is not read as shoulder "s...")
   if (strcmp(cmd, "home") == 0)        moveToHome();
-  else if (strcmp(cmd, "open") == 0)   moveGripper(180);
-  else if (strcmp(cmd, "close") == 0)  moveGripper(30);
+  else if (strcmp(cmd, "open") == 0)   moveGripper(GRIP_OPEN);
+  else if (strcmp(cmd, "close") == 0)  moveGripper(GRIP_CLOSED);
   else if (strcmp(cmd, "status") == 0) printStatus();
   else if (strcmp(cmd, "help") == 0)   printInstructions();
   // Then letter + angle
@@ -235,19 +260,15 @@ void armCommand(char *cmd) {
   else sayLine(F("Unknown command. Type 'help' for instructions."));
 }
 
-// One-letter arm commands (like the wheel letters)
-void nudge(void (*move)(int), int pos, int delta) {
-  move(constrain(pos + delta, MIN_ANGLE, MAX_ANGLE));
-}
-
-// One gripper step per button press (repeats while held are ignored)
-void gripStep(int delta) {
+// One arm action per button PRESS: the app repeats a held letter every
+// 0.15 s, so repeats that arrive close together are ignored.
+// 0 = base, 1 = shoulder, 2 = elbow, 3 = gripper
+unsigned long lastLetter[4] = {0, 0, 0, 0};
+bool newPress(int joint) {
   unsigned long now = millis();
-  bool newPress = (now - lastGripLetter > GRIP_PRESS_GAP_MS);
-  lastGripLetter = now;
-  if (!newPress) return;
-  int target = constrain(gripperPos + delta, GRIP_MIN, GRIP_MAX);
-  if (target != gripperPos) moveGripper(target);
+  bool fresh = (now - lastLetter[joint] > PRESS_GAP_MS);
+  lastLetter[joint] = now;
+  return fresh;
 }
 
 // Returns true if the letter was a car or arm command
@@ -257,14 +278,14 @@ bool letterCommand(char c) {
     case 'F': case 'B': case 'L': case 'R': case 'S':
       carCommand(c); return true;
     // --- arm ---
-    case 'A': nudge(moveBase, basePos, +STEP);          return true;  // base left
-    case 'Z': nudge(moveBase, basePos, -STEP);          return true;  // base right
-    case 'U': nudge(moveShoulder, shoulderPos, +STEP);  return true;  // shoulder up
-    case 'J': nudge(moveShoulder, shoulderPos, -STEP);  return true;  // shoulder down
-    case 'I': nudge(moveElbow, elbowPos, +STEP);        return true;  // elbow up
-    case 'K': nudge(moveElbow, elbowPos, -STEP);        return true;  // elbow down
-    case 'O': gripStep(+GRIP_STEP);                     return true;  // gripper open 45
-    case 'C': gripStep(-GRIP_STEP);                     return true;  // gripper close 45
+    case 'A': if (newPress(0)) moveBase(basePos + ARM_STEP);          return true;  // base left
+    case 'Z': if (newPress(0)) moveBase(basePos - ARM_STEP);          return true;  // base right
+    case 'U': if (newPress(1)) moveShoulder(shoulderPos + ARM_STEP);  return true;  // shoulder up
+    case 'J': if (newPress(1)) moveShoulder(shoulderPos - ARM_STEP);  return true;  // shoulder down
+    case 'I': if (newPress(2)) moveElbow(elbowPos + ARM_STEP);        return true;  // elbow up
+    case 'K': if (newPress(2)) moveElbow(elbowPos - ARM_STEP);        return true;  // elbow down
+    case 'O': if (newPress(3)) moveGripper(GRIP_OPEN);                return true;  // gripper fully open
+    case 'C': if (newPress(3)) moveGripper(GRIP_CLOSED);              return true;  // gripper fully closed
     case 'H': moveToHome();                             return true;  // arm home
   }
   return false;
@@ -338,6 +359,7 @@ void setup() {
   shoulderServo.attach(SHOULDER_PIN);
   elbowServo.attach(ELBOW_PIN);
   gripperServo.attach(GRIPPER_PIN);
+  for (int i = 0; i < 4; i++) servos[i]->write(current[i]);   // start at 90
 
   pinMode(KEEPALIVE_PIN, OUTPUT);
   digitalWrite(KEEPALIVE_PIN, LOW);
@@ -353,4 +375,5 @@ void loop() {
   expire(btLine);
   expire(usbLine);
   keepAlive();
+  updateServos();
 }

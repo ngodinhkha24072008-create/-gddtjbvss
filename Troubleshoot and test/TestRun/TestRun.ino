@@ -22,6 +22,9 @@ const unsigned long DRIVE_MS = 2000;   // how long each drive step lasts
 const unsigned long TURN_MS = 1500;    // how long each turn lasts
 const unsigned long PAUSE_MS = 1000;   // stop between steps
 
+// All arm angles used below stay inside CarArm4DOF.ino's safe limits:
+// shoulder/elbow 45-135, gripper 40 (closed) - 130 (open).
+
 // ---------- Pins (same as CarArm4DOF.ino) ----------
 const int IN1 = 7, IN2 = 6, IN3 = 5, IN4 = 4;
 const int BASE_PIN = 9, SHOULDER_PIN = 10, ELBOW_PIN = 11, GRIPPER_PIN = 8;
@@ -130,7 +133,7 @@ void setup() {
   armStep(baseServo, basePos, 45, 135, F("base: left, right, centre"));
   armStep(shoulderServo, shoulderPos, 60, 120, F("shoulder: down, up, centre"));
   armStep(elbowServo, elbowPos, 60, 120, F("elbow: down, up, centre"));
-  armStep(gripperServo, gripperPos, 150, 40, F("gripper: open, close, centre"));
+  armStep(gripperServo, gripperPos, 130, 40, F("gripper: open, close, centre"));
 
   Serial.println(F("3) DONE - arm home, car stopped. Press RESET to run again."));
 }
