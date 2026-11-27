@@ -85,7 +85,7 @@ const unsigned long PRESS_GAP_MS = 300;   // letters closer together than this =
 // 10-15 degrees closer to 90. Home (90) must stay inside every range.
 const int BASE_MIN = 0,       BASE_MAX = 180;
 const int SHOULDER_MIN = 45,  SHOULDER_MAX = 135;
-const int ELBOW_MIN = 45,     ELBOW_MAX = 135;
+const int ELBOW_MIN = 0,      ELBOW_MAX = 180;   // elbow limit removed: full servo range
 const int GRIP_CLOSED = 40;   // gripper fully closed
 const int GRIP_OPEN = 130;    // gripper fully open
 
