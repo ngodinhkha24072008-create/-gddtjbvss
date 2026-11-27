@@ -4,6 +4,8 @@ import android.Manifest
 import com.example.cubesolver.ui.theme.Console
 import android.bluetooth.BluetoothDevice
 import android.os.Build
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -30,6 +32,14 @@ fun BluetoothConnectivity(
     var showBluetoothDialog by remember { mutableStateOf(false) }
     var devices by remember { mutableStateOf(listOf<BluetoothDevice>()) }
     var isConnecting by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+
+    // Pop up Bluetooth problems (send failed, link lost, robot replied ERR...) instead of failing silently
+    LaunchedEffect(bluetoothHelper.errorCount) {
+        if (bluetoothHelper.errorCount > 0) {
+            Toast.makeText(context, bluetoothHelper.lastError, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
@@ -37,6 +47,8 @@ fun BluetoothConnectivity(
             if (granted) {
                 devices = bluetoothHelper.getPairedDevices()
                 showBluetoothDialog = true
+            } else {
+                Toast.makeText(context, "Allow Nearby devices so the app can reach the HC-06.", Toast.LENGTH_LONG).show()
             }
         }
     )
