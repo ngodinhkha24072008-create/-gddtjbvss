@@ -326,7 +326,7 @@ body:not(.in-app) .app-only { display: none !important; }
               <tr><td>Arm arrows ▲ / ▼</td><td><code>U</code> <code>J</code></td><td>Shoulder up / down, 5° steps while held</td></tr>
               <tr><td>Elbow ▲ / ▼</td><td><code>I</code> <code>K</code></td><td>Elbow up / down, 5° steps while held</td></tr>
               <tr><td>◀▶ OPEN / ▶◀ CLOSE</td><td><code>O</code> <code>C</code></td><td>Gripper fully open / fully closed</td></tr>
-              <tr><td>HOME (middle of arm arrows)</td><td><code>H</code></td><td>All arm joints to 90°</td></tr>
+              <tr><td>HOME (middle of arm arrows)</td><td><code>H</code> <code>H</code></td><td>All arm joints to 90° (H is sent twice)</td></tr>
               <tr><td>Stop</td><td><code>S</code></td><td>Stop the car</td></tr>
             </tbody>
           </table>
@@ -448,7 +448,9 @@ body:not(.in-app) .app-only { display: none !important; }
     setLink(null);
   });
   $("stopAll").addEventListener("click", () => { send("S"); setStickDir("S", true); });
-  $("homeBtn").addEventListener("click", () => send("H"));
+  // HOME is sent as H twice: the robot ignores a single H so a garbled byte can't send the arm home
+  function sendHome() { send("H"); setTimeout(() => transmit("H"), 100); }
+  $("homeBtn").addEventListener("click", sendHome);
 
   // ---- Android app: native Bluetooth bridge (window.Robot) ----
   const native = window.Robot;
@@ -636,6 +638,7 @@ body:not(.in-app) .app-only { display: none !important; }
       pid = e.pointerId;
       try { b.setPointerCapture(e.pointerId); } catch (_) {}
       b.classList.add("pressed");
+      if (b.dataset.send === "H") { sendHome(); return; }   // HOME: H twice, no repeat
       send(b.dataset.send);
       timer = setInterval(() => transmit(b.dataset.send), ARM_REPEAT_MS);
     });

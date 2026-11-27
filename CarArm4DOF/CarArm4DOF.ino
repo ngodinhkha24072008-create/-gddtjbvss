@@ -300,7 +300,7 @@ void printInstructions() {
   sayLine(F("=== Commands ==="));
   sayLine(F("CAR: F forward, B backward, L / R turn, S stop"));
   sayLine(F("ARM: A/Z base, U/J shoulder, I/K elbow (5 per step, hold to keep moving)"));
-  sayLine(F("     O gripper fully open, C fully closed, H home"));
+  sayLine(F("     O gripper fully open, C fully closed, HH home (H twice)"));
   sayLine(F("     or b90 s45 e120 g60 home open close status help + Enter"));
   sayLine(F("Safe limits are set at the top of the code."));
   if (BASE_IS_CONTINUOUS) sayLine(F("Continuous base: type spin + Enter to measure its speed"));
@@ -347,6 +347,18 @@ bool newPress(int joint) {
   return fresh;
 }
 
+// HOME needs 'H' twice within HOME_CONFIRM_MS. A single garbled Bluetooth byte
+// (H differs from I, J and L by just one bit) can then never send the arm home.
+// The Controller app's HOME buttons send H twice automatically.
+const unsigned long HOME_CONFIRM_MS = 400;
+unsigned long lastHomeLetter = 0;
+bool homeConfirmed() {
+  unsigned long now = millis();
+  bool ok = (lastHomeLetter != 0) && (now - lastHomeLetter <= HOME_CONFIRM_MS);
+  lastHomeLetter = ok ? 0 : now;      // after a confirmed home, start counting again
+  return ok;
+}
+
 // Returns true if the letter was a car or arm command
 bool letterCommand(char c) {
   switch (c) {
@@ -362,7 +374,7 @@ bool letterCommand(char c) {
     case 'K': moveElbow(elbowPos - ARM_STEP);        return true;  // elbow down
     case 'O': if (newPress(3)) moveGripper(GRIP_OPEN);                return true;  // gripper fully open
     case 'C': if (newPress(3)) moveGripper(GRIP_CLOSED);              return true;  // gripper fully closed
-    case 'H': moveToHome();                             return true;  // arm home
+    case 'H': if (homeConfirmed()) moveToHome();        return true;  // arm home (needs H twice)
   }
   return false;
 }
