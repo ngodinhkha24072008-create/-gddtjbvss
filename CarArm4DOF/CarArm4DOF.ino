@@ -73,10 +73,10 @@ int elbowPos = 90;
 int gripperPos = 90;
 
 // ---------- Arm moves ----------
-// Base, shoulder and elbow move ARM_STEP degrees per button PRESS.
+// Base, shoulder and elbow move ARM_STEP degrees for every command, and keep
+// moving while you hold the button (the app repeats the letter while held).
 // The gripper goes fully open (O) or fully closed (C) in one press.
-// Holding a button counts as one press (the app repeats the letter while held).
-const int ARM_STEP = 45;
+const int ARM_STEP = 5;
 const unsigned long PRESS_GAP_MS = 300;   // letters closer together than this = same press
 
 // ---------- SAFE LIMITS (protect the wooden arm) ----------
@@ -299,7 +299,7 @@ void printStatus() {
 void printInstructions() {
   sayLine(F("=== Commands ==="));
   sayLine(F("CAR: F forward, B backward, L / R turn, S stop"));
-  sayLine(F("ARM: A/Z base, U/J shoulder, I/K elbow (45 per press)"));
+  sayLine(F("ARM: A/Z base, U/J shoulder, I/K elbow (5 per step, hold to keep moving)"));
   sayLine(F("     O gripper fully open, C fully closed, H home"));
   sayLine(F("     or b90 s45 e120 g60 home open close status help + Enter"));
   sayLine(F("Safe limits are set at the top of the code."));
@@ -336,7 +336,7 @@ void armCommand(char *cmd) {
   else sayLine(F("Unknown command. Type 'help' for instructions."));
 }
 
-// One arm action per button PRESS: the app repeats a held letter every
+// Gripper: one action per button PRESS. The app repeats a held letter every
 // 0.15 s, so repeats that arrive close together are ignored.
 // 0 = base, 1 = shoulder, 2 = elbow, 3 = gripper
 unsigned long lastLetter[4] = {0, 0, 0, 0};
@@ -354,12 +354,12 @@ bool letterCommand(char c) {
     case 'F': case 'B': case 'L': case 'R': case 'S':
       carCommand(c); return true;
     // --- arm ---
-    case 'A': if (newPress(0)) moveBase(basePos + ARM_STEP);          return true;  // base left
-    case 'Z': if (newPress(0)) moveBase(basePos - ARM_STEP);          return true;  // base right
-    case 'U': if (newPress(1)) moveShoulder(shoulderPos + ARM_STEP);  return true;  // shoulder up
-    case 'J': if (newPress(1)) moveShoulder(shoulderPos - ARM_STEP);  return true;  // shoulder down
-    case 'I': if (newPress(2)) moveElbow(elbowPos + ARM_STEP);        return true;  // elbow up
-    case 'K': if (newPress(2)) moveElbow(elbowPos - ARM_STEP);        return true;  // elbow down
+    case 'A': moveBase(basePos + ARM_STEP);          return true;  // base left
+    case 'Z': moveBase(basePos - ARM_STEP);          return true;  // base right
+    case 'U': moveShoulder(shoulderPos + ARM_STEP);  return true;  // shoulder up
+    case 'J': moveShoulder(shoulderPos - ARM_STEP);  return true;  // shoulder down
+    case 'I': moveElbow(elbowPos + ARM_STEP);        return true;  // elbow up
+    case 'K': moveElbow(elbowPos - ARM_STEP);        return true;  // elbow down
     case 'O': if (newPress(3)) moveGripper(GRIP_OPEN);                return true;  // gripper fully open
     case 'C': if (newPress(3)) moveGripper(GRIP_CLOSED);              return true;  // gripper fully closed
     case 'H': moveToHome();                             return true;  // arm home
