@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:swappable_modifier",
+  "id": "tinkers_thinking:tools/modifiers/slotless/rebalanced_ancient",
   "allow_crystal": false,
   "inputs": [
     {

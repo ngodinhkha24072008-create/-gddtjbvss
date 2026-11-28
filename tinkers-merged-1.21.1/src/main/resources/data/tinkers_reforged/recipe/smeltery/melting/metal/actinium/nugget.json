@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_reforged:smeltery/melting/metal/actinium/nugget",
   "ingredient": {
     "tag": "c:nuggets/actinium"
   },

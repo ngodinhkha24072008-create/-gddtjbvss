@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/spectre_compound",
   "ingredient": {
     "item": "tinkers_thinking:spectre_compound"
   },

@@ -1,6 +1,6 @@
 {
   "type": "hilt:add_entry",
-  "neoforge:conditions": [
+  "conditions": [
     {
       "condition": "neoforge:loot_table_id",
       "loot_table_id": "minecraft:entities/warden"

@@ -14,10 +14,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.EventBusSubscriber.Bus;
 
-@EventBusSubscriber(
-   modid = "tinkers_thinking",
-   bus = Bus.GAME
-)
 public class Onhurt {
    @SubscribeEvent
    public void onLivingHurt(LivingIncomingDamageEvent event) {

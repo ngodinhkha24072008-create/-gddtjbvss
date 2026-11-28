@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/gilded_silky_cloth/gilded_silky_cloth",
   "ingredient": {
     "item": "tinkers_thinking:gilded_silky_cloth"
   },

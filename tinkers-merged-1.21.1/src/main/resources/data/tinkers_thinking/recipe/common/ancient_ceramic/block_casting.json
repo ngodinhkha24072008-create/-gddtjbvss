@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/ancient_ceramic/block_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_ancient_ceramic",
     "amount": 810

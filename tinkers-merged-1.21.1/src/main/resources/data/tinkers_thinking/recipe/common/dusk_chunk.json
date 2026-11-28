@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/dusk_chunk",
   "cast": {
     "item": "minecraft:cactus"
   },

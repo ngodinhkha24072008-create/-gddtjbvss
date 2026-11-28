@@ -1,7 +1,7 @@
 {
   "icon": {
     "item": "tinker_rapier:rapier_tic",
-    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
   },
   "input_slots": [
     {
@@ -18,7 +18,7 @@
         "item": "modernfoundry:large_plate"
       },
       "icon": "modernfoundry:large_plate",
-      "translation_key": "item.tconstruct.large_plate",
+      "translation_key": "item.modernfoundry.large_plate",
       "x": 33,
       "y": 44
     },
@@ -27,7 +27,7 @@
         "item": "modernfoundry:tough_handle"
       },
       "icon": "modernfoundry:tough_handle",
-      "translation_key": "item.tconstruct.tough_handle",
+      "translation_key": "item.modernfoundry.tough_handle",
       "x": 33,
       "y": 64
     },
@@ -36,7 +36,7 @@
         "item": "modernfoundry:tool_handle"
       },
       "icon": "modernfoundry:tool_handle",
-      "translation_key": "item.tconstruct.tool_handle",
+      "translation_key": "item.modernfoundry.tool_handle",
       "x": 53,
       "y": 64
     }

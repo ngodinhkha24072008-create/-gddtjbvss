@@ -1,4 +1,6 @@
 {
+  "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/echo/echo_melting",
   "neoforge:conditions": [
     {
       "value": {
@@ -8,7 +10,6 @@
       "type": "neoforge:not"
     }
   ],
-  "type": "modernfoundry:melting",
   "ingredient": {
     "item": "minecraft:echo_shard"
   },

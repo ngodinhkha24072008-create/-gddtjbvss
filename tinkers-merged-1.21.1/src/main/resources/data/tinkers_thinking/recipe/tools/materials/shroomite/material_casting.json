@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/shroomite/material_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_shroomite",
     "amount": 90

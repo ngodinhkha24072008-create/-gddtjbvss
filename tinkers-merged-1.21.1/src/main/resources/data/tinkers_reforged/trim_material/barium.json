@@ -2,7 +2,7 @@
   "asset_name": "tinkers_reforged_barium",
   "description": {
     "color": "#2A1D5B",
-    "translate": "trim_material.tconstruct.format",
+    "translate": "trim_material.modernfoundry.format",
     "with": [
       {
         "translate": "material.tinkers_reforged.barium"

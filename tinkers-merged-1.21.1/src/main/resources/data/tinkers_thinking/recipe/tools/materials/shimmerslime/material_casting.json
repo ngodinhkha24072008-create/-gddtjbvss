@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/shimmerslime/material_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_shimmerslime",
     "amount": 90

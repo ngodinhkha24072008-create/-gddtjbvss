@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/frogcroaking/ochre_frogcroaking_casting",
   "cast": {
     "item": "minecraft:ochre_froglight"
   },

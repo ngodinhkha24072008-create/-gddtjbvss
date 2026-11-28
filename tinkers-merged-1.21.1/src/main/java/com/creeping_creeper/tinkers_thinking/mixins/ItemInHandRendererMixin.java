@@ -16,7 +16,8 @@ public class ItemInHandRendererMixin {
       at = @At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;"
-      )
+      ),
+      require = 0
    )
    private Item redirectGetItemForIfCondition(ItemStack stack) {
       return stack.is(ModTags.Items.LOADING_ANIMATION) ? Items.CROSSBOW : stack.getItem();

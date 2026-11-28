@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/lightite/lightite_reinforcement_melting",
   "rate": "metal",
   "ingredient": {
     "item": "tinkers_thinking:lightite_reinforcement"

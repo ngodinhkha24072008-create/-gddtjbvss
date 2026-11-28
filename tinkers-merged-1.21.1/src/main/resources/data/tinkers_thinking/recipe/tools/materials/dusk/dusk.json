@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/dusk/dusk",
   "ingredient": {
     "item": "tinkers_thinking:dusk_chunk"
   },

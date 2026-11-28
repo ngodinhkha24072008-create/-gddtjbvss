@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/crystal/clay_crystal_melting",
   "ingredient": {
     "item": "tinkers_thinking:clay_crystal"
   },

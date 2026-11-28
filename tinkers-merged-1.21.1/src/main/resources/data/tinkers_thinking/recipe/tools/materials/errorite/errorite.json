@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/errorite/errorite",
   "input": "tinkers_thinking:zith",
   "fluid": {
     "fluid": "tinkers_thinking:error_liquid",

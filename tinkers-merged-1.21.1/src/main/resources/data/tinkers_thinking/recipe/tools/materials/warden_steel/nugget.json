@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/warden_steel/nugget",
   "ingredient": {
     "tag": "c:nuggets/warden_steel"
   },

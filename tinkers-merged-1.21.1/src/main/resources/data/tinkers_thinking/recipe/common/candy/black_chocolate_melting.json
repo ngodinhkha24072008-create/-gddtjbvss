@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/candy/black_chocolate_melting",
   "ingredient": {
     "item": "tinkers_thinking:black_chocolate"
   },

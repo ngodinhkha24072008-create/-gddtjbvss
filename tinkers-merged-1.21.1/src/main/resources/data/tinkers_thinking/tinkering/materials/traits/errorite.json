@@ -1,6 +1,6 @@
 {
   "perStat": {
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "name": "tinkers_thinking:reverse"
       },
@@ -8,7 +8,7 @@
         "name": "tinkers_thinking:repercussion"
       }
     ],
-    "tconstruct:armor": [
+    "modernfoundry:armor": [
       {
         "name": "tinkers_thinking:reverse"
       },
@@ -16,7 +16,7 @@
         "name": "tinkers_thinking:remisdirection"
       }
     ],
-    "tconstruct:plating_shield": [
+    "modernfoundry:plating_shield": [
       {
         "name": "tinkers_thinking:reverse"
       },

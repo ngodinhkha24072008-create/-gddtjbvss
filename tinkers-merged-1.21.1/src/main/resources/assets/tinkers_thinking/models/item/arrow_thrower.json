@@ -37,19 +37,19 @@
   "overrides": [
     {
       "predicate": {
-        "tconstruct:charging": 1
+        "modernfoundry:charging": 1
       },
       "model": "tinkers_thinking:item/atlatl/pulling"
     },
     {
       "predicate": {
-        "tconstruct:charging": 2
+        "modernfoundry:charging": 2
       },
       "model": "tinkers_thinking:item/atlatl/blocking"
     },
     {
       "predicate": {
-        "tconstruct:broken": 1
+        "modernfoundry:broken": 1
       },
       "model": "tinkers_thinking:item/atlatl/broken"
     }

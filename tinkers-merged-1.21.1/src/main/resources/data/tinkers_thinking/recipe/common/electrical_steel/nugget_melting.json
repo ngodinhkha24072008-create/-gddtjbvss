@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/electrical_steel/nugget_melting",
   "ingredient": {
     "tag": "c:nuggets/electrical_steel"
   },

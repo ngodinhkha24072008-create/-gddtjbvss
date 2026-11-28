@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier",
+  "id": "tinkerslevellingaddon:tools/modifiers/ability/improvable",
   "allow_crystal": true,
   "inputs": [
     {

@@ -1,6 +1,6 @@
 {
   "stats": {
-    "tconstruct:maille": {},
-    "tconstruct:shield_core": {}
+    "modernfoundry:maille": {},
+    "modernfoundry:shield_core": {}
   }
 }

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:table_casting_composite",
+  "id": "tinker_rapier:tools/parts/casting/slender_blade_composite",
   "item_cost": 6,
   "result": "tinker_rapier:slender_blade"
 }

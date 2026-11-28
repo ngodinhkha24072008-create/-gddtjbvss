@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/surging_wellspring_melting",
   "ingredient": {
     "item": "tinkers_thinking:surging_wellspring"
   },

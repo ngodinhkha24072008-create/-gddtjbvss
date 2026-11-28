@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:tool_building",
+  "id": "tinker_rapier:tools/building/estoc_tic",
   "result": "tinker_rapier:estoc_tic",
   "result_count": 1
 }

@@ -1,24 +1,24 @@
 {
   "perStat": {
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "name": "tinkers_thinking:bane_of_pigs",
         "level": 1
       }
     ],
-    "tconstruct:armor": [
+    "modernfoundry:armor": [
       {
         "name": "tinkers_thinking:antibrute",
         "level": 1
       }
     ],
-    "tconstruct:plating_shield": [
+    "modernfoundry:plating_shield": [
       {
         "level": 1,
         "name": "tinkers_thinking:antibrute"
       }
     ],
-    "tconstruct:arrow_shaft": [
+    "modernfoundry:arrow_shaft": [
       {
         "level": 1,
         "name": "tinkers_thinking:resisting"

@@ -7,5 +7,7 @@
   "ingredient": {
     "tag": "c:dusts/barium"
   },
-  "result": "tinkers_reforged:barium_ingot"
+  "result": {
+    "id": "tinkers_reforged:barium_ingot"
+  }
 }

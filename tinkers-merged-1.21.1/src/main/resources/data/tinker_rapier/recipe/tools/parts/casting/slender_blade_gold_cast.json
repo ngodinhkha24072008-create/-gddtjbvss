@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:table_casting_material",
+  "id": "tinker_rapier:tools/parts/casting/slender_blade_gold_cast",
   "cast": {
     "tag": "tinker_rapier:casts/multi_use/slender_blade"
   },

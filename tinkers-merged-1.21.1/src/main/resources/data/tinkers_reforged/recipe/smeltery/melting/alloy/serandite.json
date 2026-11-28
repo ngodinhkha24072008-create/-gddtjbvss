@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_reforged:smeltery/melting/alloy/serandite",
   "inputs": [
     {
       "amount": 500,

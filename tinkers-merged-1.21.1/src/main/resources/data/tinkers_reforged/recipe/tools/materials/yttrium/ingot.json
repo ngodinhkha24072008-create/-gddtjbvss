@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_reforged:tools/materials/yttrium/ingot",
   "ingredient": {
     "tag": "c:ingots/yttrium"
   },

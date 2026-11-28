@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/spectre/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:spectre_block"
   },

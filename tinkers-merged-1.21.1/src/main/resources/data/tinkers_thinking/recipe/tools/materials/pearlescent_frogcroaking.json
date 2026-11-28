@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/pearlescent_frogcroaking",
   "ingredient": {
     "item": "tinkers_thinking:pearlescent_frogcroaking"
   },

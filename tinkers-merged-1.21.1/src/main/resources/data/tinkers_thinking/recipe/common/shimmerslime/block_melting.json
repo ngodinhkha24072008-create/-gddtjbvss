@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/shimmerslime/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:shimmerslime_block"
   },

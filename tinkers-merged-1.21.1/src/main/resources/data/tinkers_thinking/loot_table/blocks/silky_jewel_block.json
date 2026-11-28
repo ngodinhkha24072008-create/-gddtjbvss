@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:silky_jewel_block"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

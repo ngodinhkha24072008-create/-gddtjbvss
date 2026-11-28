@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/chillslime_cryogel.json/alloy",
   "inputs": [
     {
       "tag": "c:molten_steel",

@@ -3,7 +3,7 @@
     {
       "type": "modernfoundry:multiply_stats",
       "multipliers": {
-        "tconstruct:tank_capacity": 8.0
+        "modernfoundry:tank_capacity": 8.0
       }
     },
     {

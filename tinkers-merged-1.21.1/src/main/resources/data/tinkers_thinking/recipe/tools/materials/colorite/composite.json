@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/colorite/composite",
   "input": "tinkers_thinking:zith",
   "fluid": {
     "fluid": "tinkers_thinking:color_liquid",

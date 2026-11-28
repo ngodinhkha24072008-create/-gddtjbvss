@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/chlorophyte_compound",
   "ingredient": {
     "item": "tinkers_thinking:chlorophyte_compound"
   },

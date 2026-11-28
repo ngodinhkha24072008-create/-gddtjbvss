@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:electrical_steel_block"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

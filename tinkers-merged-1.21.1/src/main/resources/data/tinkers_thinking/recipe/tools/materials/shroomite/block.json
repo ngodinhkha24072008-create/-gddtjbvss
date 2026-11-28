@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/shroomite/block",
   "ingredient": {
     "tag": "c:storage_blocks/shroomite"
   },

@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/copshowium/material_casting",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "crossroads"
     }
   ],
-  "type": "modernfoundry:material_fluid",
   "fluid": {
     "fluid": "crossroads:molten_copshowium",
     "amount": 90

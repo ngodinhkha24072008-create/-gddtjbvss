@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_melting",
+  "id": "tinkers_thinking:tools/materials/tinkers_bronze/melting",
   "input": "tinkers_thinking:tinkers_bronze",
   "temperature": 550,
   "result": {

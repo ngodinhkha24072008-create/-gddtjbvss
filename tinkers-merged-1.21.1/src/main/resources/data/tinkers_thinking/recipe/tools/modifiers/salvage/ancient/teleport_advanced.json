@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:modifier_salvage",
+  "id": "tinkers_thinking:tools/modifiers/salvage/ancient/teleport_advanced",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "tinkersinnovation"
     }
   ],
-  "type": "modernfoundry:modifier_salvage",
   "tools": {
     "item": "tinkersinnovation:teleport_staff"
   },

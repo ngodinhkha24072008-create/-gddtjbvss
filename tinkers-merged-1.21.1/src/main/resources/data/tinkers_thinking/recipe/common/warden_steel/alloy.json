@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/warden_steel/alloy",
   "inputs": [
     {
       "tag": "c:molten_steel",

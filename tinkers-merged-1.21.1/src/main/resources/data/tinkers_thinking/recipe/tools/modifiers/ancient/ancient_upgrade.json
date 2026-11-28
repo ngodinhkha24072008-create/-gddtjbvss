@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ancient/ancient_upgrade",
   "inputs": [
     {
       "item": "tinkers_thinking:clay_crystal"

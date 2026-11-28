@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_melting",
+  "id": "tinkers_thinking:tools/materials/white_chocolate/melting",
   "input": "tinkers_thinking:white_chocolate",
   "temperature": 80,
   "result": {

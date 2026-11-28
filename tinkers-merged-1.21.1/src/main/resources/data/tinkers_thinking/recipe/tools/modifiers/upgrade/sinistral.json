@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/upgrade/sinistral",
   "allow_crystal": true,
   "check_trait_level": true,
   "inputs": [

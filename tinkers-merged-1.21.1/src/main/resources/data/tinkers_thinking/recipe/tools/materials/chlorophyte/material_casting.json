@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/chlorophyte/material_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_chlorophyte",
     "amount": 90

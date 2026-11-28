@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/echo/echo_alloy",
   "neoforge:conditions": [
     {
       "modid": "tinkers_ingenious",
       "type": "neoforge:mod_loaded"
     }
   ],
-  "type": "modernfoundry:alloy",
   "inputs": [
     {
       "tag": "hilt:water",

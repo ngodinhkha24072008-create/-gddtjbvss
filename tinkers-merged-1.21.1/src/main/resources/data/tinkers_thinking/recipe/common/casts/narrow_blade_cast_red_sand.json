@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:molding_table",
+  "id": "tinkers_thinking:common/casts/narrow_blade_cast_red_sand",
   "material": {
     "item": "modernfoundry:blank_red_sand_cast"
   },

@@ -17,7 +17,7 @@
     "name": "tinkers_reforged_melee_materials",
     "data": "no-load",
     "extraData": {
-      "tconstruct:material_tier": {
+      "modernfoundry:material_tier": {
         "type": "modernfoundry:melee_harvest",
         "tier": {
           "min": 0,
@@ -54,7 +54,7 @@
     "name": "tinkers_reforged_armor_materials",
     "data": "no-load",
     "extraData": {
-      "tconstruct:material_tier": {
+      "modernfoundry:material_tier": {
         "type": "modernfoundry:armor",
         "tier": {
           "min": 0,
@@ -97,7 +97,7 @@
     "name": "tinkers_reforged_ranged_materials",
     "data": "no-load",
     "extraData": {
-      "tconstruct:material_tier": {
+      "modernfoundry:material_tier": {
         "type": "modernfoundry:ranged",
         "tier": {
           "min": 0,

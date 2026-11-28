@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/tempered_glass/pane_melting",
   "ingredient": {
     "item": "tinkers_thinking:tempered_glass_pane"
   },

@@ -1,21 +1,21 @@
 {
   "perStat": {
-    "tconstruct:ranged": [
+    "modernfoundry:ranged": [
       {
         "name": "tinkers_thinking:impact"
       }
     ],
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "name": "tinkers_thinking:cutting"
       }
     ],
-    "tconstruct:armor": [
+    "modernfoundry:armor": [
       {
         "name": "tinkers_thinking:countermeasures"
       }
     ],
-    "tconstruct:plating_shield": [
+    "modernfoundry:plating_shield": [
       {
         "name": "tinkers_thinking:countermeasures"
       }

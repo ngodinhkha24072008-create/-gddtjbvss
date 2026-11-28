@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/tinkers_bronze/alloy",
   "inputs": [
     {
       "tag": "modernfoundry:molten_copper",

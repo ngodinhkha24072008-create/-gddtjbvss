@@ -20,7 +20,7 @@ public class ModifiableArrowItemMixin {
       at = {@At("HEAD")},
       cancellable = true
    )
-   public void createArrow(Level level, ItemStack stack, LivingEntity shooter, CallbackInfoReturnable<AbstractArrow> cir) {
+   public void createArrow(Level level, ItemStack stack, LivingEntity shooter, ItemStack weapon, CallbackInfoReturnable<AbstractArrow> cir) {
       if (ToolStack.from(stack).getModifierLevel(ModModifierIds.Seeking) > 0) {
          SeekingArrow arrow = new SeekingArrow(level, shooter);
          arrow.onCreate(stack, shooter);

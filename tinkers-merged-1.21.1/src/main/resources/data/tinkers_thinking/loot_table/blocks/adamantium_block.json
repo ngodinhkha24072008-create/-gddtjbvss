@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:adamantium_block"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

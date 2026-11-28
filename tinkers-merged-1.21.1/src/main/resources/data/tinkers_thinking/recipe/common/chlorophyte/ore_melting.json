@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:ore_melting",
+  "id": "tinkers_thinking:common/chlorophyte/ore_melting",
   "rate": "metal",
   "ingredient": {
     "item": "tinkers_thinking:chlorophyll_ore"

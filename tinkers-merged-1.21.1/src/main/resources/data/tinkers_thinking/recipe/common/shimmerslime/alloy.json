@@ -1,9 +1,10 @@
 {
+  "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/shimmerslime/alloy",
   "condition": {
     "type": "hilt:tag_filled",
     "tag": "c:glowstone"
   },
-  "type": "modernfoundry:alloy",
   "inputs": [
     {
       "tag": "c:molten_zith",

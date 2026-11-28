@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/obsidian_bronze/block_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_obsidian_bronze",
     "amount": 810

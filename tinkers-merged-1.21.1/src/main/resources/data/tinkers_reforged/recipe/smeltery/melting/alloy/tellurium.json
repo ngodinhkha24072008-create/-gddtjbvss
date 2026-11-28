@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_reforged:smeltery/melting/alloy/tellurium",
   "inputs": [
     {
       "amount": 90,

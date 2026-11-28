@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:ore_melting",
+  "id": "tinkers_reforged:smeltery/melting/metal/barium/ore_singular",
   "byproducts": [
     {
       "amount": 180,

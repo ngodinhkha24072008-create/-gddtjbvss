@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/lightite/lightite_reinforcement",
   "cast": {
     "item": "modernfoundry:obsidian_pane"
   },

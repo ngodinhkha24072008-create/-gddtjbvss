@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/ancient_ceramic/ingot",
   "ingredient": {
     "item": "tinkers_thinking:ancient_ceramic"
   },

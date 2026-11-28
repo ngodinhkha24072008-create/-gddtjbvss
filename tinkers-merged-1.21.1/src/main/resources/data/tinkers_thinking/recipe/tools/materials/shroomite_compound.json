@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/shroomite_compound",
   "ingredient": {
     "item": "tinkers_thinking:shroomite_compound"
   },

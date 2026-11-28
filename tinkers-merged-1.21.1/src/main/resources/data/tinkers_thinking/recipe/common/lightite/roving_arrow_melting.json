@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/lightite/roving_arrow_melting",
   "ingredient": {
     "item": "tinkers_thinking:roving_arrow"
   },

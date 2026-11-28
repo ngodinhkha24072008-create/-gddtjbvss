@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinker_rapier:smeltery/casts/gold/slender_blade",
   "cast": {
     "type": "modernfoundry:material",
     "item": "tinker_rapier:slender_blade"

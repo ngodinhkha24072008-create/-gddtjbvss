@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "tinkers_thinking:tools/recycling/cutlass",
   "parts": [
     "modernfoundry:repair_kit",
     "modernfoundry:shield_core",

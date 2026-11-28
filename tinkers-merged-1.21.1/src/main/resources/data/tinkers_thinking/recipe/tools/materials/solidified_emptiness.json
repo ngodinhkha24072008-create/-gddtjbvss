@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/solidified_emptiness",
   "fluid": {
     "fluid": "tinkers_thinking:emptiness",
     "amount": 100

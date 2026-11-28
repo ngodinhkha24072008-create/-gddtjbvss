@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/utilities/scorched_ladder",
   "cast": {
     "item": "tinkers_thinking:stone_ladder"
   },

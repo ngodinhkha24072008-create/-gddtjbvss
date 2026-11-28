@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/electrical_steel/block",
   "ingredient": {
     "tag": "c:storage_blocks/electrical_steel"
   },

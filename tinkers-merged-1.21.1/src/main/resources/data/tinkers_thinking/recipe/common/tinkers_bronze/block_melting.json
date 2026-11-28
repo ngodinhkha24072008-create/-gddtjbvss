@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/tinkers_bronze/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:tinkers_bronze_block"
   },

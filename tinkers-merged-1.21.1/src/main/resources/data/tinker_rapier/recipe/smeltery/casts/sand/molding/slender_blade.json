@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:molding_table",
+  "id": "tinker_rapier:smeltery/casts/sand/molding/slender_blade",
   "material": {
     "tag": "modernfoundry:casts/sand"
   },

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/beetron/block",
   "ingredient": {
     "tag": "c:storage_blocks/beetron"
   },

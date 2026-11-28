@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_reforged:smeltery/melting/metal/yttrium/nugget",
   "ingredient": {
     "tag": "c:nuggets/yttrium"
   },

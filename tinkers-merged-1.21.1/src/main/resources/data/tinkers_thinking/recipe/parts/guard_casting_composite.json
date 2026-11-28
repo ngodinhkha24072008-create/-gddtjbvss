@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:table_casting_composite",
+  "id": "tinkers_thinking:parts/guard_casting_composite",
   "result": "tinkers_thinking:guard",
   "item_cost": 2
 }

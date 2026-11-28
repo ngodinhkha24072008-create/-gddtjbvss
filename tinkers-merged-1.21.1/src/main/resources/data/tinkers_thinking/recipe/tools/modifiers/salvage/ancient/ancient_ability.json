@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier_salvage",
+  "id": "tinkers_thinking:tools/modifiers/salvage/ancient/ancient_ability",
   "tools": {
     "type": "neoforge:intersection",
     "children": [

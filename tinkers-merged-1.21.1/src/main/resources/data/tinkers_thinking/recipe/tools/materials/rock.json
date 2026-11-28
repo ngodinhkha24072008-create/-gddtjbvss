@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/rock",
   "ingredient": {
     "item": "tinkers_thinking:stone_stick"
   },

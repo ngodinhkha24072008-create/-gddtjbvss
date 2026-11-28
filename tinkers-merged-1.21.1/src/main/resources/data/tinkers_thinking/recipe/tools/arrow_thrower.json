@@ -1,4 +1,5 @@
 {
   "type": "modernfoundry:tool_building",
+  "id": "tinkers_thinking:tools/arrow_thrower",
   "result": "tinkers_thinking:arrow_thrower"
 }

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:extract_modifier",
+  "id": "tinkers_thinking:tools/modifiers/extract/ancient",
   "inputs": [
     {
       "item": "minecraft:echo_shard"

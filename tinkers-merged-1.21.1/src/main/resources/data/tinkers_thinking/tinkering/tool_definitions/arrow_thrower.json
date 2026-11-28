@@ -33,18 +33,18 @@
     {
       "type": "modernfoundry:base_stats",
       "stats": {
-        "tconstruct:accuracy": 0.65,
-        "tconstruct:velocity": 1.35,
-        "tconstruct:durability": 125,
-        "tconstruct:use_item_speed": 0.6
+        "modernfoundry:accuracy": 0.65,
+        "modernfoundry:velocity": 1.35,
+        "modernfoundry:durability": 125,
+        "modernfoundry:use_item_speed": 0.6
       }
     },
     {
       "type": "modernfoundry:multiply_stats",
       "multipliers": {
-        "tconstruct:draw_speed": 1.8,
-        "tconstruct:projectile_damage": 0.65,
-        "tconstruct:durability": 2.25
+        "modernfoundry:draw_speed": 1.8,
+        "modernfoundry:projectile_damage": 0.65,
+        "modernfoundry:durability": 2.25
       }
     },
     {

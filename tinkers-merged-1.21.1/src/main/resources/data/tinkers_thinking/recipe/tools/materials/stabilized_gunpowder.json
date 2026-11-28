@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/stabilized_gunpowder",
   "ingredient": {
     "item": "tinkers_thinking:stabilized_gunpowder"
   },

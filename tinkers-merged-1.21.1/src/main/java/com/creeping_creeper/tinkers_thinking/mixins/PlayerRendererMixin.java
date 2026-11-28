@@ -24,7 +24,8 @@ public abstract class PlayerRendererMixin {
          target = "Lnet/minecraft/world/item/ItemStack;getUseAnimation()Lnet/minecraft/world/item/UseAnim;",
          shift = Shift.AFTER
       )},
-      cancellable = true
+      cancellable = true,
+      require = 0
    )
    private static void getArmPose(AbstractClientPlayer p_117795_, InteractionHand p_117796_, CallbackInfoReturnable<ArmPose> cir) {
       ItemStack itemstack = p_117795_.getItemInHand(p_117796_);
@@ -38,7 +39,8 @@ public abstract class PlayerRendererMixin {
       at = @At(
          value = "INVOKE",
          target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;"
-      )
+      ),
+      require = 0
    )
    private static Item getItem(ItemStack stack) {
       return stack.is(ModTags.Items.LOADING_ANIMATION) ? Items.CROSSBOW : stack.getItem();

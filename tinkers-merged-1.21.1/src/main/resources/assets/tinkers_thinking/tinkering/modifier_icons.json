@@ -21,54 +21,54 @@
     "modernfoundry:gui/modifiers/plus"
   ],
   "tinkers_thinking:bronze": [
-    "modernfoundry:item/tool/parts/ingot_tconstruct_bronze",
+    "modernfoundry:item/tool/parts/ingot_modernfoundry_bronze",
     "modernfoundry:gui/modifiers/plus"
   ],
   "tinkers_thinking:battle_advanced": [
-    "modernfoundry:item/tool/battlesign/head_tconstruct_iron",
+    "modernfoundry:item/tool/battlesign/head_modernfoundry_iron",
     "modernfoundry:item/tool/battlesign/handle_tinkers_thinking_obsidian_bronze",
     "modernfoundry:gui/modifiers/tier"
   ],
   "tinkers_thinking:charge_advanced": [
-    "modernfoundry:item/tool/war_pick/limb_tconstruct_iron",
-    "modernfoundry:item/tool/war_pick/body_tconstruct_wood",
-    "modernfoundry:item/tool/war_pick/bowstring_tconstruct_skyslime_vine",
+    "modernfoundry:item/tool/war_pick/limb_modernfoundry_iron",
+    "modernfoundry:item/tool/war_pick/body_modernfoundry_wood",
+    "modernfoundry:item/tool/war_pick/bowstring_modernfoundry_skyslime_vine",
     "modernfoundry:gui/modifiers/tier"
   ],
   "tinkers_thinking:melt_advanced": [
-    "modernfoundry:item/tool/melting_pan/handle_tconstruct_wood",
-    "modernfoundry:item/tool/melting_pan/head_tconstruct_iron",
+    "modernfoundry:item/tool/melting_pan/handle_modernfoundry_wood",
+    "modernfoundry:item/tool/melting_pan/head_modernfoundry_iron",
     "modernfoundry:gui/modifiers/tier"
   ],
   "tinkers_thinking:swash_advanced": [
-    "modernfoundry:item/tool/swasher/blade_tconstruct_iron",
-    "modernfoundry:item/tool/swasher/barrel_tconstruct_cobalt",
-    "modernfoundry:item/tool/swasher/handle_tconstruct_wood",
-    "modernfoundry:item/tool/swasher/modifiers/tconstruct_tank",
+    "modernfoundry:item/tool/swasher/blade_modernfoundry_iron",
+    "modernfoundry:item/tool/swasher/barrel_modernfoundry_cobalt",
+    "modernfoundry:item/tool/swasher/handle_modernfoundry_wood",
+    "modernfoundry:item/tool/swasher/modifiers/modernfoundry_tank",
     "modernfoundry:gui/modifiers/tier"
   ],
   "tinkers_thinking:attack_advanced": [
-    "modernfoundry:item/tool/pickaxe/handle_tconstruct_cobalt",
-    "modernfoundry:item/tool/minotaur_axe/back_tconstruct_wood",
-    "modernfoundry:item/tool/minotaur_axe/front_tconstruct_iron",
+    "modernfoundry:item/tool/pickaxe/handle_modernfoundry_cobalt",
+    "modernfoundry:item/tool/minotaur_axe/back_modernfoundry_wood",
+    "modernfoundry:item/tool/minotaur_axe/front_modernfoundry_iron",
     "modernfoundry:gui/modifiers/tier"
   ],
   "tinkers_thinking:density_advanced": [
-    "tinkers_thinking:item/tool/mace/plate_tconstruct_iron",
+    "tinkers_thinking:item/tool/mace/plate_modernfoundry_iron",
     "tinkers_thinking:item/tool/mace/head",
-    "tinkers_thinking:item/tool/mace/handle_tconstruct_wood",
+    "tinkers_thinking:item/tool/mace/handle_modernfoundry_wood",
     "modernfoundry:gui/modifiers/tier"
   ],
   "tinkers_thinking:repeating_advanced": [
-    "tinkers_thinking:item/tool/repeating_crossbow/limb_tconstruct_iron",
-    "tinkers_thinking:item/tool/repeating_crossbow/body_tconstruct_wood",
-    "tinkers_thinking:item/tool/repeating_crossbow/bowstring_1_tconstruct_skyslime_vine",
+    "tinkers_thinking:item/tool/repeating_crossbow/limb_modernfoundry_iron",
+    "tinkers_thinking:item/tool/repeating_crossbow/body_modernfoundry_wood",
+    "tinkers_thinking:item/tool/repeating_crossbow/bowstring_1_modernfoundry_skyslime_vine",
     "modernfoundry:gui/modifiers/tier"
   ],
   "tinkers_thinking:counter_advanced": [
-    "tinkers_thinking:item/tool/cutlass/blade_tconstruct_iron",
-    "tinkers_thinking:item/tool/cutlass/handle_tconstruct_cobalt",
-    "tinkers_thinking:item/tool/cutlass/binding_tconstruct_wood",
+    "tinkers_thinking:item/tool/cutlass/blade_modernfoundry_iron",
+    "tinkers_thinking:item/tool/cutlass/handle_modernfoundry_cobalt",
+    "tinkers_thinking:item/tool/cutlass/binding_modernfoundry_wood",
     "modernfoundry:gui/modifiers/tier"
   ],
   "tinkers_thinking:glow_advanced": [

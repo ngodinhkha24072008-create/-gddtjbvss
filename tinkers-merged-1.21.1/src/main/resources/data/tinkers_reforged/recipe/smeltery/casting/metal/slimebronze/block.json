@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_reforged:smeltery/casting/metal/slimebronze/block",
   "cooling_time": 144,
   "fluid": {
     "amount": 810,

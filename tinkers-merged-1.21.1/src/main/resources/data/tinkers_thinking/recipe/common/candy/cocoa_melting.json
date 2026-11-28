@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/candy/cocoa_melting",
   "ingredient": {
     "item": "minecraft:cocoa_beans"
   },

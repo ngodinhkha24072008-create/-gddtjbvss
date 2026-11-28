@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_reforged:smeltery/casting/metal/germanium/gear_gold_cast",
   "cast": {
     "tag": "modernfoundry:casts/multi_use/gear"
   },

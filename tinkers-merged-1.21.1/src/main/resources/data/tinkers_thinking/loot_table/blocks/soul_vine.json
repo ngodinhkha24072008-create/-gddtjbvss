@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:soul_vine"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

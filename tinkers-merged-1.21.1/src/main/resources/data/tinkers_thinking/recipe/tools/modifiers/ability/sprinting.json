@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ability/sprinting",
   "inputs": [
     {
       "tag": "c:dusts/redstone"

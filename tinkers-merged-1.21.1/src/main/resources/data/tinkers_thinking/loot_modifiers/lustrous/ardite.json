@@ -1,6 +1,6 @@
 {
   "type": "hilt:add_entry",
-  "neoforge:conditions": [
+  "conditions": [
     {
       "condition": "hilt:block_tag",
       "tag": "c:ores/ardite"

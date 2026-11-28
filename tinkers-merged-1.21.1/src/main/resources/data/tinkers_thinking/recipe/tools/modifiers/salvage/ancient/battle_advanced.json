@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier_salvage",
+  "id": "tinkers_thinking:tools/modifiers/salvage/ancient/battle_advanced",
   "tools": {
     "item": "modernfoundry:battlesign"
   },

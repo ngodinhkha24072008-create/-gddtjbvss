@@ -1,5 +1,6 @@
 {
   "type": "tinkers_thinking:drying_rack",
+  "id": "tinkers_thinking:drying_rack/mud_to_clay",
   "ingredient": [
     {
       "item": "minecraft:mud"

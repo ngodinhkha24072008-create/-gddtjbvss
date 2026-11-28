@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/adamantium/ingot",
   "ingredient": {
     "tag": "c:ingots/adamantium"
   },

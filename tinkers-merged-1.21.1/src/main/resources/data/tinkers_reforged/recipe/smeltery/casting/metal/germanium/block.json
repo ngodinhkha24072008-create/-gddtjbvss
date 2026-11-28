@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_reforged:smeltery/casting/metal/germanium/block",
   "cooling_time": 325,
   "fluid": {
     "amount": 810,

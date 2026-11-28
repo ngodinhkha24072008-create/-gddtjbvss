@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/candy/white_chocolate_alloy",
   "inputs": [
     {
       "fluid": "tinkers_thinking:molten_black_chocolate",

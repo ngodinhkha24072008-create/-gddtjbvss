@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/stewium/composite",
   "input": "tinkers_thinking:ardite",
   "fluid": {
     "tag": "c:rabbit_stew",

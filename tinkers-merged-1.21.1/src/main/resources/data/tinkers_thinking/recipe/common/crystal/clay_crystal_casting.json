@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/crystal/clay_crystal_casting",
   "cast": {
     "item": "minecraft:clay"
   },

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:tool_building",
+  "id": "tinkers_thinking:tools/quartz_staff",
   "extra_requirements": [
     {
       "item": "tinkers_thinking:quartz_crystal"

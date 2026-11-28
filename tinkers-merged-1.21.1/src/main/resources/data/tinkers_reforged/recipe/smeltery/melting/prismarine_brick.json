@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_reforged:smeltery/melting/prismarine_brick",
   "ingredient": {
     "item": "minecraft:prismarine_bricks"
   },

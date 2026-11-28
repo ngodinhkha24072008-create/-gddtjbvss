@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_reforged:smeltery/melting/metal/thallium/block",
   "ingredient": {
     "tag": "c:storage_blocks/thallium"
   },

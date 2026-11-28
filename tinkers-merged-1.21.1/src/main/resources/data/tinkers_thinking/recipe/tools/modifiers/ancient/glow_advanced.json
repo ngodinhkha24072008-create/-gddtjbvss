@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ancient/glow_advanced",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "tinkers_waste"
     }
   ],
-  "type": "modernfoundry:modifier",
   "inputs": [
     {
       "tag": "c:ingots/amethyst_bronze"

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ancient/density_advanced",
   "inputs": [
     {
       "tag": "c:ingots/electrical_steel"

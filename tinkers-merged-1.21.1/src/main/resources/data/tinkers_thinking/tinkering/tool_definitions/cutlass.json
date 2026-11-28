@@ -34,18 +34,18 @@
     {
       "type": "modernfoundry:base_stats",
       "stats": {
-        "tconstruct:block_amount": 40.0,
-        "tconstruct:block_angle": 60.0,
-        "tconstruct:attack_damage": 3.0,
-        "tconstruct:attack_speed": 0.7,
-        "tconstruct:use_item_speed": 0.1
+        "modernfoundry:block_amount": 40.0,
+        "modernfoundry:block_angle": 60.0,
+        "modernfoundry:attack_damage": 3.0,
+        "modernfoundry:attack_speed": 0.7,
+        "modernfoundry:use_item_speed": 0.1
       }
     },
     {
       "type": "modernfoundry:multiply_stats",
       "multipliers": {
-        "tconstruct:durability": 0.9,
-        "tconstruct:attack_damage": 1.2
+        "modernfoundry:durability": 0.9,
+        "modernfoundry:attack_damage": 1.2
       }
     },
     {

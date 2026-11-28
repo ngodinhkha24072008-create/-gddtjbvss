@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "tinkers_thinking:tools/recycling/mace",
   "parts": [
     "modernfoundry:repair_kit",
     "modernfoundry:tool_handle"

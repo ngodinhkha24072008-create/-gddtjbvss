@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/tinkers_bronze/nugget",
   "ingredient": {
     "tag": "c:nuggets/tinkers_bronze"
   },

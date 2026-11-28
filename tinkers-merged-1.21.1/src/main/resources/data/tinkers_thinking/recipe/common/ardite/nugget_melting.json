@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/ardite/nugget_melting",
   "ingredient": {
     "tag": "c:nuggets/ardite"
   },

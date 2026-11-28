@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/ancient_ceramic/ancient_ceramic",
   "cast": {
     "tag": "minecraft:decorated_pot_sherds"
   },

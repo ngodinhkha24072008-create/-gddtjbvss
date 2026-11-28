@@ -1,12 +1,12 @@
 {
   "perStat": {
-    "tconstruct:armor": [
+    "modernfoundry:armor": [
       {
         "level": 1,
         "name": "tinkers_reforged:friction"
       }
     ],
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "level": 1,
         "name": "tinkers_reforged:triad"

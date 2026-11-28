@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/ardite/platform_melting",
   "ingredient": {
     "item": "tinkers_thinking:ardite_platform"
   },

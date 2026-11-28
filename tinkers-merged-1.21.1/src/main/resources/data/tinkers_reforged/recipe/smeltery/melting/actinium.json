@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_melting",
+  "id": "tinkers_reforged:smeltery/melting/actinium",
   "input": "tinkers_reforged:actinium",
   "result": {
     "amount": 90,

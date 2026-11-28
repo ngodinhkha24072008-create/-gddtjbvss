@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_reforged:smeltery/casting/prismarine_shard_sand",
   "cast": {
     "tag": "modernfoundry:casts/single_use/gem"
   },

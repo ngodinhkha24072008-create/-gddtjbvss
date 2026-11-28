@@ -2,7 +2,7 @@
   "asset_name": "tinkers_reforged_thallium",
   "description": {
     "color": "#28373C",
-    "translate": "trim_material.tconstruct.format",
+    "translate": "trim_material.modernfoundry.format",
     "with": [
       {
         "translate": "material.tinkers_reforged.thallium"

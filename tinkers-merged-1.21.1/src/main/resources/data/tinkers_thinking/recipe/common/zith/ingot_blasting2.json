@@ -4,7 +4,9 @@
   "ingredient": {
     "item": "tinkers_thinking:zith_ore"
   },
-  "result": "modernfoundry:obsidian_pane",
+  "result": {
+    "id": "modernfoundry:obsidian_pane"
+  },
   "experience": 1.2,
   "cookingtime": 200
 }

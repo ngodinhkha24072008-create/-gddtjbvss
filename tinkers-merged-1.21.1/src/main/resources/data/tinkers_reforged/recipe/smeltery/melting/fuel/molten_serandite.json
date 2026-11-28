@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting_fuel",
+  "id": "tinkers_reforged:smeltery/melting/fuel/molten_serandite",
   "duration": 200,
   "fluid": {
     "amount": 50,

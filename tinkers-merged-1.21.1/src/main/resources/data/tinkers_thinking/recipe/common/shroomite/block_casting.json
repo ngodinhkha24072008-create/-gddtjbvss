@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/shroomite/block_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_shroomite",
     "amount": 810

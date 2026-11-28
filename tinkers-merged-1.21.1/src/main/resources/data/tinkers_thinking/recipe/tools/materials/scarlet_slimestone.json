@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/scarlet_slimestone",
   "input": "modernfoundry:rock",
   "fluid": {
     "fluid": "tinkers_thinking:scarletslime",

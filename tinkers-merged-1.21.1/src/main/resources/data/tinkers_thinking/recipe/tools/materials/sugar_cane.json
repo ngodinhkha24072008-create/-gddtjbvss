@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/sugar_cane",
   "ingredient": {
     "item": "minecraft:sugar_cane"
   },

@@ -1,6 +1,6 @@
 {
   "stats": {
-    "tconstruct:binding": {},
-    "tconstruct:bowstring": {}
+    "modernfoundry:binding": {},
+    "modernfoundry:bowstring": {}
   }
 }

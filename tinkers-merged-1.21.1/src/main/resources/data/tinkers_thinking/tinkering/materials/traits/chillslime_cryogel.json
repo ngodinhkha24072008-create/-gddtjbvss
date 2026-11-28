@@ -1,11 +1,11 @@
 {
   "perStat": {
-    "tconstruct:arrow_head": [
+    "modernfoundry:arrow_head": [
       {
         "name": "tinkers_thinking:frozen"
       }
     ],
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "name": "tinkers_thinking:overfreeze"
       },
@@ -13,7 +13,7 @@
         "name": "modernfoundry:overslime"
       }
     ],
-    "tconstruct:armor": [
+    "modernfoundry:armor": [
       {
         "name": "tinkers_thinking:overfreeze"
       },
@@ -21,7 +21,7 @@
         "name": "modernfoundry:overslime"
       }
     ],
-    "tconstruct:plating_shield": [
+    "modernfoundry:plating_shield": [
       {
         "name": "tinkers_thinking:overfreeze"
       },

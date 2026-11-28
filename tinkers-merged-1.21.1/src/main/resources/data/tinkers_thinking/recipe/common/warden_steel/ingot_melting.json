@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/warden_steel/ingot_melting",
   "ingredient": {
     "tag": "c:ingots/warden_steel"
   },

@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "neoforge:conditions": [
+          "conditions": [
             {
               "condition": "minecraft:match_tool",
               "predicate": {
@@ -54,7 +54,7 @@
           "name": "tinkers_thinking:chlorophyll_a"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:inverted",
           "term": {
@@ -101,7 +101,7 @@
           "name": "tinkers_thinking:chlorophyll_b"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:inverted",
           "term": {

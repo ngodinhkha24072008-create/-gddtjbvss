@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/echo_bronze/material_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_echo_bronze",
     "amount": 90

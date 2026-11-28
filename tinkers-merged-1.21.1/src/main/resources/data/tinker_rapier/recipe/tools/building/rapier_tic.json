@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:tool_building",
+  "id": "tinker_rapier:tools/building/rapier_tic",
   "result": "tinker_rapier:rapier_tic",
   "result_count": 1
 }

@@ -3,6 +3,8 @@
   "ingredient": {
     "tag": "c:gems/quartz"
   },
-  "result": "tinkers_thinking:quartz_crystal",
+  "result": {
+    "id": "tinkers_thinking:quartz_crystal"
+  },
   "count": 1
 }

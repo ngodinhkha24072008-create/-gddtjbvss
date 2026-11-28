@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:ore_melting",
+  "id": "tinkers_thinking:common/ardite/raw_ardite_melting",
   "rate": "metal",
   "ingredient": {
     "item": "tinkers_thinking:raw_ardite"

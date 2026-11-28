@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/copshowium/ingot_cast_sand",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "crossroads"
     }
   ],
-  "type": "modernfoundry:casting_table",
   "cast": {
     "tag": "modernfoundry:casts/single_use/ingot"
   },

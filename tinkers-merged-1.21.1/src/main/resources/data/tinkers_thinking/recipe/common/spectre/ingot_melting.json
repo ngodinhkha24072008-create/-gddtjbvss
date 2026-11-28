@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/spectre/ingot_melting",
   "ingredient": {
     "tag": "c:ingots/spectre"
   },

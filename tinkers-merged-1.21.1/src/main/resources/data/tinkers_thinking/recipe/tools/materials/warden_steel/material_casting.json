@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/warden_steel/material_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_warden_steel",
     "amount": 90

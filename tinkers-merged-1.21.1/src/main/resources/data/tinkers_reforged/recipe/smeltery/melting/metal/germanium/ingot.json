@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_reforged:smeltery/melting/metal/germanium/ingot",
   "ingredient": {
     "tag": "c:ingots/germanium"
   },

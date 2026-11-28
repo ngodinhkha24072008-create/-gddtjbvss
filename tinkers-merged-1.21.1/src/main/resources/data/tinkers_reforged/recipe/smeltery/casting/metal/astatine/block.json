@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_reforged:smeltery/casting/metal/astatine/block",
   "cooling_time": 164,
   "fluid": {
     "amount": 810,

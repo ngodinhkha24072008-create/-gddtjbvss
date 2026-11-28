@@ -3,7 +3,9 @@
   "ingredient": {
     "item": "minecraft:egg"
   },
-  "result": "tinkers_thinking:fried_egg",
+  "result": {
+    "id": "tinkers_thinking:fried_egg"
+  },
   "experience": 0.35,
   "cookingtime": 100
 }

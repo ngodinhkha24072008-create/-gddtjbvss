@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:ore_melting",
+  "id": "tinkers_thinking:common/zith/ore_melting",
   "rate": "metal",
   "ingredient": {
     "item": "tinkers_thinking:zith_ore"

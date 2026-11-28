@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/candy/sugar_canes_melting",
   "ingredient": {
     "item": "minecraft:sugar_cane"
   },

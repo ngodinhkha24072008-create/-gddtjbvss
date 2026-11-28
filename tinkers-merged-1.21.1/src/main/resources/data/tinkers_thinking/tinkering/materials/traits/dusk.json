@@ -1,11 +1,11 @@
 {
   "perStat": {
-    "tconstruct:arrow_head": [
+    "modernfoundry:arrow_head": [
       {
         "name": "tinkers_thinking:riding_shoot"
       }
     ],
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "name": "tinkers_thinking:overdose"
       },
@@ -13,7 +13,7 @@
         "name": "modernfoundry:overslime"
       }
     ],
-    "tconstruct:shield_core": [
+    "modernfoundry:shield_core": [
       {
         "name": "tinkers_thinking:spiky"
       }

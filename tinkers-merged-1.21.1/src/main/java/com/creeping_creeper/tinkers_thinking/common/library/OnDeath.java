@@ -19,10 +19,6 @@ import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability;
 import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability.Holder;
 
-@EventBusSubscriber(
-   modid = "tinkers_thinking",
-   bus = Bus.GAME
-)
 public class OnDeath implements ModifierUtils {
    @SubscribeEvent
    public void onLivingDying(LivingDeathEvent event) {

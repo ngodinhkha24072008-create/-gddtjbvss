@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ancient/repeating_advanced",
   "inputs": [
     {
       "tag": "c:ingots/beetron"

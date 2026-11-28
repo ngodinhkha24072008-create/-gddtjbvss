@@ -3,7 +3,7 @@
     {
       "type": "modernfoundry:base_stats",
       "stats": {
-        "tconstruct:tank_capacity": 3000
+        "modernfoundry:tank_capacity": 3000
       }
     },
     {

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/casts/guard_cast_gold",
   "cast": {
     "type": "modernfoundry:material",
     "item": "tinkers_thinking:guard"

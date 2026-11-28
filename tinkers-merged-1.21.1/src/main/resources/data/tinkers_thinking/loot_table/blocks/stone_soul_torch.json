@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:stone_soul_torch"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

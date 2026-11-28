@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/tinkers_bronze/ingot",
   "ingredient": {
     "tag": "c:ingots/tinkers_bronze"
   },

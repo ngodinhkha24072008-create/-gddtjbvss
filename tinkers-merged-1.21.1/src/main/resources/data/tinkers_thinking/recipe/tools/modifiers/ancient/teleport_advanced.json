@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ancient/teleport_advanced",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "tinkersinnovation"
     }
   ],
-  "type": "modernfoundry:modifier",
   "inputs": [
     {
       "tag": "c:ingots/slimton"

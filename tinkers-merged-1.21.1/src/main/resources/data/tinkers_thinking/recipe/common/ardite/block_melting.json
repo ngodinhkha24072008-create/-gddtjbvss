@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/ardite/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:ardite_block"
   },

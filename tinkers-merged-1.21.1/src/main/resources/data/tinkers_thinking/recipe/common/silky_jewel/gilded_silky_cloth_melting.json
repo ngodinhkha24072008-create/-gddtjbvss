@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/silky_jewel/gilded_silky_cloth_melting",
   "rate": "metal",
   "ingredient": {
     "item": "tinkers_thinking:gilded_silky_cloth"

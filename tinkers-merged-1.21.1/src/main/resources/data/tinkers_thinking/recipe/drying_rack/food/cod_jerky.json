@@ -1,5 +1,6 @@
 {
   "type": "tinkers_thinking:drying_rack",
+  "id": "tinkers_thinking:drying_rack/food/cod_jerky",
   "ingredient": [
     {
       "item": "minecraft:cod"

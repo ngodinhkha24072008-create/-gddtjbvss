@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:part_builder",
+  "id": "tinkers_thinking:parts/narrow_blade",
   "pattern": "tinkers_thinking:narrow_blade",
   "pattern_item": [
     {

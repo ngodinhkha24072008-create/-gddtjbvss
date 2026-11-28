@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/chlorophyte/block_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_chlorophyte",
     "amount": 810

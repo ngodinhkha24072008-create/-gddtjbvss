@@ -6,7 +6,7 @@
     }
   ],
   "perStat": {
-    "tconstruct:armor": [
+    "modernfoundry:armor": [
       {
         "level": 1,
         "name": "tinkers_reforged:decay_immunity"

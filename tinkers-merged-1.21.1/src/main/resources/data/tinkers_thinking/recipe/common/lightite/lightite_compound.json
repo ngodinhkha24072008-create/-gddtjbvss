@@ -1,9 +1,10 @@
 {
+  "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/lightite/lightite_compound",
   "condition": {
     "type": "neoforge:tag_filled",
     "tag": "c:molten_titanium"
   },
-  "type": "modernfoundry:casting_table",
   "cast": {
     "item": "minecraft:phantom_membrane"
   },

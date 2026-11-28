@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:raw_zith_block"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

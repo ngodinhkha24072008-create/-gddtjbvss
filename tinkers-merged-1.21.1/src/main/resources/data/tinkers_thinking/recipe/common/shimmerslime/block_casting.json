@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/shimmerslime/block_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_shimmerslime",
     "amount": 810

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/tempered_glass/pane_casting",
   "cooling_time": 65,
   "fluid": {
     "amount": 250,

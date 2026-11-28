@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/chillslime_cryogel",
   "ingredient": {
     "item": "tinkers_thinking:chillslime_cryogel"
   },

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/chlorophyte/seeking_arrow_melting",
   "ingredient": {
     "item": "tinkers_thinking:seeking_arrow"
   },

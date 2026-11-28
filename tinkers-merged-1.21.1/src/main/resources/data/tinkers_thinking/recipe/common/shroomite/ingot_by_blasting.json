@@ -4,7 +4,9 @@
   "ingredient": {
     "item": "tinkers_thinking:shroomite_compound"
   },
-  "result": "tinkers_thinking:shroomite_ingot",
+  "result": {
+    "id": "tinkers_thinking:shroomite_ingot"
+  },
   "experience": 1.2,
   "cookingtime": 100
 }

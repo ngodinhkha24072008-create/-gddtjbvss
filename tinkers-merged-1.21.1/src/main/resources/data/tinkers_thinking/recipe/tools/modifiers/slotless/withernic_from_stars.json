@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/slotless/withernic_from_stars",
   "inputs": [
     {
       "tag": "c:wither_bones"

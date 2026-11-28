@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/electrical_steel/nugget",
   "ingredient": {
     "tag": "c:nuggets/electrical_steel"
   },

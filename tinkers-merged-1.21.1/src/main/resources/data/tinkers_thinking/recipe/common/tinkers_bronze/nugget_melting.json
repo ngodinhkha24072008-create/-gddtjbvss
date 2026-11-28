@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/tinkers_bronze/nugget_melting",
   "ingredient": {
     "tag": "c:nuggets/tinkers_bronze"
   },

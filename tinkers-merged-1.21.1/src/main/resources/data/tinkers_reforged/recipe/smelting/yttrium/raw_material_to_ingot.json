@@ -7,5 +7,7 @@
   "ingredient": {
     "tag": "c:raw_materials/yttrium"
   },
-  "result": "tinkers_reforged:yttrium_ingot"
+  "result": {
+    "id": "tinkers_reforged:yttrium_ingot"
+  }
 }

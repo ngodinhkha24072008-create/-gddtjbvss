@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier_repair",
+  "id": "tinkers_thinking:tools/modifiers/overeat/earth",
   "modifier": "tinkers_thinking:overeat",
   "ingredient": {
     "item": "tinkers_thinking:earth_slime_drop"

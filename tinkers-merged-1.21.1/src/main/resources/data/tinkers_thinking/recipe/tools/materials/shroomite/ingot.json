@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/shroomite/ingot",
   "ingredient": {
     "tag": "c:ingots/shroomite"
   },

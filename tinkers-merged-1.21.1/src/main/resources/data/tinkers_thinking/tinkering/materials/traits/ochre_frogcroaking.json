@@ -1,6 +1,6 @@
 {
   "perStat": {
-    "tconstruct:ranged": [
+    "modernfoundry:ranged": [
       {
         "name": "tinkers_thinking:sculk_catalyse",
         "level": 1

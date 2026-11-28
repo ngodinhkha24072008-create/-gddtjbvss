@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/beetron/alloy",
   "inputs": [
     {
       "tag": "c:molten_iron",

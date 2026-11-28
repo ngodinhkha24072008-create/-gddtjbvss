@@ -1,6 +1,6 @@
 {
   "perStat": {
-    "tconstruct:ranged": [
+    "modernfoundry:ranged": [
       {
         "name": "tinkers_thinking:reverse"
       },
@@ -8,7 +8,7 @@
         "name": "tinkers_thinking:recharge"
       }
     ],
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "name": "tinkers_thinking:reverse"
       },

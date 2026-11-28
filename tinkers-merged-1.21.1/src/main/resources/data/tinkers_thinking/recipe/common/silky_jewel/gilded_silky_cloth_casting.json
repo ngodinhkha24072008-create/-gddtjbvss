@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/silky_jewel/gilded_silky_cloth_casting",
   "cast": {
     "item": "modernfoundry:silky_cloth"
   },

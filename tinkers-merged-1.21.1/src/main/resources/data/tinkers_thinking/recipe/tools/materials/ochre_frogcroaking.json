@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/ochre_frogcroaking",
   "ingredient": {
     "item": "tinkers_thinking:ochre_frogcroaking"
   },

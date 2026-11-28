@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/tinkers_bronze/ingot_melting",
   "ingredient": {
     "tag": "c:ingots/tinkers_bronze"
   },

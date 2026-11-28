@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:tempered_glass_pane"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

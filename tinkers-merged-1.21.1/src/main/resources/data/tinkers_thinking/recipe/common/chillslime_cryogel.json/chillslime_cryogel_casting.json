@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/chillslime_cryogel.json/chillslime_cryogel_casting",
   "cast": {
     "item": "tinkers_thinking:ashes"
   },

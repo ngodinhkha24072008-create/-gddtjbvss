@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/zith/block_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_zith",
     "amount": 810

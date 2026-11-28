@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_reforged:tools/materials/barium/block",
   "ingredient": {
     "tag": "c:storage_blocks/barium"
   },

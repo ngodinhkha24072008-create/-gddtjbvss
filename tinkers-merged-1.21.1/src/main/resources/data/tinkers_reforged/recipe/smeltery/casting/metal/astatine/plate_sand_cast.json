@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_reforged:smeltery/casting/metal/astatine/plate_sand_cast",
   "cast": {
     "tag": "modernfoundry:casts/single_use/plate"
   },

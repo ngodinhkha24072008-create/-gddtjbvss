@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/adamantium/nugget_melting",
   "ingredient": {
     "tag": "c:nuggets/adamantium"
   },

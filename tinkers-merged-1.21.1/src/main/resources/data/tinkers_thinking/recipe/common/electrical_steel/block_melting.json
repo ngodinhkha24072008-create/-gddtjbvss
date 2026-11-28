@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/electrical_steel/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:electrical_steel_block"
   },

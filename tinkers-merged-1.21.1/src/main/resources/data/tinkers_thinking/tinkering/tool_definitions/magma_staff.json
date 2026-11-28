@@ -3,17 +3,17 @@
     {
       "type": "modernfoundry:base_stats",
       "stats": {
-        "tconstruct:durability": 625.0,
-        "tconstruct:block_amount": 15.0,
-        "tconstruct:use_item_speed": 0.8,
-        "tconstruct:velocity": 1.2,
-        "tconstruct:accuracy": 0.4
+        "modernfoundry:durability": 625.0,
+        "modernfoundry:block_amount": 15.0,
+        "modernfoundry:use_item_speed": 0.8,
+        "modernfoundry:velocity": 1.2,
+        "modernfoundry:accuracy": 0.4
       }
     },
     {
       "type": "modernfoundry:multiply_stats",
       "multipliers": {
-        "tconstruct:projectile_damage": 1.15
+        "modernfoundry:projectile_damage": 1.15
       }
     },
     {

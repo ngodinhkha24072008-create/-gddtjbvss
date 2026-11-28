@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/scarletslime",
   "inputs": [
     {
       "tag": "c:molten_quartz",

@@ -4,7 +4,9 @@
   "ingredient": {
     "item": "tinkers_thinking:spectre_compound"
   },
-  "result": "tinkers_thinking:spectre_ingot",
+  "result": {
+    "id": "tinkers_thinking:spectre_ingot"
+  },
   "experience": 1.2,
   "cookingtime": 100
 }

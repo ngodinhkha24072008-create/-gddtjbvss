@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/obsidian_bronze/block",
   "ingredient": {
     "tag": "c:storage_blocks/obsidian_bronze"
   },

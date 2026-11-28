@@ -4,7 +4,9 @@
   "ingredient": {
     "item": "tinkers_thinking:ardite_ore"
   },
-  "result": "tinkers_thinking:ardite_ingot",
+  "result": {
+    "id": "tinkers_thinking:ardite_ingot"
+  },
   "experience": 1.2,
   "cookingtime": 200
 }

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:ore_melting",
+  "id": "tinkers_thinking:common/shroomite/compound_melting",
   "rate": "metal",
   "ingredient": {
     "item": "tinkers_thinking:shroomite_compound"

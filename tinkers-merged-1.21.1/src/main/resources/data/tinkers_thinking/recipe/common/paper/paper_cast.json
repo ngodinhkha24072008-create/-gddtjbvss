@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/paper/paper_cast",
   "fluid": {
     "fluid": "tinkers_thinking:pulp",
     "amount": 250

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/shroomite/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:shroomite_block"
   },

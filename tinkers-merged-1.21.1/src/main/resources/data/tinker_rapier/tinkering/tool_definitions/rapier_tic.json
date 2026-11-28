@@ -34,15 +34,15 @@
     {
       "type": "modernfoundry:base_stats",
       "stats": {
-        "tconstruct:attack_damage": 1.5,
-        "tconstruct:attack_speed": 2.75
+        "modernfoundry:attack_damage": 1.5,
+        "modernfoundry:attack_speed": 2.75
       }
     },
     {
       "type": "modernfoundry:multiply_stats",
       "multipliers": {
-        "tconstruct:durability": 0.75,
-        "tconstruct:mining_speed": 0.75
+        "modernfoundry:durability": 0.75,
+        "modernfoundry:mining_speed": 0.75
       }
     },
     {

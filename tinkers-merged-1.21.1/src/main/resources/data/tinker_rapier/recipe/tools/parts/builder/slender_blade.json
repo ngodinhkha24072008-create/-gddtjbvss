@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:part_builder",
+  "id": "tinker_rapier:tools/parts/builder/slender_blade",
   "cost": 6,
   "pattern": "tinker_rapier:slender_blade",
   "pattern_item": [

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/paper/pulp_bottle_cast",
   "cast": {
     "item": "minecraft:glass_bottle"
   },

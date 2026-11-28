@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/beetron/nugget",
   "ingredient": {
     "tag": "c:nuggets/beetron"
   },

@@ -13,7 +13,9 @@ import modernmods.modernfoundry.smeltery.block.entity.CastingBlockEntity;
 
 @Mixin({CastingBlockEntity.class})
 public class CastingBlockEntityMixin {
+   @org.spongepowered.asm.mixin.Shadow
    private int timer;
+   @org.spongepowered.asm.mixin.Shadow
    private int coolingTime;
 
    @Unique
@@ -28,11 +30,12 @@ public class CastingBlockEntityMixin {
       method = {"serverTick"},
       at = {@At(
          value = "INVOKE",
-         target = "Lslimeknights/tconstruct/smeltery/block/entity/tank/CastingFluidHandler;getFluid()Lnet/minecraftforge/fluids/FluidStack;",
+         target = "Lmodernmods/modernfoundry/smeltery/block/entity/tank/CastingFluidHandler;getFluid()Lnet/neoforged/neoforge/fluids/FluidStack;",
          shift = Shift.BY,
          by = 2
       )},
-      remap = false
+      remap = false,
+      require = 0
    )
    private void serverTick(Level level, BlockPos pos, CallbackInfo ci) {
       if (this.isFaceBlock(level, pos)) {
@@ -44,11 +47,12 @@ public class CastingBlockEntityMixin {
       method = {"clientTick"},
       at = {@At(
          value = "INVOKE",
-         target = "Lnet/minecraftforge/fluids/FluidStack;isEmpty()Z",
+         target = "Lnet/neoforged/neoforge/fluids/FluidStack;isEmpty()Z",
          shift = Shift.BY,
          by = 1
       )},
-      remap = false
+      remap = false,
+      require = 0
    )
    private void clientTick(Level level, BlockPos pos, CallbackInfo ci) {
       if (this.isFaceBlock(level, pos)) {

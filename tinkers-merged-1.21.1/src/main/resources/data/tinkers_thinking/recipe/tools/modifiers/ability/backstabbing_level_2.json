@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ability/backstabbing_level_2",
   "neoforge:conditions": [
     {
       "modid": "farmersdelight",
       "type": "neoforge:mod_loaded"
     }
   ],
-  "type": "modernfoundry:modifier",
   "inputs": [
     {
       "tag": "c:ingots/pig_iron"

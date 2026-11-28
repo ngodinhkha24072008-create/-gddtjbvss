@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_reforged:smeltery/melting/metal/germanium/block",
   "ingredient": {
     "tag": "c:storage_blocks/germanium"
   },

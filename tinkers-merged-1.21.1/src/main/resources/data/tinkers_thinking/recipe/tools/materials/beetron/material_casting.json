@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/beetron/material_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_beetron",
     "amount": 90

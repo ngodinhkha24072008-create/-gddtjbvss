@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier_repair",
+  "id": "tinkers_thinking:tools/modifiers/overeat/sky",
   "modifier": "tinkers_thinking:overeat",
   "ingredient": {
     "item": "tinkers_thinking:sky_slime_drop"

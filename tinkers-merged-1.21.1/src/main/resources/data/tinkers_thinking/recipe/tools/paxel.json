@@ -1,4 +1,5 @@
 {
   "type": "modernfoundry:tool_building",
+  "id": "tinkers_thinking:tools/paxel",
   "result": "tinkers_thinking:paxel"
 }

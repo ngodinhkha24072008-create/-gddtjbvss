@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/tempered_glass/material_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_tempered_glass",
     "amount": 250

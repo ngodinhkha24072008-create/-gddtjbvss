@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/black_chocolate/black_chocolate",
   "ingredient": {
     "item": "tinkers_thinking:black_chocolate"
   },

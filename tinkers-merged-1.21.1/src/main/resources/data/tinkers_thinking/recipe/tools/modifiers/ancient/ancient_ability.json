@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ancient/ancient_ability",
   "inputs": [
     {
       "item": "tinkers_thinking:magma_crystal"

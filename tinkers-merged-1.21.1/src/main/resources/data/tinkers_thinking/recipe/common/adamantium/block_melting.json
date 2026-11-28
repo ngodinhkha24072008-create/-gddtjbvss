@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/adamantium/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:adamantium_block"
   },

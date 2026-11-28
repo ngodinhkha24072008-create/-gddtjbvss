@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/lightite/ingot",
   "ingredient": {
     "tag": "c:ingots/lightite"
   },

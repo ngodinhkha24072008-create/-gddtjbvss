@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "tinkers_thinking:tools/recycling/repeating_crossbow",
   "parts": [
     "modernfoundry:bow_limb",
     "modernfoundry:bow_grip",

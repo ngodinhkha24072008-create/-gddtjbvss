@@ -1,6 +1,6 @@
 {
   "perStat": {
-    "tconstruct:ranged": [
+    "modernfoundry:ranged": [
       {
         "name": "tinkers_thinking:sculk_catalyse",
         "level": 1
@@ -10,7 +10,7 @@
         "level": 1
       }
     ],
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "name": "tinkers_thinking:sculk_catalyse",
         "level": 1

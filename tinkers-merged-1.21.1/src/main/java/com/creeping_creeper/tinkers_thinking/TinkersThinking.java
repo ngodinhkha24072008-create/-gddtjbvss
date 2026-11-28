@@ -35,9 +35,6 @@ import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability.Ti
 import modernmods.modernfoundry.library.utils.Util;
 
 @Mod("tinkers_thinking")
-@EventBusSubscriber(
-   bus = Bus.MOD
-)
 public class TinkersThinking {
    public static final String MODID = "tinkers_thinking";
    public static final Logger LOGGER = LogUtils.getLogger();
@@ -50,15 +47,14 @@ public class TinkersThinking {
       ModSounds.SOUND_EVENTS.register(bus);
       bus.register(new ModModifiers());
       bus.addListener(this::commonSetup);
-      NeoForge.EVENT_BUS.register(this);
       ModModifiers.init(bus);
       if (net.neoforged.fml.loading.FMLEnvironment.dist == Dist.CLIENT) { ClientEvents.onConstruct(); }
-      bus.register(new ModCommonItems());
-      bus.register(new ModToolItems());
-      bus.register(new ModFluids());
-      bus.register(new ModEffects());
+      new ModCommonItems(); // force class init so its static registrations happen
+      new ModToolItems(); // force class init so its static registrations happen
+      new ModFluids(); // force class init so its static registrations happen
+      new ModEffects(); // force class init so its static registrations happen
       bus.register(new ModBlockEntities());
-      bus.register(new ModEntities());
+      new ModEntities(); // force class init so its static registrations happen
       ModModule.initRegisters();
       ModDataKeys.init();
    }

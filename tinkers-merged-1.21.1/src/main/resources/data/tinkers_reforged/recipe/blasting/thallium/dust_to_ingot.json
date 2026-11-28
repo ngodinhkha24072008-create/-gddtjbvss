@@ -7,5 +7,7 @@
   "ingredient": {
     "tag": "c:dusts/thallium"
   },
-  "result": "tinkers_reforged:thallium_ingot"
+  "result": {
+    "id": "tinkers_reforged:thallium_ingot"
+  }
 }

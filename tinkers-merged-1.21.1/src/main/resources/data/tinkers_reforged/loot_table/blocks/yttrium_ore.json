@@ -9,7 +9,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "neoforge:conditions": [
+              "conditions": [
                 {
                   "condition": "minecraft:match_tool",
                   "predicate": {

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/zith/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:zith_block"
   },

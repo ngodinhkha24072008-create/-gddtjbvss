@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/candy/syrup_alloy",
   "inputs": [
     {
       "tag": "c:honey",

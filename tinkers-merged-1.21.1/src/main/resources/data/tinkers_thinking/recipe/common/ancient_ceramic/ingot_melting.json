@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/ancient_ceramic/ingot_melting",
   "ingredient": {
     "item": "tinkers_thinking:ancient_ceramic"
   },

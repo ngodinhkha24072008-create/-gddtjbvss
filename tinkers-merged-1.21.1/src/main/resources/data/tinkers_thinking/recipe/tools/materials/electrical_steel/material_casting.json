@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/electrical_steel/material_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_electrical_steel",
     "amount": 90

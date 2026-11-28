@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/ardite/ingot",
   "ingredient": {
     "tag": "c:ingots/ardite"
   },

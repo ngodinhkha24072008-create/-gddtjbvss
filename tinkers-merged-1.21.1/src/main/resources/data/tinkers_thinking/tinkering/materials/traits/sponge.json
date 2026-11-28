@@ -1,6 +1,6 @@
 {
   "perStat": {
-    "tconstruct:melee_harvest": [
+    "modernfoundry:melee_harvest": [
       {
         "name": "tinkers_thinking:disarm",
         "level": 1

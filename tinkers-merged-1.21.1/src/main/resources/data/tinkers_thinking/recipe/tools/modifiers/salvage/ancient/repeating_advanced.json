@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier_salvage",
+  "id": "tinkers_thinking:tools/modifiers/salvage/ancient/repeating_advanced",
   "tools": {
     "item": "tinkers_thinking:repeating_crossbow"
   },

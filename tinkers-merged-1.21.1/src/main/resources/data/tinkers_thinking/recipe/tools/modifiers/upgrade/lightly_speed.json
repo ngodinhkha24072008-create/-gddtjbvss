@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:incremental_modifier",
+  "id": "tinkers_thinking:tools/modifiers/upgrade/lightly_speed",
   "input": {
     "item": "tinkers_thinking:lightite_reinforcement"
   },

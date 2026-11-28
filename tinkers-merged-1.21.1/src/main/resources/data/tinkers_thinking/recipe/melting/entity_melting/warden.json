@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:entity_melting",
+  "id": "tinkers_thinking:melting/entity_melting/warden",
   "damage": 2,
   "entity": {
     "type": "minecraft:warden"

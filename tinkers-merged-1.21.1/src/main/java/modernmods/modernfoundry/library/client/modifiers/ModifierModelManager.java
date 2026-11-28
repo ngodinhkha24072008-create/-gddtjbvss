@@ -91,7 +91,12 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
   public void onReloadSafe(ResourceManager manager) {
     // fire an event so people can register loaders, was the easiest way to do so after modifiers are registered but before models load
     if (!eventFired) {
-      TConstruct.getModBus().post(new ModifierModelRegistrationEvent());
+      // post to every mod's bus so addons can register modifier models (one bus per mod in NeoForge 1.21)
+      net.neoforged.fml.ModList.get().forEachModContainer((modId, container) -> {
+        if (container.getEventBus() != null) {
+          container.getEventBus().post(new ModifierModelRegistrationEvent());
+        }
+      });
       eventFired = true;
     }
 

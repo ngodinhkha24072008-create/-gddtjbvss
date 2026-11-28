@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_reforged:smeltery/casting/metal/actinium/block",
   "cooling_time": 256,
   "fluid": {
     "amount": 810,

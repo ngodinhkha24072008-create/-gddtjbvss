@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:modifier_salvage",
+  "id": "tinkerslevellingaddon:tools/modifiers/salvage/ability/improvable",
   "modifier": "tinkerslevellingaddon:improvable",
   "slots": {
     "abilities": 1

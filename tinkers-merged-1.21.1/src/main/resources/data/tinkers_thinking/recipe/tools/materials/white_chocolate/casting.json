@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material_fluid",
+  "id": "tinkers_thinking:tools/materials/white_chocolate/casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_white_chocolate",
     "amount": 90

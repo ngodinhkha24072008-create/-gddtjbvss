@@ -1,5 +1,6 @@
 {
   "type": "tinkers_thinking:drying_rack",
+  "id": "tinkers_thinking:drying_rack/food/magma_slime_drop",
   "ingredient": [
     {
       "item": "minecraft:magma_cream"

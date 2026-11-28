@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_reforged:smeltery/casting/metal/barium/block",
   "cooling_time": 212,
   "fluid": {
     "amount": 810,

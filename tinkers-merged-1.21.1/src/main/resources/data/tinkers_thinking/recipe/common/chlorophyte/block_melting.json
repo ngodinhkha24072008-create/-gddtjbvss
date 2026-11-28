@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/chlorophyte/block_melting",
   "ingredient": {
     "item": "tinkers_thinking:chlorophyte_block"
   },

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_basin",
+  "id": "tinkers_thinking:common/warden_steel/block_casting",
   "fluid": {
     "fluid": "tinkers_thinking:molten_warden_steel",
     "amount": 810

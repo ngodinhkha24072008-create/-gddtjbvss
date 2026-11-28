@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:ancient_ceramic_block"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

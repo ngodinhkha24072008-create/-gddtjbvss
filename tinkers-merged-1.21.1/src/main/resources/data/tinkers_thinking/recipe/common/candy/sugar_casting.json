@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/candy/sugar_casting",
   "fluid": {
     "fluid": "tinkers_thinking:syrup",
     "amount": 100

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_reforged:tools/materials/thallium/block",
   "ingredient": {
     "tag": "c:storage_blocks/thallium"
   },

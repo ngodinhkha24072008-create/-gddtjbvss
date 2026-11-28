@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/spectre/nugget_melting",
   "ingredient": {
     "tag": "c:nuggets/spectre"
   },

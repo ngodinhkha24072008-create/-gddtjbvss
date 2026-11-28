@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/electrical_steel/ingot",
   "ingredient": {
     "tag": "c:ingots/electrical_steel"
   },

@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:table_casting_material",
+  "id": "tinkers_thinking:parts/guard_casting_sand",
   "cast": {
     "tag": "modernfoundry:casts/single_use/guard"
   },

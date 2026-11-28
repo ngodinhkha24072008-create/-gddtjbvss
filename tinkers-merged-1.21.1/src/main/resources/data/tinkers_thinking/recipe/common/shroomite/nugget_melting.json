@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_thinking:common/shroomite/nugget_melting",
   "ingredient": {
     "tag": "c:nuggets/shroomite"
   },

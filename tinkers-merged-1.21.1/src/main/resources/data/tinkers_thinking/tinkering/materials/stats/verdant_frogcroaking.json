@@ -1,13 +1,13 @@
 {
   "stats": {
-    "tconstruct:binding": {},
-    "tconstruct:handle": {
+    "modernfoundry:binding": {},
+    "modernfoundry:handle": {
       "durability": -0.05,
       "mining_speed": 0.15,
       "melee_speed": 0.15,
       "melee_damage": -0.1
     },
-    "tconstruct:head": {
+    "modernfoundry:head": {
       "durability": 425,
       "mining_speed": 5.0,
       "mining_tier": "minecraft:gold",

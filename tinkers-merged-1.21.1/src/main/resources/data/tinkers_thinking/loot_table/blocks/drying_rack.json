@@ -10,7 +10,7 @@
           "name": "tinkers_thinking:drying_rack"
         }
       ],
-      "neoforge:conditions": [
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }

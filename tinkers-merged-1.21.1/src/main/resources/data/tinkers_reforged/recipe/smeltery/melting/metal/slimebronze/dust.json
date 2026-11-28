@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_reforged:smeltery/melting/metal/slimebronze/dust",
   "neoforge:conditions": [
     {
       "type": "hilt:tag_filled",

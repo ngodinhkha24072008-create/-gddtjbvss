@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:alloy",
+  "id": "tinkers_thinking:common/emptiness",
   "inputs": [
     {
       "tag": "c:molten_copper",

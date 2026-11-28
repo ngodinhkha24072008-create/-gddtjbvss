@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/spectre/ingot_cast_gold",
   "cast": {
     "tag": "modernfoundry:casts/multi_use/ingot"
   },

@@ -137,8 +137,14 @@ public class ModifierManager extends SimpleJsonResourceReloadListener {
 
   /** Fires the modifier registry event */
   private void fireRegistryEvent() {
-    ModContainer container = ModList.get().getModContainerById(TConstruct.MOD_ID).orElseThrow();
-    TConstruct.getModBus().post(new ModifierRegistrationEvent(container));
+    // NeoForge 1.21 gives every mod its own event bus, so post to each one: addons register
+    // their static modifiers from their own bus (originally ModLoader posted to all mods).
+    ModList.get().forEachModContainer((modId, container) -> {
+      net.neoforged.bus.api.IEventBus bus = container.getEventBus();
+      if (bus != null) {
+        bus.post(new ModifierRegistrationEvent(container));
+      }
+    });
     modifiersRegistered = true;
   }
 

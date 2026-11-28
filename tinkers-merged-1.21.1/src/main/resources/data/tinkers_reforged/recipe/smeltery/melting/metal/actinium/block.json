@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:melting",
+  "id": "tinkers_reforged:smeltery/melting/metal/actinium/block",
   "ingredient": {
     "tag": "c:storage_blocks/actinium"
   },

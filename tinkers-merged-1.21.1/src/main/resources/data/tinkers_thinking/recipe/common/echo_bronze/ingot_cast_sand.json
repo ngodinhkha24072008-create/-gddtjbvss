@@ -1,5 +1,6 @@
 {
   "type": "modernfoundry:casting_table",
+  "id": "tinkers_thinking:common/echo_bronze/ingot_cast_sand",
   "cast": {
     "tag": "modernfoundry:casts/single_use/ingot"
   },

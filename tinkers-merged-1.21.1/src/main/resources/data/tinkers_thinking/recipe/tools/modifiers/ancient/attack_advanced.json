@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:modifier",
+  "id": "tinkers_thinking:tools/modifiers/ancient/attack_advanced",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "twilightforest"
     }
   ],
-  "type": "modernfoundry:modifier",
   "inputs": [
     {
       "tag": "c:ingots/ironwood"

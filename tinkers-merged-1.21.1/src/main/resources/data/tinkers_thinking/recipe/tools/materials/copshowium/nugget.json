@@ -1,11 +1,12 @@
 {
+  "type": "modernfoundry:material",
+  "id": "tinkers_thinking:tools/materials/copshowium/nugget",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "crossroads"
     }
   ],
-  "type": "modernfoundry:material",
   "ingredient": {
     "item": "crossroads:nugget_copshowium"
   },
