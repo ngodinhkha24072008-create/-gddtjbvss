@@ -31,7 +31,7 @@ public class SculkTeleportModifier extends NoLevelsModifier implements MeleeHitM
       if (!context.isExtraAttack() && context.isFullyCharged()) {
          LivingEntity attacker = context.getAttacker();
          LivingEntity target = context.getLivingTarget();
-         if (attacker.hasEffect((MobEffect)ModEffects.sculk_power.get()) && target != null) {
+         if (attacker.hasEffect(ModEffects.sculk_power) && target != null) {
             TeleportHelper.randomNearbyTeleport(target, (e, x, y, z) -> new EnderdodgingTeleportEvent(e, x, y, z, modifier));
          }
       }
@@ -47,7 +47,7 @@ public class SculkTeleportModifier extends NoLevelsModifier implements MeleeHitM
       @Nullable LivingEntity target,
       boolean notBlocked
    ) {
-      if (target != null && attacker != null && attacker.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+      if (target != null && attacker != null && attacker.hasEffect(ModEffects.sculk_power)) {
          TeleportHelper.randomNearbyTeleport(target, (e, x, y, z) -> new EnderdodgingTeleportEvent(e, x, y, z, modifier));
       }
 

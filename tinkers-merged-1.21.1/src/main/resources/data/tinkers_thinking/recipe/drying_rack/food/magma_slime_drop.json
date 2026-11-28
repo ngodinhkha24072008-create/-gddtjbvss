@@ -6,6 +6,6 @@
     }
   ],
   "output": {
-    "item": "tinkers_thinking:magma_slime_drop"
+    "id": "tinkers_thinking:magma_slime_drop"
   }
 }

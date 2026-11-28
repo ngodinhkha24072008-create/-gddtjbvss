@@ -63,7 +63,7 @@ public enum RederangementModule implements ModifierModule, MeleeHitModifierHook,
 
                lightning.setDamage(l * 3);
                level.addFreshEntity(lightning);
-               level.playSound(null, target, SoundEvents.TRIDENT_THUNDER, SoundSource.NEUTRAL, 5.0F, 1.0F);
+               level.playSound(null, target, SoundEvents.TRIDENT_THUNDER.value(), SoundSource.NEUTRAL, 5.0F, 1.0F);
             }
          } else {
             AreaEffectCloud entity = new AreaEffectCloud(level, target.getX(), target.getY(), target.getZ());

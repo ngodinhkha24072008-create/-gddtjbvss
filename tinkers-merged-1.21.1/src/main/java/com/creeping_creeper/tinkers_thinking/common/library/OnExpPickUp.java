@@ -16,15 +16,15 @@ public class OnExpPickUp implements ModifierUtils {
    public void onPlayerPickupXp(PickupXp event) {
       ExperienceOrb exp = event.getOrb();
       Player player = event.getEntity();
-      Optional<Holder> dataCap = player.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+      Optional<Holder> dataCap = TinkerDataCapability.getCapability(player).resolve();
       dataCap.ifPresent(data -> {
          if ((Integer)data.get(ModDataKeys.SculkCatalyse, 0) > 0) {
             int time = exp.getValue() * 60;
-            if (player.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
-               time += player.getEffect((MobEffect)ModEffects.sculk_power.get()).getDuration();
+            if (player.hasEffect(ModEffects.sculk_power)) {
+               time += player.getEffect(ModEffects.sculk_power).getDuration();
             }
 
-            this.addEffect(player, (MobEffect)ModEffects.sculk_power.get(), time);
+            this.addEffect(player, ModEffects.sculk_power, time);
             event.setCanceled(true);
             exp.discard();
          }

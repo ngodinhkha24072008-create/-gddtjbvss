@@ -116,7 +116,7 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
                   GeneralInteractionModifierHook.startDrawtime(tool, player, 1.0F);
                   if (!ammo.isEmpty()) {
                      if (this.storeDrawingItem) {
-                        persistentData.put(KEY_DRAWBACK_AMMO, ammo.save(new CompoundTag()));
+                        persistentData.put(KEY_DRAWBACK_AMMO, modernmods.modernfoundry.library.utils.TagUtil.saveItem(ammo, new CompoundTag()));
                      } else {
                         persistentData.putBoolean(KEY_DRAWBACK_AMMO, true);
                      }
@@ -166,7 +166,7 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
          int damage = 0;
          float velocity = ConditionalStatModifierHook.getModifiedStat(tool, living, ToolStats.VELOCITY);
          float inaccuracy = ModifierUtil.getInaccuracy(tool, living);
-         ItemStack ammo = ItemStack.of(heldAmmo);
+         ItemStack ammo = modernmods.modernfoundry.library.utils.TagUtil.readItem(heldAmmo);
          int ammoCount = Math.min(1 + 2 * tool.getModifierLevel(TinkerModifiers.multishot.getId()), ammo.getCount());
          float startAngle = getAngleStart(ammoCount);
          int primaryIndex = ammoCount / 2;
@@ -180,15 +180,11 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
                speed = 1.5F;
                damage += 3;
             } else {
-               if (!(ammo.getItem() instanceof ArrowItem var10000)) {
-                  var10000 = (ArrowItem)Items.ARROW;
-               }
-
-               arrow = var10000.createArrow(level, ammo, living);
+               ArrowItem arrowItem = ammo.getItem() instanceof ArrowItem a ? a : (ArrowItem)Items.ARROW;
+               arrow = arrowItem.createArrow(level, ammo, living, null);
                projectile = arrow;
                arrow.setCritArrow(true);
                arrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
-               arrow.setShotFromCrossbow(true);
                speed = 3.0F;
                damage++;
                float angle = (float)(arrow.getBaseDamage() - 2.0 + ((Float)tool.getStats().get(ToolStats.PROJECTILE_DAMAGE)).floatValue());
@@ -229,7 +225,7 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
          tool.getPersistentData().remove(KEY_CROSSBOW_AMMO);
          if (ammo.getCount() > ammoCount) {
             ammo.shrink(ammoCount);
-            CompoundTag ammoNBT = ammo.save(new CompoundTag());
+            CompoundTag ammoNBT = modernmods.modernfoundry.library.utils.TagUtil.saveItem(ammo, new CompoundTag());
             tool.getPersistentData().put(KEY_CROSSBOW_AMMO, ammoNBT);
          }
 
@@ -243,7 +239,7 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
 
    public void releaseUsing(ItemStack bow, Level level, LivingEntity living, int chargeRemaining) {
       ToolStack tool = ToolStack.from(bow);
-      int duration = this.getUseDuration(bow);
+      int duration = this.getUseDuration(bow, living);
 
       for (ModifierEntry entry : tool.getModifiers()) {
          ((UsingToolModifierHook)entry.getHook(ModifierHooks.TOOL_USING))
@@ -252,7 +248,7 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
 
       ModDataNBT persistentData = tool.getPersistentData();
       if (!tool.isBroken()
-         && this.getUseDuration(bow) - chargeRemaining >= persistentData.getInt(GeneralInteractionModifierHook.KEY_DRAWTIME)
+         && this.getUseDuration(bow, living) - chargeRemaining >= persistentData.getInt(GeneralInteractionModifierHook.KEY_DRAWTIME)
          && !persistentData.contains(KEY_CROSSBOW_AMMO, 10)) {
          Player player = living instanceof Player p ? p : null;
          int projectilesDesired = (3 + tool.getModifierLevel(ModModifierIds.RepeatingAdvanced))
@@ -270,7 +266,7 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
                1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F
             );
             if (!level.isClientSide) {
-               CompoundTag ammoNBT = ammo.save(new CompoundTag());
+               CompoundTag ammoNBT = modernmods.modernfoundry.library.utils.TagUtil.saveItem(ammo, new CompoundTag());
                persistentData.put(KEY_CROSSBOW_AMMO, ammoNBT);
                if (tool.isBroken()) {
                   fireCrossbow(tool, living, player != null && player.getAbilities().instabuild, living.getUsedItemHand(), ammoNBT);
@@ -284,7 +280,7 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
       tooltips = super.getStatInformation(tool, player, tooltips, key, tooltipFlag);
       CompoundTag heldAmmo = tool.getPersistentData().getCompound(KEY_CROSSBOW_AMMO);
       if (!heldAmmo.isEmpty()) {
-         ItemStack heldStack = ItemStack.of(heldAmmo);
+         ItemStack heldStack = modernmods.modernfoundry.library.utils.TagUtil.readItem(heldAmmo);
          if (!heldStack.isEmpty()) {
             MutableComponent component = Component.translatable("item.minecraft.crossbow.projectile");
             int count = heldStack.getCount();
@@ -297,7 +293,7 @@ public class ModifiableRepeatingCrossbowItem extends ModifiableLauncherItem {
             tooltips.add(component.append(heldStack.getDisplayName()));
             if (tooltipFlag.isAdvanced() && player != null) {
                List<Component> nestedTooltip = new ArrayList<>();
-               heldStack.getItem().appendHoverText(heldStack, player.level(), nestedTooltip, tooltipFlag);
+               heldStack.getItem().appendHoverText(heldStack, net.minecraft.world.item.Item.TooltipContext.of(player.level()), nestedTooltip, tooltipFlag);
 
                for (Component nested : nestedTooltip) {
                   tooltips.add(Component.literal("  ").append(nested).withStyle(ChatFormatting.GRAY));

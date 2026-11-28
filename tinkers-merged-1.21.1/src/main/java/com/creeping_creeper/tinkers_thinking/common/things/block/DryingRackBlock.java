@@ -36,6 +36,13 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class DryingRackBlock extends BaseEntityBlock {
+   public static final com.mojang.serialization.MapCodec<DryingRackBlock> CODEC = simpleCodec(DryingRackBlock::new);
+
+   @Override
+   protected com.mojang.serialization.MapCodec<? extends BaseEntityBlock> codec() {
+      return CODEC;
+   }
+
    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
    private static final VoxelShape EAST = Block.box(6.0, 12.0, 0.0, 10.0, 16.0, 16.0);
    private static final VoxelShape NORTH = Block.box(0.0, 12.0, 6.0, 16.0, 16.0, 10.0);
@@ -57,9 +64,8 @@ public class DryingRackBlock extends BaseEntityBlock {
    }
 
    @NotNull
-   public InteractionResult use(
-      @NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult res
-   ) {
+   @Override
+   protected InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull BlockHitResult res) {
       if (!level.isClientSide()) {
          BlockEntity entity = level.getBlockEntity(pos);
          if (entity instanceof DryingRackBlockEntity) {
@@ -67,9 +73,7 @@ public class DryingRackBlock extends BaseEntityBlock {
                && ((DryingRackBlockEntity)entity).itemStackHandler.getStackInSlot(1).isEmpty()) {
                if (!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()) {
                   ItemStack itemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-                  CompoundTag tag = itemStack.getTag();
-                  ItemStack itemStack2 = new ItemStack(itemStack.getItem(), 1);
-                  itemStack2.setTag(tag);
+                  ItemStack itemStack2 = itemStack.copyWithCount(1);
                   ((DryingRackBlockEntity)entity).itemStackHandler.setStackInSlot(0, itemStack2);
                   itemStack.shrink(1);
                   return InteractionResult.SUCCESS;
@@ -77,9 +81,7 @@ public class DryingRackBlock extends BaseEntityBlock {
 
                if (!player.getItemInHand(InteractionHand.OFF_HAND).isEmpty()) {
                   ItemStack itemStack = player.getItemInHand(InteractionHand.OFF_HAND);
-                  CompoundTag tag = itemStack.getTag();
-                  ItemStack itemStack2 = new ItemStack(itemStack.getItem(), 1);
-                  itemStack2.setTag(tag);
+                  ItemStack itemStack2 = itemStack.copyWithCount(1);
                   ((DryingRackBlockEntity)entity).itemStackHandler.setStackInSlot(0, itemStack2);
                   itemStack.shrink(1);
                   return InteractionResult.SUCCESS;

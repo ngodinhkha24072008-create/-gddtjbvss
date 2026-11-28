@@ -1,5 +1,6 @@
 package pyre.tinkerslevellingaddon.util;
 
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -157,7 +158,7 @@ public class ToolUtil {
    }
 
    public static HitResult calculateHitResult(LivingEntity living) {
-      return ProjectileUtil.getHitResultOnViewVector(living, entity -> !entity.isSpectator() && entity.isPickable(), living.getAttributeValue((Attribute)NeoForgeMod.BLOCK_REACH.get()));
+      return ProjectileUtil.getHitResultOnViewVector(living, entity -> !entity.isSpectator() && entity.isPickable(), living.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE));
    }
 
    private ToolUtil() {

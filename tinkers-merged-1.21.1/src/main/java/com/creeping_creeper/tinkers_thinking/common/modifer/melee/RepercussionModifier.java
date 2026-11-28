@@ -84,7 +84,7 @@ public class RepercussionModifier
 
    public void afterMeleeHit(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
       if (!context.isExtraAttack() && !this.reverse(tool) && context.getTarget().isAlive()) {
-         this.addEffect(context.getAttacker(), (MobEffect)ModEffects.disintegration.get(), 200 / modifier.getLevel(), 2);
+         this.addEffect(context.getAttacker(), ModEffects.disintegration, 200 / modifier.getLevel(), 2);
       }
    }
 }

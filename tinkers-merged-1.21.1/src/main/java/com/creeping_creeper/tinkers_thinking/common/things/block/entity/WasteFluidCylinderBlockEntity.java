@@ -7,28 +7,21 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.capabilities.Capability;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import org.jetbrains.annotations.Nullable;
 
 public class WasteFluidCylinderBlockEntity extends BlockEntity {
-   private final LazyOptional<IFluidHandler> mainOpt = LazyOptional.of(WasteFluidCylinderBlockEntity.VoidHandler::new);
+   private final IFluidHandler handler = new VoidHandler();
 
-   public WasteFluidCylinderBlockEntity(BlockPos p_155229_, BlockState p_155230_) {
-      super((BlockEntityType)ModBlockEntities.Waste_Fluid_Cylinder.get(), p_155229_, p_155230_);
+   public WasteFluidCylinderBlockEntity(BlockPos pos, BlockState state) {
+      super(ModBlockEntities.Waste_Fluid_Cylinder.get(), pos, state);
    }
 
-   public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-      return (LazyOptional<T>)(capability == Capabilities.FLUID_HANDLER ? this.mainOpt : super.getCapability(capability, facing));
-   }
-
-   public void setRemoved() {
-      super.setRemoved();
-      this.mainOpt.invalidate();
+   /** Exposed as a block capability in ModBlockEntities. Voids every fluid inserted. */
+   public IFluidHandler getFluidHandler() {
+      return this.handler;
    }
 
    private static class VoidHandler implements IFluidHandler {

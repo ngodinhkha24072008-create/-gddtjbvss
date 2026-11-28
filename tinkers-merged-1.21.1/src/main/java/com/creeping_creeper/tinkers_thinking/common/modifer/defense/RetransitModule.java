@@ -44,15 +44,15 @@ public record RetransitModule(LevelingValue amount) implements ModifierModule, M
       IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage
    ) {
       LivingEntity living = context.getEntity();
-      Optional<Holder> dataCap = living.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+      Optional<Holder> dataCap = TinkerDataCapability.getCapability(living).resolve();
       dataCap.ifPresent(data -> {
          int x = (int)this.amount().eachLevel() * (Integer)data.get(ModDataKeys.Retransit, 0) * 20;
-         if (this.reverse(tool) && !living.hasEffect((MobEffect)TinkerEffects.returning.get())) {
-            this.addEffect(living, (MobEffect)TinkerEffects.returning.get(), x);
+         if (this.reverse(tool) && !living.hasEffect(TinkerEffects.returning)) {
+            this.addEffect(living, TinkerEffects.returning, x);
          }
 
-         if (!this.reverse(tool) && !living.hasEffect((MobEffect)ModEffects.reminiscence.get())) {
-            this.addEffect(living, (MobEffect)ModEffects.reminiscence.get(), x);
+         if (!this.reverse(tool) && !living.hasEffect(ModEffects.reminiscence)) {
+            this.addEffect(living, ModEffects.reminiscence, x);
          }
       });
       return amount;

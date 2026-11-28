@@ -33,7 +33,8 @@ public class ModBookItem extends LecternBookItem {
       this.bookType = bookType;
    }
 
-   public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flagIn) {
+   public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+      Level world = context.level();
       if (world != null && world.isClientSide) {
          Player player = SafeClientAccess.getPlayer();
          if (player != null && InventorySlotMenuModule.isValidContainer(player.containerMenu)) {
@@ -44,7 +45,7 @@ public class ModBookItem extends LecternBookItem {
          }
       }
 
-      super.appendHoverText(stack, world, tooltip, flagIn);
+      super.appendHoverText(stack, context, tooltip, flagIn);
    }
 
    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {

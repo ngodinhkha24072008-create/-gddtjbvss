@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.NetworkHooks;
 import modernmods.modernfoundry.tools.entity.ModifiableArrow;
 
 public class SeekingArrow extends ModifiableArrow {
@@ -31,13 +30,10 @@ public class SeekingArrow extends ModifiableArrow {
       super(level, shooter);
    }
 
-   protected void defineSynchedData() {
-      super.defineSynchedData();
-      this.entityData.define(ARC_TOWARDS_ENTITY_ID, -1);
-   }
-
-   public Packet<ClientGamePacketListener> getAddEntityPacket() {
-      return NetworkHooks.getEntitySpawningPacket(this);
+   @Override
+   protected void defineSynchedData(SynchedEntityData.Builder builder) {
+      super.defineSynchedData(builder);
+      builder.define(ARC_TOWARDS_ENTITY_ID, -1);
    }
 
    public void tick() {
@@ -50,7 +46,7 @@ public class SeekingArrow extends ModifiableArrow {
                Entity owner = this.getOwner();
                float boxExpandBy = Math.min(10, 3 + this.tickCount / 4);
 
-               for (Entity entity : new ArrayList(this.level().getEntities(this, this.getBoundingBox().inflate(boxExpandBy), x$0 -> this.canHitEntity(x$0)))) {
+               for (Entity entity : new ArrayList<Entity>(this.level().getEntities(this, this.getBoundingBox().inflate(boxExpandBy), x$0 -> this.canHitEntity(x$0)))) {
                   if ((closest == null || entity.distanceTo(this) < closest.distanceTo(this))
                      && entity instanceof LivingEntity living
                      && !this.ownedBy(entity)

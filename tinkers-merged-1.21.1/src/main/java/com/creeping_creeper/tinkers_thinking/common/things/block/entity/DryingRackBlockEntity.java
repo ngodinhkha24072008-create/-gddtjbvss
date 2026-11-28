@@ -12,14 +12,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import com.creeping_creeper.tinkers_thinking.common.recipes.ModRecipes;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.capabilities.Capability;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
@@ -40,31 +41,30 @@ public class DryingRackBlockEntity extends HiltBlockEntity {
          };
       }
    };
-   private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
+   private final Map<Direction, WrappedHandler> directionWrappedHandlerMap = Map.of(
       Direction.DOWN,
-      LazyOptional.of(() -> new WrappedHandler(this.itemStackHandler, i -> i == 1, (i, s) -> false)),
+      new WrappedHandler(this.itemStackHandler, i -> i == 1, (i, s) -> false),
       Direction.UP,
-      LazyOptional.of(() -> new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack))),
+      new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack)),
       Direction.NORTH,
-      LazyOptional.of(() -> new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack))),
+      new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack)),
       Direction.SOUTH,
-      LazyOptional.of(() -> new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack))),
+      new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack)),
       Direction.EAST,
-      LazyOptional.of(() -> new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack))),
+      new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack)),
       Direction.WEST,
-      LazyOptional.of(() -> new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack)))
+      new WrappedHandler(this.itemStackHandler, i -> i == 1, (index, stack) -> this.itemStackHandler.isItemValid(0, stack))
    );
    protected final ContainerData data;
    private int progress = 0;
    private int maxProgress = 2998;
-   private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
    private static boolean canInsertItemToOutputSlot(SimpleContainer inventory) {
       return inventory.getItem(1).isEmpty();
    }
 
    public DryingRackBlockEntity(BlockPos blockPos, BlockState blockState) {
-      super((BlockEntityType)ModBlockEntities.Drying_Rack.get(), blockPos, blockState);
+      super(ModBlockEntities.Drying_Rack.get(), blockPos, blockState);
       this.data = new ContainerData() {
          public int get(int index) {
             return switch (index) {
@@ -90,54 +90,38 @@ public class DryingRackBlockEntity extends HiltBlockEntity {
       };
    }
 
-   @NotNull
-   public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-      if (cap == Capabilities.ITEM_HANDLER) {
-         if (side == null) {
-            return this.lazyItemHandler.cast();
-         }
-
-         if (this.directionWrappedHandlerMap.containsKey(side)) {
-            if (this.itemStackHandler.getStackInSlot(0).isEmpty() && this.itemStackHandler.getStackInSlot(1).isEmpty()) {
-               Direction LocalDir = (Direction)this.getBlockState().getValue(DryingRackBlock.FACING);
-               if (side != Direction.UP && side != Direction.DOWN) {
-                  return switch (LocalDir) {
-                     case EAST -> this.directionWrappedHandlerMap.get(side.getClockWise()).cast();
-                     case SOUTH -> this.directionWrappedHandlerMap.get(side).cast();
-                     case WEST -> this.directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
-                     default -> this.directionWrappedHandlerMap.get(side.getOpposite()).cast();
-                  };
-               }
-
-               return this.directionWrappedHandlerMap.get(side).cast();
-            }
-
-            return this.directionWrappedHandlerMap.get(Direction.DOWN).cast();
-         }
+   /** Item handler exposed to pipes/hoppers; registered in ModBlockEntities via RegisterCapabilitiesEvent. */
+   @Nullable
+   public IItemHandler getItemHandler(@Nullable Direction side) {
+      if (side == null) {
+         return this.itemStackHandler;
       }
-
-      return super.getCapability(cap, side);
+      if (this.itemStackHandler.getStackInSlot(0).isEmpty() && this.itemStackHandler.getStackInSlot(1).isEmpty()) {
+         Direction localDir = this.getBlockState().getValue(DryingRackBlock.FACING);
+         if (side != Direction.UP && side != Direction.DOWN) {
+            return switch (localDir) {
+               case EAST -> this.directionWrappedHandlerMap.get(side.getClockWise());
+               case SOUTH -> this.directionWrappedHandlerMap.get(side);
+               case WEST -> this.directionWrappedHandlerMap.get(side.getCounterClockWise());
+               default -> this.directionWrappedHandlerMap.get(side.getOpposite());
+            };
+         }
+         return this.directionWrappedHandlerMap.get(side);
+      }
+      return this.directionWrappedHandlerMap.get(Direction.DOWN);
    }
 
-   public void onLoad() {
-      super.onLoad();
-      this.lazyItemHandler = LazyOptional.of(() -> this.itemStackHandler);
-   }
-
-   public void invalidateCaps() {
-      super.invalidateCaps();
-      this.lazyItemHandler.invalidate();
-   }
-
-   public void saveAdditional(CompoundTag nbt) {
-      nbt.put("inventory", this.itemStackHandler.serializeNBT());
+   @Override
+   public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
+      super.saveAdditional(nbt, registries);
+      nbt.put("inventory", this.itemStackHandler.serializeNBT(registries));
       nbt.putInt("drying_rack.progress", this.progress);
-      super.saveAdditional(nbt);
    }
 
-   public void load(@NotNull CompoundTag nbt) {
-      super.load(nbt);
-      this.itemStackHandler.deserializeNBT(nbt.getCompound("inventory"));
+   @Override
+   protected void loadAdditional(@NotNull CompoundTag nbt, HolderLookup.Provider registries) {
+      super.loadAdditional(nbt, registries);
+      this.itemStackHandler.deserializeNBT(registries, nbt.getCompound("inventory"));
       this.progress = nbt.getInt("drying_rack.progress");
    }
 
@@ -182,14 +166,14 @@ public class DryingRackBlockEntity extends HiltBlockEntity {
          inventory.setItem(i, entity.itemStackHandler.getStackInSlot(i));
       }
 
-      Optional<DryingRackRecipes> recipe = Optional.empty();
+      Optional<RecipeHolder<DryingRackRecipes>> recipe = Optional.empty();
       if (level != null) {
-         recipe = level.getRecipeManager().getRecipeFor(DryingRackRecipes.Type.INSTANCE, inventory, level);
+         recipe = level.getRecipeManager().getRecipeFor(ModRecipes.DRYING_RACK_TYPE.get(), new SingleRecipeInput(inventory.getItem(0)), level);
       }
 
       if (hasRecipe(entity)) {
          entity.itemStackHandler.extractItem(0, 1, false);
-         entity.itemStackHandler.setStackInSlot(1, new ItemStack(recipe.get().getResultItem(level.registryAccess()).getItem(), 1));
+         entity.itemStackHandler.setStackInSlot(1, new ItemStack(recipe.get().value().getResultItem(level.registryAccess()).getItem(), 1));
          entity.resetProgress();
       }
    }
@@ -202,9 +186,9 @@ public class DryingRackBlockEntity extends HiltBlockEntity {
          inventory.setItem(i, entity.itemStackHandler.getStackInSlot(i));
       }
 
-      Optional<DryingRackRecipes> recipe = Optional.empty();
+      Optional<RecipeHolder<DryingRackRecipes>> recipe = Optional.empty();
       if (level != null) {
-         recipe = level.getRecipeManager().getRecipeFor(DryingRackRecipes.Type.INSTANCE, inventory, level);
+         recipe = level.getRecipeManager().getRecipeFor(ModRecipes.DRYING_RACK_TYPE.get(), new SingleRecipeInput(inventory.getItem(0)), level);
       }
 
       return recipe.isPresent() && canInsertItemToOutputSlot(inventory);

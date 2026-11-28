@@ -637,7 +637,7 @@ public class Config {
          slotsOrder = DEFAULT_ARMOR_SLOTS_ORDER;
       }
 
-      return slotsOrder;
+      return java.util.List.copyOf(slotsOrder);
    }
 
    public static List<String> getArmorSlotsRandomPool() {
@@ -646,7 +646,7 @@ public class Config {
          slotsRandomPool = DEFAULT_ARMOR_SLOTS_RANDOM_POOL;
       }
 
-      return slotsRandomPool;
+      return java.util.List.copyOf(slotsRandomPool);
    }
 
    public static List<String> getArmorStatsOrder() {
@@ -655,7 +655,7 @@ public class Config {
          statsOrder = DEFAULT_ARMOR_STATS_ORDER;
       }
 
-      return statsOrder;
+      return java.util.List.copyOf(statsOrder);
    }
 
    public static List<String> getArmorStatsRandomPool() {
@@ -664,7 +664,7 @@ public class Config {
          statsRandomPool = DEFAULT_ARMOR_STATS_RANDOM_POOL;
       }
 
-      return statsRandomPool;
+      return java.util.List.copyOf(statsRandomPool);
    }
 
    public static List<String> getRangedSlotsOrder() {
@@ -673,7 +673,7 @@ public class Config {
          slotsOrder = DEFAULT_RANGED_SLOTS_ORDER;
       }
 
-      return slotsOrder;
+      return java.util.List.copyOf(slotsOrder);
    }
 
    public static List<String> getRangedSlotsRandomPool() {
@@ -682,7 +682,7 @@ public class Config {
          slotsRandomPool = DEFAULT_RANGED_SLOTS_RANDOM_POOL;
       }
 
-      return slotsRandomPool;
+      return java.util.List.copyOf(slotsRandomPool);
    }
 
    public static List<String> getRangedStatsOrder() {
@@ -691,7 +691,7 @@ public class Config {
          statsOrder = DEFAULT_RANGED_STATS_ORDER;
       }
 
-      return statsOrder;
+      return java.util.List.copyOf(statsOrder);
    }
 
    public static List<String> getRangedStatsRandomPool() {
@@ -700,7 +700,7 @@ public class Config {
          statsRandomPool = DEFAULT_RANGED_STATS_RANDOM_POOL;
       }
 
-      return statsRandomPool;
+      return java.util.List.copyOf(statsRandomPool);
    }
 
    public static List<String> getShieldSlotsOrder() {
@@ -709,7 +709,7 @@ public class Config {
          slotsOrder = DEFAULT_SHIELD_SLOTS_ORDER;
       }
 
-      return slotsOrder;
+      return java.util.List.copyOf(slotsOrder);
    }
 
    public static List<String> getShieldSlotsRandomPool() {
@@ -718,7 +718,7 @@ public class Config {
          slotsRandomPool = DEFAULT_SHIELD_SLOTS_RANDOM_POOL;
       }
 
-      return slotsRandomPool;
+      return java.util.List.copyOf(slotsRandomPool);
    }
 
    public static List<String> getShieldStatsOrder() {
@@ -727,7 +727,7 @@ public class Config {
          statsOrder = DEFAULT_SHIELD_STATS_ORDER;
       }
 
-      return statsOrder;
+      return java.util.List.copyOf(statsOrder);
    }
 
    public static List<String> getShieldStatsRandomPool() {
@@ -736,7 +736,7 @@ public class Config {
          statsRandomPool = DEFAULT_SHIELD_STATS_RANDOM_POOL;
       }
 
-      return statsRandomPool;
+      return java.util.List.copyOf(statsRandomPool);
    }
 
    public static List<String> getStaffSlotsOrder() {
@@ -745,7 +745,7 @@ public class Config {
          slotsOrder = DEFAULT_STAFF_SLOTS_ORDER;
       }
 
-      return slotsOrder;
+      return java.util.List.copyOf(slotsOrder);
    }
 
    public static List<String> getStaffSlotsRandomPool() {
@@ -754,7 +754,7 @@ public class Config {
          slotsRandomPool = DEFAULT_STAFF_SLOTS_RANDOM_POOL;
       }
 
-      return slotsRandomPool;
+      return java.util.List.copyOf(slotsRandomPool);
    }
 
    public static List<String> getStaffStatsOrder() {
@@ -763,7 +763,7 @@ public class Config {
          statsOrder = DEFAULT_STAFF_STATS_ORDER;
       }
 
-      return statsOrder;
+      return java.util.List.copyOf(statsOrder);
    }
 
    public static List<String> getStaffStatsRandomPool() {
@@ -772,7 +772,7 @@ public class Config {
          statsRandomPool = DEFAULT_STAFF_STATS_RANDOM_POOL;
       }
 
-      return statsRandomPool;
+      return java.util.List.copyOf(statsRandomPool);
    }
 
    public static List<String> getToolsSlotsOrder() {
@@ -781,7 +781,7 @@ public class Config {
          slotsOrder = DEFAULT_TOOLS_SLOTS_ORDER;
       }
 
-      return slotsOrder;
+      return java.util.List.copyOf(slotsOrder);
    }
 
    public static List<String> getToolsSlotsRandomPool() {
@@ -790,7 +790,7 @@ public class Config {
          slotsRandomPool = DEFAULT_TOOLS_SLOTS_RANDOM_POOL;
       }
 
-      return slotsRandomPool;
+      return java.util.List.copyOf(slotsRandomPool);
    }
 
    public static List<String> getToolsStatsOrder() {
@@ -799,7 +799,7 @@ public class Config {
          statsOrder = DEFAULT_TOOLS_STATS_ORDER;
       }
 
-      return statsOrder;
+      return java.util.List.copyOf(statsOrder);
    }
 
    public static List<String> getToolsStatsRandomPool() {
@@ -808,7 +808,7 @@ public class Config {
          statsRandomPool = DEFAULT_TOOLS_STATS_RANDOM_POOL;
       }
 
-      return statsRandomPool;
+      return java.util.List.copyOf(statsRandomPool);
    }
 
    public static double getArmorStatValue(FloatToolStat stat) {

@@ -63,6 +63,6 @@ public class DryingRackRecipesCategory implements IRecipeCategory<DryingRackReci
 
    public void setRecipe(IRecipeLayoutBuilder builder, DryingRackRecipes recipe, @NotNull IFocusGroup focuses) {
       builder.addSlot(RecipeIngredientRole.INPUT, 9, 13).addIngredients((Ingredient)recipe.getIngredients().get(0));
-      builder.addSlot(RecipeIngredientRole.OUTPUT, 65, 13).addItemStack(recipe.getResultItem(null));
+      builder.addSlot(RecipeIngredientRole.OUTPUT, 65, 13).addItemStack(recipe.getOutput());
    }
 }

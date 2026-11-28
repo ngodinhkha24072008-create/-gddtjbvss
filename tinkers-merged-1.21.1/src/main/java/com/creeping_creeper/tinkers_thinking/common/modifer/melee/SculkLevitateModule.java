@@ -40,9 +40,9 @@ public record SculkLevitateModule(LevelingValue amount) implements ModifierModul
       if (!context.isExtraAttack() && context.isFullyCharged()) {
          LivingEntity attacker = context.getAttacker();
          LivingEntity target = context.getLivingTarget();
-         if (attacker.hasEffect((MobEffect)ModEffects.sculk_power.get()) && target != null && !target.hasEffect((MobEffect)ModEffects.modifier_immune.get())) {
-            this.addEffect(target, (MobEffect)ModEffects.weightless.get(), 120, 2);
-            this.addEffect(target, (MobEffect)ModEffects.modifier_immune.get(), (int)(this.amount.eachLevel() / modifier.getLevel()));
+         if (attacker.hasEffect(ModEffects.sculk_power) && target != null && !target.hasEffect(ModEffects.modifier_immune)) {
+            this.addEffect(target, ModEffects.weightless, 120, 2);
+            this.addEffect(target, ModEffects.modifier_immune, (int)(this.amount.eachLevel() / modifier.getLevel()));
          }
       }
    }

@@ -9,11 +9,12 @@ public class StrengthResetEffect extends NoMilkEffect {
       super(typeIn, color, show);
    }
 
-   public boolean isDurationEffectTick(int duration, int amplifier) {
+   public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
       return duration == 1;
    }
 
-   public void applyEffectTick(LivingEntity living, int amplifier) {
+   public boolean applyEffectTick(LivingEntity living, int amplifier) {
       living.attackStrengthTicker += 2000;
+      return true;
    }
 }

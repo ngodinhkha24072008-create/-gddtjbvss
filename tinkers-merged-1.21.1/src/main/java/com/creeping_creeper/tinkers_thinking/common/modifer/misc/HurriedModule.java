@@ -30,7 +30,7 @@ import modernmods.modernfoundry.library.tools.context.EquipmentChangeContext;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 
 public record HurriedModule(LevelingValue amount) implements ModifierModule, EquipmentChangeModifierHook, TooltipModifierHook, InventoryTickModifierHook {
-   private static final UUID ATTRIBUTE_BONUS = UUID.fromString("2307DE5E-7CE8-4030-940E-514C1F170002");
+   private static final net.minecraft.resources.ResourceLocation ATTRIBUTE_BONUS = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("tinkers_thinking", "hurried_module.attribute_bonus");
    private static final Component Boost = TinkersThinking.makeTranslation("modifier", "hurried.boost");
    private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.defaultHooks(
       new ModuleHook[]{ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.TOOLTIP, ModifierHooks.INVENTORY_TICK}
@@ -63,7 +63,7 @@ public record HurriedModule(LevelingValue amount) implements ModifierModule, Equ
    ) {
       AttributeInstance attribute = holder.getAttribute(Attributes.MOVEMENT_SPEED);
       if (attribute != null && attribute.getModifier(ATTRIBUTE_BONUS) == null) {
-         attribute.addTransientModifier(new AttributeModifier(ATTRIBUTE_BONUS, "tinkers_thinking.modifier.hurried", this.getBonus(holder, modifier), Operation.ADDITION));
+         attribute.addTransientModifier(new AttributeModifier(ATTRIBUTE_BONUS, this.getBonus(holder, modifier), Operation.ADD_VALUE));
       }
    }
 

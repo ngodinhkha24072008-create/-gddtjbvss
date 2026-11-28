@@ -7,7 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ModSounds {
-   public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, "tinkers_thinking");
+   public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(net.minecraft.core.registries.Registries.SOUND_EVENT, "tinkers_thinking");
    public static final DeferredHolder<SoundEvent, SoundEvent> DAMAGE_BLOCKING = registerSoundEvent("damage_blocking");
 
    private static DeferredHolder<SoundEvent, SoundEvent> registerSoundEvent(String name) {

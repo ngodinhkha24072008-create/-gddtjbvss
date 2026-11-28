@@ -45,7 +45,7 @@ public enum ReburningModifier implements ModifierModule, OnAttackedModifierHook,
       LivingEntity living = context.getEntity();
       int fire = living.getRemainingFireTicks() / 20;
       if (!living.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-         Optional<Holder> dataCap = living.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+         Optional<Holder> dataCap = TinkerDataCapability.getCapability(living).resolve();
          dataCap.ifPresent(data -> living.heal(fire * (Integer)data.get(ModDataKeys.Reburning, 1)));
          living.clearFire();
          this.particles(living.level(), living, ParticleTypes.SMOKE, 4);

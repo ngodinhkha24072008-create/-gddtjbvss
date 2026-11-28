@@ -30,7 +30,7 @@ public class OverFreezeModifier extends Modifier implements MeleeHitModifierHook
          int x = Math.min(5, OverslimeModule.INSTANCE.getAmount(tool));
          if (target != null && x > 0) {
             OverslimeModule.INSTANCE.removeAmount(tool, modifier, x);
-            target.addEffect(new MobEffectInstance((MobEffect)ModEffects.freezing_cold.get(), 40 * x, modifier.getLevel()));
+            target.addEffect(new MobEffectInstance(ModEffects.freezing_cold, 40 * x, modifier.getLevel()));
             target.setLastHurtMob(context.getAttacker());
          }
       }
@@ -43,7 +43,7 @@ public class OverFreezeModifier extends Modifier implements MeleeHitModifierHook
       int x = Math.min(5, OverslimeModule.INSTANCE.getAmount(tool));
       if (attacker instanceof LivingEntity living && attacker.isAlive() && x > 0) {
          OverslimeModule.INSTANCE.removeAmount(tool, modifier, x);
-         living.addEffect(new MobEffectInstance((MobEffect)ModEffects.freezing_cold.get(), 40 * x, modifier.getLevel()));
+         living.addEffect(new MobEffectInstance(ModEffects.freezing_cold, 40 * x, modifier.getLevel()));
          living.setLastHurtMob(context.getEntity());
       }
 

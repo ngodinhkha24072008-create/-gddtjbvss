@@ -101,7 +101,7 @@ public record SymbioticModule(LevelingValue amount)
          int level = modifier.getLevel();
          this.heal(player, Math.max((float)level, (player.getMaxHealth() - player.getHealth()) * 0.3F));
          if (ToolDamageUtil.directDamage(tool, 8 * level, player, player.getUseItem())) {
-            player.broadcastBreakEvent(player.getUsedItemHand());
+            player.onEquippedItemBroken(player.getItemInHand(player.getUsedItemHand()).getItem(), net.minecraft.world.entity.LivingEntity.getSlotForHand(player.getUsedItemHand()));
          }
       }
    }

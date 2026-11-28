@@ -49,7 +49,7 @@ public enum RemisdirectionModule implements ModifierModule, DamageBlockModifierH
       IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount
    ) {
       LivingEntity living = context.getEntity();
-      if (source.getEntity() != null && !living.hasEffect((MobEffect)TinkerModifiers.teleportCooldownEffect.get()) && this.reverse(tool)) {
+      if (source.getEntity() != null && !living.hasEffect(TinkerModifiers.teleportCooldownEffect) && this.reverse(tool)) {
          Vec3 look = living.getLookAngle();
          Level level = context.getLevel();
          double offX = look.x * 5.0;
@@ -76,11 +76,11 @@ public enum RemisdirectionModule implements ModifierModule, DamageBlockModifierH
             NeoForge.EVENT_BUS.post(event);
             if (!event.isCanceled()) {
                this.block(living);
-               Optional<Holder> dataCap = living.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+               Optional<Holder> dataCap = TinkerDataCapability.getCapability(living).resolve();
                dataCap.ifPresent(
                   data -> this.addEffect(
                      living,
-                     (MobEffect)TinkerModifiers.teleportCooldownEffect.get(),
+                     TinkerModifiers.teleportCooldownEffect,
                      Mth.clamp((int)amount / (Integer)data.get(ModDataKeys.Remisdirection, 1), 10, 60) * 20
                   )
                );

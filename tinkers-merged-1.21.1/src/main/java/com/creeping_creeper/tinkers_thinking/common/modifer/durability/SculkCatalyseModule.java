@@ -53,7 +53,7 @@ public enum SculkCatalyseModule
    }
 
    public int onDamageTool(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
-      if (holder != null && holder.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+      if (holder != null && holder.hasEffect(ModEffects.sculk_power)) {
          amount--;
       }
 
@@ -77,11 +77,11 @@ public enum SculkCatalyseModule
       IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack
    ) {
       if (holder instanceof Player) {
-         if (holder.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+         if (holder.hasEffect(ModEffects.sculk_power)) {
             tool.getPersistentData().putBoolean(KEY, true);
          }
 
-         if (!holder.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+         if (!holder.hasEffect(ModEffects.sculk_power)) {
             tool.getPersistentData().remove(KEY);
          }
       }

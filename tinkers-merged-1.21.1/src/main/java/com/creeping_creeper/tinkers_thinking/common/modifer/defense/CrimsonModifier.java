@@ -35,11 +35,11 @@ public class CrimsonModifier extends Modifier implements MeleeHitModifierHook, R
 
    private void apply(LivingEntity living, int level) {
       int x = -1;
-      if (living.hasEffect((MobEffect)ModEffects.armor.get())) {
-         x = living.getEffect((MobEffect)ModEffects.armor.get()).getAmplifier();
+      if (living.hasEffect(ModEffects.armor)) {
+         x = living.getEffect(ModEffects.armor).getAmplifier();
       }
 
-      this.addEffect(living, (MobEffect)ModEffects.armor.get(), 400, Math.min(x + 1, level * 2 + 2));
+      this.addEffect(living, ModEffects.armor, 400, Math.min(x + 1, level * 2 + 2));
    }
 
    public void afterMeleeHit(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, ToolAttackContext context, float damageDealt) {

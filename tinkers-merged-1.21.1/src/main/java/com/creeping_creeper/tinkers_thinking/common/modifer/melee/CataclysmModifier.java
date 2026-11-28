@@ -28,7 +28,7 @@ public class CataclysmModifier extends Modifier implements MeleeHitModifierHook,
       if (!context.isExtraAttack() && context.isFullyCharged()) {
          LivingEntity target = context.getLivingTarget();
          if (target != null && RANDOM.nextFloat() > modifier.getLevel() * 0.15) {
-            target.addEffect(new MobEffectInstance((MobEffect)ModEffects.cataclysm.get(), 600, modifier.getLevel()));
+            target.addEffect(new MobEffectInstance(ModEffects.cataclysm, 600, modifier.getLevel()));
          }
       }
    }
@@ -43,7 +43,7 @@ public class CataclysmModifier extends Modifier implements MeleeHitModifierHook,
       @Nullable LivingEntity target
    ) {
       if (target != null && RANDOM.nextFloat() > modifier.getLevel() * 0.15) {
-         target.addEffect(new MobEffectInstance((MobEffect)ModEffects.cataclysm.get(), 600, modifier.getLevel()));
+         target.addEffect(new MobEffectInstance(ModEffects.cataclysm, 600, modifier.getLevel()));
       }
 
       return false;

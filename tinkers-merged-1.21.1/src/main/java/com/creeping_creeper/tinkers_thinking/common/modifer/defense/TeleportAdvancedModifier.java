@@ -39,15 +39,15 @@ public class TeleportAdvancedModifier extends NoLevelsModifier implements Genera
 
    private void applyEffect(LivingEntity living, int level) {
       this.addEffect(living, MobEffects.MOVEMENT_SPEED, level * 300, 1);
-      this.addEffect(living, (MobEffect)ModEffects.sculk_power.get(), level * 300);
+      this.addEffect(living, ModEffects.sculk_power, level * 300);
    }
 
    public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
       if (source == InteractionSource.RIGHT_CLICK
          && !tool.isBroken()
          && player.isCrouching()
-         && !player.hasEffect((MobEffect)TinkerModifiers.teleportCooldownEffect.get())
-         && !player.hasEffect((MobEffect)TinkerEffects.enderference.get())) {
+         && !player.hasEffect(TinkerModifiers.teleportCooldownEffect)
+         && !player.hasEffect(TinkerEffects.enderference)) {
          Level world = player.level();
          ModDataNBT data = tool.getPersistentData();
          if (data.contains(this.X, 5)
@@ -64,7 +64,7 @@ public class TeleportAdvancedModifier extends NoLevelsModifier implements Genera
 
    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
       LivingEntity target = context.getLivingTarget();
-      if (!tool.isBroken() && target != null && !target.hasEffect((MobEffect)TinkerEffects.enderference.get())) {
+      if (!tool.isBroken() && target != null && !target.hasEffect(TinkerEffects.enderference)) {
          Level world = target.level();
          ModDataNBT data = tool.getPersistentData();
          if (data.contains(this.X, 5)

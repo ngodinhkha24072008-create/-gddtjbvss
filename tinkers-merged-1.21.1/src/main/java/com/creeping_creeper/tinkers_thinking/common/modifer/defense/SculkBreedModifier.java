@@ -30,7 +30,7 @@ import modernmods.modernfoundry.library.tools.context.EquipmentContext;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 
 public class SculkBreedModifier extends Modifier implements ModifyDamageModifierHook, EquipmentChangeModifierHook, TooltipModifierHook {
-   public static final UUID ATTRIBUTE_BONUS = UUID.fromString("2307DE5E-7CE8-4030-940E-514C1F170001");
+   public static final net.minecraft.resources.ResourceLocation ATTRIBUTE_BONUS = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("tinkers_thinking", "sculk_breed_modifier.attribute_bonus");
    private static final Component Boost = TinkersThinking.makeTranslation("modifier", "sculk_breed.boost");
 
    protected void registerHooks(Builder hookBuilder) {
@@ -43,15 +43,15 @@ public class SculkBreedModifier extends Modifier implements ModifyDamageModifier
       LivingEntity living = context.getEntity();
       AttributeInstance attribute = living.getAttribute(Attributes.MAX_HEALTH);
       float x = (float)(amount * modifier.getLevel() * 0.5);
-      if (living.hasEffect((MobEffect)ModEffects.sculk_power.get()) && !tool.isBroken()) {
+      if (living.hasEffect(ModEffects.sculk_power) && !tool.isBroken()) {
          if (attribute.getModifier(ATTRIBUTE_BONUS) == null) {
-            attribute.addTransientModifier(new AttributeModifier(ATTRIBUTE_BONUS, "tinkers_thinking.modifier.sculk_breed", x, Operation.ADDITION));
-            attribute.getModifier(ATTRIBUTE_BONUS).getAmount();
+            attribute.addTransientModifier(new AttributeModifier(ATTRIBUTE_BONUS, x, Operation.ADD_VALUE));
+            attribute.getModifier(ATTRIBUTE_BONUS).amount();
          }
 
-         if (attribute.getModifier(ATTRIBUTE_BONUS) != null && x > Objects.requireNonNull(attribute.getModifier(ATTRIBUTE_BONUS)).getAmount()) {
+         if (attribute.getModifier(ATTRIBUTE_BONUS) != null && x > Objects.requireNonNull(attribute.getModifier(ATTRIBUTE_BONUS)).amount()) {
             attribute.removeModifier(ATTRIBUTE_BONUS);
-            attribute.addTransientModifier(new AttributeModifier(ATTRIBUTE_BONUS, "tinkers_thinking.modifier.sculk_breed", x, Operation.ADDITION));
+            attribute.addTransientModifier(new AttributeModifier(ATTRIBUTE_BONUS, x, Operation.ADD_VALUE));
          }
       }
 
@@ -79,7 +79,7 @@ public class SculkBreedModifier extends Modifier implements ModifyDamageModifier
       if (player != null && key == TooltipKey.SHIFT) {
          AttributeInstance attribute = player.getAttribute(Attributes.MAX_HEALTH);
          if (attribute != null && attribute.getModifier(ATTRIBUTE_BONUS) != null) {
-            x = (float)Objects.requireNonNull(attribute.getModifier(ATTRIBUTE_BONUS)).getAmount();
+            x = (float)Objects.requireNonNull(attribute.getModifier(ATTRIBUTE_BONUS)).amount();
          }
 
          TooltipModifierHook.addFlatBoost(this, Boost, x, tooltip);

@@ -22,16 +22,24 @@ import org.jetbrains.annotations.Nullable;
 import modernmods.hilt.fluid.FluidTransferHelper;
 
 public class WasteFluidCylinderBlock extends BaseEntityBlock {
+   public static final com.mojang.serialization.MapCodec<WasteFluidCylinderBlock> CODEC = simpleCodec(WasteFluidCylinderBlock::new);
+
+   @Override
+   protected com.mojang.serialization.MapCodec<? extends BaseEntityBlock> codec() {
+      return CODEC;
+   }
+
    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
    public WasteFluidCylinderBlock(Properties p_49224_) {
       super(p_49224_);
    }
 
-   public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+   @Override
+   protected net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
       return FluidTransferHelper.interactWithTank(world, pos, player, hand, hit)
-         ? InteractionResult.SUCCESS
-         : super.use(state, world, pos, player, hand, hit);
+         ? net.minecraft.world.ItemInteractionResult.SUCCESS
+         : super.useItemOn(stack, state, world, pos, player, hand, hit);
    }
 
    @Nullable

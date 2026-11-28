@@ -34,7 +34,7 @@ public class SpikyModifier extends Modifier implements OnAttackedModifierHook, M
       boolean isDirectDamage
    ) {
       if (source.getEntity() instanceof LivingEntity attacker
-         && !attacker.hasEffect((MobEffect)ModEffects.modifier_immune.get())
+         && !attacker.hasEffect(ModEffects.modifier_immune)
          && attacker != context.getEntity()
          && !(source.getDirectEntity() instanceof AbstractArrow arrow && arrow.getPierceLevel() != 0)) {
          attacker.hurt(context.getEntity().damageSources().thorns(context.getEntity()), amount);
@@ -50,7 +50,7 @@ public class SpikyModifier extends Modifier implements OnAttackedModifierHook, M
                1.0F,
                1.0F
             );
-         this.addEffect(attacker, (MobEffect)ModEffects.modifier_immune.get(), 60 / modifier.getLevel());
+         this.addEffect(attacker, ModEffects.modifier_immune, 60 / modifier.getLevel());
       }
    }
 }

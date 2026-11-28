@@ -53,8 +53,8 @@ public class SprintingModifier extends SlingModifier implements ModifierUtils {
                player.setDeltaMovement(velocity.x, 0.0, velocity.z);
                player.push(force * angle.x, 0.02F, force * angle.z);
                int time = (int)(charge * 20.0F);
-               this.addEffect(player, (MobEffect)ModEffects.jumpless.get(), time, 0, false);
-               this.addEffect(player, (MobEffect)ModEffects.weightless.get(), time, 1, false);
+               this.addEffect(player, ModEffects.jumpless, time, 0, false);
+               this.addEffect(player, ModEffects.weightless, time, 1, false);
                SlingLaunchModifierHook.afterSlingLaunch(tool, entity, entity, modifier, force, multiplier, angle);
                SlimeBounceHandler.addBounceHandler(player);
                if (!level.isClientSide) {
@@ -65,7 +65,7 @@ public class SprintingModifier extends SlingModifier implements ModifierUtils {
                }
 
                if (ModifierUtil.canPerformAction(tool, TinkerToolActions.DRILL_ATTACK)) {
-                  player.startAutoSpinAttack(20);
+                  player.startAutoSpinAttack(20, 8.0F, player.getMainHandItem());
                }
 
                return;

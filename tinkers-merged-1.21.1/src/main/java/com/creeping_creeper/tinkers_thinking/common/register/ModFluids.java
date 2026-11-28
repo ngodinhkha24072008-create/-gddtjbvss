@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidType.Properties;
@@ -113,12 +113,12 @@ public class ModFluids extends ModModule {
       .flowing();
    public static final FlowingFluidObject<BaseFlowingFluid> liquid_sculk_power = FLUIDS.register("liquid_sculk_power")
       .type(common("liquid_sculk_power").temperature(50).lightLevel(3))
-      .block(MobEffectLiquidBlock.createEffect(MapColor.COLOR_BLACK, 3, () -> new MobEffectInstance((MobEffect)ModEffects.sculk_power.get(), 80)))
+      .block(MobEffectLiquidBlock.createEffect(MapColor.COLOR_BLACK, 3, () -> new MobEffectInstance(ModEffects.sculk_power, 80)))
       .bucket()
       .flowing();
    public static final FlowingFluidObject<BaseFlowingFluid> chillslime = FLUIDS.registerSlime("chillslime")
       .type(common("chillslime").temperature(210).lightLevel(3))
-      .block(MobEffectLiquidBlock.createEffect(MapColor.COLOR_LIGHT_BLUE, 3, () -> new MobEffectInstance((MobEffect)ModEffects.freezing_cold.get(), 40)))
+      .block(MobEffectLiquidBlock.createEffect(MapColor.COLOR_LIGHT_BLUE, 3, () -> new MobEffectInstance(ModEffects.freezing_cold, 40)))
       .bucket()
       .flowing();
    public static final FlowingFluidObject<BaseFlowingFluid> color_liquid = FLUIDS.registerSlime("color_liquid")
@@ -181,7 +181,7 @@ public class ModFluids extends ModModule {
          .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
          .canSwim(false)
          .canDrown(false)
-         .pathType(BlockPathTypes.LAVA)
+         .pathType(PathType.LAVA)
          .adjacentPathType(null);
    }
 

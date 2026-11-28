@@ -45,9 +45,8 @@ import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.util.BlockSnapshot;
 import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.event.TickEvent.Phase;
-import net.neoforged.neoforge.event.TickEvent.PlayerTickEvent;
-import net.neoforged.neoforge.event.entity.living.ShieldBlockEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -141,7 +140,7 @@ import modernmods.modernfoundry.tools.modules.interaction.SplashingModule;
 
 @EventBusSubscriber(
    modid = "tinkerslevellingaddon",
-   bus = Bus.FORGE
+   bus = Bus.GAME
 )
 public enum ImprovableModule
    implements ModifierModule,
@@ -235,8 +234,8 @@ public enum ImprovableModule
    }
 
    @SubscribeEvent
-   static void onPlayerTick(PlayerTickEvent event) {
-      if (event.phase == Phase.END && event.player instanceof ServerPlayer player) {
+   static void onPlayerTick(PlayerTickEvent.Post event) {
+      if (event.getEntity() instanceof ServerPlayer player) {
          for (ItemStack itemStack : player.getInventory().armor) {
             ToolLevellingUtil.processPendingLevelUp(player, itemStack);
          }
@@ -354,7 +353,7 @@ public enum ImprovableModule
       IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage
    ) {
       if ((Boolean)Config.enableTakingDamageXp.get()
-         && slotType.getType() == Type.ARMOR
+         && slotType.getType() == Type.HUMANOID_ARMOR
          && isDirectDamage
          && context.getEntity() instanceof ServerPlayer player
          && player.invulnerableTime <= 10
@@ -422,7 +421,7 @@ public enum ImprovableModule
    }
 
    @SubscribeEvent
-   static void onBlock(ShieldBlockEvent event) {
+   static void onBlock(LivingShieldBlockEvent event) {
       if ((Boolean)Config.enableBlockingDamageXp.get()) {
          LivingEntity entity = event.getEntity();
          ItemStack activeStack = entity.getUseItem();
@@ -996,7 +995,7 @@ public enum ImprovableModule
       if (hook instanceof BucketModule bucketModule1) {
          bucketModule = bucketModule1;
       } else {
-         if (!(hook instanceof FirstMerger merger)) {
+         if (!(hook instanceof BlockInteractionModifierHook.FirstMerger merger)) {
             return;
          }
 

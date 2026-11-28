@@ -32,7 +32,7 @@ public class JEIPlugin implements IModPlugin {
 
    public void registerRecipes(IRecipeRegistration registration) {
       RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-      List<DryingRackRecipes> recipesDryingRack = rm.getAllRecipesFor(DryingRackRecipes.Type.INSTANCE);
+      List<DryingRackRecipes> recipesDryingRack = rm.getAllRecipesFor(com.creeping_creeper.tinkers_thinking.common.recipes.ModRecipes.DRYING_RACK_TYPE.get()).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).toList();
       registration.addRecipes(DryingRackRecipes_TYPE, recipesDryingRack);
    }
 

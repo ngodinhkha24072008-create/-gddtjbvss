@@ -28,12 +28,12 @@ public class ReforgedBlockDeferredRegister extends BlockDeferredRegisterExtensio
    public BlockMetalObject registerMetal(String name) {
       ItemObject<Block> block = this.register(
          name + "_block",
-         () -> new Block(Properties.copy(Blocks.IRON_BLOCK).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresCorrectToolForDrops().strength(4.0F, 4.0F)),
+         () -> new Block(Properties.ofFullCopy(Blocks.IRON_BLOCK).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresCorrectToolForDrops().strength(4.0F, 4.0F)),
          b -> new BlockItem(b, new net.minecraft.world.item.Item.Properties())
       );
       ItemObject<PlatformBlock> platform = this.register(
          name + "_platform",
-         () -> new PlatformBlock(Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0F, 6.0F).noOcclusion()),
+         () -> new PlatformBlock(Properties.ofFullCopy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0F, 6.0F).noOcclusion()),
          b -> new BlockItem(b, new net.minecraft.world.item.Item.Properties())
       );
       return new BlockMetalObject(block, platform);
@@ -43,13 +43,13 @@ public class ReforgedBlockDeferredRegister extends BlockDeferredRegisterExtensio
       ItemObject<Block> block = this.register(
          name + "_block",
          () -> new SlimesteelBlock(
-            Properties.copy(Blocks.IRON_BLOCK).instrument(NoteBlockInstrument.IRON_XYLOPHONE).noOcclusion().requiresCorrectToolForDrops().strength(4.0F, 4.0F)
+            Properties.ofFullCopy(Blocks.IRON_BLOCK).instrument(NoteBlockInstrument.IRON_XYLOPHONE).noOcclusion().requiresCorrectToolForDrops().strength(4.0F, 4.0F)
          ),
          b -> new BlockItem(b, new net.minecraft.world.item.Item.Properties())
       );
       ItemObject<PlatformBlock> platform = this.register(
          name + "_platform",
-         () -> new PlatformBlock(Properties.copy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0F, 6.0F).noOcclusion()),
+         () -> new PlatformBlock(Properties.ofFullCopy(Blocks.IRON_BLOCK).requiresCorrectToolForDrops().strength(3.0F, 6.0F).noOcclusion()),
          b -> new BlockItem(b, new net.minecraft.world.item.Item.Properties())
       );
       return new BlockMetalObject(block, platform);
@@ -59,16 +59,16 @@ public class ReforgedBlockDeferredRegister extends BlockDeferredRegisterExtensio
       ItemObject<DropExperienceBlock> ore = this.register(
          name + "_ore",
          () -> new DropExperienceBlock(
-            Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F),
-            UniformInt.of(3, 7)
+            UniformInt.of(3, 7),
+            Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F)
          ),
          b -> new BlockItem(b, new net.minecraft.world.item.Item.Properties())
       );
       ItemObject<DropExperienceBlock> deepslate_ore = this.register(
          "deepslate_" + name + "_ore",
          () -> new DropExperienceBlock(
-            Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F),
-            UniformInt.of(3, 7)
+            UniformInt.of(3, 7),
+            Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F)
          ),
          b -> new BlockItem(b, new net.minecraft.world.item.Item.Properties())
       );
@@ -85,8 +85,8 @@ public class ReforgedBlockDeferredRegister extends BlockDeferredRegisterExtensio
       ItemObject<DropExperienceBlock> ore = this.register(
          name + "_ore",
          () -> new DropExperienceBlock(
-            Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F),
-            UniformInt.of(3, 7)
+            UniformInt.of(3, 7),
+            Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F)
          ),
          b -> new BlockItem(b, new net.minecraft.world.item.Item.Properties())
       );

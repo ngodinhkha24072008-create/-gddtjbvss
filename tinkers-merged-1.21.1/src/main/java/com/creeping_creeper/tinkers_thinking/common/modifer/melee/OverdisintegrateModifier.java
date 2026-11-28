@@ -35,7 +35,7 @@ public class OverdisintegrateModifier extends Modifier implements MeleeHitModifi
 
          if (target != null && x > 0) {
             OverslimeModule.INSTANCE.removeAmount(tool, modifier, x);
-            target.addEffect(new MobEffectInstance((MobEffect)ModEffects.disintegration.get(), 20 * x, y));
+            target.addEffect(new MobEffectInstance(ModEffects.disintegration, 20 * x, y));
             target.setLastHurtMob(context.getAttacker());
          }
       }

@@ -74,7 +74,7 @@ public class ResistingModifier extends Modifier implements ProjectileHitModifier
             attacker.setLastHurtMob(target);
             int remainingFire = target.getRemainingFireTicks();
             if (arrow.isOnFire()) {
-               target.setSecondsOnFire(5);
+               target.igniteForSeconds(5);
             }
 
             Level level = arrow.level();
@@ -83,17 +83,9 @@ public class ResistingModifier extends Modifier implements ProjectileHitModifier
                   target.setArrowCount(target.getArrowCount() + 1);
                }
 
-               int knockback = arrow.getKnockback();
-               if (knockback > 0) {
-                  Vec3 knockbackVec = arrow.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale(knockback * 0.6);
-                  if (knockbackVec.lengthSqr() > 0.0) {
-                     target.push(knockbackVec.x, 0.1, knockbackVec.z);
-                  }
-               }
-
-               if (!level.isClientSide) {
-                  EnchantmentHelper.doPostHurtEffects(target, attacker);
-                  EnchantmentHelper.doPostDamageEffects(attacker, target);
+               // 1.21: arrow knockback and post-hit effects come from enchantment effect components
+               if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                  EnchantmentHelper.doPostAttackEffects(serverLevel, target, damageSource);
                }
 
                arrow.doPostHurtEffects(target);

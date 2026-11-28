@@ -19,7 +19,7 @@ public class BattleAdvancedModifier extends Modifier implements MeleeDamageModif
    public float getMeleeDamage(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
       Player player = context.getPlayerAttacker();
       if (player != null && player.isBlocking()) {
-         float bonus = 0.005F * Math.min(1200, modifier.getLevel() * (tool.getItem().getUseDuration(player.getUseItem()) - player.getUseItemRemainingTicks()));
+         float bonus = 0.005F * Math.min(1200, modifier.getLevel() * (tool.getItem().getUseDuration(player.getUseItem(), player) - player.getUseItemRemainingTicks()));
          damage *= 1.0F + bonus;
       }
 

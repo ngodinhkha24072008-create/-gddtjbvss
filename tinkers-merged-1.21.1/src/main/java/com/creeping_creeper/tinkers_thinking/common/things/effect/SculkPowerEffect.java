@@ -27,24 +27,24 @@ import modernmods.modernfoundry.tools.modifiers.effect.NoMilkEffect;
 public class SculkPowerEffect extends NoMilkEffect implements ModifierUtils {
    public SculkPowerEffect(MobEffectCategory typeIn, int color, boolean show) {
       super(typeIn, color, show);
-      NeoForge.EVENT_BUS.addListener(this::onEffectAdded);
-      NeoForge.EVENT_BUS.addListener(this::onEffectRemove);
+      NeoForge.EVENT_BUS.<Added>addListener(this::onEffectAdded);
+      NeoForge.EVENT_BUS.<Remove>addListener(this::onEffectRemove);
    }
 
    private void onEffectAdded(Added event) {
       LivingEntity entity = event.getEntity();
       Level level = entity.level();
       MobEffectInstance effect = event.getEffectInstance();
-      if (effect.getEffect() == this) {
+      if (effect.getEffect().value() == this) {
          if (event.getOldEffectInstance() == null) {
-            Optional<Holder> dataCap = entity.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+            Optional<Holder> dataCap = TinkerDataCapability.getCapability(entity).resolve();
             dataCap.ifPresent(
                data -> {
                   int x = (Integer)data.get(ModDataKeys.SculkBoost, 0);
                   if (x > 0) {
                      entity.getAttribute(Attributes.ARMOR_TOUGHNESS)
                         .addPermanentModifier(
-                           new AttributeModifier(SculkBoostModule.ATTRIBUTE_BONUS, "tinkers_thinking.modifier.sculk_boost", x * 0.2F, Operation.MULTIPLY_BASE)
+                           new AttributeModifier(SculkBoostModule.ATTRIBUTE_BONUS, x * 0.2F, Operation.ADD_MULTIPLIED_BASE)
                         );
                   }
                }
@@ -61,17 +61,18 @@ public class SculkPowerEffect extends NoMilkEffect implements ModifierUtils {
    }
 
    private void onEffectRemove(Remove event) {
-      if (event.getEffect() == this) {
+      if (event.getEffect() != null && event.getEffect().value() == this) {
          this.removeAttribute(event.getEntity());
       }
    }
 
-   public boolean isDurationEffectTick(int duration, int amplifier) {
+   public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
       return duration == 1;
    }
 
-   public void applyEffectTick(LivingEntity living, int amplifier) {
+   public boolean applyEffectTick(LivingEntity living, int amplifier) {
       this.removeAttribute(living);
+      return true;
    }
 
    private void removeAttribute(LivingEntity living) {

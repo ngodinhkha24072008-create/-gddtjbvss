@@ -36,15 +36,15 @@ public enum SculkStruggleModule implements ModifierModule, MeleeHitModifierHook,
    public void afterMeleeHit(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
       LivingEntity attacker = context.getAttacker();
       LivingEntity living = context.getLivingTarget();
-      if (!context.isExtraAttack() && attacker.hasEffect((MobEffect)ModEffects.sculk_power.get()) && living != null && living.isDeadOrDying()) {
+      if (!context.isExtraAttack() && attacker.hasEffect(ModEffects.sculk_power) && living != null && living.isDeadOrDying()) {
          int x = 0;
          int y = 0;
-         if (attacker.hasEffect((MobEffect)ModEffects.last_effort.get())) {
-            x = attacker.getEffect((MobEffect)ModEffects.last_effort.get()).getDuration();
-            y = attacker.getEffect((MobEffect)ModEffects.last_effort.get()).getAmplifier();
+         if (attacker.hasEffect(ModEffects.last_effort)) {
+            x = attacker.getEffect(ModEffects.last_effort).getDuration();
+            y = attacker.getEffect(ModEffects.last_effort).getAmplifier();
          }
 
-         this.addEffect(attacker, (MobEffect)ModEffects.last_effort.get(), 100 * modifier.getLevel() + x, y);
+         this.addEffect(attacker, ModEffects.last_effort, 100 * modifier.getLevel() + x, y);
       }
    }
 }

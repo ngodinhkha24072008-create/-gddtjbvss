@@ -12,13 +12,14 @@ public class DisintegrationEffect extends NoMilkEffect {
       super(typeIn, color, show);
    }
 
-   public boolean isDurationEffectTick(int tick, int amplifier) {
+   public boolean shouldApplyEffectTickThisTick(int tick, int amplifier) {
       return tick > 0 && tick % 20 == 0;
    }
 
-   public void applyEffectTick(LivingEntity living, int amplifier) {
+   public boolean applyEffectTick(LivingEntity living, int amplifier) {
       LivingEntity lastAttacker = living.getLastHurtMob();
       DamageSource source = TinkerDamageTypes.source(living.level().registryAccess(), TinkerDamageTypes.BLEEDING, lastAttacker);
       ToolAttackUtil.attackEntitySecondary(source, (float)(living.getMaxHealth() * 0.01 * (amplifier + 1)), living, living, true);
+      return true;
    }
 }

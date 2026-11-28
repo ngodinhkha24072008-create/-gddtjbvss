@@ -47,12 +47,12 @@ public record SculkGravityModule(LevelingValue amount) implements ModifierModule
       boolean notBlocked
    ) {
       if (target != null
-         && !target.hasEffect((MobEffect)ModEffects.modifier_immune.get())
+         && !target.hasEffect(ModEffects.modifier_immune)
          && attacker != null
-         && attacker.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
-         this.addEffect(target, (MobEffect)ModEffects.overweight.get(), 120, 5);
-         this.addEffect(target, (MobEffect)ModEffects.jumpless.get(), 120, 0, false);
-         this.addEffect(target, (MobEffect)ModEffects.modifier_immune.get(), (int)(this.amount.eachLevel() / modifier.getLevel()));
+         && attacker.hasEffect(ModEffects.sculk_power)) {
+         this.addEffect(target, ModEffects.overweight, 120, 5);
+         this.addEffect(target, ModEffects.jumpless, 120, 0, false);
+         this.addEffect(target, ModEffects.modifier_immune, (int)(this.amount.eachLevel() / modifier.getLevel()));
       }
 
       return false;

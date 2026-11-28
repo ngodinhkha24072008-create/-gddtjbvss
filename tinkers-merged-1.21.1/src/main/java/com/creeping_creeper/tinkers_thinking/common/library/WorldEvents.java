@@ -20,7 +20,6 @@ import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -36,7 +35,7 @@ import modernmods.modernfoundry.common.TinkerDamageTypes;
 
 @EventBusSubscriber(
    modid = "tinkers_thinking",
-   bus = Bus.FORGE
+   bus = Bus.GAME
 )
 public class WorldEvents {
    @SubscribeEvent
@@ -45,13 +44,12 @@ public class WorldEvents {
       LivingEntity dying = event.getEntity();
       boolean a = source.getDirectEntity() instanceof Snowball;
       boolean b = source.getDirectEntity() instanceof ThrownPotion potion
-         && PotionUtils.getPotion(potion.getItem()) == Potions.WATER
-         && PotionUtils.getMobEffects(potion.getItem()).isEmpty();
+         && potion.getItem().getOrDefault(net.minecraft.core.component.DataComponents.POTION_CONTENTS, net.minecraft.world.item.alchemy.PotionContents.EMPTY).is(Potions.WATER);
       if (dying instanceof Blaze && (source.is(ModTags.DamageTypes.drop_ashes) || a || b)) {
          dropItem(dying, (Item)ModCommonItems.ashes.get());
       }
 
-      if (source.is(DamageTypes.SONIC_BOOM) && dying.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+      if (source.is(DamageTypes.SONIC_BOOM) && dying.hasEffect(ModEffects.sculk_power)) {
          if (dying instanceof Creeper) {
             dropItem(dying, ((ChainBlock)ModCommonItems.soul_vine.get()).asItem());
          }

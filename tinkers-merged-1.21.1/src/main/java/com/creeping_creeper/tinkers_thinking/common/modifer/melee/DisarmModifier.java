@@ -23,9 +23,9 @@ public class DisarmModifier extends Modifier implements MeleeHitModifierHook, Re
    public void afterMeleeHit(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
       if (!context.isExtraAttack() && context.isFullyCharged()) {
          LivingEntity target = context.getLivingTarget();
-         if (target != null && !target.hasEffect((MobEffect)ModEffects.modifier_immune.get())) {
-            this.addEffect(target, (MobEffect)ModEffects.disarm.get(), 160);
-            this.addEffect(target, (MobEffect)ModEffects.modifier_immune.get(), 360 / modifier.getLevel());
+         if (target != null && !target.hasEffect(ModEffects.modifier_immune)) {
+            this.addEffect(target, ModEffects.disarm, 160);
+            this.addEffect(target, ModEffects.modifier_immune, 360 / modifier.getLevel());
          }
       }
    }

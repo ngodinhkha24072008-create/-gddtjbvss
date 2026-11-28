@@ -20,7 +20,7 @@ public class ModBooks extends BookData {
    }
 
    public static void initBook() {
-      BookLoader.registerGsonTypeAdapter(Component.class, new Serializer());
+      BookLoader.registerGsonTypeAdapter(Component.class, new Component.SerializerAdapter(net.minecraft.core.RegistryAccess.EMPTY));
       addStandardData(FANTASTIC_GADGETRY, FANTASTIC_GADGETRY_ID);
    }
 

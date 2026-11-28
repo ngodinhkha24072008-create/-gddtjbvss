@@ -30,8 +30,8 @@ public class SculkProtectionModifier extends Modifier implements ProtectionModif
    }
 
    private float getBono(LivingEntity living, ModifierEntry modifier) {
-      return living.hasEffect((MobEffect)ModEffects.sculk_power.get())
-         ? Math.min(1.5F, living.getEffect((MobEffect)ModEffects.sculk_power.get()).duration / 1600.0F) * modifier.getLevel()
+      return living.hasEffect(ModEffects.sculk_power)
+         ? Math.min(1.5F, living.getEffect(ModEffects.sculk_power).duration / 1600.0F) * modifier.getLevel()
          : 0.0F;
    }
 

@@ -22,15 +22,15 @@ import modernmods.modernfoundry.library.tools.nbt.ModDataNBT;
 public interface ModifierUtils {
    ResourceLocation reverse_key = ResourceLocation.fromNamespaceAndPath("tinkers_thinking", "reverse");
 
-   default void addEffect(LivingEntity living, MobEffect effect, int duration) {
+   default void addEffect(LivingEntity living, net.minecraft.core.Holder<MobEffect> effect, int duration) {
       this.addEffect(living, effect, duration, 0);
    }
 
-   default void addEffect(LivingEntity living, MobEffect effect, int duration, int amplifier) {
+   default void addEffect(LivingEntity living, net.minecraft.core.Holder<MobEffect> effect, int duration, int amplifier) {
       this.addEffect(living, effect, duration, amplifier, true);
    }
 
-   default void addEffect(LivingEntity living, MobEffect effect, int duration, int amplifier, boolean visible) {
+   default void addEffect(LivingEntity living, net.minecraft.core.Holder<MobEffect> effect, int duration, int amplifier, boolean visible) {
       living.addEffect(new MobEffectInstance(effect, duration, amplifier, false, visible, visible));
    }
 

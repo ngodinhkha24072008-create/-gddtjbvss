@@ -32,7 +32,7 @@ import modernmods.modernfoundry.library.tools.nbt.ToolStack;
 @EventBusSubscriber(
    modid = "tinkerslevellingaddon",
    value = {Dist.CLIENT},
-   bus = Bus.FORGE
+   bus = Bus.GAME
 )
 public class TooltipEventHandler {
    private static final Component TOOLTIP_HOLD_ALT = ModUtil.makeTranslation(
@@ -126,7 +126,7 @@ public class TooltipEventHandler {
          infoEntries.add(TOOLTIP_STATS_GAINED);
 
          for (Entry<String, Double> entry : gainedStats.entrySet()) {
-            MutableComponent value = ModUtil.makeText(ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(entry.getValue()), ToolLevellingUtil.getStatColor(entry.getKey()));
+            MutableComponent value = ModUtil.makeText(net.minecraft.world.item.component.ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(entry.getValue()), ToolLevellingUtil.getStatColor(entry.getKey()));
             infoEntries.add(ModUtil.makeTranslation("tooltip", "info.stats." + entry.getKey(), value));
          }
       }
@@ -168,7 +168,7 @@ public class TooltipEventHandler {
                   statValue *= 10.0;
                }
 
-               MutableComponent value = ModUtil.makeText(ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(statValue), ToolLevellingUtil.getStatColor(nextStat));
+               MutableComponent value = ModUtil.makeText(net.minecraft.world.item.component.ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(statValue), ToolLevellingUtil.getStatColor(nextStat));
                MutableComponent name = ModUtil.makeTranslation("tooltip", "stat." + nextStat);
                infoEntries.add(ModUtil.makeTranslation("tooltip", "info.next_level.stat", value, name));
             }

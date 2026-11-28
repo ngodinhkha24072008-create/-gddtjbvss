@@ -45,10 +45,10 @@ public enum AntibruteModule implements ModifierModule, ModifyDamageModifierHook,
    ) {
       LivingEntity living = context.getEntity();
       float x = living.getHealth() / 2.0F;
-      if (!source.is(DamageTypeTags.BYPASSES_RESISTANCE) && !context.getEntity().hasEffect((MobEffect)ModEffects.antibrute_cooldown.get()) && amount > x) {
-         Optional<Holder> dataCap = living.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+      if (!source.is(DamageTypeTags.BYPASSES_RESISTANCE) && !context.getEntity().hasEffect(ModEffects.antibrute_cooldown) && amount > x) {
+         Optional<Holder> dataCap = TinkerDataCapability.getCapability(living).resolve();
          dataCap.ifPresent(
-            data -> this.addEffect(context.getEntity(), (MobEffect)ModEffects.antibrute_cooldown.get(), 240 / (Integer)data.get(ModDataKeys.Antibrute, 1))
+            data -> this.addEffect(context.getEntity(), ModEffects.antibrute_cooldown, 240 / (Integer)data.get(ModDataKeys.Antibrute, 1))
          );
          this.block(living);
          return x;

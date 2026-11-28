@@ -21,7 +21,7 @@ import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability.Ho
 
 @EventBusSubscriber(
    modid = "tinkers_thinking",
-   bus = Bus.FORGE
+   bus = Bus.GAME
 )
 public class OnDeath implements ModifierUtils {
    @SubscribeEvent
@@ -29,23 +29,23 @@ public class OnDeath implements ModifierUtils {
       LivingEntity living = event.getEntity();
       DamageSource source = event.getSource();
       if (living instanceof Player player && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
-         if (player.hasEffect((MobEffect)ModEffects.last_effort.get())) {
+         if (player.hasEffect(ModEffects.last_effort)) {
             event.setCanceled(true);
             player.setHealth(1.0F);
             this.block(living);
-            if (player.getEffect((MobEffect)ModEffects.last_effort.get()).getAmplifier() == 0) {
-               int x = Objects.requireNonNull(player.getEffect((MobEffect)ModEffects.last_effort.get())).getDuration();
-               player.addEffect(new MobEffectInstance((MobEffect)ModEffects.last_effort.get(), x, 1));
+            if (player.getEffect(ModEffects.last_effort).getAmplifier() == 0) {
+               int x = Objects.requireNonNull(player.getEffect(ModEffects.last_effort)).getDuration();
+               player.addEffect(new MobEffectInstance(ModEffects.last_effort, x, 1));
             }
          } else {
-            Optional<Holder> dataCap = living.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+            Optional<Holder> dataCap = TinkerDataCapability.getCapability(living).resolve();
             dataCap.ifPresent(data -> {
                int level = (Integer)data.get(ModDataKeys.SculkStruggle, 0);
-               if (level > 0 && player.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+               if (level > 0 && player.hasEffect(ModEffects.sculk_power)) {
                   event.setCanceled(true);
                   player.setHealth(1.0F);
                   this.block(living);
-                  player.addEffect(new MobEffectInstance((MobEffect)ModEffects.last_effort.get(), level * 60 + 180, 1));
+                  player.addEffect(new MobEffectInstance(ModEffects.last_effort, level * 60 + 180, 1));
                   if (player.level().isClientSide) {
                      Minecraft.getInstance().gameRenderer.displayItemActivation(ModCommonItems.warden_steel.getIngot().getDefaultInstance());
                   }

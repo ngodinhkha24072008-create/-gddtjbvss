@@ -6,6 +6,6 @@
     }
   ],
   "output": {
-    "item": "tinkers_thinking:sky_slime_drop"
+    "id": "tinkers_thinking:sky_slime_drop"
   }
 }

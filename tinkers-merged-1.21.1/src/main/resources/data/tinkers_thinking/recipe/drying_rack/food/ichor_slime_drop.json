@@ -6,6 +6,6 @@
     }
   ],
   "output": {
-    "item": "tinkers_thinking:ichor_slime_drop"
+    "id": "tinkers_thinking:ichor_slime_drop"
   }
 }

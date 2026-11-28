@@ -26,8 +26,8 @@ import modernmods.modernfoundry.library.tools.nbt.ModifierNBT;
 import modernmods.modernfoundry.shared.TinkerEffects;
 
 public class RecalamityModifier extends Modifier implements MeleeDamageModifierHook, ProjectileHitModifierHook, ModifierUtils {
-   private static final List<MobEffect> EFFECTS = new ArrayList<>(
-      List.of(MobEffects.POISON, MobEffects.WITHER, (MobEffect)TinkerEffects.bleeding.get(), (MobEffect)ModEffects.disintegration.get())
+   private static final List<net.minecraft.core.Holder<MobEffect>> EFFECTS = new ArrayList<>(
+      List.of(MobEffects.POISON, MobEffects.WITHER, TinkerEffects.bleeding, ModEffects.disintegration)
    );
 
    protected void registerHooks(Builder hookBuilder) {
@@ -35,7 +35,7 @@ public class RecalamityModifier extends Modifier implements MeleeDamageModifierH
    }
 
    private float calamity(LivingEntity target, LivingEntity attacker, boolean a, float damage, int l) {
-      MobEffect effect = (MobEffect)ModEffects.disintegration.get();
+      net.minecraft.core.Holder<MobEffect> effect = ModEffects.disintegration;
       int x = 0;
       if (a) {
          switch (RANDOM.nextInt(4)) {
@@ -46,13 +46,13 @@ public class RecalamityModifier extends Modifier implements MeleeDamageModifierH
                effect = MobEffects.WITHER;
                break;
             case 3:
-               effect = (MobEffect)TinkerEffects.bleeding.get();
+               effect = TinkerEffects.bleeding;
          }
 
          target.addEffect(new MobEffectInstance(effect, target.hasEffect(effect) ? Objects.requireNonNull(target.getEffect(effect)).getDuration() + 80 * l : 80 * l));
          target.setLastHurtMob(attacker);
       } else {
-         for (MobEffect i : EFFECTS) {
+         for (net.minecraft.core.Holder<MobEffect> i : EFFECTS) {
             x += target.hasEffect(i) ? 1 : 0;
          }
       }

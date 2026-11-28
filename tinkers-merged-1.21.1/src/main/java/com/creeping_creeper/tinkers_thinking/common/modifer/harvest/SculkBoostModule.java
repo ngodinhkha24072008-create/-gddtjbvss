@@ -48,7 +48,7 @@ public enum SculkBoostModule implements ModifierModule, TooltipModifierHook, Con
    );
    public static final RecordLoadable<SculkBoostModule> LOADER = new SingletonLoader(INSTANCE);
    private static final Component Boost = TinkersThinking.makeTranslation("modifier", "sculk_boost");
-   public static final UUID ATTRIBUTE_BONUS = UUID.fromString("2307DE5E-7CE8-4030-940E-514C1F170002");
+   public static final net.minecraft.resources.ResourceLocation ATTRIBUTE_BONUS = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("tinkers_thinking", "sculk_boost_module.attribute_bonus");
 
    @NotNull
    public RecordLoadable<SculkBoostModule> getLoader() {
@@ -68,7 +68,7 @@ public enum SculkBoostModule implements ModifierModule, TooltipModifierHook, Con
       boolean isEffective,
       float miningSpeedModifier
    ) {
-      if (isEffective && event.getEntity().hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+      if (isEffective && event.getEntity().hasEffect(ModEffects.sculk_power)) {
          event.setNewSpeed(event.getNewSpeed() * (1.0F + modifier.getLevel() * 0.2F));
       }
    }
@@ -76,10 +76,10 @@ public enum SculkBoostModule implements ModifierModule, TooltipModifierHook, Con
    public float modifyStat(
       @NotNull IToolStackView tool, @NotNull ModifierEntry modifier, LivingEntity living, @NotNull FloatToolStat stat, float baseValue, float multiplier
    ) {
-      if (living.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+      if (living.hasEffect(ModEffects.sculk_power)) {
          if (tool.hasTag(Items.ARMOR) && stat == ToolStats.ARMOR_TOUGHNESS) {
             AtomicInteger x = new AtomicInteger();
-            Optional<Holder> dataCap = living.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+            Optional<Holder> dataCap = TinkerDataCapability.getCapability(living).resolve();
             dataCap.ifPresent(data -> x.set((Integer)data.get(ModDataKeys.SculkBoost, 1)));
             return baseValue * (1.0F + x.get() * 0.2F);
          }
@@ -112,13 +112,13 @@ public enum SculkBoostModule implements ModifierModule, TooltipModifierHook, Con
          attribute.removeModifier(ATTRIBUTE_BONUS);
       }
 
-      Optional<Holder> dataCap = living.getCapability(TinkerDataCapability.CAPABILITY).resolve();
+      Optional<Holder> dataCap = TinkerDataCapability.getCapability(living).resolve();
       dataCap.ifPresent(
          data -> {
             int x = (Integer)data.get(ModDataKeys.SculkBoost, 0);
-            if (x > 0 && living.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+            if (x > 0 && living.hasEffect(ModEffects.sculk_power)) {
                living.getAttribute(Attributes.ARMOR_TOUGHNESS)
-                  .addPermanentModifier(new AttributeModifier(ATTRIBUTE_BONUS, "tinkers_thinking.modifier.sculk_boost", x * 0.2F, Operation.MULTIPLY_BASE));
+                  .addPermanentModifier(new AttributeModifier(ATTRIBUTE_BONUS, x * 0.2F, Operation.ADD_MULTIPLIED_BASE));
             }
          }
       );
@@ -129,7 +129,7 @@ public enum SculkBoostModule implements ModifierModule, TooltipModifierHook, Con
    ) {
       if (player != null) {
          float bonus = 0.0F;
-         if (player.hasEffect((MobEffect)ModEffects.sculk_power.get())) {
+         if (player.hasEffect(ModEffects.sculk_power)) {
             bonus = 0.2F * modifier.getLevel();
          }
 

@@ -19,29 +19,29 @@ import modernmods.modernfoundry.library.tools.helper.ToolAttackUtil;
 import modernmods.modernfoundry.tools.modifiers.effect.NoMilkEffect;
 
 public class FreezingColdEffect extends NoMilkEffect {
-   public static final UUID FREEZINGCOLDBONUS = UUID.fromString("2307DE5E-7CE8-4030-940E-514C1F170002");
+   public static final net.minecraft.resources.ResourceLocation FREEZINGCOLDBONUS = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("tinkers_thinking", "freezing_cold_effect.freezingcoldbonus");
 
    public FreezingColdEffect(MobEffectCategory typeIn, int color, boolean show) {
       super(typeIn, color, show);
    }
 
-   public boolean isDurationEffectTick(int tick, int amplifier) {
+   public boolean shouldApplyEffectTickThisTick(int tick, int amplifier) {
       return tick % 10 == 0 || tick == 1;
    }
 
-   public void applyEffectTick(LivingEntity living, int amplifier) {
+   public boolean applyEffectTick(LivingEntity living, int amplifier) {
       AttributeInstance attribute = living.getAttribute(Attributes.MOVEMENT_SPEED);
       if (attribute != null && attribute.getValue() > 0.0) {
          float x = (float)(-0.002 * (amplifier + 1));
          if (attribute.getModifier(FREEZINGCOLDBONUS) != null) {
-            x += (float)Objects.requireNonNull(attribute.getModifier(FREEZINGCOLDBONUS)).getAmount();
+            x += (float)Objects.requireNonNull(attribute.getModifier(FREEZINGCOLDBONUS)).amount();
             attribute.removeModifier(FREEZINGCOLDBONUS);
          }
 
-         attribute.addTransientModifier(new AttributeModifier(FREEZINGCOLDBONUS, "tinkers_thinking.effect.freezing_cold", x, Operation.ADDITION));
+         attribute.addTransientModifier(new AttributeModifier(FREEZINGCOLDBONUS, x, Operation.ADD_VALUE));
       }
 
-      if (Objects.requireNonNull(living.getEffect((MobEffect)ModEffects.freezing_cold.get())).getDuration() == 1) {
+      if (Objects.requireNonNull(living.getEffect(ModEffects.freezing_cold)).getDuration() == 1) {
          int y = 3 * amplifier + 3;
          LivingEntity lastAttacker = living.getLastHurtMob();
          DamageSource source = TinkerDamageTypes.source(living.level().registryAccess(), DamageTypes.FREEZE, lastAttacker);
@@ -51,5 +51,6 @@ public class FreezingColdEffect extends NoMilkEffect {
             attribute.removeModifier(FREEZINGCOLDBONUS);
          }
       }
+      return true;
    }
 }

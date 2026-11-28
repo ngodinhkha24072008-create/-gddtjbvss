@@ -57,7 +57,7 @@ public record LightlyAttackModule(LevelingValue amount) implements ModifierModul
 
    public void afterMeleeHit(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
       if (!context.isExtraAttack() && this.isAllEmpty(context.getAttacker())) {
-         this.addEffect(context.getAttacker(), (MobEffect)ModEffects.quick_attack.get(), 60, modifier.getLevel() * 3 - 1);
+         this.addEffect(context.getAttacker(), ModEffects.quick_attack, 60, modifier.getLevel() * 3 - 1);
       }
    }
 

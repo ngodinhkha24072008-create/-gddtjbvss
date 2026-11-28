@@ -5,7 +5,7 @@ import mrthomas20121.tinkers_reforged.TinkersReforged;
 import mrthomas20121.tinkers_reforged.api.data.Metal;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidType.Properties;
@@ -92,7 +92,7 @@ public class TinkersReforgedFluids {
          .motionScale(0.0023333333333333335)
          .canSwim(false)
          .canDrown(false)
-         .pathType(BlockPathTypes.LAVA)
+         .pathType(PathType.LAVA)
          .adjacentPathType(null);
    }
 }

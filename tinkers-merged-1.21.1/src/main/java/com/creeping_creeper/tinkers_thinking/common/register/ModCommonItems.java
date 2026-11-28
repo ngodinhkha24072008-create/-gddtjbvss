@@ -19,7 +19,7 @@ import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChainBlock;
-import net.minecraft.world.level.block.GlassBlock;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TorchBlock;
@@ -150,56 +150,56 @@ public class ModCommonItems extends ModModule {
    );
    public static final ItemObject<ChainBlock> soul_vine = BLOCKS.register(
       "soul_vine",
-      () -> new ChainBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.copy(Blocks.CHAIN).sound(SoundType.VINE)),
+      () -> new ChainBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN).sound(SoundType.VINE)),
       GENERAL_TOOLTIP_BLOCK_ITEM
    );
    public static final ItemObject<ChainBlock> bound_chain = BLOCKS.register(
       "bound_chain",
-      () -> new ChainBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.copy(Blocks.CHAIN)),
+      () -> new ChainBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.ofFullCopy(Blocks.CHAIN)),
       GENERAL_TOOLTIP_BLOCK_ITEM
    );
-   public static final DeferredHolder<TorchBlock, TorchBlock> ground_stone_torch = BLOCKS.registerNoItem(
+   public static final DeferredHolder<net.minecraft.world.level.block.Block, TorchBlock> ground_stone_torch = BLOCKS.registerNoItem(
       "stone_torch",
       () -> new TorchBlock(
+         ParticleTypes.FLAME,
          net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
             .noCollission()
             .strength(0.6F)
             .lightLevel(p_50886_ -> 14)
-            .sound(SoundType.STONE),
-         ParticleTypes.FLAME
+            .sound(SoundType.STONE)
       )
    );
-   public static final DeferredHolder<WallTorchBlock, WallTorchBlock> wall_stone_torch = BLOCKS.registerNoItem(
+   public static final DeferredHolder<net.minecraft.world.level.block.Block, WallTorchBlock> wall_stone_torch = BLOCKS.registerNoItem(
       "wall_stone_torch",
       () -> new WallTorchBlock(
+         ParticleTypes.FLAME,
          net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
             .noCollission()
             .strength(0.6F)
             .lightLevel(p_50886_ -> 14)
-            .sound(SoundType.STONE),
-         ParticleTypes.FLAME
+            .sound(SoundType.STONE)
       )
    );
-   public static final DeferredHolder<TorchBlock, TorchBlock> ground_stone_soul_torch = BLOCKS.registerNoItem(
+   public static final DeferredHolder<net.minecraft.world.level.block.Block, TorchBlock> ground_stone_soul_torch = BLOCKS.registerNoItem(
       "stone_soul_torch",
       () -> new TorchBlock(
+         ParticleTypes.SOUL_FIRE_FLAME,
          net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
             .noCollission()
             .strength(0.6F)
             .lightLevel(p_50886_ -> 10)
-            .sound(SoundType.STONE),
-         ParticleTypes.SOUL_FIRE_FLAME
+            .sound(SoundType.STONE)
       )
    );
-   public static final DeferredHolder<WallTorchBlock, WallTorchBlock> wall_stone_soul_torch = BLOCKS.registerNoItem(
+   public static final DeferredHolder<net.minecraft.world.level.block.Block, WallTorchBlock> wall_stone_soul_torch = BLOCKS.registerNoItem(
       "wall_stone_soul_torch",
       () -> new WallTorchBlock(
+         ParticleTypes.SOUL_FIRE_FLAME,
          net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
             .noCollission()
             .strength(0.6F)
             .lightLevel(p_50886_ -> 10)
-            .sound(SoundType.STONE),
-         ParticleTypes.SOUL_FIRE_FLAME
+            .sound(SoundType.STONE)
       )
    );
    public static final ItemObject<Item> stone_torch_item = ITEMS.register(
@@ -212,13 +212,13 @@ public class ModCommonItems extends ModModule {
    public static final ItemObject<LadderBlock> stone_ladder = BLOCKS.register(
       "stone_ladder",
       () -> new LadderBlock(
-         net.minecraft.world.level.block.state.BlockBehaviour.Properties.copy(Blocks.LADDER).sound(SoundType.LADDER).strength(0.8F)
+         net.minecraft.world.level.block.state.BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).sound(SoundType.LADDER).strength(0.8F)
       ),
       GENERAL_BLOCK_ITEM
    );
-   public static final ItemObject<GlassBlock> tempered_glass = BLOCKS.register(
+   public static final ItemObject<TransparentBlock> tempered_glass = BLOCKS.register(
       "tempered_glass",
-      () -> new GlassBlock(
+      () -> new TransparentBlock(
          net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
             .mapColor(MapColor.NONE)
             .strength(10.0F, 1200.0F)
@@ -227,9 +227,9 @@ public class ModCommonItems extends ModModule {
             .instrument(NoteBlockInstrument.HAT)
             .noOcclusion()
             .isValidSpawn(Blocks::never)
-            .isRedstoneConductor(Blocks::never)
-            .isSuffocating(Blocks::never)
-            .isViewBlocking(Blocks::never)
+            .isRedstoneConductor((s, g, p) -> false)
+            .isSuffocating((s, g, p) -> false)
+            .isViewBlocking((s, g, p) -> false)
       ),
       GENERAL_TOOLTIP_BLOCK_ITEM
    );
@@ -244,9 +244,9 @@ public class ModCommonItems extends ModModule {
             .instrument(NoteBlockInstrument.HAT)
             .noOcclusion()
             .isValidSpawn(Blocks::never)
-            .isRedstoneConductor(Blocks::never)
-            .isSuffocating(Blocks::never)
-            .isViewBlocking(Blocks::never)
+            .isRedstoneConductor((s, g, p) -> false)
+            .isSuffocating((s, g, p) -> false)
+            .isViewBlocking((s, g, p) -> false)
       ),
       GENERAL_TOOLTIP_BLOCK_ITEM
    );

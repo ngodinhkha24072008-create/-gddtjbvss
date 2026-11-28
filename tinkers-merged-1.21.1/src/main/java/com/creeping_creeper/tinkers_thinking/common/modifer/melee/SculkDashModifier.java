@@ -56,9 +56,9 @@ public class SculkDashModifier
       Player attacker = context.getPlayerAttacker();
       ModDataNBT persistentData = Objects.requireNonNull(tool.getPersistentData());
       if (attacker != null) {
-         if (attacker.hasEffect((MobEffect)ModEffects.sculk_power.get()) && (context.getLivingTarget() == null || context.getLivingTarget().isDeadOrDying())) {
+         if (attacker.hasEffect(ModEffects.sculk_power) && (context.getLivingTarget() == null || context.getLivingTarget().isDeadOrDying())) {
             persistentData.putInt(this.KEY, persistentData.getInt(this.KEY) + modifier.getLevel());
-            attacker.addEffect(new MobEffectInstance((MobEffect)ModEffects.strength_reset.get(), 5, 0, true, false));
+            attacker.addEffect(new MobEffectInstance(ModEffects.strength_reset, 5, 0, true, false));
          }
       }
    }

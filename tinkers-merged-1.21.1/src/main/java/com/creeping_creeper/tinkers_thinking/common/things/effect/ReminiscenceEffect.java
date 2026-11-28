@@ -15,7 +15,7 @@ public class ReminiscenceEffect extends TinkerEffect {
 
    public ReminiscenceEffect(MobEffectCategory typeIn, boolean show) {
       super(typeIn, 12074426, show);
-      NeoForge.EVENT_BUS.addListener(this::onEffectAdded);
+      NeoForge.EVENT_BUS.<Added>addListener(this::onEffectAdded);
    }
 
    private void onEffectAdded(Added event) {
@@ -28,11 +28,11 @@ public class ReminiscenceEffect extends TinkerEffect {
       }
    }
 
-   public boolean isDurationEffectTick(int duration, int amplifier) {
+   public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
       return duration == 1;
    }
 
-   public void applyEffectTick(LivingEntity living, int amplifier) {
+   public boolean applyEffectTick(LivingEntity living, int amplifier) {
       ModDataNBT data = PersistentDataCapability.getOrWarn(living);
       if (data.contains(KEY, 10)) {
          CompoundTag health = data.getCompound(KEY);
@@ -40,5 +40,6 @@ public class ReminiscenceEffect extends TinkerEffect {
             living.setHealth(health.getFloat("health"));
          }
       }
+      return true;
    }
 }

@@ -86,7 +86,7 @@ public class WorldUtil {
    }
 
    private static boolean cannotContainFluid(Level world, BlockPos pos, BlockState state, Fluid fluid) {
-      return !(state.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(world, pos, state, fluid));
+      return !(state.getBlock() instanceof LiquidBlockContainer container && container.canPlaceLiquid(null, world, pos, state, fluid));
    }
 
    private WorldUtil() {

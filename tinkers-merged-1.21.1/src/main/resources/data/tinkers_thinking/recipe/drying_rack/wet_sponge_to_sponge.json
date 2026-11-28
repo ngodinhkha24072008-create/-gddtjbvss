@@ -6,6 +6,6 @@
     }
   ],
   "output": {
-    "item": "minecraft:sponge"
+    "id": "minecraft:sponge"
   }
 }

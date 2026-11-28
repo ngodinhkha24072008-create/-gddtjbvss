@@ -11,7 +11,7 @@ public interface TinkersReforgedPredicates {
    LivingEntityPredicate BELOW_ZERO = LivingEntityPredicate.simple(entity -> entity.getY() < 0.0);
    LivingEntityPredicate NOT_MAX_HEALTH = LivingEntityPredicate.simple(entity -> entity.getHealth() < entity.getMaxHealth());
    LivingEntityPredicate IS_NOT_IN_THE_OVERWORLD = LivingEntityPredicate.simple(livingEntity -> {
-      ResourceKey<DimensionType> dimensionTypeResourceKey = livingEntity.level().dimensionTypeId();
+      ResourceKey<DimensionType> dimensionTypeResourceKey = livingEntity.level().dimensionTypeRegistration().unwrapKey().orElseThrow();
       return !dimensionTypeResourceKey.equals(BuiltinDimensionTypes.OVERWORLD) || !dimensionTypeResourceKey.equals(BuiltinDimensionTypes.OVERWORLD_CAVES);
    });
 }

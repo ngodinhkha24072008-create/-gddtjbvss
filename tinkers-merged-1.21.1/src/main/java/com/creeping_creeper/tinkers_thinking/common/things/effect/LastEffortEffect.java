@@ -12,14 +12,15 @@ public class LastEffortEffect extends NoMilkEffect {
       super(typeIn, color, show);
    }
 
-   public boolean isDurationEffectTick(int duration, int amplifier) {
+   public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
       return duration == 1 && amplifier == 1;
    }
 
-   public void applyEffectTick(LivingEntity living, int amplifier) {
+   public boolean applyEffectTick(LivingEntity living, int amplifier) {
       Level level = living.level();
       if (!level.isClientSide) {
          living.hurt(TinkerDamageTypes.source(level.registryAccess(), ModDamageTypes.last_effort), 99999.0F);
       }
+      return true;
    }
 }

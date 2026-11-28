@@ -33,7 +33,7 @@ public class SculkSiphonModifier extends Modifier implements MeleeHitModifierHoo
       LivingEntity attacker = context.getAttacker();
       if (context.isFullyCharged()
          && !context.isExtraAttack()
-         && attacker.hasEffect((MobEffect)ModEffects.sculk_power.get())
+         && attacker.hasEffect(ModEffects.sculk_power)
          && living != null
          && RANDOM.nextFloat() < 0.3) {
          this.dropItem(living, (Item)ModCommonItems.soul_shard_a.get(), modifier.getLevel());
@@ -44,7 +44,7 @@ public class SculkSiphonModifier extends Modifier implements MeleeHitModifierHoo
       IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage
    ) {
       Entity entity = source.getEntity();
-      if (context.getEntity().hasEffect((MobEffect)ModEffects.sculk_power.get()) && entity != null && entity.isAlive() && RANDOM.nextFloat() < 0.3) {
+      if (context.getEntity().hasEffect(ModEffects.sculk_power) && entity != null && entity.isAlive() && RANDOM.nextFloat() < 0.3) {
          this.dropItem(entity, (Item)ModCommonItems.soul_shard_b.get(), modifier.getLevel());
       }
 

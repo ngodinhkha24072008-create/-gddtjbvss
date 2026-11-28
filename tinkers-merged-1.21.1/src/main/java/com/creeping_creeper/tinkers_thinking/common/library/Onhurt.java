@@ -9,41 +9,41 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.Level.ExplosionInteraction;
-import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.EventBusSubscriber.Bus;
 
 @EventBusSubscriber(
    modid = "tinkers_thinking",
-   bus = Bus.FORGE
+   bus = Bus.GAME
 )
 public class Onhurt {
    @SubscribeEvent
-   public void onLivingHurt(LivingHurtEvent event) {
+   public void onLivingHurt(LivingIncomingDamageEvent event) {
       LivingEntity living = event.getEntity();
       Level level = living.level();
       DamageSource source = event.getSource();
-      if (living.hasEffect((MobEffect)ModEffects.cataclysm.get())) {
+      if (living.hasEffect(ModEffects.cataclysm)) {
          if (source.is(DamageTypeTags.IS_FIRE) && !level.isClientSide) {
             level.explode(
                living,
                living.getX(),
                living.getY(),
                living.getZ(),
-               Objects.requireNonNull(living.getEffect((MobEffect)ModEffects.cataclysm.get())).getAmplifier() + 1,
+               Objects.requireNonNull(living.getEffect(ModEffects.cataclysm)).getAmplifier() + 1,
                ExplosionInteraction.MOB
             );
-            living.removeEffect((MobEffect)ModEffects.cataclysm.get());
+            living.removeEffect(ModEffects.cataclysm);
          }
 
          if (source.is(DamageTypes.FREEZE)) {
-            living.removeEffect((MobEffect)ModEffects.cataclysm.get());
+            living.removeEffect(ModEffects.cataclysm);
          }
       }
 
-      if (living.hasEffect((MobEffect)ModEffects.disarm.get())) {
-         living.removeEffect((MobEffect)ModEffects.disarm.get());
+      if (living.hasEffect(ModEffects.disarm)) {
+         living.removeEffect(ModEffects.disarm);
       }
    }
 }
