@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_reforged:berkelium",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_berkelium"
+  },
+  "temperature": 2200
+}

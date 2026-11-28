@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/zith"
+  },
+  "result": {
+    "fluid": "tinkers_thinking:molten_zith",
+    "amount": 90
+  },
+  "temperature": 1500,
+  "time": 80
+}

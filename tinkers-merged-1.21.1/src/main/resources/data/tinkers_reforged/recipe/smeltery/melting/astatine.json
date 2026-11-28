@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_reforged:astatine",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_astatine"
+  },
+  "temperature": 635
+}

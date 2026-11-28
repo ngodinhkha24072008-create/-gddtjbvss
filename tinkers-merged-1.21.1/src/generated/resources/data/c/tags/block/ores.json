@@ -1,0 +1,22 @@
+{
+  "values": [
+    "#c:ores/cobalt",
+    "#c:ores/coal",
+    "#c:ores/copper",
+    "#c:ores/diamond",
+    "#c:ores/emerald",
+    "#c:ores/gold",
+    "#c:ores/iron",
+    "#c:ores/lapis",
+    "#c:ores/quartz",
+    "#c:ores/redstone",
+    "#c:ores/netherite_scrap",
+    "tinkers_reforged:yttrium_ore",
+    "tinkers_reforged:deepslate_yttrium_ore",
+    "tinkers_reforged:barium_ore",
+    "tinkers_reforged:thallium_ore",
+    "#c:ores/ardite",
+    "#c:ores/chlorophyll",
+    "#c:ores/zith"
+  ]
+}

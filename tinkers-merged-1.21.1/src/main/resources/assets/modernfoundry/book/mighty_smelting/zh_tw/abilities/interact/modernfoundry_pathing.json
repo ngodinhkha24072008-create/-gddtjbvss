@@ -1,0 +1,14 @@
+{
+  "modifier_id": "modernfoundry:pathing",
+  "text": [
+    {
+      "text": "找不到金磚路就用土徑路吧。"
+    }
+  ],
+  "tool_filter": "modernfoundry:modifiable/interactable",
+  "effects": [
+    "允許使用該工具製作土徑",
+    "單個等級",
+    "需要1個能力槽"
+  ]
+}

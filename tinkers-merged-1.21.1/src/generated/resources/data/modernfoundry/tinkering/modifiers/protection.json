@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "each_level": 1.25
+    }
+  ]
+}

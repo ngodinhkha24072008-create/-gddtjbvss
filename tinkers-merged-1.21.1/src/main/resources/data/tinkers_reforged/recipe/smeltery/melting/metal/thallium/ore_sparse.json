@@ -1,0 +1,37 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "byproducts": [
+    {
+      "amount": 90,
+      "rate": "metal",
+      "tag": "c:molten_iron"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_combination_filled",
+      "match": [
+        "c:ores/thallium",
+        "c:ore_rates/sparse"
+      ]
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "c:ores/thallium"
+      },
+      {
+        "tag": "c:ore_rates/sparse"
+      }
+    ]
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_thallium"
+  },
+  "temperature": 2200,
+  "time": 146
+}

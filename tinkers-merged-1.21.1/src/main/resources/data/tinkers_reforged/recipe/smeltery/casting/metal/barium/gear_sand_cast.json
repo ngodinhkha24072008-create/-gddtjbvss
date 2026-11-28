@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/barium"
+    }
+  ],
+  "cooling_time": 141,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_barium"
+  },
+  "result": {
+    "tag": "c:gears/barium"
+  }
+}

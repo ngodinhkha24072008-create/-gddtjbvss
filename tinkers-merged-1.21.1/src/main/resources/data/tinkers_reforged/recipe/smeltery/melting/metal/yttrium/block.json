@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:storage_blocks/yttrium"
+  },
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_yttrium"
+  },
+  "temperature": 555,
+  "time": 156
+}

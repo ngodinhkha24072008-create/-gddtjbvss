@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "item": "tinkers_thinking:magma_crystal"
+  },
+  "result": {
+    "fluid": "modernfoundry:magma",
+    "amount": 250
+  },
+  "temperature": 36,
+  "time": 40
+}

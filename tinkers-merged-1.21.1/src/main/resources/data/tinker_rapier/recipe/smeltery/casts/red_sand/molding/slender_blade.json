@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:molding_table",
+  "material": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "pattern": {
+    "type": "modernfoundry:material",
+    "item": "tinker_rapier:slender_blade"
+  },
+  "result": "tinker_rapier:slender_blade_red_sand_cast"
+}

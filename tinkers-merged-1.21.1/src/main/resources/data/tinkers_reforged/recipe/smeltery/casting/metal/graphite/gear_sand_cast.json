@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/graphite"
+    }
+  ],
+  "cooling_time": 76,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_graphite"
+  },
+  "result": {
+    "tag": "c:gears/graphite"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "cooling_time": 17,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_yttrium"
+  },
+  "result": {
+    "tag": "c:nuggets/yttrium"
+  }
+}

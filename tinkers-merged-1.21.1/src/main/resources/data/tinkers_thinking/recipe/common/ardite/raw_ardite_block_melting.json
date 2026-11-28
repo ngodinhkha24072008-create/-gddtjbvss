@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "rate": "metal",
+  "ingredient": {
+    "item": "tinkers_thinking:raw_ardite_block"
+  },
+  "result": {
+    "fluid": "tinkers_thinking:molten_ardite",
+    "amount": 810
+  },
+  "temperature": 950,
+  "time": 78,
+  "byproducts": [
+    {
+      "fluid": "modernfoundry:molten_gold",
+      "amount": 270
+    }
+  ]
+}

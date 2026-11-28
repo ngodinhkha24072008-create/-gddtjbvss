@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/chlorophyte"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkers_thinking:chlorophyte",
+  "leftover": {
+    "tag": "c:ingots/chlorophyte"
+  }
+}

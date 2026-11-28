@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/graphite"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/graphite"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_graphite"
+  },
+  "temperature": 200,
+  "time": 28
+}

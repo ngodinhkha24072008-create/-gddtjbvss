@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "metal",
+  "key": {
+    "N": {
+      "tag": "c:nuggets/berkelium"
+    },
+    "X": {
+      "item": "tinkers_reforged:berkelium_nugget"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NXN",
+    "NNN"
+  ],
+  "result": {
+    "id": "tinkers_reforged:berkelium_ingot"
+  },
+  "show_notification": true
+}

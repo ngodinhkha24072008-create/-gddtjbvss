@@ -1,0 +1,10 @@
+{
+  "values": [
+    "modernfoundry:dagger",
+    "modernfoundry:arrow",
+    "modernfoundry:shuriken",
+    "modernfoundry:throwing_axe",
+    "tinker_rapier:estoc_tic",
+    "tinker_rapier:rapier_tic"
+  ]
+}

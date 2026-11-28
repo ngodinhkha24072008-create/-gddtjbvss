@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "tinkers_thinking:stone_stick"
+    },
+    "X": {
+      "tag": "minecraft:coals"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "tinkers_thinking:stone_torch"
+  }
+}

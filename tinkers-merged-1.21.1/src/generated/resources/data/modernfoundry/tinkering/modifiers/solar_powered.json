@@ -1,0 +1,27 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:reduce_tool_damage",
+      "formula": [
+        0.01,
+        "$level",
+        "*",
+        0.04,
+        "+",
+        "$light",
+        "*"
+      ],
+      "reinforced_tooltip": true,
+      "variables": {
+        "light": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:light",
+          "fallback": 15.0,
+          "light_layer": "sky"
+        }
+      }
+    }
+  ],
+  "priority": 185
+}

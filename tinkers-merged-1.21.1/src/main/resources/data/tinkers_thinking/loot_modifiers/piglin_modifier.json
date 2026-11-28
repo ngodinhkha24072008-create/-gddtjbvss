@@ -1,0 +1,19 @@
+{
+  "type": "hilt:add_entry",
+  "neoforge:conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/piglin_bartering"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.08
+    }
+  ],
+  "entry": {
+    "type": "minecraft:loot_table",
+    "name": "tinkers_thinking/loot_tables/modifiers/piglin_modifier"
+  },
+  "functions": [],
+  "post_conditions": []
+}

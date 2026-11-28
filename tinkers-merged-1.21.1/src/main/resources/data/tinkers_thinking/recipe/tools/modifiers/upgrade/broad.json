@@ -1,0 +1,28 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "c:ingots/tinkers_bronze"
+    },
+    {
+      "tag": "c:ingots/cobalt"
+    },
+    {
+      "tag": "c:ingots/tinkers_bronze"
+    },
+    {
+      "tag": "c:ingots/cobalt"
+    },
+    {
+      "tag": "c:ingots/cobalt"
+    }
+  ],
+  "tools": {
+    "tag": "modernfoundry:modifiable/shields"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "allow_crystal": true,
+  "result": "tinkers_thinking:broad"
+}

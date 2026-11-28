@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:charred_prismarine"
+  },
+  "output": "modernfoundry:prismarine",
+  "temperature": 200
+}

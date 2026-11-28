@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_thinking:ardite",
+  "temperature": 950,
+  "result": {
+    "fluid": "tinkers_thinking:molten_ardite",
+    "amount": 90
+  }
+}

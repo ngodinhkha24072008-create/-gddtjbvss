@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:pluses",
+  "modules": [
+    {
+      "type": "modernfoundry:autosmelt",
+      "extra_drop_chance": 0.2,
+      "recipe_types": "minecraft:smelting"
+    }
+  ]
+}

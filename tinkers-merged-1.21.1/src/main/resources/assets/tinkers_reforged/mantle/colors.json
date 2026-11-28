@@ -1,0 +1,33 @@
+{
+  "material.tinkers_reforged": {
+    "actinium": "#403e2f",
+    "astatine": "#e99475",
+    "barium": "#2a1d5b",
+    "berkelium": "#40541e",
+    "germanium": "#4c183c",
+    "graphite": "#1c1c20",
+    "slimebronze": "#94a47b",
+    "tellurium": "#522728",
+    "thallium": "#28373c",
+    "yttrium": "#ac2c32"
+  },
+  "modifier.tinkers_reforged": {
+    "agility": "#E99475",
+    "chasm": "#AC2C32",
+    "cleavage": "#1C1C20",
+    "close_combat": "#40541E",
+    "decay_immunity": "#4C183C",
+    "flaming": "#403E2F",
+    "frail": "#2A1D5B",
+    "friction": "#522728",
+    "geographical": "#4C183C",
+    "health_up": "#40541E",
+    "heat_proof": "#1C1C20",
+    "ionize": "#28373C",
+    "lungful": "#28373C",
+    "overfracture": "#94A47B",
+    "roast": "#403E2F",
+    "subaquatic": "#E99475",
+    "triad": "#522728"
+  }
+}

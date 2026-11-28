@@ -1,0 +1,6 @@
+{
+  "parent": "neoforge:item/bucket_drip",
+  "flip_gas": false,
+  "fluid": "tinkers_reforged:molten_uranophane",
+  "loader": "modernfoundry:fluid_container"
+}

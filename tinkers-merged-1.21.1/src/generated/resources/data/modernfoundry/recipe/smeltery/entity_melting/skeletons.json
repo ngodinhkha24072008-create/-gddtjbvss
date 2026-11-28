@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/skeletons",
+  "damage": 2,
+  "entity": {
+    "tag": "modernfoundry:meltable/skeleton"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "minecraft:milk"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "condition": {
+    "type": "neoforge:tag_filled",
+    "tag": "c:molten_titanium"
+  },
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "item": "minecraft:phantom_membrane"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "c:molten_titanium",
+    "amount": 90
+  },
+  "result": "tinkers_thinking:lightite_compound",
+  "cooling_time": 35
+}

@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "cooling_time": 36,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_germanium"
+  },
+  "result": {
+    "tag": "c:nuggets/germanium"
+  }
+}

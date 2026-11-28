@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "cooling_time": 164,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_astatine"
+  },
+  "result": {
+    "tag": "c:storage_blocks/astatine"
+  }
+}

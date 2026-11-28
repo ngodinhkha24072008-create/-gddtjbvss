@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "each_level": 1.5,
+      "wearing_entity": "tinkers_reforged:is_nether_biome"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "metal",
+  "key": {
+    "I": {
+      "tag": "c:ingots/thallium"
+    },
+    "X": {
+      "tag": "c:nuggets/iron"
+    }
+  },
+  "pattern": [
+    " I ",
+    "IXI",
+    " I "
+  ],
+  "result": {
+    "id": "tinkers_reforged:thallium_gear"
+  },
+  "show_notification": true
+}

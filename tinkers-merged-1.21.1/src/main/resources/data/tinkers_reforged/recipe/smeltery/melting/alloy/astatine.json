@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    {
+      "amount": 1000,
+      "tag": "c:charred_prismarine"
+    },
+    {
+      "amount": 90,
+      "tag": "c:molten_yttrium"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_astatine"
+  },
+  "temperature": 635
+}

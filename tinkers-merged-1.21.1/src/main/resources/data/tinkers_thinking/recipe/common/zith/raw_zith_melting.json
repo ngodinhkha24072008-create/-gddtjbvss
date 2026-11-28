@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "rate": "metal",
+  "ingredient": {
+    "item": "tinkers_thinking:raw_zith"
+  },
+  "result": {
+    "fluid": "modernfoundry:molten_obsidian",
+    "amount": 250
+  },
+  "temperature": 1500,
+  "time": 80,
+  "byproducts": [
+    {
+      "fluid": "tinkers_thinking:molten_zith",
+      "amount": 360
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "slime": "modernfoundry:item/tool/armor/slime/helmet/slime_broken"
+  },
+  "modifier_maps": [
+    "modernfoundry:slime/helmet_broken",
+    "modernfoundry:slime/helmet",
+    "modernfoundry:armor/helmet"
+  ],
+  "parts": [
+    {
+      "name": "slime",
+      "index": 1
+    }
+  ]
+}

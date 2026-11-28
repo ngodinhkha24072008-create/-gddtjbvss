@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/thallium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_thallium"
+  },
+  "temperature": 2200,
+  "time": 97
+}

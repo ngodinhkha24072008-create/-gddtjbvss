@@ -1,0 +1,6 @@
+{
+  "parent": "neoforge:item/bucket_drip",
+  "flip_gas": false,
+  "fluid": "tinkers_thinking:chillslime",
+  "loader": "modernfoundry:fluid_container"
+}

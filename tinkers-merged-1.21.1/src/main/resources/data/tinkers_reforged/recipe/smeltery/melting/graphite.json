@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_reforged:graphite",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_graphite"
+  },
+  "temperature": 200
+}

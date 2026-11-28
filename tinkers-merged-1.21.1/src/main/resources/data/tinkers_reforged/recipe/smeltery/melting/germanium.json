@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_reforged:germanium",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_germanium"
+  },
+  "temperature": 2700
+}

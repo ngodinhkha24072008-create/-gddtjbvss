@@ -1,0 +1,14 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": {
+        "type": "hilt:damage_type",
+        "name": "minecraft:dragon_breath"
+      },
+      "each_level": 6.0
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:nuggets/graphite"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_graphite"
+  },
+  "temperature": 200,
+  "time": 13
+}

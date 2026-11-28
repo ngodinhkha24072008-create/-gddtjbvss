@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:nuggets/actinium"
+  },
+  "material": "tinkers_reforged:actinium",
+  "needed": 9,
+  "value": 1
+}

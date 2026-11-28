@@ -1,0 +1,26 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "c:wither_bones"
+    },
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "tag": "c:wither_bones"
+    },
+    {
+      "item": "minecraft:wither_rose"
+    },
+    {
+      "item": "minecraft:wither_rose"
+    }
+  ],
+  "tools": {
+    "tag": "modernfoundry:modifiable/bonus_slots"
+  },
+  "allow_crystal": true,
+  "result": "tinkers_thinking:withernic",
+  "level": 1
+}

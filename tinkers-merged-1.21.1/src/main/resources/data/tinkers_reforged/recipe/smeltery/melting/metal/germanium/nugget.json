@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:nuggets/germanium"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_germanium"
+  },
+  "temperature": 2700,
+  "time": 36
+}

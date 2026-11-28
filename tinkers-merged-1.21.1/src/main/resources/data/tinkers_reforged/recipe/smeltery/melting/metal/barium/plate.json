@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/barium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:plates/barium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_barium"
+  },
+  "temperature": 1150,
+  "time": 71
+}

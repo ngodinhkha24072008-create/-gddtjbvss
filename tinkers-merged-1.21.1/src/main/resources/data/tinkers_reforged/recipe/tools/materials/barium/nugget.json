@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:nuggets/barium"
+  },
+  "material": "tinkers_reforged:barium",
+  "needed": 9,
+  "value": 1
+}

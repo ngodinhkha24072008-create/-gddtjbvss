@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "tinkers_thinking:molten_tinkers_bronze",
+    "amount": 10
+  },
+  "result": "tinkers_thinking:tinkers_bronze_nugget",
+  "cooling_time": 5
+}

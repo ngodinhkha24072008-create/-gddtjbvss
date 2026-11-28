@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/thallium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:plates/thallium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_thallium"
+  },
+  "temperature": 2200,
+  "time": 97
+}

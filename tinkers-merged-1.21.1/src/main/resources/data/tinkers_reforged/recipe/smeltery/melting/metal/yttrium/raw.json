@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "byproducts": [
+    {
+      "amount": 90,
+      "rate": "metal",
+      "tag": "c:molten_graphite"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:raw_materials/yttrium"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_yttrium"
+  },
+  "temperature": 555,
+  "time": 78
+}

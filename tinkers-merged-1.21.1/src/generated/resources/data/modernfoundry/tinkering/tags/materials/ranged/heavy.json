@@ -1,0 +1,38 @@
+{
+  "values": [
+    "modernfoundry:copper",
+    "modernfoundry:cactus",
+    "modernfoundry:iron",
+    "modernfoundry:weeping_vine",
+    "modernfoundry:amethyst_bronze",
+    "modernfoundry:steel",
+    "modernfoundry:manyullyn",
+    "modernfoundry:cinderslime",
+    "modernfoundry:knightmetal",
+    {
+      "id": "modernfoundry:lead",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:bronze",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:electrum",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:fiery",
+      "required": false
+    },
+    "tinkers_thinking:tinkers_bronze",
+    "tinkers_thinking:spectre",
+    "tinkers_thinking:burnt_ashes",
+    {
+      "id": "tinkers_thinking:copshowium",
+      "required": false
+    },
+    "tinkers_thinking:solidified_emptiness",
+    "tinkers_thinking:colorite"
+  ]
+}

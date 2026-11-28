@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "metal",
+  "key": {
+    "I": {
+      "tag": "c:ingots/yttrium"
+    },
+    "X": {
+      "item": "tinkers_reforged:yttrium_ingot"
+    }
+  },
+  "pattern": [
+    "III",
+    "IXI",
+    "III"
+  ],
+  "result": {
+    "id": "tinkers_reforged:yttrium_block"
+  },
+  "show_notification": true
+}

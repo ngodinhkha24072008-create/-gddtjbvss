@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    {
+      "amount": 1000,
+      "tag": "c:charred_prismarine"
+    },
+    {
+      "amount": 180,
+      "tag": "c:molten_copper"
+    },
+    {
+      "amount": 500,
+      "fluid": "modernfoundry:earth_slime"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_slimebronze"
+  },
+  "temperature": 450
+}

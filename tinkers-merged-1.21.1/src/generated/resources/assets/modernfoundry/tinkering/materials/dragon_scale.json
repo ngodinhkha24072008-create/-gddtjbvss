@@ -1,0 +1,27 @@
+{
+  "color": "FF393738",
+  "generator": {
+    "supported_stats": [
+      "modernfoundry:arrow_head",
+      "modernfoundry:maille",
+      "modernfoundry:armor_maille",
+      "modernfoundry:shell",
+      "modernfoundry:repair_kit"
+    ],
+    "transformer": {
+      "type": "modernfoundry:recolor_sprite",
+      "color_mapping": {
+        "type": "modernfoundry:grey_to_color",
+        "palette": {
+          "000": "FF000000",
+          "063": "FF0B090C",
+          "102": "FF161417",
+          "140": "FF221F22",
+          "178": "FF2A282B",
+          "216": "FF393738",
+          "255": "FF474747"
+        }
+      }
+    }
+  }
+}

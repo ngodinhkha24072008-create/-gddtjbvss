@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/platform/neither",
+  "textures": {
+    "side": "tinkers_reforged:block/platform/actinium_side",
+    "top": "tinkers_reforged:block/platform/actinium_top"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "item": "tinkers_thinking:magma_crystal"
+    }
+  ],
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/ancient"
+      },
+      {
+        "tag": "modernfoundry:modifiable/bonus_slots"
+      }
+    ]
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "level": 1,
+  "allow_crystal": true,
+  "result": "tinkers_thinking:ancient_ability"
+}

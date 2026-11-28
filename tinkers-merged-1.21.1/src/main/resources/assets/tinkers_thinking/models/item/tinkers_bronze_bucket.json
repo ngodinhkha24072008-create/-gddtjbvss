@@ -1,0 +1,16 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "tool": "tinkers_thinking:item/tool/bucket/tinkers_bronze_bucket"
+  },
+  "modifier_roots": [
+    "tinkers_thinking:item/tool/bucket/modifiers/"
+  ],
+  "first_modifiers": [
+    {
+      "name": "modernfoundry:tank",
+      "forced": true
+    }
+  ]
+}

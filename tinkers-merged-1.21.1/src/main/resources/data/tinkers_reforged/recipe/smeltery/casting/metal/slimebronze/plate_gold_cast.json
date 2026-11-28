@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/plate"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/slimebronze"
+    }
+  ],
+  "cooling_time": 48,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_slimebronze"
+  },
+  "result": {
+    "tag": "c:plates/slimebronze"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/raw",
+  "byproducts": [
+    {
+      "amount": 90,
+      "rate": "metal",
+      "tag": "c:molten_iron"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:raw_materials/steel"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:raw_materials/steel"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_steel"
+  },
+  "temperature": 950,
+  "time": 97
+}

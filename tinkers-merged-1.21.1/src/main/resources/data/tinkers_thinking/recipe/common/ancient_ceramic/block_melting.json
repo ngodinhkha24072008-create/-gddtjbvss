@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "item": "tinkers_thinking:ancient_ceramic_block"
+  },
+  "result": {
+    "fluid": "tinkers_thinking:molten_ancient_ceramic",
+    "amount": 810
+  },
+  "temperature": 1200,
+  "time": 400
+}

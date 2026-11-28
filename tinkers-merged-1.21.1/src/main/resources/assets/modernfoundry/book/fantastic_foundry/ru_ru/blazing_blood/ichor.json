@@ -1,0 +1,16 @@
+{
+  "title": "Ихор",
+  "item": [
+    "modernfoundry:ichor_slime_ball",
+    "modernfoundry:ichor_congealed_slime",
+    "modernfoundry:ichor_slime",
+    "modernfoundry:ichor_slime_crystal",
+    "modernfoundry:ichor_slime_crystal_block"
+  ],
+  "text": [
+    {
+      "text": "Вы можете получить огненную кровь, расплавив ихор, хотя это не так идеально, поскольку для его расплавления вам нужно более горячее топливо. В конечном счёте, это чистая выгода, поэтому было бы неплохо увеличить ваши запасы после того, как вы получите огненную кровь из другого источника.",
+      "paragraph": true
+    }
+  ]
+}

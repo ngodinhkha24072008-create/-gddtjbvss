@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "modid": "farmersdelight",
+      "type": "neoforge:mod_loaded"
+    }
+  ],
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "c:ingots/pig_iron"
+    },
+    {
+      "item": "farmersdelight:honey_glazed_ham_block"
+    },
+    {
+      "tag": "c:ingots/pig_iron"
+    },
+    {
+      "tag": "c:ingots/pig_iron"
+    },
+    {
+      "tag": "c:ingots/pig_iron"
+    }
+  ],
+  "tools": {
+    "tag": "modernfoundry:modifiable/melee"
+  },
+  "level": 3,
+  "allow_crystal": false,
+  "result": "tinkers_thinking:backstabbing"
+}

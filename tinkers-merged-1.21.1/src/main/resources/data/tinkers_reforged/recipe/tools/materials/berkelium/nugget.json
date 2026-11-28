@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:nuggets/berkelium"
+  },
+  "material": "tinkers_reforged:berkelium",
+  "needed": 9,
+  "value": 1
+}

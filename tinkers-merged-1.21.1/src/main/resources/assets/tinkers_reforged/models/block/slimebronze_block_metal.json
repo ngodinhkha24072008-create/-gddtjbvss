@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/template/cube_all_14",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "all": "tinkers_reforged:block/material/slimebronze_block"
+  }
+}

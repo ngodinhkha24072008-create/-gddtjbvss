@@ -1,0 +1,9 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:punch",
+      "each_level": 1.0
+    }
+  ]
+}

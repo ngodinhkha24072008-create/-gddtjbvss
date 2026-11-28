@@ -1,0 +1,11 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:fishing"
+    },
+    {
+      "type": "modernfoundry:show_interaction_source"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "cooling_time": 126,
+  "fluid": {
+    "amount": 1000,
+    "tag": "c:charred_prismarine"
+  },
+  "result": "minecraft:prismarine"
+}

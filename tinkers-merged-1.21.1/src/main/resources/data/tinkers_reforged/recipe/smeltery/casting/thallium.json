@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_thallium"
+  },
+  "output": "tinkers_reforged:thallium",
+  "temperature": 2200
+}

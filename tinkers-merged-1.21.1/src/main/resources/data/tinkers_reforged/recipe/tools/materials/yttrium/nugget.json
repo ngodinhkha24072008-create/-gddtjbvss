@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:nuggets/yttrium"
+  },
+  "material": "tinkers_reforged:yttrium",
+  "needed": 9,
+  "value": 1
+}

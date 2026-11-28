@@ -1,0 +1,36 @@
+{
+  "type": "modernfoundry:swappable_modifier",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "tag": "c:nuggets/warden_steel"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "tag": "c:nuggets/warden_steel"
+    },
+    {
+      "item": "minecraft:sculk_catalyst"
+    },
+    {
+      "item": "minecraft:sculk_catalyst"
+    }
+  ],
+  "result": {
+    "name": "modernfoundry:rebalanced",
+    "value": "ancient"
+  },
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/ancient"
+      },
+      {
+        "tag": "modernfoundry:modifiable/bonus_slots"
+      }
+    ]
+  }
+}

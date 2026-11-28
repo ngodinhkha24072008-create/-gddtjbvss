@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:ingots/electrical_steel"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "tinkers_thinking:electrical_steel"
+}

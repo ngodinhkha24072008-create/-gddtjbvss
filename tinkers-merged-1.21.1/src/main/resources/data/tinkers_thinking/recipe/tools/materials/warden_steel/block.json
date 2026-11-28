@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/warden_steel"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkers_thinking:warden_steel",
+  "leftover": {
+    "tag": "c:ingots/warden_steel"
+  }
+}

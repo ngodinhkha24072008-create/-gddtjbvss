@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "tinkers_thinking:molten_shimmerslime",
+    "amount": 90
+  },
+  "result": "tinkers_thinking:shimmerslime_ingot",
+  "cooling_time": 75
+}

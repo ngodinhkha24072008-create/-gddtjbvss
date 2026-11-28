@@ -1,0 +1,9 @@
+{
+  "modifier_id": "modernfoundry:dyed",
+  "text": [
+    {
+      "text": "黒はありますか？"
+    }
+  ],
+  "effects": ["道具の色を変更できる", "再度適用すると混色できる", "スロット不要"]
+}

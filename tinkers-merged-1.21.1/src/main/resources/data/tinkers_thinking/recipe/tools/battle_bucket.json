@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "B B",
+    " B "
+  ],
+  "key": {
+    "A": {
+      "tag": "c:rods/blaze"
+    },
+    "B": {
+      "tag": "c:ingots/ardite"
+    }
+  },
+  "result": {
+    "id": "tinkers_thinking:battle_bucket"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "metal",
+  "key": {
+    "N": {
+      "tag": "c:nuggets/germanium"
+    },
+    "X": {
+      "item": "tinkers_reforged:germanium_nugget"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NXN",
+    "NNN"
+  ],
+  "result": {
+    "id": "tinkers_reforged:germanium_ingot"
+  },
+  "show_notification": true
+}

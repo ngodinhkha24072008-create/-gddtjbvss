@@ -1,0 +1,12 @@
+{
+  "values": [
+    "modernfoundry:sky_staff",
+    "modernfoundry:earth_staff",
+    "modernfoundry:ichor_staff",
+    "modernfoundry:ender_staff",
+    "tinkers_thinking:quartz_staff",
+    "tinkers_thinking:magma_staff",
+    "tinkers_thinking:clay_staff",
+    "#modernfoundry:modifiable/bucket"
+  ]
+}

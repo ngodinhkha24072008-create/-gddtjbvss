@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": [
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
+    }
+  ],
+  "result": {
+    "amount": 250,
+    "tag": "c:charred_prismarine"
+  },
+  "temperature": 200,
+  "time": 63
+}

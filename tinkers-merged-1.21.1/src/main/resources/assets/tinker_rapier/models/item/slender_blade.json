@@ -1,0 +1,7 @@
+{
+  "loader": "modernfoundry:material",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "texture": "tinker_rapier:item/tool/parts/slender_blade"
+  }
+}

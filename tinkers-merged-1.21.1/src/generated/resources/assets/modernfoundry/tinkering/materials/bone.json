@@ -1,0 +1,36 @@
+{
+  "color": "FFE8E5D2",
+  "fallbacks": [
+    "bone",
+    "rock"
+  ],
+  "generator": {
+    "supported_stats": [
+      "modernfoundry:head",
+      "modernfoundry:handle",
+      "modernfoundry:binding",
+      "modernfoundry:repair_kit",
+      "modernfoundry:limb",
+      "modernfoundry:grip",
+      "modernfoundry:arrow_shaft",
+      "modernfoundry:shield_core",
+      "modernfoundry:ribcage",
+      "modernfoundry:slimesuit_overlay"
+    ],
+    "transformer": {
+      "type": "modernfoundry:recolor_sprite",
+      "color_mapping": {
+        "type": "modernfoundry:grey_to_color",
+        "palette": {
+          "000": "FF000000",
+          "063": "FF7B7E6B",
+          "102": "FFA09F86",
+          "140": "FFCBC6A5",
+          "178": "FFDAD6BC",
+          "216": "FFE8E5D2",
+          "255": "FFFCFBED"
+        }
+      }
+    }
+  }
+}

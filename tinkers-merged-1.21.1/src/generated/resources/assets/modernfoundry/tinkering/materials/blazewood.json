@@ -1,0 +1,33 @@
+{
+  "color": "FF5C2B29",
+  "fallbacks": [
+    "wood",
+    "stick"
+  ],
+  "generator": {
+    "supported_stats": [
+      "modernfoundry:shield_core",
+      "modernfoundry:repair_kit",
+      "modernfoundry:arrow_shaft",
+      "modernfoundry:wood"
+    ],
+    "transformer": {
+      "type": "modernfoundry:animated_sprite",
+      "frames": 7,
+      "meta": "modernfoundry:block/wood/blazewood",
+      "palette": {
+        "000": "FF000000",
+        "063": {
+          "color": "FF404040",
+          "path": "modernfoundry:block/wood/blazewood"
+        },
+        "102": {
+          "color": "FF808080",
+          "path": "modernfoundry:block/wood/blazewood"
+        },
+        "140": "modernfoundry:block/wood/blazewood"
+      }
+    }
+  },
+  "luminosity": 7
+}

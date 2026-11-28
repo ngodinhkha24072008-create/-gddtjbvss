@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "modifier": "tinkerslevellingaddon:improvable",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable"
+  }
+}

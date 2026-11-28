@@ -1,0 +1,17 @@
+[
+  {
+    "name": "introduction",
+    "type": "hilt:text",
+    "data": "intro/welcome.json"
+  },
+  {
+    "name": "tinkers_reforged",
+    "type": "hilt:text",
+    "data": "intro/tinkers_reforged.json"
+  },
+  {
+    "name": "tools",
+    "type": "hilt:text",
+    "data": "intro/tools.json"
+  }
+]

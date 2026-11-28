@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/thallium"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/thallium"
+  },
+  "material": "tinkers_reforged:thallium",
+  "needed": 1,
+  "value": 9
+}

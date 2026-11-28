@@ -1,0 +1,19 @@
+{
+  "layers": [
+    {
+      "type": "modernfoundry:first_present",
+      "options": [
+        {
+          "type": "modernfoundry:dyed",
+          "prefix": "modernfoundry:slime/dyed_"
+        },
+        {
+          "type": "modernfoundry:material",
+          "index": 0,
+          "prefix": "modernfoundry:slime/"
+        }
+      ]
+    },
+    "modernfoundry:trim"
+  ]
+}

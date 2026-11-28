@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:storage_blocks/germanium"
+  },
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_germanium"
+  },
+  "temperature": 2700,
+  "time": 325
+}

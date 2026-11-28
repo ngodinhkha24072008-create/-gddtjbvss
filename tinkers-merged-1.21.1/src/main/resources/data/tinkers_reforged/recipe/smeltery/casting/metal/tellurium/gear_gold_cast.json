@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/gear"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/tellurium"
+    }
+  ],
+  "cooling_time": 171,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_tellurium"
+  },
+  "result": {
+    "tag": "c:gears/tellurium"
+  }
+}

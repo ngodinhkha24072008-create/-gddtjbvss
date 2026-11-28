@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "attacker": "tinkers_reforged:not_in_overworld",
+      "damage_source": "hilt:can_protect",
+      "each_level": 3.0
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,32 @@
+{
+  "modifiers": {
+    "modernfoundry:antiaquatic": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_antiaquatic",
+    "modernfoundry:bane_of_sssss": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_bane_of_sssss",
+    "modernfoundry:blasting": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_blasting",
+    "modernfoundry:cooling": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_cooling",
+    "modernfoundry:emerald": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_emerald",
+    "modernfoundry:experienced": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_experienced",
+    "modernfoundry:fiery": {
+      "luminosity": 10,
+      "texture": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_fiery"
+    },
+    "modernfoundry:hydraulic": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_hydraulic",
+    "modernfoundry:knockback": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_knockback",
+    "modernfoundry:luck": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_luck",
+    "modernfoundry:magnetic": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_magnetic",
+    "modernfoundry:necrotic": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_necrotic",
+    "modernfoundry:netherite": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_netherite",
+    "modernfoundry:overforced": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_overforced",
+    "modernfoundry:reinforced": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_reinforced",
+    "modernfoundry:silky": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_silky",
+    "modernfoundry:smite": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_smite",
+    "modernfoundry:soulbound": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_soulbound",
+    "modernfoundry:tank": [
+      {
+        "type": "modernfoundry:tank",
+        "full": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_tank_full",
+        "partial": "modernfoundry:item/tool/pickadze/modifiers/modernfoundry_tank_partial"
+      }
+    ]
+  }
+}

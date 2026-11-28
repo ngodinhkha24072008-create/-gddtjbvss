@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "input": "tinkers_thinking:ardite",
+  "fluid": {
+    "tag": "c:rabbit_stew",
+    "amount": 125
+  },
+  "temperature": 100,
+  "output": "tinkers_thinking:stewium"
+}

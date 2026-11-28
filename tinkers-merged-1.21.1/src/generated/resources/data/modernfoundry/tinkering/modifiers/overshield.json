@@ -1,0 +1,14 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:overshield",
+      "consumed": {
+        "each_level": 2
+      },
+      "protection": {
+        "each_level": 1.25
+      }
+    }
+  ]
+}

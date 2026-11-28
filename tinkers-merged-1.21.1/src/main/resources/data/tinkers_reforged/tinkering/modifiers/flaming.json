@@ -1,0 +1,23 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:armor_harvest_enchantment",
+      "holder": "hilt:on_fire",
+      "level": 1,
+      "modifier_level": {
+        "max": 3
+      },
+      "name": "minecraft:fortune",
+      "slots": [
+        "head",
+        "feet"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/harvest"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

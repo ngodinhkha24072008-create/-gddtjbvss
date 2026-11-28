@@ -1,0 +1,17 @@
+{
+  "condition": {
+    "type": "neoforge:mod_loaded",
+    "modid": "headlight"
+  },
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:variant_name",
+      "formatter": "modernfoundry:parameter"
+    },
+    {
+      "type": "modernfoundry:headlight",
+      "default_light": 10
+    }
+  ]
+}

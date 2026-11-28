@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "item": "minecraft:prismarine_bricks"
+  },
+  "result": {
+    "amount": 2250,
+    "tag": "c:charred_prismarine"
+  },
+  "temperature": 200,
+  "time": 190
+}

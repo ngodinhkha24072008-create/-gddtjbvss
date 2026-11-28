@@ -1,0 +1,24 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "each_level": 3.0,
+      "percent": false,
+      "target": {
+        "type": "hilt:tag",
+        "tag": "c:bosses"
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_power",
+      "each_level": 3.0,
+      "percent": false,
+      "target": {
+        "type": "hilt:tag",
+        "tag": "c:bosses"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

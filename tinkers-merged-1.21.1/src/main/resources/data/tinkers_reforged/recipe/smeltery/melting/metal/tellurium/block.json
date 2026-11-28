@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:storage_blocks/tellurium"
+  },
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_tellurium"
+  },
+  "temperature": 1700,
+  "time": 256
+}

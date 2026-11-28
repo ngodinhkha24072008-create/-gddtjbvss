@@ -1,0 +1,37 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "byproducts": [
+    {
+      "amount": 90,
+      "fluid": "modernfoundry:molten_debris",
+      "rate": "metal"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_combination_filled",
+      "match": [
+        "c:ores/barium",
+        "c:ore_rates/sparse"
+      ]
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "c:ores/barium"
+      },
+      {
+        "tag": "c:ore_rates/sparse"
+      }
+    ]
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_barium"
+  },
+  "temperature": 1150,
+  "time": 106
+}

@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    {
+      "tag": "c:molten_steel",
+      "amount": 90
+    },
+    {
+      "tag": "c:molten_ardite",
+      "amount": 90
+    },
+    {
+      "tag": "c:molten_echo",
+      "amount": 200
+    }
+  ],
+  "result": {
+    "fluid": "tinkers_thinking:molten_warden_steel",
+    "amount": 180
+  },
+  "temperature": 1100
+}

@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "cooling_time": 13,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_graphite"
+  },
+  "result": {
+    "tag": "c:nuggets/graphite"
+  }
+}

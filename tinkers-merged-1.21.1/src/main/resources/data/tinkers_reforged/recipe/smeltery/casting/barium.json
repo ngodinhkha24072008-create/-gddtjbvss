@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_barium"
+  },
+  "output": "tinkers_reforged:barium",
+  "temperature": 1150
+}

@@ -1,0 +1,16 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "attacker": "hilt:underwater",
+      "each_level": 5.0,
+      "percent": false,
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/held"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

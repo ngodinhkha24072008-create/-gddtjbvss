@@ -1,0 +1,9 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:sweeping_edge",
+      "each_level": 0.25
+    }
+  ]
+}

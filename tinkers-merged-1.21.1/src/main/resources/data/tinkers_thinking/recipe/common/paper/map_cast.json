@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "item": "minecraft:compass"
+  },
+  "fluid": {
+    "fluid": "tinkers_thinking:pulp",
+    "amount": 2000
+  },
+  "result": "minecraft:map",
+  "cooling_time": 60
+}

@@ -1,0 +1,38 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "each_level": 3.0,
+      "entity": "tinkers_reforged:below_zero",
+      "percent": false,
+      "require_effective": true,
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/harvest"
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_stat",
+      "each_level": 0.2,
+      "entity": "tinkers_reforged:below_zero",
+      "percent": false,
+      "stat": "modernfoundry:draw_speed",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ranged"
+      }
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "each_level": 2.0,
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      },
+      "wearing_entity": "tinkers_reforged:below_zero"
+    }
+  ],
+  "tooltip_display": "always"
+}

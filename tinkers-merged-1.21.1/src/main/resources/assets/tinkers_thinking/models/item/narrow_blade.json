@@ -1,0 +1,7 @@
+{
+  "loader": "modernfoundry:material",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "texture": "tinkers_thinking:item/tool/parts/narrow_blade"
+  }
+}

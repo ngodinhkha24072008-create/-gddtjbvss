@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "B B",
+    " B "
+  ],
+  "key": {
+    "A": {
+      "tag": "c:rods/stone"
+    },
+    "B": {
+      "tag": "c:ingots/tinkers_bronze"
+    }
+  },
+  "result": {
+    "id": "tinkers_thinking:tinkers_bronze_bucket"
+  }
+}

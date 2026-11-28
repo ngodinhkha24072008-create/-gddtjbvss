@@ -1,0 +1,32 @@
+{
+  "color": "FFFFB97C",
+  "fallbacks": [
+    "cloth"
+  ],
+  "generator": {
+    "supported_stats": [
+      "modernfoundry:cuirass",
+      "modernfoundry:armor_cuirass",
+      "modernfoundry:repair_kit",
+      "modernfoundry:maille",
+      "modernfoundry:armor_maille"
+    ],
+    "transformer": {
+      "type": "modernfoundry:recolor_sprite",
+      "color_mapping": {
+        "type": "modernfoundry:grey_to_color",
+        "palette": {
+          "000": "FF000000",
+          "063": "FFB04000",
+          "102": "FFD35200",
+          "127": "FFEC5E00",
+          "140": "FFFF6E05",
+          "178": "FFFF8324",
+          "193": "FFFF9F50",
+          "216": "FFFFB97C",
+          "255": "FFFFE1BF"
+        }
+      }
+    }
+  }
+}

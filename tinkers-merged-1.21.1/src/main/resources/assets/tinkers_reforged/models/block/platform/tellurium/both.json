@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/platform/both",
+  "textures": {
+    "side": "tinkers_reforged:block/platform/tellurium_side",
+    "top": "tinkers_reforged:block/platform/tellurium_top"
+  }
+}

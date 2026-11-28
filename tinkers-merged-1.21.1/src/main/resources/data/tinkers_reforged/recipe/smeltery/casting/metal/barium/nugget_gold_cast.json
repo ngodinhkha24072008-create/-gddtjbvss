@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "cooling_time": 24,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_barium"
+  },
+  "result": {
+    "tag": "c:nuggets/barium"
+  }
+}

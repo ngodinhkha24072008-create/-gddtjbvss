@@ -1,0 +1,18 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:enderclearance",
+      "chance": {
+        "flat": 0.25
+      },
+      "diameter": {
+        "each_level": 8,
+        "flat": 8
+      },
+      "teleport_chances": {
+        "flat": 16
+      }
+    }
+  ]
+}

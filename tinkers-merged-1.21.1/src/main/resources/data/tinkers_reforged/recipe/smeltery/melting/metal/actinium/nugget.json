@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:nuggets/actinium"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_actinium"
+  },
+  "temperature": 1700,
+  "time": 28
+}

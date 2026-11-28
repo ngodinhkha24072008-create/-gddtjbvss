@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "cooling_time": 144,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_slimebronze"
+  },
+  "result": {
+    "tag": "c:storage_blocks/slimebronze"
+  }
+}

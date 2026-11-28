@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/astatine"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_astatine"
+  },
+  "temperature": 635,
+  "time": 55
+}

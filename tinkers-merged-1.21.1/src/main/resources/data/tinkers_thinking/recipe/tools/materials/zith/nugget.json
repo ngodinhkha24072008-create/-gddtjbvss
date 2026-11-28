@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:nuggets/zith"
+  },
+  "value": 1,
+  "needed": 9,
+  "material": "tinkers_thinking:zith"
+}

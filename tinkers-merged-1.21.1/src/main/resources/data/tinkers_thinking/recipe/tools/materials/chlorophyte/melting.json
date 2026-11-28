@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_thinking:chlorophyte",
+  "temperature": 600,
+  "result": {
+    "fluid": "tinkers_thinking:molten_chlorophyte",
+    "amount": 90
+  }
+}

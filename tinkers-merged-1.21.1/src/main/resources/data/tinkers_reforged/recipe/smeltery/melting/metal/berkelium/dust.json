@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/berkelium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/berkelium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_berkelium"
+  },
+  "temperature": 2200,
+  "time": 73
+}

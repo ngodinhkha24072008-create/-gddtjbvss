@@ -1,0 +1,104 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff",
+  "textures": {
+    "tool": "tinkers_thinking:item/tool/clay_staff/staff",
+    "large_tool": "tinkers_thinking:item/tool/clay_staff/staff_large"
+  },
+  "large": true,
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:embellishment"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/staff/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/staff/large_modifiers/"
+    ]
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "tconstruct:charging": 1
+      },
+      "model": "modernfoundry:item/tool/staff/earth/charging_1"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 1,
+        "tconstruct:charge": 0.4
+      },
+      "model": "modernfoundry:item/tool/staff/earth/charging_2"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 1,
+        "tconstruct:charge": 0.7
+      },
+      "model": "modernfoundry:item/tool/staff/earth/charging_3"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 1,
+        "tconstruct:charge": 0.9
+      },
+      "model": "modernfoundry:item/tool/staff/earth/charging_4"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 1,
+        "tconstruct:charge": 1.0
+      },
+      "model": "modernfoundry:item/tool/staff/earth/charging_5"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 2
+      },
+      "model": "modernfoundry:item/tool/staff/earth/blocking"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 2,
+        "tconstruct:charge": 0.05
+      },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_1"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 2,
+        "tconstruct:charge": 0.4
+      },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_2"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 2,
+        "tconstruct:charge": 0.7
+      },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_3"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 2,
+        "tconstruct:charge": 0.9
+      },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_4"
+    },
+    {
+      "predicate": {
+        "tconstruct:charging": 2,
+        "tconstruct:charge": 1.0
+      },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_5"
+    },
+    {
+      "predicate": {
+        "tconstruct:broken": 1
+      },
+      "model": "tinkers_thinking:item/broken/clay_staff"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    {
+      "tag": "c:molten_copper",
+      "amount": 90
+    },
+    {
+      "tag": "c:molten_ardite",
+      "amount": 90
+    },
+    {
+      "fluid": "tinkers_thinking:molten_echo",
+      "amount": 100
+    }
+  ],
+  "result": {
+    "fluid": "tinkers_thinking:emptiness",
+    "amount": 200
+  },
+  "temperature": 1100
+}

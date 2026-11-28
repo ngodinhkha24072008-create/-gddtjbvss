@@ -1,0 +1,53 @@
+{
+  "values": [
+    "modernfoundry:wood",
+    "modernfoundry:chorus",
+    "modernfoundry:string",
+    "modernfoundry:vine",
+    "modernfoundry:leather",
+    "modernfoundry:slimewood",
+    "modernfoundry:necrotic_bone",
+    "modernfoundry:skyslime_vine",
+    "modernfoundry:cheese",
+    "modernfoundry:slimesteel",
+    "modernfoundry:darkthread",
+    "modernfoundry:cobalt",
+    "modernfoundry:pig_iron",
+    "modernfoundry:blazing_bone",
+    "modernfoundry:jeweled_hide",
+    "modernfoundry:enderslime_vine",
+    {
+      "id": "modernfoundry:treated_wood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:silver",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:ironwood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:invar",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:pewter",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:steeleaf",
+      "required": false
+    },
+    "tinkers_thinking:ardite",
+    "tinkers_thinking:stewium",
+    "tinkers_thinking:chlorophyte",
+    "tinkers_thinking:electrical_steel",
+    "tinkers_thinking:obsidian_bronze",
+    "tinkers_thinking:verdant_frogcroaking",
+    "tinkers_thinking:ochre_frogcroaking",
+    "tinkers_thinking:pearlescent_frogcroaking",
+    "tinkers_thinking:adamantium"
+  ]
+}

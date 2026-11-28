@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "c:molten_barium"
+    },
+    {
+      "amount": 500,
+      "tag": "c:magma"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_tellurium"
+  },
+  "temperature": 1700
+}

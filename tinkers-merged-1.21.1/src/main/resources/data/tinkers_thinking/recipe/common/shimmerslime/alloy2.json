@@ -1,0 +1,26 @@
+{
+  "condition": {
+    "type": "neoforge:tag_empty",
+    "tag": "c:glowstone"
+  },
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    {
+      "tag": "c:molten_zith",
+      "amount": 90
+    },
+    {
+      "fluid": "modernfoundry:ender_slime",
+      "amount": 250
+    },
+    {
+      "fluid": "modernfoundry:blazing_blood",
+      "amount": 250
+    }
+  ],
+  "result": {
+    "fluid": "tinkers_thinking:molten_shimmerslime",
+    "amount": 180
+  },
+  "temperature": 1300
+}

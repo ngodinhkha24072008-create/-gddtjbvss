@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [
+    {
+      "item": "tinkers_thinking:tinkers_bronze_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "tinkers_thinking:tinkers_bronze_ingot"
+  }
+}

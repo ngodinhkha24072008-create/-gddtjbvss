@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gem"
+  },
+  "cast_consumed": true,
+  "cooling_time": 63,
+  "fluid": {
+    "amount": 250,
+    "tag": "c:charred_prismarine"
+  },
+  "result": "minecraft:prismarine_shard"
+}

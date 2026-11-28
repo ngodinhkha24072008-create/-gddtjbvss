@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/plate"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/graphite"
+    }
+  ],
+  "cooling_time": 38,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_graphite"
+  },
+  "result": {
+    "tag": "c:plates/graphite"
+  }
+}

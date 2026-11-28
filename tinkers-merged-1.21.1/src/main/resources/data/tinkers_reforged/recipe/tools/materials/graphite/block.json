@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/graphite"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/graphite"
+  },
+  "material": "tinkers_reforged:graphite",
+  "needed": 1,
+  "value": 9
+}

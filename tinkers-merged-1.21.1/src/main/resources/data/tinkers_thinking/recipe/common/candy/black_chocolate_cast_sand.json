@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "tinkers_thinking:molten_black_chocolate",
+    "amount": 90
+  },
+  "result": "tinkers_thinking:black_chocolate",
+  "cooling_time": 55
+}

@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/shulker",
+  "damage": 3,
+  "entity": {
+    "tag": "c:shulkers"
+  },
+  "result": {
+    "amount": 50,
+    "nbt": {
+      "Potion": "modernfoundry:_levitation"
+    },
+    "tag": "c:potion"
+  }
+}

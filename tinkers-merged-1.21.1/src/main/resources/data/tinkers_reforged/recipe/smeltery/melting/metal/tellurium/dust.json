@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/tellurium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/tellurium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_tellurium"
+  },
+  "temperature": 1700,
+  "time": 64
+}

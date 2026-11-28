@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/electrical_steel"
+  },
+  "result": {
+    "fluid": "tinkers_thinking:molten_electrical_steel",
+    "amount": 90
+  },
+  "temperature": 900,
+  "time": 25
+}

@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:swappable_tool_traits",
+      "hook": "modernfoundry:rebalanced_trait"
+    }
+  ],
+  "show_in_tooltips": "bonus_slot"
+}

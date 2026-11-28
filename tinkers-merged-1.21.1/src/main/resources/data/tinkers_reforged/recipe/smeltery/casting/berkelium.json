@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_berkelium"
+  },
+  "output": "tinkers_reforged:berkelium",
+  "temperature": 2200
+}

@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/piglin",
+  "damage": 4,
+  "entity": {
+    "tag": "c:piglins"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_gold"
+  }
+}

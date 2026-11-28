@@ -1,0 +1,35 @@
+{
+  "type": "modernfoundry:crafting_shaped_materials",
+  "id": "modernfoundry:tools/armor/travelers/shield",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "type": "modernfoundry:material_value",
+      "material": {
+        "type": "modernfoundry:stat_type",
+        "stat_type": "modernfoundry:shield_core"
+      },
+      "value": 1
+    },
+    "l": {
+      "type": "modernfoundry:material_value",
+      "material": {
+        "type": "modernfoundry:stat_type",
+        "stat_type": "modernfoundry:cuirass"
+      },
+      "value": 1.0
+    },
+    "s": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "parts": "cl",
+  "pattern": [
+    "scs",
+    "lcl"
+  ],
+  "result": {
+    "item": "modernfoundry:travelers_shield"
+  },
+  "show_notification": true
+}

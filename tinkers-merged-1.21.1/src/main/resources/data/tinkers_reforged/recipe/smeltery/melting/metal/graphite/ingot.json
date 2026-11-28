@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/graphite"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_graphite"
+  },
+  "temperature": 200,
+  "time": 38
+}

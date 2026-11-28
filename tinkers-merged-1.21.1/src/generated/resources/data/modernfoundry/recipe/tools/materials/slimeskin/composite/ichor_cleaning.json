@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/slimeskin/composite/ichor_cleaning",
+  "fluid": {
+    "amount": 50,
+    "tag": "modernfoundry:venom"
+  },
+  "hide_in_book": true,
+  "input": "modernfoundry:ichorskin",
+  "output": "modernfoundry:leather",
+  "temperature": 10
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "index",
+    "type": "hilt:index",
+    "data": "ores/index.json"
+  },
+  {
+    "name": "yttrium",
+    "type": "hilt:showcase",
+    "data": "ores/yttrium.json"
+  },
+  {
+    "name": "barium",
+    "type": "hilt:showcase",
+    "data": "ores/barium.json"
+  },
+  {
+    "name": "thallium",
+    "type": "hilt:showcase",
+    "data": "ores/thallium.json"
+  }
+]

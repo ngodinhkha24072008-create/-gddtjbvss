@@ -1,0 +1,13 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "tinkers_reforged:roast",
+      "consumed": {
+        "each_level": 1
+      },
+      "predicate": "hilt:on_fire"
+    }
+  ],
+  "tooltip_display": "always"
+}

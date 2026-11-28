@@ -1,0 +1,9 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:repair",
+      "each_level": 0.5
+    }
+  ]
+}

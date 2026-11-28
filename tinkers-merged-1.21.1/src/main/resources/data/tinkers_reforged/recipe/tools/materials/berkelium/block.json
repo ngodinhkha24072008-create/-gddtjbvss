@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/berkelium"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/berkelium"
+  },
+  "material": "tinkers_reforged:berkelium",
+  "needed": 1,
+  "value": 9
+}

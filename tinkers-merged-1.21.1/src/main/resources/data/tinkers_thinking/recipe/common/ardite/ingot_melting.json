@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/ardite"
+  },
+  "result": {
+    "fluid": "tinkers_thinking:molten_ardite",
+    "amount": 90
+  },
+  "temperature": 950,
+  "time": 20
+}

@@ -1,0 +1,19 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:enchantment_ignoring_protection",
+      "level": {
+        "flat": 7
+      },
+      "name": "minecraft:fire_protection"
+    },
+    {
+      "type": "modernfoundry:effect_immunity",
+      "effect": "modernfoundry:conductive",
+      "max_level": {
+        "each_level": 1
+      }
+    }
+  ]
+}

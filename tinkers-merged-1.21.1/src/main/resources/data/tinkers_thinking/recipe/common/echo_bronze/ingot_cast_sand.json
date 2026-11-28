@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "tinkers_thinking:molten_echo_bronze",
+    "amount": 90
+  },
+  "result": "tinkers_thinking:echo_bronze_ingot",
+  "cooling_time": 20
+}

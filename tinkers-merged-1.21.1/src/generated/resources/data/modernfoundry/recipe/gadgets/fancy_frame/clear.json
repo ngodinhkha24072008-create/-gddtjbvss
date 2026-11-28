@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:fancy_item_frame",
+  "key": {
+    "M": {
+      "item": "modernfoundry:clear_glass"
+    },
+    "e": {
+      "item": "modernfoundry:clear_glass_pane"
+    }
+  },
+  "pattern": [
+    " e ",
+    "eMe",
+    " e "
+  ],
+  "result": {
+    "id": "modernfoundry:clear_item_frame"
+  },
+  "show_notification": true
+}

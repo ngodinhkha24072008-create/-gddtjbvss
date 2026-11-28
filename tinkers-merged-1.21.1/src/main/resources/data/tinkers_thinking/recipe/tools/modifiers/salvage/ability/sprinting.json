@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "modifier": "tinkers_thinking:sprinting",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/durability"
+      },
+      {
+        "tag": "modernfoundry:modifiable/interactable/right"
+      }
+    ]
+  }
+}

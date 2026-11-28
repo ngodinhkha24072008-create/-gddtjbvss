@@ -1,0 +1,15 @@
+{
+  "values": [
+    "modernfoundry:melting_pan",
+    "modernfoundry:war_pick",
+    "modernfoundry:battlesign",
+    "modernfoundry:swasher",
+    {
+      "id": "modernfoundry:minotaur_axe",
+      "required": false
+    },
+    "tinkers_thinking:mace",
+    "tinkers_thinking:cutlass",
+    "tinkers_thinking:repeating_crossbow"
+  ]
+}

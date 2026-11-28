@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/tellurium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:gears/tellurium"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_tellurium"
+  },
+  "temperature": 1700,
+  "time": 171
+}

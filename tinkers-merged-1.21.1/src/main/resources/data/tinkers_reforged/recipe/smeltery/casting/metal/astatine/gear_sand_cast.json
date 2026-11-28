@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/astatine"
+    }
+  ],
+  "cooling_time": 109,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_astatine"
+  },
+  "result": {
+    "tag": "c:gears/astatine"
+  }
+}

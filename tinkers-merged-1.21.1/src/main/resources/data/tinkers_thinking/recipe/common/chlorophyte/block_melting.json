@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "item": "tinkers_thinking:chlorophyte_block"
+  },
+  "result": {
+    "fluid": "tinkers_thinking:molten_chlorophyte",
+    "amount": 810
+  },
+  "temperature": 600,
+  "time": 40
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AWA",
+    " I ",
+    " W "
+  ],
+  "key": {
+    "A": {
+      "item": "tinkers_thinking:clay_crystal"
+    },
+    "W": {
+      "tag": "minecraft:logs"
+    },
+    "I": {
+      "tag": "c:bricks/normal"
+    }
+  },
+  "result": {
+    "id": "tinkers_thinking:clay_staff"
+  }
+}

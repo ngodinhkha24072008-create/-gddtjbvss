@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/shroomite"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkers_thinking:shroomite",
+  "leftover": {
+    "tag": "c:ingots/shroomite"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_reforged:barium",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_barium"
+  },
+  "temperature": 1150
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "metal",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/germanium"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "tinkers_reforged:germanium_ingot"
+  }
+}

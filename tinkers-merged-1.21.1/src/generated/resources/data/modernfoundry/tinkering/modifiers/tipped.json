@@ -1,0 +1,8 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:tipped"
+    }
+  ]
+}

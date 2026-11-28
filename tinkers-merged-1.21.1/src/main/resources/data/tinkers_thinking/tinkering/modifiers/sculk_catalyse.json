@@ -1,0 +1,15 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "tinkers_thinking:sculk_catalyse"
+    },
+    {
+      "type": "modernfoundry:armor_level",
+      "allow_broken": false,
+      "held_tag": "modernfoundry:modifiable/held",
+      "key": "tinkers_thinking:sculk_catalyse"
+    }
+  ],
+  "tooltip_display": "always"
+}

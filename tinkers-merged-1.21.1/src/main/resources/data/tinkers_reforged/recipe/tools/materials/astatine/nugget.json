@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:nuggets/astatine"
+  },
+  "material": "tinkers_reforged:astatine",
+  "needed": 9,
+  "value": 1
+}

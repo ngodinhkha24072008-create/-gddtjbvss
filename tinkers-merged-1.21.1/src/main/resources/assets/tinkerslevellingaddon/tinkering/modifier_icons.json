@@ -1,0 +1,7 @@
+{
+  "tinkerslevellingaddon:improvable": [
+    "minecraft:item/nether_star",
+    "tinkerslevellingaddon:gui/modifiers/exp_bottle",
+    "modernfoundry:gui/modifiers/plus"
+  ]
+}

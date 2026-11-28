@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "item": "modernfoundry:obsidian_pane"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "tinkers_thinking:molten_lightite",
+    "amount": 30
+  },
+  "result": "tinkers_thinking:lightite_reinforcement",
+  "cooling_time": 20
+}

@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/plate"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/astatine"
+    }
+  ],
+  "cooling_time": 55,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_astatine"
+  },
+  "result": {
+    "tag": "c:plates/astatine"
+  }
+}

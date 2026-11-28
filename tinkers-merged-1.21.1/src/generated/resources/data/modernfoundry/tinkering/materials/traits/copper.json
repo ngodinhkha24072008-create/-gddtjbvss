@@ -1,0 +1,26 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:dwarven"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:depth_protection"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:respiration_skull"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:drowned_disguise"
+      }
+    ]
+  }
+}

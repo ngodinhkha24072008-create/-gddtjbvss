@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "cooling_time": 85,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_actinium"
+  },
+  "result": {
+    "tag": "c:ingots/actinium"
+  }
+}

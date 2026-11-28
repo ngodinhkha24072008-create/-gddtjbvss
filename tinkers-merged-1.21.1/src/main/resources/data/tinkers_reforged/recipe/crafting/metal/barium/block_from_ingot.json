@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "metal",
+  "key": {
+    "I": {
+      "tag": "c:ingots/barium"
+    },
+    "X": {
+      "item": "tinkers_reforged:barium_ingot"
+    }
+  },
+  "pattern": [
+    "III",
+    "IXI",
+    "III"
+  ],
+  "result": {
+    "id": "tinkers_reforged:barium_block"
+  },
+  "show_notification": true
+}

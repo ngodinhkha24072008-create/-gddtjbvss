@@ -1,0 +1,33 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "byproducts": [
+    {
+      "amount": 180,
+      "fluid": "modernfoundry:molten_debris",
+      "rate": "metal"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_combination_filled",
+      "ignore": "modernfoundry:non_singular_ore_rates",
+      "match": "c:ores/barium"
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "c:ores/barium"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:non_singular_ore_rates"
+    }
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_barium"
+  },
+  "temperature": 1150,
+  "time": 177
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:prismarine",
+  "result": {
+    "amount": 90,
+    "tag": "c:charred_prismarine"
+  },
+  "temperature": 200
+}

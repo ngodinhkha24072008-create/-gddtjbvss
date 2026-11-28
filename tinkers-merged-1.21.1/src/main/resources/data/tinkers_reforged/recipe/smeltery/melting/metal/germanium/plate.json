@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/germanium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:plates/germanium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_germanium"
+  },
+  "temperature": 2700,
+  "time": 108
+}

@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/slimebronze"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_slimebronze"
+  },
+  "temperature": 450,
+  "time": 48
+}

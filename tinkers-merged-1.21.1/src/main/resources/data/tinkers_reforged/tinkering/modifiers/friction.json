@@ -1,0 +1,15 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "attacker": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:on_ground"
+      },
+      "damage_source": "hilt:can_protect",
+      "each_level": 2.0
+    }
+  ],
+  "tooltip_display": "always"
+}

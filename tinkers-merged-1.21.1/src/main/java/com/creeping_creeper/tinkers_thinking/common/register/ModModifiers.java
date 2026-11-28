@@ -1,0 +1,155 @@
+package com.creeping_creeper.tinkers_thinking.common.register;
+
+import com.creeping_creeper.tinkers_thinking.TinkersThinking;
+import com.creeping_creeper.tinkers_thinking.common.modifer.OverbearModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.AntibruteModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.ConcealingModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.CounterAttackModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.CrimsonModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.GlowAdvancedModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.MagicTransformModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.ReburningModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.RemisdirectionModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.RetransitModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.SculkBreedModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.SculkProtectionModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.SculkSiphonModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.ShadowingModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.SpikyModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.SymbioticModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.defense.TeleportAdvancedModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.durability.DepositionModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.durability.DurableModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.durability.DuritaeModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.durability.NetheriteModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.durability.OverchargeModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.durability.OvereatModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.durability.ReverseModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.durability.SculkCatalyseModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.harvest.HungrinessModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.harvest.InspiredModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.harvest.SculkBoostModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.harvest.ShadyModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.BattleAdvancedModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.BurningOutModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.CataclysmModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.DisarmModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.FallingAttackModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.LightlyAttackModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.MockModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.OverFreezeModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.OverdisintegrateModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.PricklyModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.RecalamityModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.RederangementModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.RedyeModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.RepercussionModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.RepulsiveModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.SculkDashModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.SculkGravityModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.SculkLevitateModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.SculkStruggleModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.SculkTeleportModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.SharpCircumstanceModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.melee.StimulationModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.misc.HurriedModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.misc.SprintingModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.AtlatlModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.BideTimeModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.BoomModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.CoercionModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.FrozenModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.NocturnalModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.NonsenseModule;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.RechargeModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.ResistingModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.RidingShootModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.SinistralModifier;
+import com.creeping_creeper.tinkers_thinking.common.modifer.ranged.SwashAdvancedModifier;
+import net.minecraft.core.registries.Registries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.registries.RegisterEvent;
+import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
+import modernmods.modernfoundry.library.modifiers.util.ModifierDeferredRegister;
+import modernmods.modernfoundry.library.modifiers.util.StaticModifier;
+
+public class ModModifiers {
+   private static final ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create("tinkers_thinking");
+   public static final StaticModifier<DepositionModifier> Deposition = MODIFIERS.register("deposition", DepositionModifier::new);
+   public static final StaticModifier<StimulationModifier> Stimulation = MODIFIERS.register("stimulation", StimulationModifier::new);
+   public static final StaticModifier<InspiredModifier> Inspired = MODIFIERS.register("inspired", InspiredModifier::new);
+   public static final StaticModifier<MockModifier> Mock = MODIFIERS.register("mock", MockModifier::new);
+   public static final StaticModifier<ConcealingModifier> Concealing = MODIFIERS.register("concealing", ConcealingModifier::new);
+   public static final StaticModifier<ShadyModifier> Shady = MODIFIERS.register("shady", ShadyModifier::new);
+   public static final StaticModifier<ShadowingModifier> Shadowing = MODIFIERS.register("shadowing", ShadowingModifier::new);
+   public static final StaticModifier<RepulsiveModifier> Repulsive = MODIFIERS.register("repulsive", RepulsiveModifier::new);
+   public static final StaticModifier<PricklyModifier> Prickly = MODIFIERS.register("prickly", PricklyModifier::new);
+   public static final StaticModifier<SprintingModifier> Sprinting = MODIFIERS.register("sprinting", SprintingModifier::new);
+   public static final StaticModifier<DuritaeModifier> Duritae = MODIFIERS.register("duritae", DuritaeModifier::new);
+   public static final StaticModifier<OvereatModifier> Overeat = MODIFIERS.register("overeat", OvereatModifier::new);
+   public static final StaticModifier<DisarmModifier> Disarm = MODIFIERS.register("disarm", DisarmModifier::new);
+   public static final StaticModifier<SculkProtectionModifier> SculkProtection = MODIFIERS.register("sculk_protection", SculkProtectionModifier::new);
+   public static final StaticModifier<SculkTeleportModifier> SculkTeleport = MODIFIERS.register("sculk_teleport", SculkTeleportModifier::new);
+   public static final StaticModifier<FallingAttackModifier> FallingAttack = MODIFIERS.register("falling_attack", FallingAttackModifier::new);
+   public static final StaticModifier<SpikyModifier> Spiky = MODIFIERS.register("spiky", SpikyModifier::new);
+   public static final StaticModifier<HungrinessModifier> Hungriness = MODIFIERS.register("hungriness", HungrinessModifier::new);
+   public static final StaticModifier<BurningOutModifier> BurningOut = MODIFIERS.register("burning_out", BurningOutModifier::new);
+   public static final StaticModifier<SinistralModifier> Sinistral = MODIFIERS.register("sinistral", SinistralModifier::new);
+   public static final StaticModifier<SculkBreedModifier> SculkBreed = MODIFIERS.register("sculk_breed", SculkBreedModifier::new);
+   public static final StaticModifier<SculkDashModifier> SculkDash = MODIFIERS.register("sculk_dash", SculkDashModifier::new);
+   public static final StaticModifier<CrimsonModifier> Crimson = MODIFIERS.register("crimson", CrimsonModifier::new);
+   public static final StaticModifier<CataclysmModifier> Cataclysm = MODIFIERS.register("cataclysm", CataclysmModifier::new);
+   public static final StaticModifier<MagicTransformModifier> MagicTransform = MODIFIERS.register("magic_transform", MagicTransformModifier::new);
+   public static final StaticModifier<OverFreezeModifier> FreezingCold = MODIFIERS.register("overfreeze", OverFreezeModifier::new);
+   public static final StaticModifier<DurableModifier> Durable = MODIFIERS.register("durable", DurableModifier::new);
+   public static final StaticModifier<OverdisintegrateModifier> Overdisintegrate = MODIFIERS.register("overdisintegrate", OverdisintegrateModifier::new);
+   public static final StaticModifier<OverbearModifier> Overbear = MODIFIERS.register("overbear", OverbearModifier::new);
+   public static final StaticModifier<ReverseModifier> Reverse = MODIFIERS.register("reverse", ReverseModifier::new);
+   public static final StaticModifier<RecalamityModifier> Recalamity = MODIFIERS.register("recalamity", RecalamityModifier::new);
+   public static final StaticModifier<SculkSiphonModifier> SculkSiphon = MODIFIERS.register("sculk_siphon", SculkSiphonModifier::new);
+   public static final StaticModifier<ResistingModifier> Resisting = MODIFIERS.register("resisting", ResistingModifier::new);
+   public static final StaticModifier<BoomModifier> Boom = MODIFIERS.register("boom", BoomModifier::new);
+   public static final StaticModifier<RidingShootModifier> RidingShoot = MODIFIERS.register("riding_shoot", RidingShootModifier::new);
+   public static final StaticModifier<FrozenModifier> Frozen = MODIFIERS.register("frozen", FrozenModifier::new);
+   public static final StaticModifier<RedyeModifier> Redye = MODIFIERS.register("redye", RedyeModifier::new);
+   public static final StaticModifier<RechargeModifier> Recharge = MODIFIERS.register("recharge", RechargeModifier::new);
+   public static final StaticModifier<RepercussionModifier> Repercussion = MODIFIERS.register("repercussion", RepercussionModifier::new);
+   public static final StaticModifier<CounterAttackModifier> CounterAttack = MODIFIERS.register("counter_attack", CounterAttackModifier::new);
+   public static final StaticModifier<SwashAdvancedModifier> SwashAdvanced = MODIFIERS.register("swash_advanced", SwashAdvancedModifier::new);
+   public static final StaticModifier<BattleAdvancedModifier> BattleAdvanced = MODIFIERS.register("battle_advanced", BattleAdvancedModifier::new);
+   public static final StaticModifier<GlowAdvancedModifier> GlowAdvanced = MODIFIERS.register("glow_advanced", GlowAdvancedModifier::new);
+   public static final StaticModifier<TeleportAdvancedModifier> TeleportAdvanced = MODIFIERS.register("teleport_advanced", TeleportAdvancedModifier::new);
+   public static final StaticModifier<OverchargeModifier> Overcharge = MODIFIERS.register("overcharge", OverchargeModifier::new);
+
+   public static void init(net.neoforged.bus.api.IEventBus bus) {
+      MODIFIERS.register(bus);
+   }
+
+   @SubscribeEvent
+   void registerSerializers(RegisterEvent event) {
+      if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER) {
+         ModifierModule.LOADER.register(TinkersThinking.getResource("atlatl"), AtlatlModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("netherite"), NetheriteModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("symbiotic"), SymbioticModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("sculk_boost"), SculkBoostModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("sculk_catalyse"), SculkCatalyseModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("sculk_levitate"), SculkLevitateModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("sculk_gravity"), SculkGravityModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("lightly_attack"), LightlyAttackModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("hurried"), HurriedModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("antibrute"), AntibruteModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("reburning"), ReburningModifier.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("sculk_struggle"), SculkStruggleModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("rederangement"), RederangementModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("retransit"), RetransitModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("nonsense"), NonsenseModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("coercion"), CoercionModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("nocturnal"), NocturnalModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("bide_time"), BideTimeModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("sharp_circumstance"), SharpCircumstanceModule.LOADER);
+         ModifierModule.LOADER.register(TinkersThinking.getResource("remisdirection"), RemisdirectionModule.LOADER);
+      }
+   }
+
+}

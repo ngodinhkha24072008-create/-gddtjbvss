@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "BCB",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "tinkers_thinking:gilded_silky_cloth"
+    },
+    "B": {
+      "item": "modernfoundry:silky_cloth"
+    },
+    "C": {
+      "tag": "c:gems/emerald"
+    }
+  },
+  "result": {
+    "id": "tinkers_thinking:silky_jewel"
+  }
+}

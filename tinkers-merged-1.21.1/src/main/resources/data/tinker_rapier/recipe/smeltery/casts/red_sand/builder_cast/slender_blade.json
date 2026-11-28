@@ -1,0 +1,8 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "pattern": "tinker_rapier:slender_blade",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "result": "tinker_rapier:slender_blade_red_sand_cast"
+}

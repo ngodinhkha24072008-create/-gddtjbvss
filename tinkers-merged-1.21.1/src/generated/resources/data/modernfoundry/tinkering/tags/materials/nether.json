@@ -1,0 +1,26 @@
+{
+  "values": [
+    "modernfoundry:wood",
+    "modernfoundry:flint",
+    "modernfoundry:rock",
+    "modernfoundry:bone",
+    "modernfoundry:leather",
+    "modernfoundry:string",
+    "modernfoundry:gold",
+    "modernfoundry:slimewood",
+    "modernfoundry:nahuatl",
+    "modernfoundry:obsidian",
+    "modernfoundry:darkthread",
+    "modernfoundry:steel",
+    "modernfoundry:ancient",
+    "#modernfoundry:nether/gated",
+    "tinkers_reforged:barium",
+    "tinkers_reforged:tellurium",
+    "tinkers_reforged:actinium",
+    "tinkers_thinking:ardite",
+    "tinkers_thinking:adamantium",
+    "tinkers_thinking:stewium",
+    "tinkers_thinking:burnt_ashes",
+    "tinkers_thinking:bacium"
+  ]
+}

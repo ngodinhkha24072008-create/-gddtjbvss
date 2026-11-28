@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/lightite"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkers_thinking:lightite",
+  "leftover": {
+    "tag": "c:ingots/lightite"
+  }
+}

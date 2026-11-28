@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/thallium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/thallium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_thallium"
+  },
+  "temperature": 2200,
+  "time": 73
+}

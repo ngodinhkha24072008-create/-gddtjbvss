@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/plate"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/tellurium"
+    }
+  ],
+  "cooling_time": 85,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_tellurium"
+  },
+  "result": {
+    "tag": "c:plates/tellurium"
+  }
+}

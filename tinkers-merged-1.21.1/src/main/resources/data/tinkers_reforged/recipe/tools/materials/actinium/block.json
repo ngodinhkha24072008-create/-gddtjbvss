@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/actinium"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/actinium"
+  },
+  "material": "tinkers_reforged:actinium",
+  "needed": 1,
+  "value": 9
+}

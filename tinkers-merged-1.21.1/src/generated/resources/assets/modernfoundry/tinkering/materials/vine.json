@@ -1,0 +1,35 @@
+{
+  "color": "FF48B518",
+  "fallbacks": [
+    "vine",
+    "primitive",
+    "cloth"
+  ],
+  "generator": {
+    "supported_stats": [
+      "modernfoundry:binding",
+      "modernfoundry:bowstring",
+      "modernfoundry:cuirass",
+      "modernfoundry:armor_cuirass",
+      "modernfoundry:repair_kit",
+      "modernfoundry:fletching",
+      "modernfoundry:laces",
+      "modernfoundry:slimesuit_overlay"
+    ],
+    "transformer": {
+      "type": "modernfoundry:recolor_sprite",
+      "color_mapping": {
+        "type": "modernfoundry:grey_to_color",
+        "palette": {
+          "000": "FF000000",
+          "063": "FF143306",
+          "102": "FF183D08",
+          "140": "FF1F4E0A",
+          "178": "FF265F0D",
+          "216": "FF2E730F",
+          "255": "FF3A9313"
+        }
+      }
+    }
+  }
+}

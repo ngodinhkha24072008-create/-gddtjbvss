@@ -1,0 +1,29 @@
+package mrthomas20121.tinkers_reforged.data;
+
+import modernmods.modernfoundry.library.modifiers.ModifierId;
+
+public class TinkersReforgedModifierIds {
+   public static ModifierId OVERFRACTURE = create("overfracture");
+   public static ModifierId IONIZE = create("ionize");
+   public static ModifierId CHASM = create("chasm");
+   public static ModifierId TRIAD = create("triad");
+   public static ModifierId CLOSE_COMBAT = create("close_combat");
+   public static ModifierId FLAMING = create("flaming");
+   public static ModifierId CLEAVAGE = create("cleavage");
+   public static ModifierId SUBAQUATIC = create("subaquatic");
+   public static ModifierId FRAIL = create("frail");
+   public static ModifierId GEOGRAPHICAL = create("geographical");
+   public static ModifierId DECAY_IMMUNITY = create("decay_immunity");
+   public static ModifierId SAFEGUARD = create("safeguard");
+   public static ModifierId AGILITY = create("agility");
+   public static ModifierId HEAT_PROOF = create("heat_proof");
+   public static ModifierId HEALTH_UP = create("health_up");
+   public static ModifierId FRICTION = create("friction");
+   public static ModifierId LUNGFUL = create("lungful");
+   public static ModifierId ROAST = create("roast");
+   public static ModifierId SPACIAL = create("spacial");
+
+   private static ModifierId create(String name) {
+      return new ModifierId("tinkers_reforged", name);
+   }
+}

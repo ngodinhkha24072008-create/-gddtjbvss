@@ -1,0 +1,494 @@
+{
+  "_comment": "Modern Foundry Common",
+
+  "block.modernfoundry.sky_slime": "Blok Lendir Angkasa",
+  "block.modernfoundry.sky_slime.tooltip": "Menempel ke blok lendir dan madu",
+  "block.modernfoundry.ichor_slime": "Blok Ichor",
+  "block.modernfoundry.ichor_slime.tooltip": "Menempel ke semua blok lengket selain ichor",
+  "block.modernfoundry.ender_slime": "Blok Lendir Ender",
+  "block.modernfoundry.ender_slime.tooltip": "Menempel ketika didorong, tapi tidak jika berdekatan dengan blok lengket lain",
+
+  "block.modernfoundry.earth_congealed_slime": "Gumpalan Lendir",
+  "block.modernfoundry.earth_congealed_slime.tooltip": "Membuatmu melompat sangat tinggi",
+  "block.modernfoundry.sky_congealed_slime": "Gumpalan Lendir Angkasa",
+  "block.modernfoundry.sky_congealed_slime.tooltip": "Membuatmu melompat sangat tinggi",
+  "block.modernfoundry.ender_congealed_slime": "Gumpalan Lendir Ender",
+  "block.modernfoundry.ender_congealed_slime.tooltip": "Membuatmu melompat sangat tinggi",
+  "block.modernfoundry.ichor_congealed_slime": "Gumpalan Ichor",
+  "block.modernfoundry.ichor_congealed_slime.tooltip": "Membuatmu melompat sangat tinggi",
+
+  "block.modernfoundry.mud_bricks": "Bata Lumpur",
+  "block.modernfoundry.mud_bricks_slab": "Lempeng Bata Lumpur",
+  "block.modernfoundry.mud_bricks_stairs": "Tangga Bata Lumpur",
+
+  "block.modernfoundry.blazewood": "Kayu Berapi",
+  "block.modernfoundry.blazewood_slab": "Lempeng Kayu Berapi",
+  "block.modernfoundry.blazewood_stairs": "Tangga Kayu Berapi",
+
+  "block.modernfoundry.nahuatl": "Papan Nahuatl",
+  "block.modernfoundry.nahuatl_slab": "Lempeng Nahuatl",
+  "block.modernfoundry.nahuatl_stairs": "Tangga Nahuatl",
+  "block.modernfoundry.nahuatl_fence": "Pagar Nahuatl",
+
+  "block.modernfoundry.clear_glass": "Kaca Bersih",
+  "block.modernfoundry.clear_glass_pane": "Panel Kaca Bersih",
+  "block.modernfoundry.clear_tinted_glass": "Kaca Kristal Bersih",
+
+  "block.modernfoundry.obsidian_pane": "Panel Obsidian",
+  "block.modernfoundry.gold_bars": "Panel Batangan Emas",
+  "block.modernfoundry.gold_bars.tooltip": "Berfungsi sebagai tuangan kosong di meja pengecoran",
+
+  "block.modernfoundry.gold_platform": "Platform Emas",
+  "block.modernfoundry.gold_platform.tooltip": "Berfungsi sebagai tuangan kosong di baskom pengecoran",
+  "block.modernfoundry.iron_platform": "Platform Besi",
+  "block.modernfoundry.cobalt_platform": "Platform Kobalt",
+
+  "block.modernfoundry.copper_platform":           "Platform Tembaga",
+  "block.modernfoundry.exposed_copper_platform":   "Platform Tembaga Terpapar",
+  "block.modernfoundry.weathered_copper_platform": "Platform Tembaga Lapuk",
+  "block.modernfoundry.oxidized_copper_platform":  "Platform Tembaga Teroksidasi",
+
+  "block.modernfoundry.waxed_copper_platform":           "Platform Tembaga Dililin",
+  "block.modernfoundry.waxed_exposed_copper_platform":   "Platform Tembaga Terpapar Dililin",
+  "block.modernfoundry.waxed_weathered_copper_platform": "Platform Tembaga Lapuk Dililin",
+  "block.modernfoundry.waxed_oxidized_copper_platform":  "Platform Tembaga Teroksidasi Dililin",
+
+  "block.modernfoundry.white_clear_stained_glass": "Kaca Bersih Bernoda Putih",
+  "block.modernfoundry.orange_clear_stained_glass": "Kaca Bersih Bernoda Oranye",
+  "block.modernfoundry.magenta_clear_stained_glass": "Kaca Bersih Bernoda Magenta",
+  "block.modernfoundry.light_blue_clear_stained_glass": "Kaca Bersih Bernoda Biru Muda",
+  "block.modernfoundry.yellow_clear_stained_glass": "Kaca Bersih Bernoda Kuning",
+  "block.modernfoundry.lime_clear_stained_glass": "Kaca Bersih Bernoda Hijau Muda",
+  "block.modernfoundry.pink_clear_stained_glass": "Kaca Bersih Bernoda Pink",
+  "block.modernfoundry.gray_clear_stained_glass": "Kaca Bersih Bernoda Abu-abu",
+  "block.modernfoundry.light_gray_clear_stained_glass": "Kaca Bersih Bernoda Abu-abu Muda",
+  "block.modernfoundry.cyan_clear_stained_glass": "Kaca Bersih Bernoda Sian",
+  "block.modernfoundry.purple_clear_stained_glass": "Kaca Bersih Bernoda Ungu",
+  "block.modernfoundry.blue_clear_stained_glass": "Kaca Bersih Bernoda Biru",
+  "block.modernfoundry.brown_clear_stained_glass": "Kaca Bersih Bernoda Coklat",
+  "block.modernfoundry.green_clear_stained_glass": "Kaca Bersih Bernoda Hijau",
+  "block.modernfoundry.red_clear_stained_glass": "Kaca Bersih Bernoda Merah",
+  "block.modernfoundry.black_clear_stained_glass": "Kaca Bersih Bernoda Hitam",
+
+  "block.modernfoundry.white_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Putih",
+  "block.modernfoundry.orange_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Oranye",
+  "block.modernfoundry.magenta_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Magenta",
+  "block.modernfoundry.light_blue_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Biru Muda",
+  "block.modernfoundry.yellow_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Kuning",
+  "block.modernfoundry.lime_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Hijau Muda",
+  "block.modernfoundry.pink_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Pink",
+  "block.modernfoundry.gray_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Abu-abu",
+  "block.modernfoundry.light_gray_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Abu-abu Muda",
+  "block.modernfoundry.cyan_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Sian",
+  "block.modernfoundry.purple_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Ungu",
+  "block.modernfoundry.blue_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Biru",
+  "block.modernfoundry.brown_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Coklat",
+  "block.modernfoundry.green_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Hijau",
+  "block.modernfoundry.red_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Merah",
+  "block.modernfoundry.black_clear_stained_glass_pane": "Panel Kaca Bersih Bernoda Hitam",
+
+  "block.modernfoundry.soul_glass": "Kaca Jiwa",
+  "block.modernfoundry.soul_glass_pane": "Panel Kaca Jiwa",
+
+  "block.modernfoundry.glow": "Sinar",
+
+
+  "__comment": "Ore Metals",
+
+  "item.modernfoundry.copper_nugget": "Nugget Tembaga",
+
+  "block.modernfoundry.cobalt_ore": "Bijih Kobalt Neraka",
+  "item.modernfoundry.raw_cobalt": "Kobalt Mentah",
+  "block.modernfoundry.raw_cobalt_block": "Blok Kobalt Mentah",
+
+  "block.modernfoundry.cobalt_block": "Block Kobalt",
+  "block.modernfoundry.cobalt_block.tooltip": "Bisa digunakan sebagai dasar suar",
+  "item.modernfoundry.cobalt_ingot": "Batangan Kobalt",
+  "item.modernfoundry.cobalt_nugget": "Nugget Kobalt",
+
+
+  "__comment": "Tier 3 Metals",
+
+  "block.modernfoundry.slimesteel_block": "Blok Slimesteel",
+  "item.modernfoundry.slimesteel_ingot": "Batangan Slimesteel",
+  "item.modernfoundry.slimesteel_nugget": "Nugget Slimesteel",
+
+  "block.modernfoundry.amethyst_bronze_block": "Blok Perunggu Kecubung",
+  "item.modernfoundry.amethyst_bronze_ingot": "Batangan Perungu Kecubung",
+  "item.modernfoundry.amethyst_bronze_nugget": "Nugget Perunggu Kecubung",
+
+  "block.modernfoundry.rose_gold_block": "Blok Mawar Emas",
+  "item.modernfoundry.rose_gold_ingot": "Batangan Mawar Emas",
+  "item.modernfoundry.rose_gold_nugget": "Nugget Mawar Emas",
+
+  "block.modernfoundry.pig_iron_block": "Blok Besi Gubal",
+  "item.modernfoundry.pig_iron_ingot": "Batangan Besi Gubal",
+  "item.modernfoundry.pig_iron_nugget": "Nugget Besi Gubal",
+
+
+  "__comment": "Tier 4 Metals",
+
+  "block.modernfoundry.manyullyn_block": "Blok Manyullyn",
+  "block.modernfoundry.manyullyn_block.tooltip": "Bisa digunakan sebagai dasar suar",
+  "item.modernfoundry.manyullyn_ingot": "Batangan Manyullyn",
+  "item.modernfoundry.manyullyn_nugget": "Nugget Manyullyn",
+
+  "block.modernfoundry.hepatizon_block": "Blok Hepatizon",
+  "block.modernfoundry.hepatizon_block.tooltip": "Bisa digunakan sebagai dasar suar",
+  "item.modernfoundry.hepatizon_ingot": "Batangan Hepatizon",
+  "item.modernfoundry.hepatizon_nugget": "Nugget Hepatizon",
+
+  "block.modernfoundry.queens_slime_block": "Blok Queen's Slime",
+  "block.modernfoundry.queens_slime_block.tooltip": "Bisa digunakan sebagai dasar suar",
+  "item.modernfoundry.queens_slime_ingot": "Batangan Queen's Slime",
+  "item.modernfoundry.queens_slime_nugget": "Nugget Queen's Slime",
+
+  "block.modernfoundry.soulsteel_block": "Blok Soulsteel",
+  "block.modernfoundry.soulsteel_block.tooltip": "Bisa digunakan sebagai dasar suar",
+  "item.modernfoundry.soulsteel_ingot": "Batangan Soulsteel",
+  "item.modernfoundry.soulsteel_nugget": "Nugget Soulsteel",
+
+  "item.modernfoundry.netherite_nugget": "Nugget Netherite",
+  "item.modernfoundry.debris_nugget": "Serpihan Puing",
+  "item.modernfoundry.debris_nugget.tooltip": "Pecahan kecil dari netherite kuno, mungkin bisa dicairkan untuk diselamatkan",
+
+
+  "__comment": "Tier 5 Metals",
+
+  "block.modernfoundry.knightslime_block": "Blok Knightslime",
+  "item.modernfoundry.knightslime_ingot": "Batangan Knightslime",
+  "item.modernfoundry.knightslime_nugget": "Nugget Knightslime",
+
+  "item.modernfoundry.materials_and_you": "Material dan Kamu",
+  "item.modernfoundry.materials_and_you.tooltip": "Buku pengenalan alat dan bahan\noleh Selena",
+  "item.modernfoundry.encyclopedia": "Ensiklopedia para Modern Foundry",
+  "item.modernfoundry.encyclopedia.tooltip": "Buku referensi yang dibutuhkan setiap Modern Foundry\noleh Selena",
+
+  "item.modernfoundry.tinkers_gadgetry": "Gadget Gadget Modern Foundry",
+  "item.modernfoundry.tinkers_gadgetry.tooltip": "Buku kegunaan slime dalam tugas sehari-hari\noleh Melvin",
+
+  "item.modernfoundry.puny_smelting": "Peleburan Yang Biasa-Biasa Saja",
+  "item.modernfoundry.puny_smelting.tooltip": "Buku panduan peleburan dan pengecoran untuk pemula\noleh Thruul M'Gon",
+  "item.modernfoundry.mighty_smelting": "Peleburan Yang Luar Biasa",
+  "item.modernfoundry.mighty_smelting.tooltip": "Buku teks untuk penguasaan peleburan, pengecoran, dan paduan logam\noleh Thruul M'Gon",
+
+  "item.modernfoundry.fantastic_foundry": "Pengecoran Fantastis",
+  "item.modernfoundry.fantastic_foundry.tooltip": "Buku tentang teknologi baru terpanas dalam logam cair\noleh Nemea",
+
+  "item.modernfoundry.sky_slime_ball": "Bola Lendir Angkasa",
+  "item.modernfoundry.ender_slime_ball": "Bola Lendir Ender",
+  "item.modernfoundry.ichor_slime_ball": "Bola Ichor",
+
+  "item.modernfoundry.bacon": "Bacon",
+
+  "item.modernfoundry.earth_slime_crystal": "Kristal Lendir Bumi",
+  "block.modernfoundry.earth_slime_crystal_block": "Blok Kristal Lendir Bumu",
+  "block.modernfoundry.small_earth_slime_crystal_bud": "Kuncup Kecil Kristal Lendir Bumi",
+  "block.modernfoundry.medium_earth_slime_crystal_bud": "Kuncup Sedang Kristal Lendir Bumi",
+  "block.modernfoundry.large_earth_slime_crystal_bud": "Kuncup Besar Kristal Lendir Bumi",
+  "block.modernfoundry.earth_slime_crystal_cluster": "Kluster Kristal Lendir Bumi",
+  "block.modernfoundry.budding_earth_slime_crystal": "Kristal Lendir Bumi Bertumbuh",
+
+  "item.modernfoundry.sky_slime_crystal": "Kristal Lendir Angkasa",
+  "block.modernfoundry.sky_slime_crystal_block": "Blok Kristal Lendir Angkasa",
+  "block.modernfoundry.small_sky_slime_crystal_bud": "Kuncup Kecil Kristal Lendir Angkasa",
+  "block.modernfoundry.medium_sky_slime_crystal_bud": "Kuncup Sedang Kristal Lendir Angkasa",
+  "block.modernfoundry.large_sky_slime_crystal_bud": "Kuncup Besar Kristal Lendir Angkasa",
+  "block.modernfoundry.sky_slime_crystal_cluster": "Kluster Kristal Lendir Angkasa",
+  "block.modernfoundry.budding_sky_slime_crystal": "Kristal Lendir Angkasa Bertumbuh",
+
+  "item.modernfoundry.ichor_slime_crystal": "Kristal Ichor",
+  "block.modernfoundry.ichor_slime_crystal_block": "Blok Kristal Ichor",
+  "block.modernfoundry.small_ichor_slime_crystal_bud": "Kuncup Kecil Kristal Ichor",
+  "block.modernfoundry.medium_ichor_slime_crystal_bud": "Kuncup Sedang Kristal Ichor",
+  "block.modernfoundry.large_ichor_slime_crystal_bud": "Kuncup Besar Kristal Ichor",
+  "block.modernfoundry.ichor_slime_crystal_cluster": "Kluster Kristal Ichor",
+  "block.modernfoundry.budding_ichor_slime_crystal": "Kristal Ichor Bertumbuh",
+
+  "item.modernfoundry.ender_slime_crystal": "Kristal Lendir Ender",
+  "block.modernfoundry.ender_slime_crystal_block": "Blok Kristal Lendir Ender",
+  "block.modernfoundry.small_ender_slime_crystal_bud": "Kuncup Kecil Kristal Lendir Ender",
+  "block.modernfoundry.medium_ender_slime_crystal_bud": "Kuncup Sedang Kristal Lendir Ender",
+  "block.modernfoundry.large_ender_slime_crystal_bud": "Kuncup Besar Kristal Lendir Ender",
+  "block.modernfoundry.ender_slime_crystal_cluster": "Kluster Kristal Lendir Ender",
+  "block.modernfoundry.budding_ender_slime_crystal": "Kristal Lendir Ender Bertumbuh",
+
+  "item.modernfoundry.iron_reinforcement": "Penguatan Besi",
+  "item.modernfoundry.iron_reinforcement.tooltip": "Meningkatkan ketahanan armor terhadap proyektil",
+  "item.modernfoundry.slimesteel_reinforcement": "Penguatan Slimesteel",
+  "item.modernfoundry.slimesteel_reinforcement.tooltip": "Meningkatkan kapasitas overslime",
+  "item.modernfoundry.seared_reinforcement": "Penguatan Batu Hangus",
+  "item.modernfoundry.seared_reinforcement.tooltip": "Meningkatkan ketahanan armor terhadap api",
+  "item.modernfoundry.gold_reinforcement": "Penguatan Emas",
+  "item.modernfoundry.gold_reinforcement.tooltip": "Meningkatkan ketahanan armor terhadap sihir",
+  "item.modernfoundry.emerald_reinforcement": "Penguatan Zamrud",
+  "item.modernfoundry.emerald_reinforcement.tooltip": "Mengurangi kemungkinan alat mengambil kerusakan",
+  "item.modernfoundry.obsidian_reinforcement.tooltip": "Meningkatkan ketahanan armor terhadap ledakan",
+  "item.modernfoundry.cobalt_reinforcement": "Penguatan Kobalt",
+  "item.modernfoundry.cobalt_reinforcement.tooltip": "Meningkatkan ketahanan armor terhadap serangan umum",
+  "item.modernfoundry.jeweled_apple": "Apel Permata",
+  "item.modernfoundry.silky_cloth": "Kain Sutra",
+  "item.modernfoundry.silky_cloth.tooltip": "Mencegah alat dari merusakkan hasil blok",
+  "item.modernfoundry.necrotic_bone": "Tulang Nekrotik",
+  "item.modernfoundry.necrotic_bone.tooltip": "Dijatuhkan oleh kerangka wither",
+  "item.modernfoundry.necronium_bone": "Tulang Nekronium",
+  "item.modernfoundry.blazing_bone": "Tulang Berapi",
+  "item.modernfoundry.dragon_scale": "Sisik naga",
+  "item.modernfoundry.dragon_scale.tooltip": "Didapatkan dengan meledakkan naga ender",
+
+  "item.modernfoundry.creative_slot": "Slot Kreatif",
+  "item.modernfoundry.creative_slot.upgrades": "Peningkatan Kreatif",
+  "item.modernfoundry.creative_slot.abilities": "Kemampuan Kreatif",
+  "item.modernfoundry.creative_slot.souls": "Slot Jiwa Kreatif",
+  "item.modernfoundry.creative_slot.defense": "Slot Pertahanan Kreatif",
+  "item.modernfoundry.creative_slot.missing": "NBT tidak ada atau tidak valid yang menentukan jenis slot",
+  "item.modernfoundry.creative_slot.tooltip": "Menambahkan slot %s tambahan ke alat",
+
+  "item.modernfoundry.copper_can": "Cangkir Tembaga",
+  "item.modernfoundry.copper_can.tooltip": "Wadah yang dapat ditumpuk menampung 1 batang cairan",
+  "item.modernfoundry.copper_can.contents": "Berisi: 1 batangan %s",
+
+
+  "_comment": "Modern Foundry Patterns",
+
+  "pattern.modernfoundry.repair_kit": "Kotak Perbaikan",
+
+  "_comment": "Small Head Gold Casts",
+
+  "pattern.modernfoundry.pick_head": "Kepala Beliung",
+  "pattern.modernfoundry.small_axe_head": "Kepala Kapak kecil",
+  "pattern.modernfoundry.small_blade": "Bilah Pedang Kecil",
+  "pattern.modernfoundry.bow_limb": "Bagian Busur",
+
+  "_comment": "Large Head Gold Casts",
+
+  "pattern.modernfoundry.hammer_head": "Kepala Palu",
+  "pattern.modernfoundry.broad_axe_head": "Kepala Kapak Lebar",
+  "pattern.modernfoundry.broad_blade": "Bilah Pedang Besar",
+
+  "_comment": "Binding Gold Casts",
+
+  "pattern.modernfoundry.tool_binding": "Pengikat Alat",
+  "pattern.modernfoundry.large_plate": "Piringan Besar",
+
+  "_comment": "Tool Handle Gold Casts",
+
+  "pattern.modernfoundry.tool_handle": "Pegangan Alat",
+  "pattern.modernfoundry.tough_handle": "Pegangan Tangguh",
+
+
+  "_comment": "Modern Foundry Gold Casts",
+
+  "item.modernfoundry.blank_cast": "Tuangan Emas Kosong",
+  "item.modernfoundry.ingot_cast": "Tuangan Batangan Emas",
+  "item.modernfoundry.nugget_cast": "Tuangan Nugget Emas",
+  "item.modernfoundry.gem_cast": "Tuangan Permata Emas",
+  "item.modernfoundry.rod_cast": "Tuangan Tongkat Emas",
+
+  "item.modernfoundry.gear_cast": "Tuangan Gir Emas",
+  "item.modernfoundry.plate_cast": "Tuangan Plat Emas",
+  "item.modernfoundry.coin_cast": "Tuangan Koin Emas",
+  "item.modernfoundry.wire_cast": "Tuangan Kawat Emas",
+
+  "item.modernfoundry.repair_kit_cast": "Tuangan Kotak Perbaikan Emas",
+
+  "_comment": "Small Head Gold Casts",
+
+  "item.modernfoundry.pick_head_cast": "Tuangan Kepala Beliung",
+  "item.modernfoundry.small_axe_head_cast": "Tuangan Kepala Kapak Kecil Emas",
+  "item.modernfoundry.small_blade_cast": "Tuangan Bilah Kecil Emas",
+  "item.modernfoundry.bow_limb_cast": "Tuangan Bagian Busur Emas",
+
+  "_comment": "Large Head Gold Casts",
+
+  "item.modernfoundry.hammer_head_cast": "Tuangan Kepala Palu Emas",
+  "item.modernfoundry.broad_axe_head_cast": "Tuangan Kepala Kapak Lebar Emas",
+  "item.modernfoundry.broad_blade_cast": "Tuangan Bilah Besar Emas",
+
+  "_comment": "Binding Gold Casts",
+
+  "item.modernfoundry.tool_binding_cast": "Tuangan Pengikat Alat Emas",
+  "item.modernfoundry.large_plate_cast": "Tuangan Piringan Besar Emas",
+
+  "_comment": "Tool Handle Gold Casts",
+
+  "item.modernfoundry.tool_handle_cast": "Tuangan Pegangan Alat Emas",
+  "item.modernfoundry.tough_handle_cast": "Tuangan Pegangan Kuat Emas",
+
+
+  "_comment": "Modern Foundry Sand Casts",
+
+  "item.modernfoundry.blank_sand_cast": "Tuangan Pasir Kosong",
+  "item.modernfoundry.ingot_sand_cast": "Tuangan Batangan Pasir",
+  "item.modernfoundry.nugget_sand_cast": "Tuangan Nugget Pasir",
+  "item.modernfoundry.gem_sand_cast": "Tuangan Permata Pasir",
+  "item.modernfoundry.rod_sand_cast": "Tuangan Tongkat Pasir",
+
+  "item.modernfoundry.gear_sand_cast": "Tuangan Gir Pasir",
+  "item.modernfoundry.plate_sand_cast": "Tuangan Plat Pasir",
+  "item.modernfoundry.coin_sand_cast": "Tuangan Koin Pasir",
+  "item.modernfoundry.wire_sand_cast": "Tuangan Kawat Pasir",
+
+  "item.modernfoundry.repair_kit_sand_cast": "Tuangan Kotak Perbaikan Pasir",
+
+  "_comment": "Small Head Sand Casts",
+
+  "item.modernfoundry.pick_head_sand_cast": "Tuangan Kepala Beliung Pasir",
+  "item.modernfoundry.small_axe_head_sand_cast": "Tuangan Kepala Kapak Pasir",
+  "item.modernfoundry.small_blade_sand_cast": "Tuangan Bilah Kecil Pasir",
+  "item.modernfoundry.bow_limb_sand_cast": "Tuangan Bagian Busur Pasir",
+
+  "_comment": "Large Head Sand Casts",
+
+  "item.modernfoundry.hammer_head_sand_cast": "Tuangan Kepala Palu Pasir",
+  "item.modernfoundry.broad_axe_head_sand_cast": "Tuangan Kepala Kapak Lebar Pasir",
+  "item.modernfoundry.broad_blade_sand_cast": "Tuangan Bilah Besar Pasir",
+
+  "_comment": "Binding Sand Casts",
+
+  "item.modernfoundry.tool_binding_sand_cast": "Tuangan Pengikat Alat Pasir",
+  "item.modernfoundry.large_plate_sand_cast": "Tuangan Piringan Besar Pasir",
+
+  "_comment": "Tool Handle Sand Casts",
+
+  "item.modernfoundry.tool_handle_sand_cast": "Tuangan Pegangan Alat Pasir",
+  "item.modernfoundry.tough_handle_sand_cast": "Tuangan Pegangan Kuat Pasir",
+
+
+  "_comment": "Modern Foundry Red Sand Casts",
+
+  "item.modernfoundry.blank_red_sand_cast": "Tuangan Pasir Merah Kosong",
+  "item.modernfoundry.ingot_red_sand_cast": "Tuangan Batangan Pasir Merah",
+  "item.modernfoundry.nugget_red_sand_cast": "Tuangan Nugget Pasir Merah",
+  "item.modernfoundry.gem_red_sand_cast": "Tuangan Permata Pasir Merah",
+  "item.modernfoundry.rod_red_sand_cast": "Tuangan Tongkat Pasir Merah",
+
+
+  "_comment": "Modern Foundry Fluids",
+
+  "block.modernfoundry.blazing_blood_fluid": "Darah Bersinar",
+  "fluid.modernfoundry.blazing_blood": "Darah Bersinar",
+  "fluid.modernfoundry.flowing_blazing_blood": "Darah Bersinar Mengalir",
+  "item.modernfoundry.blazing_blood_bucket": "Ember Darah Bersinar",
+
+
+  "_comment": "Food",
+
+  "block.modernfoundry.honey_fluid": "Madu",
+  "fluid.modernfoundry.honey": "Madu",
+  "fluid.modernfoundry.flowing_honey": "Madu Mengalir",
+  "item.modernfoundry.honey_bucket": "Ember Madu",
+
+  "block.modernfoundry.beetroot_soup_fluid": "Sup Bit",
+  "fluid.modernfoundry.beetroot_soup": "Sup Bit",
+  "fluid.modernfoundry.flowing_beetroot_soup": "Sup Bit Mengalir",
+  "item.modernfoundry.beetroot_soup_bucket": "Ember Sup Bit",
+
+  "block.modernfoundry.mushroom_stew_fluid": "Rebusan Jamur",
+  "fluid.modernfoundry.mushroom_stew": "Rebusan Jamur",
+  "fluid.modernfoundry.flowing_mushroom_stew": "Rebusan Jamur Mengalir",
+  "item.modernfoundry.mushroom_stew_bucket": "Ember Rebusan Jamur",
+
+  "block.modernfoundry.rabbit_stew_fluid": "Rebusan Kelinci",
+  "fluid.modernfoundry.rabbit_stew": "Rebusan Kelinci",
+  "fluid.modernfoundry.flowing_rabbit_stew": "Rebusan Kelinci Mengalir",
+  "item.modernfoundry.rabbit_stew_bucket": "Ember Rebusan Kelinci",
+
+
+  "_comment": "Slime",
+
+  "block.modernfoundry.earth_slime_fluid": "Lendir",
+  "fluid.modernfoundry.earth_slime": "Lendir",
+  "fluid.modernfoundry.flowing_earth_slime": "Lendir Mengalir",
+  "item.modernfoundry.earth_slime_bucket": "Ember Lendir",
+
+  "block.modernfoundry.sky_slime_fluid": "Lendir Angkasa",
+  "fluid.modernfoundry.sky_slime": "Ember Lendir Angkasa",
+  "fluid.modernfoundry.flowing_sky_slime": "Lendir Angkasa Mengalir",
+  "item.modernfoundry.sky_slime_bucket": "Skyslime Bucket",
+
+  "block.modernfoundry.magma_fluid": "Magma",
+  "fluid.modernfoundry.magma": "Magma",
+  "fluid.modernfoundry.flowing_magma": "Magma Mengalir",
+  "item.modernfoundry.magma_bucket": "Ember Magma",
+
+  "block.modernfoundry.ender_slime_fluid": "Lendir Ender",
+  "fluid.modernfoundry.ender_slime": "Lendir Ender",
+  "fluid.modernfoundry.flowing_ender_slime": "Lendir Ender Mengalir",
+  "item.modernfoundry.ender_slime_bucket": "Ember Lendir Ender",
+
+  "block.modernfoundry.venom_fluid": "Racun",
+  "fluid.modernfoundry.venom": "Racun",
+  "fluid.modernfoundry.flowing_venom": "Racun Mengalir",
+  "item.modernfoundry.venom_bucket": "Ember Racun",
+
+  "_comment": "Rock",
+
+  "block.modernfoundry.seared_stone_fluid": "Batu Hangus Leleh",
+  "fluid.modernfoundry.seared_stone": "Batu Hangus Leleh",
+  "fluid.modernfoundry.flowing_seared_stone": "Batu Hangus Leleh Mengalir",
+  "item.modernfoundry.seared_stone_bucket": "Ember Batu hangus Leleh",
+
+  "block.modernfoundry.scorched_stone_fluid": "Batu Gosong Leleh",
+  "fluid.modernfoundry.scorched_stone": "Batu Gosong Leleh",
+  "fluid.modernfoundry.flowing_scorched_stone": "Batu Gosong Leleh Mengalir",
+  "item.modernfoundry.scorched_stone_bucket": "Ember Batu Gosong Leleh",
+
+  "block.modernfoundry.molten_clay_fluid": "Terakota Leleh",
+  "fluid.modernfoundry.molten_clay": "Terakota Leleh",
+  "fluid.modernfoundry.flowing_molten_clay": "Terakota Leleh Mengalir",
+  "item.modernfoundry.molten_clay_bucket": "Ember Terakota Leleh",
+
+  "block.modernfoundry.molten_glass_fluid": "Kaca Leleh",
+  "fluid.modernfoundry.molten_glass": "Kaca Leleh",
+  "fluid.modernfoundry.flowing_molten_glass": "Kaca Leleh Mengalir",
+  "item.modernfoundry.molten_glass_bucket": "Ember Kaca Leleh",
+
+  "block.modernfoundry.liquid_soul_fluid": "Jiwa Cair",
+  "fluid.modernfoundry.liquid_soul": "Jiwa Cair",
+  "fluid.modernfoundry.flowing_liquid_soul": "Jiwa Cair Mengalir",
+  "item.modernfoundry.liquid_soul_bucket": "Ember Jiwa Cair",
+
+  "block.modernfoundry.molten_obsidian_fluid": "Obsidian Leleh",
+  "fluid.modernfoundry.molten_obsidian": "Obsidian Leleh",
+  "fluid.modernfoundry.flowing_molten_obsidian": "Obsidian Leleh Mengalir",
+  "item.modernfoundry.molten_obsidian_bucket": "Ember Obsidian Leleh",
+
+  "block.modernfoundry.molten_emerald_fluid": "Zamrud Leleh",
+  "fluid.modernfoundry.molten_emerald": "Zamrud Leleh",
+  "fluid.modernfoundry.flowing_molten_emerald": "Zamrud Leleh Mengalir",
+  "item.modernfoundry.molten_emerald_bucket": "Ember Zamrud Leleh",
+
+  "block.modernfoundry.molten_quartz_fluid": "Kuarsa Leleh",
+  "fluid.modernfoundry.molten_quartz": "Kuarsa Leleh",
+  "fluid.modernfoundry.flowing_molten_quartz": "Kuarsa Leleh Mengalir",
+  "item.modernfoundry.molten_quartz_bucket": "Ember Kuarsa Leleh",
+
+  "block.modernfoundry.molten_amethyst_fluid": "Kecubung Leleh",
+  "fluid.modernfoundry.molten_amethyst": "Kecubung Leleh",
+  "fluid.modernfoundry.flowing_molten_amethyst": "Kecubung Leleh Mengalir",
+  "item.modernfoundry.molten_amethyst_bucket": "Ember Kecubung Leleh",
+
+  "block.modernfoundry.molten_diamond_fluid": "Berlian Leleh",
+  "fluid.modernfoundry.molten_diamond": "Berlian Leleh",
+  "fluid.modernfoundry.flowing_molten_diamond": "Berlian Leleh Mengalir",
+  "item.modernfoundry.molten_diamond_bucket": "Ember Berlian Leleh",
+
+  "block.modernfoundry.molten_ender_fluid": "Ender Leleh",
+  "fluid.modernfoundry.molten_ender": "Ender Leleh",
+  "fluid.modernfoundry.flowing_molten_ender": "Ender Leleh Mengalir",
+  "item.modernfoundry.molten_ender_bucket": "Ember Ender Leleh",
+
+  "block.modernfoundry.molten_porcelain_fluid": "Porselen Leleh",
+  "fluid.modernfoundry.molten_porcelain": "Porselen Leleh",
+  "fluid.modernfoundry.flowing_molten_porcelain": "Porselen Leleh Mengalir",
+  "item.modernfoundry.molten_porcelain_bucket": "Ember Porselen Leleh",
+
+  "_comment": "Ores",
+
+  "block.modernfoundry.molten_iron_fluid": "Besi Leleh",
+  "fluid.modernfoundry.molten_iron": "Besi Leleh",
+  "fluid.modernfoundry.flowing_molten_iron": "Besi Leleh Mengalir",
+  "item.modernfoundry.molten_iron_bucket": "Ember Besi Leleh"
+}
+

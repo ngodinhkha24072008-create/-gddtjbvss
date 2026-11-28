@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/tellurium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_tellurium"
+  },
+  "temperature": 1700,
+  "time": 85
+}

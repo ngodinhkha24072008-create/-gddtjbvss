@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:ingots/tellurium"
+  },
+  "material": "tinkers_reforged:tellurium",
+  "needed": 1,
+  "value": 1
+}

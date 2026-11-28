@@ -1,0 +1,37 @@
+{
+  "values": [
+    "modernfoundry:bamboo",
+    "modernfoundry:bone",
+    "modernfoundry:venombone",
+    "modernfoundry:twisting_vine",
+    "modernfoundry:nahuatl",
+    "modernfoundry:rose_gold",
+    "modernfoundry:hepatizon",
+    "modernfoundry:queens_slime",
+    "modernfoundry:knightslime",
+    {
+      "id": "modernfoundry:aluminum",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:necronium",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:constantan",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:plated_slimewood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:nicrosil",
+      "required": false
+    },
+    "tinkers_thinking:lightite",
+    "tinkers_thinking:shroomite",
+    "tinkers_thinking:echo_bronze",
+    "tinkers_thinking:beetron"
+  ]
+}

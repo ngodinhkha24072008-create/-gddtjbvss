@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_reforged:tellurium",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_tellurium"
+  },
+  "temperature": 1700
+}

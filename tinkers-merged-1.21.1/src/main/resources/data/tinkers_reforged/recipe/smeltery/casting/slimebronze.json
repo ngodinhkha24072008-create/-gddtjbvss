@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_slimebronze"
+  },
+  "output": "tinkers_reforged:slimebronze",
+  "temperature": 450
+}

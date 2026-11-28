@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:ingots/barium"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_barium"
+  },
+  "temperature": 1150,
+  "time": 71
+}

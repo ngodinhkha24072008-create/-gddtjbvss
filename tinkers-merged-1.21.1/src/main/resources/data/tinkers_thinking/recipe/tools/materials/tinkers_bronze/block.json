@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/tinkers_bronze"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkers_thinking:tinkers_bronze",
+  "leftover": {
+    "tag": "c:ingots/tinkers_bronze"
+  }
+}

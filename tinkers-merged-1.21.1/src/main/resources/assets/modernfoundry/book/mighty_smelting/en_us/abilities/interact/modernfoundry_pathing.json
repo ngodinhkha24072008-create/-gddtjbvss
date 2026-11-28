@@ -1,0 +1,14 @@
+{
+  "modifier_id": "modernfoundry:pathing",
+  "text": [
+    {
+      "text": "If you can't find the golden brick road make your own dirt path road."
+    }
+  ],
+  "tool_filter": "modernfoundry:modifiable/interactable",
+  "effects": [
+     "Allows you to make paths with your tools",
+    "Single level",
+    "Requires 1 ability slot"
+  ]
+}

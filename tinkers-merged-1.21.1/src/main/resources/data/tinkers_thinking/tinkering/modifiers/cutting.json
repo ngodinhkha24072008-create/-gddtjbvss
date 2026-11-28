@@ -1,0 +1,34 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "blocks": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:tag",
+            "tag": "c:stones"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "c:blackstone"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "c:cobblestones"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "tinkers_thinking:cuttable_blocks"
+          }
+        ]
+      },
+      "each_level": 5,
+      "entity": "hilt:any",
+      "percent": false,
+      "require_effective": false
+    }
+  ],
+  "tooltip_display": "always"
+}

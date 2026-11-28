@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:storage_blocks/graphite"
+  },
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_graphite"
+  },
+  "temperature": 200,
+  "time": 114
+}

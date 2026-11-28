@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_yttrium"
+  },
+  "output": "tinkers_reforged:yttrium",
+  "temperature": 555
+}

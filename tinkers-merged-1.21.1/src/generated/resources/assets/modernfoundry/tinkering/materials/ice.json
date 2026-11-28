@@ -1,0 +1,19 @@
+{
+  "color": "FF74ABFE",
+  "generator": {
+    "supported_stats": [
+      "modernfoundry:shield_core",
+      "modernfoundry:repair_kit",
+      "modernfoundry:arrow_head"
+    ],
+    "transformer": {
+      "type": "modernfoundry:grey_to_sprite",
+      "palette": {
+        "000": "FF000000",
+        "063": "minecraft:block/blue_ice",
+        "102": "minecraft:block/packed_ice",
+        "140": "minecraft:block/ice"
+      }
+    }
+  }
+}

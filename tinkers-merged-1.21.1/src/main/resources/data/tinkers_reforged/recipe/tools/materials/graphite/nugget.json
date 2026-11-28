@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:nuggets/graphite"
+  },
+  "material": "tinkers_reforged:graphite",
+  "needed": 9,
+  "value": 1
+}

@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    {
+      "amount": 500,
+      "tag": "modernfoundry:ichor"
+    },
+    {
+      "amount": 250,
+      "tag": "modernfoundry:blazing_blood"
+    }
+  ],
+  "result": {
+    "amount": 500,
+    "tag": "c:molten_uranophane"
+  },
+  "temperature": 1500
+}

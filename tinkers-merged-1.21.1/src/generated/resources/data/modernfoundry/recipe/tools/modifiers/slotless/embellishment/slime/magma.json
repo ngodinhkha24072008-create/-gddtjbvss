@@ -1,0 +1,30 @@
+{
+  "type": "modernfoundry:swappable_modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/magma",
+  "allow_crystal": false,
+  "conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:modifiable/embellishment/slime"
+    }
+  ],
+  "inputs": [
+    {
+      "item": "minecraft:magma_block"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "minecraft:magma_block"
+    }
+  ],
+  "result": {
+    "name": "modernfoundry:embellishment",
+    "value": "modernfoundry:magma"
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/embellishment/slime"
+  },
+  "variant_formatter": "modernfoundry:material"
+}

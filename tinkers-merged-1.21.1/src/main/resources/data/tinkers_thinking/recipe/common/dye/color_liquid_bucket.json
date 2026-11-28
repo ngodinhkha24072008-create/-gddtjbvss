@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "modernfoundry:venom_bucket"
+    },
+    {
+      "item": "tinkers_thinking:chromatic_crystal"
+    },
+    {
+      "tag": "c:dusts/redstone"
+    },
+    {
+      "tag": "c:dusts/glowstone"
+    },
+    {
+      "tag": "c:gems/lapis"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tinkers_thinking:color_liquid_bucket"
+  }
+}

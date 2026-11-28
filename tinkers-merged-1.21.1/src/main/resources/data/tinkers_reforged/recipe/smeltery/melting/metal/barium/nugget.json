@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "tag": "c:nuggets/barium"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_barium"
+  },
+  "temperature": 1150,
+  "time": 24
+}

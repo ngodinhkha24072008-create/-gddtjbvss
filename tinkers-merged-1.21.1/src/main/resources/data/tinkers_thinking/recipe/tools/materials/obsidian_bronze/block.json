@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/obsidian_bronze"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkers_thinking:obsidian_bronze",
+  "leftover": {
+    "tag": "c:ingots/obsidian_bronze"
+  }
+}

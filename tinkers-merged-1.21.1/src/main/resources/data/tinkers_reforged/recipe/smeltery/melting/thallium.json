@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_reforged:thallium",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_thallium"
+  },
+  "temperature": 2200
+}

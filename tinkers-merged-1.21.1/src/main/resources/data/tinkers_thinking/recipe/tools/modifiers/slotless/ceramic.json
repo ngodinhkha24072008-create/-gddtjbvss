@@ -1,0 +1,28 @@
+{
+  "type": "modernfoundry:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "tinkers_thinking:ancient_ceramic"
+    },
+    {
+      "item": "tinkers_thinking:ancient_ceramic"
+    },
+    {
+      "item": "tinkers_thinking:ancient_ceramic"
+    }
+  ],
+  "level": 1,
+  "result": "tinkers_thinking:ceramic",
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/ancient"
+      },
+      {
+        "tag": "modernfoundry:modifiable/bonus_slots"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/ingot"
+  },
+  "cooling_time": 48,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_slimebronze"
+  },
+  "result": {
+    "tag": "c:ingots/slimebronze"
+  }
+}

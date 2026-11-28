@@ -1,0 +1,82 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        {
+          "item": "tinkers_thinking:narrow_blade",
+          "scale": 0.5
+        },
+        "modernfoundry:tool_handle",
+        {
+          "item": "tinkers_thinking:narrow_blade",
+          "scale": 0.5
+        }
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "tconstruct:attack_damage": 3.5,
+        "tconstruct:attack_speed": 1.8
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "tconstruct:attack_damage": 0.8,
+        "tconstruct:durability": 0.8,
+        "tconstruct:mining_speed": 1.2
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:silky_shears"
+        },
+        {
+          "name": "modernfoundry:antiaquatic",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "sword_dig"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "tinkers_thinking:mineable/knife"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "c:storage_blocks/zith"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkers_thinking:zith",
+  "leftover": {
+    "tag": "c:ingots/zith"
+  }
+}

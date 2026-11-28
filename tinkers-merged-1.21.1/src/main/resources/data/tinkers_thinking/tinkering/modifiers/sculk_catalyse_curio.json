@@ -1,0 +1,14 @@
+{
+  "condition": {
+    "type": "neoforge:mod_loaded",
+    "modid": "tinkers_ingenuity"
+  },
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "tinkers_thinking:curio_level",
+      "key": "tinkers_thinking:sculk_catalyse"
+    }
+  ],
+  "tooltip_display": "always"
+}

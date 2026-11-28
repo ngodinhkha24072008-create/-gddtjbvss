@@ -1,0 +1,26 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:tanned"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:laces": [
+      {
+        "level": 1,
+        "name": "modernfoundry:rugged"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:consecrated_skull"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:zombie_disguise"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "tinkers_thinking:stabilized_gunpowder"
+  },
+  "value": 1,
+  "needed": 2,
+  "material": "tinkers_thinking:stabilized_gunpowder"
+}

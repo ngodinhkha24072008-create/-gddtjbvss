@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "input": "tinkers_thinking:ardite",
+  "fluid": {
+    "fluid": "tinkers_thinking:reburn_ashes",
+    "amount": 125
+  },
+  "temperature": 1500,
+  "output": "tinkers_thinking:burnt_ashes"
+}

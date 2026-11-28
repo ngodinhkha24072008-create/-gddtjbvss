@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    {
+      "amount": 500,
+      "tag": "modernfoundry:ender_slime"
+    },
+    {
+      "amount": 250,
+      "tag": "modernfoundry:blazing_blood"
+    }
+  ],
+  "result": {
+    "amount": 500,
+    "tag": "c:molten_serandite"
+  },
+  "temperature": 1500
+}

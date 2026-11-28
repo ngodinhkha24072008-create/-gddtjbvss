@@ -1,0 +1,37 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "c:dusts/redstone"
+    },
+    {
+      "item": "tinkers_thinking:magma_crystal"
+    },
+    {
+      "tag": "c:dusts/redstone"
+    },
+    {
+      "item": "minecraft:magma_block"
+    },
+    {
+      "item": "minecraft:magma_block"
+    }
+  ],
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/durability"
+      },
+      {
+        "tag": "modernfoundry:modifiable/interactable/right"
+      }
+    ]
+  },
+  "level": 1,
+  "slots": {
+    "abilities": 1
+  },
+  "allow_crystal": true,
+  "result": "tinkers_thinking:sprinting"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "tinkers_reforged:actinium",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_actinium"
+  },
+  "temperature": 1700
+}

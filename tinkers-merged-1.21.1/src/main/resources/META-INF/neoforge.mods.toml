@@ -1,0 +1,113 @@
+modLoader="javafml"
+loaderVersion="${loader_range}"
+issueTrackerURL="https://github.com/Modern-Mods/ModernFoundry/issues"
+logoFile="logo.png"
+license="MIT"
+
+[[mods]]
+    modId="modernfoundry"
+    version="${version}"
+    displayName="Modern Foundry"
+    authors="Modern Mods"
+    description='''
+Build tools, refine materials, and master the Modern Foundry.
+    '''
+    displayURL="https://github.com/Modern-Mods/ModernFoundry"
+    
+[[dependencies.modernfoundry]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.modernfoundry]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.modernfoundry]]
+    modId="hilt"
+    type="required"
+    versionRange="${hilt_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.modernfoundry]]
+    modId="jei"
+    type="optional"
+    versionRange="${jei_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.modernfoundry]]
+    modId="jsonthings"
+    type="optional"
+    versionRange="${json_things_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# ---------------------------------------------------------------------------
+# Bundled addons (ported from 1.20.1 Forge). Each keeps its own mod id so that
+# configs, worlds and other mods that reference them keep working.
+# ---------------------------------------------------------------------------
+
+[[mods]]
+    modId="tinker_rapier"
+    version="1.0.1-1.21.1"
+    displayName="Tinkers' Rapier"
+    description='''Rapier and estoc tools for Tinkers' Construct. Ported to 1.21.1 NeoForge.'''
+
+[[dependencies.tinker_rapier]]
+    modId="modernfoundry"
+    type="required"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[mods]]
+    modId="tinkers_reforged"
+    version="2.20.0.7-1.21.1"
+    displayName="Tinkers Reforged"
+    description='''New materials, modifiers and tools for Tinkers' Construct. Ported to 1.21.1 NeoForge.'''
+
+[[dependencies.tinkers_reforged]]
+    modId="modernfoundry"
+    type="required"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[mods]]
+    modId="tinkers_thinking"
+    version="0.1.6.6.3-1.21.1"
+    displayName="Tinkers' Thinking"
+    authors="Creeping Creeper"
+    logoFile="tinkers_thinking_logo.png"
+    description='''Tinkers' Construct addon with new tools, materials and modifiers. Ported to 1.21.1 NeoForge.'''
+
+[[dependencies.tinkers_thinking]]
+    modId="modernfoundry"
+    type="required"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[mixins]]
+    config="tinkers_thinking.mixins.json"
+
+[[mods]]
+    modId="tinkerslevellingaddon"
+    version="1.5.0-1.21.1"
+    displayName="Tinkers' Levelling Addon"
+    authors="Pyre540"
+    description='''Tools gain experience and level up. Ported to 1.21.1 NeoForge.'''
+
+[[dependencies.tinkerslevellingaddon]]
+    modId="modernfoundry"
+    type="required"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"

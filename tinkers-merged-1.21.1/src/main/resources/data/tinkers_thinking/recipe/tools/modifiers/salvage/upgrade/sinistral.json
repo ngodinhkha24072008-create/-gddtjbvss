@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "modifier": "tinkers_thinking:sinistral",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "item": "tinkers_thinking:repeating_crossbow"
+  }
+}

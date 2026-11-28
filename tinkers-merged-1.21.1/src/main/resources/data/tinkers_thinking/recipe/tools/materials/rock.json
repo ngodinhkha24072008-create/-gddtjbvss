@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "tinkers_thinking:stone_stick"
+  },
+  "value": 1,
+  "needed": 2,
+  "material": "modernfoundry:rock"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/yttrium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:gears/yttrium"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_yttrium"
+  },
+  "temperature": 555,
+  "time": 104
+}

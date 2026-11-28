@@ -1,0 +1,11 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:modifier_slot",
+      "each_level": 1,
+      "name": "defense"
+    }
+  ],
+  "priority": 60
+}

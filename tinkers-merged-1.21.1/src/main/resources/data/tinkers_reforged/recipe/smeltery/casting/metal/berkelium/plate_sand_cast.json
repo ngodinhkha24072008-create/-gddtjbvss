@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/plate"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/berkelium"
+    }
+  ],
+  "cooling_time": 97,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_berkelium"
+  },
+  "result": {
+    "tag": "c:plates/berkelium"
+  }
+}

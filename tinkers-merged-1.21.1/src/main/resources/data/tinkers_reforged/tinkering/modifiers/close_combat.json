@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 4.0,
+      "operation": "add",
+      "stat": "modernfoundry:attack_damage"
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:player.entity_interaction_range",
+      "each_level": -0.5,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

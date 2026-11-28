@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:banner"
+    }
+  ],
+  "priority": 25,
+  "show_in_tooltips": [
+    "tinker_station"
+  ]
+}
